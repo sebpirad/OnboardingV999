@@ -332,7 +332,7 @@ function vis(n){
   const m=Math.max(0,Math.min(slides.length-1,n));
   if(m===i&&slides[i].classList.contains('klar'))return;
   ryd();
-  slides[i].classList.remove('aktiv','klar');
+  slides.forEach(s=>s.classList.remove('aktiv','klar'));
   i=Math.max(0,Math.min(slides.length-1,n));
   const s=slides[i];
   s.classList.add('aktiv');

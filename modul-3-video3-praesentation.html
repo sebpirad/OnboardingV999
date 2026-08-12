@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="da">
+<head><meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PowerMatch · Modul 3 · Video 3 · 10 spørgsmål til rekruttering</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gul:#F8E965; --gul-soft:#FDF8D4; --gul-kant:#F0E4A0;
+  --sort:#111213; --tekst:#26282B; --muted:#71757C;
+  --border:#ECECE8; --flade:#F6F6F3; --bg:#FFFFFF;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --mx:5vw; --chatb:400px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+body{font-family:'Inter',Arial,sans-serif;color:var(--tekst);background:var(--bg);-webkit-font-smoothing:antialiased}
+b{color:var(--sort)}
+mark{background:linear-gradient(transparent 70%, var(--gul) 70%, var(--gul) 96%, transparent 96%);padding:0 .05em}
+
+.slide{position:absolute;inset:0;visibility:hidden;opacity:0;transform:scale(.986);
+  transition:opacity .45s var(--ease),transform .65s var(--ease),visibility 0s .45s;overflow:hidden}
+.slide.aktiv{visibility:visible;opacity:1;transform:none;transition:opacity .5s var(--ease),transform .7s var(--ease)}
+.r{opacity:0;transform:translateY(14px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
+.slide.klar .r{opacity:1;transform:none}
+.slide.klar .d1{transition-delay:.1s}.slide.klar .d2{transition-delay:.22s}.slide.klar .d3{transition-delay:.34s}.slide.klar .d4{transition-delay:.46s}
+
+/* venstre scene */
+.scene{position:absolute;inset:0;right:var(--chatb);padding:11vh var(--mx) 9vh;display:flex;flex-direction:column;
+  background-image:radial-gradient(rgba(17,18,19,.045) 1px, transparent 1px);background-size:24px 24px}
+.kicker{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.kicker .knr{font-size:14px;font-weight:900;color:var(--sort);font-variant-numeric:tabular-nums}
+.kicker .krule{width:44px;height:2px;background:var(--gul)}
+.kicker .ktxt{font-size:11.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+h1{font-size:clamp(38px,4.4vw,66px);font-weight:900;color:var(--sort);letter-spacing:-.033em;line-height:1.04}
+h2{font-size:clamp(26px,2.7vw,40px);font-weight:900;color:var(--sort);letter-spacing:-.025em;line-height:1.12;max-width:24ch}
+p.under{font-size:clamp(14px,1.25vw,17px);line-height:1.6;color:var(--muted);max-width:54ch}
+.skub{margin-top:auto !important;padding-bottom:1vh}
+
+/* spørgsmåls-pop */
+.qpop{position:absolute;inset:0;right:var(--chatb);z-index:60;display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.93);backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .45s var(--ease)}
+.qpop.vis{opacity:1}
+.qpop .qkort{max-width:980px;text-align:center;padding:0 60px;transform:scale(.9);transition:transform .55s var(--ease)}
+.qpop.vis .qkort{transform:scale(1)}
+.qpop .qtag{display:inline-block;background:var(--gul);color:var(--sort);border-radius:100px;padding:9px 22px;
+  font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;margin-bottom:30px}
+.qpop h3{font-size:clamp(34px,3.8vw,58px);font-weight:900;color:var(--sort);letter-spacing:-.03em;line-height:1.12}
+
+/* komponenter */
+.stak{margin:auto 0;max-width:860px}
+.stak .s-linje{display:flex;height:74px;border-radius:14px;overflow:hidden;border:1px solid var(--border)}
+.stak .seg{display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:800;letter-spacing:.03em;color:var(--sort);white-space:nowrap;overflow:hidden}
+.stak .seg.loen{background:var(--sort);color:#fff;font-size:14px}
+.stak .seg.g1{background:#F8E965}.stak .seg.g2{background:#FAEE8A}.stak .seg.g3{background:#FCF3AC}
+.stak .seg.g4{background:#FDF8D4}.stak .seg.g5{background:#FEFBE6}.stak .seg.g6{background:#FFFDF2}
+.stak .s-labels{display:flex;justify-content:space-between;margin-top:16px;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.stak .s-labels b{font-size:15px;color:var(--sort)}
+
+.frows{margin:auto 0;max-width:840px;width:100%}
+.frow{display:flex;align-items:baseline;gap:18px;border-top:1px solid var(--border);padding:22px 4px}
+.frow:last-child{border-bottom:1px solid var(--border)}
+.frow .fnr{font-size:14px;font-weight:900;color:var(--sort);width:30px;flex-shrink:0}
+.frow .ft{font-size:clamp(15px,1.5vw,20px);font-weight:800;color:var(--sort)}
+.frow .ft span{color:var(--muted);font-weight:500}
+
+
+.svarhero{margin:auto 0}
+.svarhero .sv{font-size:clamp(44px,4.6vw,72px);font-weight:900;color:var(--sort);letter-spacing:-.035em;line-height:1.05}
+.svarhero .sv mark{padding:0 .1em}
+.svarhero .svu{margin-top:3vh;font-size:clamp(15px,1.4vw,19px);color:var(--muted);line-height:1.65;max-width:50ch}
+.svarhero .svu b{color:var(--sort)}
+
+.heroTal{margin:auto 0;display:flex;align-items:baseline;gap:26px}
+.heroTal .t{font-size:clamp(90px,10vw,170px);font-weight:900;color:var(--sort);letter-spacing:-.05em;line-height:1;position:relative}
+.heroTal .t i{position:absolute;left:-.04em;right:-.04em;bottom:.04em;height:.22em;background:var(--gul);z-index:-1}
+.heroTal .tl{font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+
+.livebadge{display:inline-flex;align-items:center;gap:10px;background:var(--sort);color:#fff;border-radius:100px;padding:10px 22px;font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:4vh;width:fit-content}
+.livebadge .dot{width:10px;height:10px;border-radius:50%;background:#E5484D;animation:puls 1.6s infinite}
+@keyframes puls{0%,100%{opacity:1}50%{opacity:.35}}
+
+
+/* trustpilot */
+.trust{margin:auto 0;display:flex;align-items:center;gap:34px}
+.trust .t-tal{position:relative;font-size:clamp(90px,10vw,170px);font-weight:900;color:var(--sort);letter-spacing:-.05em;line-height:1}
+.trust .t-tal i{position:absolute;left:-.04em;right:-.04em;bottom:.04em;height:.22em;background:var(--gul);z-index:-1}
+.trust .t-info{display:flex;flex-direction:column;gap:10px}
+.trust .t-stjerner{font-size:clamp(28px,2.6vw,40px);color:#D4A900;letter-spacing:.08em}
+.trust .t-stjerner .halv{background:linear-gradient(90deg,#D4A900 55%,#E4E0D4 55%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.trust .t-lab{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);max-width:30ch;line-height:1.6}
+/* prøvetids-skala */
+.skala{margin:auto 0;max-width:860px;width:100%}
+.sk-track{position:relative;height:16px;border-radius:100px;background:var(--flade);border:1px solid var(--border)}
+.sk-band{position:absolute;inset:0;border-radius:100px;background:linear-gradient(90deg,var(--gul-soft),var(--flade))}
+.sk-pm{position:absolute;top:50%;transform:translate(-50%,-50%);white-space:nowrap;font-size:12px;font-weight:900;color:var(--sort);
+  background:var(--gul);border-radius:100px;padding:10px 18px;letter-spacing:.06em;box-shadow:0 2px 10px rgba(17,18,19,.14)}
+.sk-pm i{position:absolute;left:50%;top:100%;transform:translateX(-50%);border:7px solid transparent;border-top-color:var(--gul)}
+.sk-ticks{display:flex;justify-content:space-between;margin-top:26px;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+/* mørk outro */
+.slide.moerk .scene{background:var(--sort);background-image:radial-gradient(rgba(255,255,255,.06) 1px, transparent 1px);background-size:24px 24px}
+.moerk h1,.moerk h2{color:#fff}
+.moerk .kicker .knr{color:#fff}
+.moerk .kicker .ktxt{color:rgba(255,255,255,.5)}
+.moerk p.under{color:rgba(255,255,255,.6)}
+.moerk .recap{margin-top:4vh;max-width:720px}
+.moerk .rrow{display:flex;gap:20px;align-items:center;border-top:1px solid rgba(255,255,255,.16);padding:22px 0}
+.moerk .rrow:last-child{border-bottom:1px solid rgba(255,255,255,.16)}
+.moerk .rnr{width:40px;height:40px;border-radius:12px;background:var(--gul);color:var(--sort);font-weight:900;font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.moerk .rtxt{font-size:clamp(16px,1.6vw,21px);font-weight:800;color:#fff}
+.moerk .rtxt em{font-style:normal;color:var(--gul)}
+
+/* chatpanel */
+.chat{position:absolute;top:0;right:0;bottom:0;width:var(--chatb);border-left:1px solid var(--border);background:#fff;display:flex;flex-direction:column;z-index:70}
+.chat-h{padding:20px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.chat-h .dot{width:9px;height:9px;border-radius:50%;background:#E5484D;animation:puls 1.6s infinite}
+.chat-h b{font-size:13.5px;color:var(--sort)}
+.chat-h span{margin-left:auto;font-size:11px;font-weight:800;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+.chat-str{flex:1;overflow:hidden;padding:18px 20px;display:flex;flex-direction:column;justify-content:flex-end;gap:14px}
+.msg{display:flex;gap:11px;align-items:flex-start;opacity:0;transform:translateY(16px);transition:opacity .4s var(--ease),transform .4s var(--ease)}
+.msg.vis{opacity:1;transform:none}
+.msg .av{width:30px;height:30px;border-radius:10px;background:var(--gul);color:var(--sort);font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.msg .mb .navn{font-size:12px;font-weight:800;color:var(--sort)}
+.msg .mb .txt{font-size:13.5px;line-height:1.45;color:var(--tekst);margin-top:2px}
+.msg.spg{background:var(--gul-soft);border:1px solid var(--gul-kant);border-radius:14px;padding:12px 14px;margin:0 -4px}
+.msg.spg .tag{display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:.16em;color:var(--sort);background:var(--gul);border-radius:100px;padding:3px 9px;margin-bottom:5px;text-transform:uppercase}
+.chat-f{border-top:1px solid var(--border);padding:14px 20px;font-size:12.5px;color:#C9C9C2;font-weight:600}
+
+/* chrome */
+.folio{position:fixed;left:0;right:var(--chatb);bottom:0;z-index:97;height:52px;display:flex;align-items:center;gap:14px;
+  padding:0 var(--mx);border-top:1px solid var(--border);font-size:10.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);background:var(--bg)}
+.folio img{width:20px;height:20px}
+.folio .nr{margin-left:auto;font-size:14px;font-weight:900;color:var(--sort);font-variant-numeric:tabular-nums}
+.folio .nr span{color:#C9C9C2}
+.moerk-chrome .folio{background:var(--sort);border-color:rgba(255,255,255,.14);color:rgba(255,255,255,.5)}
+.moerk-chrome .folio .nr{color:#fff}
+.progress{position:fixed;bottom:50px;left:0;height:3px;background:var(--gul);width:0;z-index:98;transition:width .4s var(--ease);max-width:calc(100vw - var(--chatb))}
+.pilzone{position:fixed;top:0;bottom:52px;width:9%;z-index:90;cursor:pointer}
+.pilzone.v{left:0}.pilzone.h{right:var(--chatb)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head>
+<body>
+
+<section class="slide aktiv" data-chat='[["N","NyIMarken_Nick","er der lyd? 🎧 (undskyld, tradition)",600],["K","KranKaj","logget på oppe fra kranen 🏗️",1400],["P","Praktikant_Palle","lige tilbage fra kaffepause, hvad går jeg glip af? ☕",2200],["M","MurerMads87","LASSE LASSE LASSE",3000]]'>
+  <div class="scene">
+    <span class="livebadge r"><span class="dot"></span>PowerMatch · Onboarding Live</span>
+    <div style="margin:auto 0">
+      <h1 class="r d1">10 spørgsmål til<br><mark>rekruttering</mark>.</h1>
+      <p class="under r d2" style="margin-top:3vh">Dem kunderne stiller. Dem håndværkerne stiller. Og dem du selv sidder med efter de sidste to videoer. Chatten spørger, Lasse&nbsp;svarer.</p>
+    </div>
+    <p class="under skub r d3"><b>Kan du svare på alle 10 bagefter, så kender du markedet.</b></p>
+  </div>
+</section>
+
+<section class="slide" data-q="Hvad har dagbøder og forsinkelser med rekruttering at gøre?" data-chat='[["A","Anlægs_Anders","jeg forstår ikke det med dagbøder... hvad har det med rekruttering at gøre? 🤔",600,"spg"],["T","TømrerThomas","vi venter stadig på mureren 💀",1800],["M","MurerMads87","HEY. vi venter på beton",2600],["K","KranKaj","jeg venter på jer alle sammen 🏗️",3400]]'>
+  <div class="scene">
+    <div class="kicker r"><span class="knr">01</span><span class="krule"></span><span class="ktxt">Spørgsmål 1 af 10 · fra chatten</span></div>
+    <h2 class="r d1">Hvad har dagbøder og forsinkelser med rekruttering at gøre?</h2>
+    <div class="frows">
+      <div class="frow r d1"><span class="fnr">01</span><span class="ft">De rigtige folk forebygger bøderne <span>projekter til tiden er den eneste garanti mod dagbøder</span></span></div>
+      <div class="frow r d2"><span class="fnr">02</span><span class="ft">Presset af en deadline? Rekruttér stadig rigtigt <span>en dygtig mand på lang sigt slår en hurtig nødløsning</span></span></div>
+      <div class="frow r d3"><span class="fnr">03</span><span class="ft">Brug hellere en dag ekstra på at finde den rigtige <span>ham kan du beholde, når projektet er slut</span></span></div>
+    </div>
+    <p class="under skub r d4"><b>God rekruttering er den billigste forsikring mod dagbøder.</b></p>
+  </div>
+</section>
+
+<section class="slide" data-q="Hvordan kan det være, at PowerMatch har så mange kandidater i databasen?" data-chat='[["N","NysgerrigNiklas","hvordan har I SÅ mange kandidater i databasen??",600,"spg"],["S","SmedeSimon","I har garanteret også min gamle profil 😅",1800],["MM","MalerMette","de glemmer aldrig en håndværker 🥹",2600],["L","LagerLars","nu bliver det nørdet 🔥",3400]]'>
+  <div class="scene">
+    <div class="kicker r"><span class="knr">02</span><span class="krule"></span><span class="ktxt">Spørgsmål 2 af 10 · fra chatten</span></div>
+    <h2 class="r d1">Hvordan kan det være, at PowerMatch har så mange kandidater i databasen?</h2>
+    <div class="heroTal r d2"><span class="t">20-50<i></i></span><span class="tl">Nye profiler<br>hver eneste dag</span></div>
+    <p class="under skub r d3">Og med hans samtykke gemmer vi hans krav og ønsker, også efter han har fået job. Bliver han utilfreds om to år, går der <b>én sms fra os, og han har nye jobmuligheder inden for få timer.</b> Vi gemmer ikke bare profiler. <b>Vi gemmer, hvad folk VIL.</b></p>
+  </div>
+</section>
+
+<section class="slide" data-q="Hvorfor er PowerMatch ikke et rekrutteringsbureau eller vikarbureau?" data-chat='[["B","BrolæggerBo","er I ikke bare et vikarbureau med ekstra trin? 👀",600,"spg"],["M","MurerMads87","UHHH den var modig",1800],["T","TømrerThomas","nu bliver Lasse varm 🔥",2600],["V","VVS_Viktor","🍿",3400]]'>
+  <div class="scene">
+    <div class="kicker r"><span class="knr">03</span><span class="krule"></span><span class="ktxt">Spørgsmål 3 af 10 · fra chatten</span></div>
+    <h2 class="r d1">Hvorfor er PowerMatch ikke et rekrutteringsbureau eller vikarbureau?</h2>
+    <div class="svarhero r d2">
+      <div class="sv">En platform.<br><mark>Ikke et bureau.</mark></div>
+      <div class="svu">Alt kører på data: virksomhedens krav og ønsker, håndværkerens krav og ønsker, <b>matchet automatisk</b>. Der sidder ingen konsulent og smider en håndværker ud til en virksomhed. Og alt er <b>altid med henblik på fastansættelse</b>, aldrig vikar.</div>
+    </div>
+    <p class="under skub r d3"><b>Virksomheden vælger selv. Håndværkeren vælger selv.</b> De gode folk gider ikke være vikarer. De bruger os for at finde fast&nbsp;arbejde.</p>
+  </div>
+</section>
+
+<section class="slide" data-q="Er PowerMatch dyrere end konkurrenterne?" data-chat='[["T","TømrerThomas","helt ærligt Lasse: er I dyrere end de andre?",600,"spg"],["K","KloakKarl","direkte spørgsmål, respekt",1800],["MO","Malermester_Mogens","det her vil jeg gerne høre 👂",2600],["S","SmedeSimon","🍿🍿",3400]]'>
+  <div class="scene">
+    <div class="kicker r"><span class="knr">04</span><span class="krule"></span><span class="ktxt">Spørgsmål 4 af 10 · fra chatten</span></div>
+    <h2 class="r d1">Er PowerMatch dyrere end konkurrenterne?</h2>
+    <div class="svarhero r d2">
+      <div class="sv">Ja.<br><mark>En smule.</mark></div>
+      <div class="svu">Og det står vi ved. Dyb screening, kvalitet hele vejen og matches på begge parters krav giver <b>langt større sandsynlighed for, at det ender i en fastansættelse</b>. Og husk, hvad du har lært: det koster kassen at ansætte forkert, og det koster kassen slet ikke at ansætte, når du har brug for folk.</div>
+    </div>
+    <p class="under skub r d3">Med det problem, vi løser, <b>kan vi tillade os at være en smule dyrere end konkurrenterne.</b> Kunderne ser det ikke som et problem, når de først ser&nbsp;kvaliteten.</p>
+  </div>
+</section>
+
+<section class="slide" data-q="Hvad er vigtigst for virksomhederne: kvalitet hele vejen eller bare folk nok?" data-chat='[["A","Anlægs_Anders","vil kunderne ha topkvalitet eller bare folk nok til at nå i mål?",600,"spg"],["S","SmedeSimon","10 mand ind, 7 bliver. det kalder jeg statistik 📊",1800],["MO","Malermester_Mogens","kvalitet. altid. (skriver fra kontoret)",2600],["K","KloakKarl","bare der er kaffe på pladsen ☕",3400]]'>
+  <div class="scene">
+    <div class="kicker r"><span class="knr">05</span><span class="krule"></span><span class="ktxt">Spørgsmål 5 af 10 · fra chatten</span></div>
+    <h2 class="r d1">Kvalitet hele vejen eller bare folk nok? Det afhænger af kunden.</h2>
+    <div class="frows">
+      <div class="frow r d1"><span class="fnr">01</span><span class="ft">Nogle vil kun have de helt rigtige <span>tager hellere færre opgaver ind. Vi skruer kravene op i databasen</span></span></div>
+      <div class="frow r d2"><span class="fnr">02</span><span class="ft">Andre kører volumen <span>prøver hellere én for meget: 10 kandidater, 6-7 lykkes, og det er fint for dem</span></span></div>
+      <div class="frow r d3"><span class="fnr">03</span><span class="ft">Dit job som sælger <span>tilpas kundens opsætning på platformen til deres behov</span></span></div>
+    </div>
+    <p class="under skub r d4"><b>Der findes ikke ét svar. Der findes kundens svar.</b> Og platformen kan indstilles til begge dele.</p>
+  </div>
+</section>
+
+<section class="slide" data-q="Hvorfor får PowerMatch bedre kandidater end fx JobTeam og JKS?" data-chat='[["E","El_Emil","hvorfor får I bedre folk end JobTeam og JKS? 😎",600,"spg"],["M","MurerMads87","4,7 stjerner?? mit firma har 2,1 😅",1800],["K","KranKaj","kan bekræfte. kan se anmeldelserne heroppefra",2600],["T","TømrerThomas","W firma",3400]]'>
+  <div class="scene">
+    <div class="kicker r"><span class="knr">06</span><span class="krule"></span><span class="ktxt">Spørgsmål 6 af 10 · fra chatten</span></div>
+    <h2 class="r d1">Hvorfor får PowerMatch bedre kandidater end fx JobTeam og JKS?</h2>
+    <div class="trust r d2">
+      <div class="t-tal">4,7<i></i></div>
+      <div class="t-info"><span class="t-stjerner">★★★★<span class="halv">★</span></span><span class="t-lab">Trustpilot-snit · 600+ anmeldelser · klart bedst i branchen</span></div>
+    </div>
+    <p class="under skub r d3">Fordi vi kan tilbyde bedre jobs: <b>over 4000 virksomheder på platformen</b>, vi sender ikke folk ud til dårlige arbejdsgivere, og han matches kun mod jobs, der lever op til HANS krav. <b>Bedre jobs giver bedre kandidater. Så simpelt er det.</b></p>
+  </div>
+</section>
+
+<section class="slide" data-q="Hvor lang er prøveperioden hos de andre rekrutteringsbureauer?" data-chat='[["V","VVS_Viktor","hvor lang er prøvetiden egentlig hos de andre?",600,"spg"],["L","LagerLars","6 MÅNEDER?? det er jo et parforhold",1800],["MM","MalerMette","😂😂",2600],["S","SmedeSimon","man kan bygge et parcelhus på kortere tid",3400]]'>
+  <div class="scene">
+    <div class="kicker r"><span class="knr">07</span><span class="krule"></span><span class="ktxt">Spørgsmål 7 af 10 · fra chatten</span></div>
+    <h2 class="r d1">Hvor lang er prøveperioden hos de andre?</h2>
+    <div class="skala r d2">
+      <div class="sk-track"><span class="sk-band"></span><span class="sk-pm" style="left:14%"><i></i>PowerMatch · ca. 3-3,5 mdr.</span></div>
+      <div class="sk-ticks"><span>3 mdr.</span><span>4 mdr.</span><span>5 mdr.</span><span>6 mdr.</span></div>
+    </div>
+    <p class="under skub r d3">Branchen ligger typisk på <b>3 til 6 måneder</b>, nogle helt oppe på 6. Vi ligger i den korte ende. <b>Ingen gider vente et halvt år på at få sin mand.</b></p>
+  </div>
+</section>
+
+<section class="slide" data-q="Hvem er PowerMatchs største konkurrent?" data-chat='[["N","NyIMarken_Nick","hvem er jeres største konkurrent egentlig?",600,"spg"],["S","SmedeSimon","JKS incoming 👀",1800],["K","KloakKarl","10 kr på at han IKKE siger JKS",2600],["T","TømrerThomas","den svarer han aldrig ærligt på... eller? 👀",3400]]'>
+  <div class="scene">
+    <div class="kicker r"><span class="knr">08</span><span class="krule"></span><span class="ktxt">Spørgsmål 8 af 10 · fra chatten</span></div>
+    <h2 class="r d1">Hvem er PowerMatchs største konkurrent?</h2>
+    <div class="svarhero r d2">
+      <div class="sv">Ikke bureauerne.<br><mark>Fordommen.</mark></div>
+      <div class="svu">Det dårlige ry, som rekrutterings- og vikarbureauer har skabt i branchen, rammer også os: <b>"I er sikkert bare endnu et bureau."</b> Vores største opgave er at få kunden forbi den fordom og ind på platformen.</div>
+    </div>
+    <p class="under skub r d3">For når de først har prøvet produktet, <b>kommer de igen og igen.</b></p>
+  </div>
+</section>
+
+<section class="slide" data-q="Hvad er den hyppigste måde at rekruttere på i byggebranchen?" data-chat='[["K","KloakKarl","hvad er den mest brugte måde at rekruttere på herude?",600,"spg"],["P","PensioneretPreben","netværk. næste spørgsmål",1800],["E","El_Emil","Preben on fire i dag 🔥",2600],["M","MurerMads87","giv Preben mikrofonen",3400]]'>
+  <div class="scene">
+    <div class="kicker r"><span class="knr">09</span><span class="krule"></span><span class="ktxt">Spørgsmål 9 af 10 · fra chatten</span></div>
+    <h2 class="r d1">Hvad er den hyppigste måde at rekruttere på i byggebranchen?</h2>
+    <div class="svarhero r d2">
+      <div class="sv">Netværk og<br><mark>relationer.</mark></div>
+      <div class="svu">Præcis som du lærte i video 1. Og derfor lever PowerMatch selv efter samme logik: <b>hver eneste kandidat skal have en god oplevelse</b>, uanset om han bruger os nu eller ej. Han kommer måske tilbage. Eller han fortæller en kollega om os.</div>
+    </div>
+    <p class="under skub r d3"><b>Hver eneste samtale er en investering i vores netværk.</b> Omdømmet er vores livsnerve.</p>
+  </div>
+</section>
+
+<section class="slide" data-q="Rekrutterer malere anderledes end fx elektrikere?" data-chat='[["MM","MalerMette","rekrutterer malere anderledes end fx elektrikere? spørger for en ven 🎨",600,"spg"],["E","El_Emil","vi er bare grundige 😎",1800],["MM","MalerMette","vi er bare hurtige 😤",2600],["T","TømrerThomas","FIGHT",3400]]'>
+  <div class="scene">
+    <div class="kicker r"><span class="knr">10</span><span class="krule"></span><span class="ktxt">Spørgsmål 10 af 10 · fra chatten</span></div>
+    <h2 class="r d1">Rekrutterer malere anderledes end fx elektrikere?</h2>
+    <div class="frows">
+      <div class="frow r d1"><span class="fnr">01</span><span class="ft">Ja. Fagene er forskellige <span>en malervirksomhed og en elektrikervirksomhed rekrutterer ikke ens</span></span></div>
+      <div class="frow r d2"><span class="fnr">02</span><span class="ft">Jo højere krav og løn, jo grundigere proces <span>el og VVS vil ofte have telefonsamtale eller regulær jobsamtale</span></span></div>
+      <div class="frow r d3"><span class="fnr">03</span><span class="ft">De hurtige fag går stærkt <span>en maler kan være i gang efter 10 minutters samtale</span></span></div>
+    </div>
+    <p class="under skub r d4"><b>Jo højere krav og løn, jo grundigere proces.</b> Resten går stærkt. <b>Meget mere om fagene i næste modul.</b></p>
+  </div>
+</section>
+
+<section class="slide moerk" data-chat='[["MM","MalerMette","tak Lasse!! 🎉",600],["P","PensioneretPreben","godkendt. og det siger jeg aldrig",1400],["S","SmedeSimon","W stream, quiz så 💪",2200],["K","KranKaj","ses i næste modul. jeg bliver heroppe 🏗️",3000]]'>
+  <div class="scene">
+    <div class="kicker r"><span class="knr">12</span><span class="krule"></span><span class="ktxt">Det var alle 10</span></div>
+    <h1 class="r d1">Kan du svare på alle 10,<br>kender du markedet.</h1>
+    <div class="recap">
+      <div class="rrow r d2"><span class="rnr">1</span><span class="rtxt">I tvivl om ét af dem? <em>Se svaret igen.</em> De kommer i dine kundesamtaler.</span></div>
+      <div class="rrow r d3"><span class="rnr">2</span><span class="rtxt">Tag så <em>modulets quiz</em>. Bestået er 8 af 10.</span></div>
+      <div class="rrow r d4"><span class="rnr">3</span><span class="rtxt">Næste modul: <em>Byggebranchen</em>. Fagene, overenskomsterne og hverdagen på pladsen.</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="qpop" id="qpop"><div class="qkort"><span class="qtag" id="qtag"></span><h3 id="qtekst"></h3></div></div>
+
+<div class="chat">
+  <div class="chat-h"><span class="dot"></span><b>Onboarding-chatten</b><span>312 ser med</span></div>
+  <div class="chat-str" id="chatStr"></div>
+  <div class="chat-f">Skriv en besked ...</div>
+</div>
+
+<div class="progress" id="progress"></div>
+<div class="pilzone v" onclick="gaa(-1)"></div>
+<div class="pilzone h" onclick="gaa(1)"></div>
+<div class="folio">
+  <img src="data:image/png;base64,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0Bst/nk2il5+YfHPBRQILAAAliMzBAAAAgsAQGABAAgsAAAEFgCAwAIAEFgAAAgsAACBBQAgsAAAEFgAAAILAEBgAQAILAAABBYAgMACABBYAAAILAAAgQUAILAAABBYAAACCwBAYAEAILAAAAQWAIDAAgAQWAAACCwAAIEFACCwAAAQWAAAAgsAQGABACCwAAAEFgCAwAIAQGABAAgsAACBBQAgsAAAEFgAAAILAEBgAQAgsAAABBYAgMACAEBgAQAILAAAgQUAgMACABBYAAACCwBAYAEAILAAAAQWAIDAAgBAYAEACCwAAIEFAIDAAgAQWAAAAgsAQGABACCwAAAEFgCAwAIAQGABAAgsAACBBQCAwAIAEFgAAAILAACBBQAgsAAABBYAgMACAEBgAQAILAAAgQUAgMACABBYAAACCwAAgQUAILAAAAQWAAACCwBAYAEACCwAAIEFAIDAAgAQWAAAAgsAAIEFACCwAAAEFgAAAgsAQGABAAgsAAAEFgCAwAIAEFgAAAILAACBBQAgsAAABBYAAAILAEBgAQAILAAABBYAgMACABBYAAACCwAAgQUAILAAAAQWAAACCwCgEf4/Paatms/mpuAAAAAASUVORK5CYII=" alt=""><span>PowerMatch · Modul 3 · Video 3</span>
+  <span class="nr" id="taeller">01 <span>/ 12</span></span>
+</div>
+
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+const chatStr=document.getElementById('chatStr');
+const qpop=document.getElementById('qpop');
+let i=0, timere=[];
+let qnr=0;
+
+function ryd(){timere.forEach(clearTimeout);timere=[];qpop.classList.remove('vis')}
+
+function visChat(slide){
+  chatStr.innerHTML='';
+  const msgs=JSON.parse(slide.dataset.chat||'[]');
+  msgs.forEach(m=>{
+    const [ini,navn,txt,delay,type]=m;
+    timere.push(setTimeout(()=>{
+      const el=document.createElement('div');
+      el.className='msg'+(type==='spg'?' spg':'');
+      el.innerHTML=`<span class="av">${ini}</span><span class="mb">`+
+        (type==='spg'?`<span class="tag">Spørgsmål</span><br>`:'')+
+        `<span class="navn">${navn}</span><div class="txt">${txt}</div></span>`;
+      chatStr.appendChild(el);
+      requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.add('vis')));
+      while(chatStr.children.length>7)chatStr.removeChild(chatStr.firstChild);
+    },delay));
+  });
+}
+
+function vis(n){
+  const m=Math.max(0,Math.min(slides.length-1,n));
+  if(m===i&&slides[i].classList.contains('klar'))return;
+  ryd();
+  slides.forEach(s=>s.classList.remove('aktiv','klar'));
+  i=Math.max(0,Math.min(slides.length-1,n));
+  const s=slides[i];
+  s.classList.add('aktiv');
+  document.getElementById('taeller').innerHTML=String(i+1).padStart(2,'0')+' <span>/ '+String(slides.length).padStart(2,'0')+'</span>';
+  document.getElementById('progress').style.width='calc((100vw - var(--chatb)) * '+((i+1)/slides.length)+')';
+  document.body.classList.toggle('moerk-chrome',s.classList.contains('moerk'));
+  visChat(s);
+  if(s.dataset.q){
+    // spørgsmålet popper op midt på skærmen først, så Las kan læse det højt
+    const qi=slides.filter(x=>x.dataset.q).indexOf(s)+1;
+    document.getElementById('qtag').textContent='Spørgsmål '+qi+' af 10';
+    document.getElementById('qtekst').textContent=s.dataset.q;
+    timere.push(setTimeout(()=>qpop.classList.add('vis'),250));
+    timere.push(setTimeout(()=>qpop.classList.remove('vis'),3600));
+    timere.push(setTimeout(()=>s.classList.add('klar'),3950));
+  } else {
+    timere.push(setTimeout(()=>s.classList.add('klar'),150));
+  }
+}
+function gaa(d){vis(i+d)}
+addEventListener('keydown',e=>{
+  if(['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)){e.preventDefault();gaa(1)}
+  if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();gaa(-1)}
+  if(e.key==='Home')vis(0); if(e.key==='End')vis(slides.length-1);
+  if(e.key==='f'||e.key==='F'){if(!document.fullscreenElement)document.documentElement.requestFullscreen().catch(()=>{});else document.exitFullscreen()}
+});
+vis(0);
+</script>
+</body>
+</html>
