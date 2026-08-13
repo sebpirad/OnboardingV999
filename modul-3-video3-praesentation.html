@@ -138,6 +138,15 @@ p.under{font-size:clamp(14px,1.25vw,17px);line-height:1.6;color:var(--muted);max
 .progress{position:fixed;bottom:50px;left:0;height:3px;background:var(--gul);width:0;z-index:98;transition:width .4s var(--ease);max-width:calc(100vw - var(--chatb))}
 .pilzone{position:fixed;top:0;bottom:52px;width:9%;z-index:90;cursor:pointer}
 .pilzone.v{left:0}.pilzone.h{right:var(--chatb)}
+/* ---------- lav skaerm (fx 1366x768): samme udtryk, strammere lodret rytme ---------- */
+@media (max-height:820px){
+  .slide{padding:9vh var(--mx) 8vh}
+  .split .venstre{padding:9vh 3vw 8vh var(--mx)}
+  .tjekliste{margin-top:3.2vh}
+  .tjekliste .trow{padding:18px 4px}
+  p.under{line-height:1.5}
+  .skub{padding-bottom:1vh}
+}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 
 /* v2 typografi-vagt: forhindrer horeunger (kort sidste linje) og skaeve overskrifts-brud */
@@ -236,7 +245,7 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-
       <div class="sk-track"><span class="sk-band"></span><span class="sk-pm" style="left:14%"><i></i>PowerMatch · ca. 3-3,5 mdr.</span></div>
       <div class="sk-ticks"><span>3 mdr.</span><span>4 mdr.</span><span>5 mdr.</span><span>6 mdr.</span></div>
     </div>
-    <p class="under skub r d3">Branchen ligger typisk på <b>3 til 6 måneder</b>, nogle helt oppe på 6. Vi ligger i den korte ende. <b><span style="white-space:nowrap">Ingen gider vente et halvt år på at få sin mand.</span></b></p>
+    <p class="under skub r d3">Branchen ligger typisk på <b>3 til 6 måneder</b>, nogle helt oppe på 6. Vi ligger i den korte ende. <b><span style="white-space:nowrap">Ingen gider betale et halvt år, før manden er deres.</span></b></p>
   </div>
 </section>
 
