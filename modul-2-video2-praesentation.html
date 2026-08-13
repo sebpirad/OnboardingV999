@@ -70,6 +70,8 @@ p.under{font-size:clamp(14px,1.25vw,17px);line-height:1.6;color:var(--muted);max
 .frik .val{font-size:clamp(26px,2.5vw,40px);font-weight:900;color:var(--sort);letter-spacing:-.03em}
 .frik .val.hero{font-size:clamp(40px,4.2vw,64px);background:var(--gul);padding:.02em .14em;border-radius:12px}
 .frik .op{font-size:clamp(24px,2.6vw,40px);font-weight:800;color:#C9C9C2}
+.frik{align-items:flex-end}
+.frik .led{padding-bottom:0}
 .frik .lab{position:absolute;left:2px;top:100%;margin-top:14px;font-size:10.5px;font-weight:800;letter-spacing:.16em;color:var(--muted);text-transform:uppercase;white-space:nowrap}
 
 .svarhero{margin:auto 0}
@@ -128,6 +130,10 @@ p.under{font-size:clamp(14px,1.25vw,17px);line-height:1.6;color:var(--muted);max
 .pilzone{position:fixed;top:0;bottom:52px;width:9%;z-index:90;cursor:pointer}
 .pilzone.v{left:0}.pilzone.h{right:var(--chatb)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* v2 typografi-vagt: forhindrer horeunger (kort sidste linje) og skaeve overskrifts-brud */
+h1,h2{text-wrap:balance}
+p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-lab{text-wrap:pretty}
 </style></head>
 <body>
 
@@ -199,7 +205,7 @@ p.under{font-size:clamp(14px,1.25vw,17px);line-height:1.6;color:var(--muted);max
       <span class="op">−</span>
       <span class="led"><span class="val hero">20 %</span><span class="lab">rabatten</span></span>
     </div>
-    <p class="under skub r d3">Kan de ikke få hænderne ned, kan han købes fri før tid, og <b>de sparer 20 % i forhold til at lade timerne løbe.</b> Alle tre parter vinder stadig.</p>
+    <p class="under skub r d3">Kan de ikke få hænderne ned, kan han købes fri før tid, og <b>de sparer 20 % i forhold til at lade timerne løbe.</b> <span style="white-space:nowrap">Alle tre parter vinder stadig.</span></p>
   </div>
 </section>
 
@@ -211,7 +217,7 @@ p.under{font-size:clamp(14px,1.25vw,17px);line-height:1.6;color:var(--muted);max
       <div class="sv">Virksomheden.<br><mark>Altid.</mark></div>
       <div class="svu">Det hedder <b>instruktionspligten</b>: Det er virksomheden, der fortæller ham, hvad han skal lave, og hvordan han skal gøre det. Skal noget laves om, er det virksomhedens regning.</div>
     </div>
-    <p class="under skub r d3">Reglen, du skal kunne: <b>Den, der instruerer arbejdet, hæfter for arbejdet.</b></p>
+    <p class="under skub r d3">Reglen, du skal kunne: <b><span style="white-space:nowrap">Den, der instruerer arbejdet, hæfter for arbejdet.</span></b></p>
   </div>
 </section>
 
@@ -223,7 +229,7 @@ p.under{font-size:clamp(14px,1.25vw,17px);line-height:1.6;color:var(--muted);max
       <div class="sv">Virksomhedens<br><mark>forsikring.</mark></div>
       <div class="svu">Samme regel, samme grund: <b>instruktionspligten</b>. Og her er detaljen, du skal kende: <b>PowerMatch må rent lovmæssigt ikke tegne den forsikring.</b> Det skal være virksomheden selv.</div>
     </div>
-    <p class="under skub r d3">Derfor er forsikring <b>det eneste</b>, virksomheden selv står for i hele forløbet.</p>
+    <p class="under skub r d3">Derfor er forsikring <b>det eneste</b>, <span style="white-space:nowrap">virksomheden selv står for i hele forløbet.</span></p>
   </div>
 </section>
 
@@ -281,7 +287,7 @@ p.under{font-size:clamp(14px,1.25vw,17px);line-height:1.6;color:var(--muted);max
     <div class="recap">
       <div class="rrow r d2"><span class="rnr">1</span><span class="rtxt">Er du i tvivl om ét af dem, så <em>se svaret igen</em>. De kommer i dine kundesamtaler.</span></div>
       <div class="rrow r d3"><span class="rnr">2</span><span class="rtxt">Tag så <em>quizzen</em>. Bestået er 8 af 10.</span></div>
-      <div class="rrow r d4"><span class="rnr">3</span><span class="rtxt">Næste modul: <em>Rekrutteringsbranchen</em>. Forstå det marked, du sælger ind i.</span></div>
+      <div class="rrow r d4"><span class="rnr">3</span><span class="rtxt">Næste modul: <em>Rekrutteringsbranchen</em>. <span style="white-space:nowrap">Forstå det marked, du sælger ind i.</span></span></div>
     </div>
   </div>
 </section>

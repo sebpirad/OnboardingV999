@@ -284,6 +284,10 @@ p.under.bundfast{margin-top:auto !important;border-top:1px solid var(--border);p
   .r,.lm span{opacity:1;transform:none}
   mark{background-size:100% 100%}
 }
+
+/* v2 typografi-vagt: forhindrer horeunger (kort sidste linje) og skaeve overskrifts-brud */
+h1,h2{text-wrap:balance}
+p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-lab{text-wrap:pretty}
 </style>
 </head>
 <body>
@@ -364,16 +368,16 @@ p.under.bundfast{margin-top:auto !important;border-top:1px solid var(--border);p
 <section class="slide" data-sektion="Modellen">
   <div class="z fyld">
     <div class="kicker r"><span class="knr">02</span><span class="krule"></span><span class="ktxt">Modellen</span></div>
-    <h2 class="r d1">Fem trin. De tre første er gratis.</h2>
+    <h2 class="r d1">Fem trin. De tre <span style="white-space:nowrap">første er gratis.</span></h2>
     <div class="vgruppe">
       <div class="tflow">
         <div class="linje r d2"></div>
         <div class="stationer">
           <div class="station r d2"><div class="boks">1</div><h5>Behov</h5><p>Virksomheden mangler arbejdskraft.</p><span class="fase">Gratis</span></div>
           <div class="station r d3"><div class="boks">2</div><h5>Match</h5><p>Platformen finder og præsenterer kandidater.</p><span class="fase">Gratis</span></div>
-          <div class="station r d4"><div class="boks">3</div><h5>Samtale</h5><p>Telefon, fysisk eller Meet. Ren kemi-test.</p><span class="fase">Gratis</span></div>
-          <div class="station betalt r d5"><div class="boks">4</div><h5>Mand i marken</h5><p>Kandidaten starter, ansat hos os.</p><span class="fase">Her tjener vi penge</span></div>
-          <div class="station slut r d6"><div class="boks">✓</div><h5>Fastansættelse</h5><p>Efter 518 effektive timer: 0 kr. ekstra.</p><span class="fase">Målet</span></div>
+          <div class="station r d4"><div class="boks">3</div><h5>Samtale</h5><p>Telefon, fysisk eller <span style="white-space:nowrap">Meet. Ren kemi-test.</span></p><span class="fase">Gratis</span></div>
+          <div class="station betalt r d5"><div class="boks">4</div><h5>Mand i marken</h5><p>Kandidaten starter, <span style="white-space:nowrap">ansat hos os.</span></p><span class="fase">Her tjener vi penge</span></div>
+          <div class="station slut r d6"><div class="boks">✓</div><h5>Fastansættelse</h5><p>Efter 518 effektive timer: <span style="white-space:nowrap">0 kr. ekstra.</span></p><span class="fase">Målet</span></div>
         </div>
         <div class="bracketrow r d6">
           <div class="bracket">
@@ -398,7 +402,7 @@ p.under.bundfast{margin-top:auto !important;border-top:1px solid var(--border);p
       <div class="trow r d2"><span class="tdot"></span><span class="ttxt">Matches ned til mindste detalje <span>afstand, opgaver, erfaring og løn</span></span></div>
       <div class="trow r d3"><span class="tdot"></span><span class="ttxt">CV'er screenet i dybden <span>referencer, billeder og video fra manden selv</span></span></div>
       <div class="trow r d4"><span class="tdot"></span><span class="ttxt">Book samtaler direkte <span>telefon, fysisk eller Meet</span></span></div>
-      <div class="trow r d5"><span class="tdot"></span><span class="ttxt">Hvorfor gratis? Forarbejdet er forretningsmodellen <span>læst CV, telefonsnak og håndtryk giver matches, der holder</span></span></div>
+      <div class="trow r d5"><span class="tdot"></span><span class="ttxt">Hvorfor gratis? Forarbejdet er forretningsmodellen <span><span style="white-space:nowrap">læst CV, telefonsnak og håndtryk giver matches, der holder</span></span></span></div>
     </div>
     <p class="under skub r d6">Det kan måles: <b>cirka 380 timer pr. kandidat i snit.</b> Nogle kigger uden at købe. Fint. De der køber,&nbsp;lykkes.</p>
   </div>
@@ -411,12 +415,12 @@ p.under.bundfast{margin-top:auto !important;border-top:1px solid var(--border);p
     <div class="kicker r"><span class="knr">04</span><span class="krule"></span><span class="ktxt">Prøveperioden</span></div>
     <h2 class="r d1">Vi står for det hele. Virksomheden binder sig til ingenting.</h2>
     <div class="tjekliste">
-      <div class="trow r d2"><span class="tdot"></span><span class="ttxt">Vi er hans arbejdsgiver <span>løn, sociale omkostninger, arbejdstøj, kørsel. Og vi følger op hele vejen</span></span></div>
+      <div class="trow r d2"><span class="tdot"></span><span class="ttxt">Vi er hans arbejdsgiver <span>løn, sociale omkostninger, arbejdstøj, kørsel. <span style="white-space:nowrap">Og vi følger op hele vejen</span></span></span></div>
       <div class="trow r d3"><span class="tdot"></span><span class="ttxt">Lønnen er på plads på forhånd <span>ønske og tilbud matcher. Samtalen er ren kemi</span></span></div>
-      <div class="trow r d4"><span class="tdot"></span><span class="ttxt">Begge parter kan stoppe fra dag til dag <span>og stopper de ham, dækker vi opsigelsesdagene</span></span></div>
+      <div class="trow r d4"><span class="tdot"></span><span class="ttxt">Begge parter kan stoppe fra dag til dag <span>og stopper de ham, <span style="white-space:nowrap">dækker vi opsigelsesdagene</span></span></span></div>
       <div class="trow r d5"><span class="tdot"></span><span class="ttxt">Virksomheden skal kun ét <span>vurdere om han dur til arbejdet</span></span></div>
     </div>
-    <p class="under skub r d6">Manden må <b>aldrig</b> være dårligere dækket hos os end ved direkte ansættelse. <b>Aldrig.</b></p>
+    <p class="under skub r d6">Manden må <b>aldrig</b> være dårligere dækket hos os end ved <span style="white-space:nowrap">direkte ansættelse. <b>Aldrig.</b></span></p>
   </div>
 </section>
 
@@ -449,10 +453,10 @@ p.under.bundfast{margin-top:auto !important;border-top:1px solid var(--border);p
     <div class="kicker r"><span class="knr">06</span><span class="krule"></span><span class="ktxt">Kundens gevinst</span></div>
     <h2 class="r d1">Virksomheden tjener penge, <mark>mens de prøver ham af</mark>.</h2>
     <div class="tjekliste">
-      <div class="trow r d2"><span class="tdot"></span><span class="ttxt">Adgang til folk, de aldrig selv kunne finde <span>især dem, der allerede er i job. Vores database og navn sikrer det</span></span></div>
-      <div class="trow r d3"><span class="tdot"></span><span class="ttxt">De fakturerer kunden mere, end han koster gennem os <span>de tjener penge i hele prøveperioden</span></span></div>
+      <div class="trow r d2"><span class="tdot"></span><span class="ttxt">Adgang til folk, de aldrig selv kunne finde <span>især dem, der allerede er i job. <span style="white-space:nowrap">Vores database og navn sikrer det</span></span></span></div>
+      <div class="trow r d3"><span class="tdot"></span><span class="ttxt">De fakturerer kunden mere, end han koster gennem os <span>de tjener penge <span style="white-space:nowrap">i hele prøveperioden</span></span></span></div>
       <div class="trow r d4"><span class="tdot"></span><span class="ttxt">Ingen annoncer, ingen sortering, ingen risiko <span>den har vi taget</span></span></div>
-      <div class="trow r d5"><span class="tdot"></span><span class="ttxt">Én ting står de selv for: forsikringer <span>de instruerer manden på pladsen, så de hæfter for fejl og skader</span></span></div>
+      <div class="trow r d5"><span class="tdot"></span><span class="ttxt">Én ting står de selv for: forsikringer <span>de instruerer manden på pladsen, <span style="white-space:nowrap">så de hæfter for fejl og skader</span></span></span></div>
     </div>
     <p class="under skub r d6">Lidt dyrere i 3 til 3,5 måneder. <b>En fast mand i mange&nbsp;år.</b></p>
   </div>
@@ -471,7 +475,7 @@ p.under.bundfast{margin-top:auto !important;border-top:1px solid var(--border);p
       <div class="trow r d5"><span class="tdot"></span><span class="ttxt">Point pr. arbejdstime <span>byttes til gavekort i Power Shop</span></span></div>
       <div class="trow r d6"><span class="tdot"></span><span class="ttxt">Jobsikkerhed <span>ikke glad? Vi finder et nyt job, der passer</span></span></div>
     </div>
-    <p class="under skub r d6">Kandidaten skal tænke: hold kæft, det er fede fordele. <b>Ingen andre har noget, der&nbsp;ligner.</b></p>
+    <p class="under skub r d6">Kandidaten skal tænke: hold kæft, det er fede fordele. <b>Ingen andre <span style="white-space:nowrap">har noget, der&nbsp;ligner.</b></span></p>
   </div>
 </section>
 
@@ -483,7 +487,7 @@ p.under.bundfast{margin-top:auto !important;border-top:1px solid var(--border);p
     <h2 class="r d1">Tre ting skal sidde fast.</h2>
     <div class="recap">
       <div class="rrow r d2"><span class="rnr">1</span><span class="rtxt">Modellen virker kun, når <em>alle tre parter vinder</em>.</span></div>
-      <div class="rrow r d3"><span class="rnr">2</span><span class="rtxt">Timeløn × gangfaktor = timepris. <em>El/VVS 2,0 til 2,2 · resten 1,85 til 1,975.</em></span></div>
+      <div class="rrow r d3"><span class="rnr">2</span><span class="rtxt">Timeløn × gangfaktor = timepris. <em>El/VVS 2,0 til 2,2 · resten <span style="white-space:nowrap">1,85 til 1,975</span>.</em></span></div>
       <div class="rrow r d4"><span class="rnr">3</span><span class="rtxt"><em>Ingen binding.</em> Vi står for det hele. De skal kun vurdere, om han dur.</span></div>
     </div>
     <p class="naeste skub r d5">Næste video: <b>10 typiske spørgsmål til forretningsmodellen.</b> Fra virksomheder, kandidater og dig selv.</p>

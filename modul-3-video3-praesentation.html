@@ -139,6 +139,10 @@ p.under{font-size:clamp(14px,1.25vw,17px);line-height:1.6;color:var(--muted);max
 .pilzone{position:fixed;top:0;bottom:52px;width:9%;z-index:90;cursor:pointer}
 .pilzone.v{left:0}.pilzone.h{right:var(--chatb)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* v2 typografi-vagt: forhindrer horeunger (kort sidste linje) og skaeve overskrifts-brud */
+h1,h2{text-wrap:balance}
+p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-lab{text-wrap:pretty}
 </style></head>
 <body>
 
@@ -183,7 +187,7 @@ p.under{font-size:clamp(14px,1.25vw,17px);line-height:1.6;color:var(--muted);max
       <div class="sv">En platform.<br><mark>Ikke et bureau.</mark></div>
       <div class="svu">Alt kører på data: virksomhedens krav og ønsker, håndværkerens krav og ønsker, <b>matchet automatisk</b>. Der sidder ingen konsulent og smider en håndværker ud til en virksomhed. Og alt er <b>altid med henblik på fastansættelse</b>, aldrig vikar.</div>
     </div>
-    <p class="under skub r d3"><b>Virksomheden vælger selv. Håndværkeren vælger selv.</b> De gode folk gider ikke være vikarer. De bruger os for at finde fast&nbsp;arbejde.</p>
+    <p class="under skub r d3"><b>Virksomheden vælger selv. Håndværkeren vælger selv.</b> De gode folk gider ikke være vikarer. <span style="white-space:nowrap">De bruger os for at finde fast arbejde.</span></p>
   </div>
 </section>
 
@@ -232,7 +236,7 @@ p.under{font-size:clamp(14px,1.25vw,17px);line-height:1.6;color:var(--muted);max
       <div class="sk-track"><span class="sk-band"></span><span class="sk-pm" style="left:14%"><i></i>PowerMatch · ca. 3-3,5 mdr.</span></div>
       <div class="sk-ticks"><span>3 mdr.</span><span>4 mdr.</span><span>5 mdr.</span><span>6 mdr.</span></div>
     </div>
-    <p class="under skub r d3">Branchen ligger typisk på <b>3 til 6 måneder</b>, nogle helt oppe på 6. Vi ligger i den korte ende. <b>Ingen gider vente et halvt år på at få sin mand.</b></p>
+    <p class="under skub r d3">Branchen ligger typisk på <b>3 til 6 måneder</b>, nogle helt oppe på 6. Vi ligger i den korte ende. <b><span style="white-space:nowrap">Ingen gider vente et halvt år på at få sin mand.</span></b></p>
   </div>
 </section>
 
