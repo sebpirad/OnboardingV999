@@ -69,7 +69,7 @@ p.under{font-size:clamp(15px,1.35vw,19px);line-height:1.6;color:var(--muted);max
 .skub{margin-top:auto !important;padding-bottom:2vh}
 
 /* ---------- læringsmål / faktarækker ---------- */
-.maal{margin-top:5vh;max-width:880px;flex:1;display:flex;flex-direction:column;justify-content:space-evenly}
+.maal{margin-top:5vh;max-width:1040px;flex:1;display:flex;flex-direction:column;justify-content:space-evenly}
 .maal .mrow{display:flex;align-items:center;gap:26px;border-top:1px solid var(--border);padding:30px 4px;flex:1}
 .maal .mrow:last-child{border-bottom:1px solid var(--border)}
 .maal .tjek{
@@ -100,7 +100,7 @@ p.under{font-size:clamp(15px,1.35vw,19px);line-height:1.6;color:var(--muted);max
 .tflow{position:relative;margin:auto 0}
 .tflow .linje{position:absolute;left:31px;right:calc((100% - 104px)/5 - 31px);top:31px;height:2px;background:var(--sort)}
 .tflow .stationer{display:grid;grid-template-columns:repeat(5,1fr);column-gap:26px}
-.station{position:relative}
+.station{position:relative;display:flex;flex-direction:column}
 .station .boks{
   width:62px;height:62px;background:var(--gul);border-radius:12px;
   display:flex;align-items:center;justify-content:center;
@@ -111,14 +111,14 @@ p.under{font-size:clamp(15px,1.35vw,19px);line-height:1.6;color:var(--muted);max
 .station h5{font-size:17.5px;font-weight:800;color:var(--sort);margin-bottom:7px;letter-spacing:-.01em}
 .station p{font-size:13.5px;line-height:1.55;color:var(--muted);max-width:24ch}
 .station .fase{
-  margin-top:22px;display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.18em;
+  margin-top:auto;padding-top:22px;display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.18em;
   color:var(--muted);border-top:1px solid var(--border);padding-top:10px;text-transform:uppercase;
 }
 .station.betalt .fase{color:var(--sort);border-top:3px solid var(--gul);padding-top:8px}
 
 /* ---------- tjekliste ---------- */
-.tjekliste{margin-top:5vh;max-width:900px}
-.tjekliste .trow{display:flex;align-items:baseline;gap:20px;border-top:1px solid var(--border);padding:26px 4px}
+.tjekliste{margin-top:5vh;max-width:940px;flex:1;display:flex;flex-direction:column;justify-content:space-evenly}
+.tjekliste .trow{display:flex;align-items:center;gap:20px;border-top:1px solid var(--border);padding:26px 4px;flex:1}
 .tjekliste .trow:last-child{border-bottom:1px solid var(--border)}
 .tjekliste .tdot{width:12px;height:12px;border-radius:50%;background:var(--gul);flex-shrink:0;position:relative;top:-2px}
 .tjekliste .ttxt{font-size:clamp(16px,1.7vw,22px);font-weight:800;color:var(--sort)}
@@ -174,7 +174,7 @@ p.under{font-size:clamp(15px,1.35vw,19px);line-height:1.6;color:var(--muted);max
   line-height:1;color:var(--sort);font-variant-numeric:tabular-nums;
 }
 .kaempe i{position:absolute;left:-.05em;right:-.05em;bottom:.03em;height:.24em;background:var(--gul);z-index:-1}
-.kaempe .ktag{
+.kaempe .ktag,.hoejre .ktag{
   position:absolute;left:50%;transform:translateX(-50%);top:100%;margin-top:26px;
   font-size:12px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);white-space:nowrap;
 }
@@ -325,9 +325,9 @@ p.under.bundfast{margin-top:auto !important;border-top:1px solid var(--border);p
   <div class="ghost">3</div>
   <div class="z fyld">
     <div class="kicker r"><span class="knr">00</span><span class="krule"></span><span class="ktxt">Efter denne video kan du</span></div>
-    <h2 class="r d1">Tre ting du skal kunne bagefter.</h2>
+    <h2 class="r d1">Tre ting, du skal kunne&nbsp;bagefter.</h2>
     <div class="maal">
-      <div class="mrow r d2"><span class="tjek">✓</span><span class="mtxt">Sætte kroner på en tom plads <span>tabt omsætning, fejlansættelser og dagbøder</span></span></div>
+      <div class="mrow r d2"><span class="tjek">✓</span><span class="mtxt">Sætte kroner på problemet <span>tabt omsætning, fejlansættelser og dagbøder</span></span></div>
       <div class="mrow r d3"><span class="tjek">✓</span><span class="mtxt">Forklare hvor de dygtige håndværkere er <span>og hvorfor virksomhederne ikke selv kan nå dem</span></span></div>
       <div class="mrow r d4"><span class="tjek">✓</span><span class="mtxt">Forklare hvorfor PowerMatch kan nå dem <span>databasen, dialogen og matchet begge veje</span></span></div>
     </div>
@@ -338,8 +338,8 @@ p.under.bundfast{margin-top:auto !important;border-top:1px solid var(--border);p
 <section class="slide gulflade" data-sektion="Tom plads">
   <div class="z fyld">
     <div class="kicker r"><span class="knr">01</span><span class="krule"></span><span class="ktxt">Regnestykket: en tom plads</span></div>
-    <h2 class="r d1">En tømrer, du mangler. Lad os regne.</h2>
     <div class="vgruppe">
+      <h2 class="r d1" style="margin-bottom:7vh">En tømrer, du mangler. Lad os regne.</h2>
       <div class="regne" style="margin:0">
         <div class="led r d2"><span class="val">550 kr</span><span class="lab">Fakturering pr. time</span></div>
         <div class="op r d3">×</div>
@@ -347,7 +347,7 @@ p.under.bundfast{margin-top:auto !important;border-top:1px solid var(--border);p
         <div class="op r d4">=</div>
         <div class="led svar r d4"><span class="val">88.000 kr</span><span class="lab">Tabt omsætning pr. måned</span></div>
       </div>
-      <p class="under r d5" style="margin-top:9vh;color:rgba(17,18,19,.68)">Har kunden opgaverne, men ikke manden, går der <b>op mod 100.000&nbsp;kr i omsætning tabt. Hver måned.</b> Og det er bare én mand.</p>
+      <p class="under r d5" style="margin-top:7vh;max-width:46ch;color:rgba(17,18,19,.68)">Har kunden opgaverne, men ikke manden, ryger der <b>op&nbsp;mod&nbsp;100.000&nbsp;kr i omsætning. Hver måned.</b> <span style="white-space:nowrap">Og det er bare én mand.</span></p>
     </div>
   </div>
 </section>
@@ -359,7 +359,7 @@ p.under.bundfast{margin-top:auto !important;border-top:1px solid var(--border);p
       <div class="kicker r"><span class="knr">02</span><span class="krule"></span><span class="ktxt">Fejlansættelsen</span></div>
       <div class="vgruppe">
         <h2 class="r d1">At vælge forkert er endnu dyrere.</h2>
-        <p class="under r d2" style="margin-top:3vh">Det hører vi fra virksomhederne selv. Regningen kommer fra alle sider:</p>
+        <p class="under r d2" style="margin-top:3vh">Regningen kommer fra alle sider:</p>
         <div class="fakta-stak r d3" style="margin-top:4vh">
           <div class="fakta-r">Firmabil og værktøj <span>klar fra dag 1</span></div>
           <div class="fakta-r">Oplæring og spildtid</div>
@@ -371,7 +371,7 @@ p.under.bundfast{margin-top:auto !important;border-top:1px solid var(--border);p
     <div class="hoejre">
       <div class="r d2" style="text-align:center">
         <div class="kaempe" style="font-size:clamp(90px,9vw,160px)">250.000<i></i></div>
-        <div class="ktag" style="position:static;transform:none;display:block;margin-top:30px">Kr · op til, pr. fejlansættelse</div>
+        <div class="ktag" style="position:static;transform:none;display:block;margin-top:30px">Kr · op til · pr. fejlansættelse</div>
       </div>
     </div>
   </div>
@@ -383,34 +383,35 @@ p.under.bundfast{margin-top:auto !important;border-top:1px solid var(--border);p
   <div class="z fyld">
     <div class="kicker r"><span class="knr">03</span><span class="krule"></span><span class="ktxt">Dagbøder</span></div>
     <h2 class="r d1">Dagbøder: forsinkelse med taxameter.</h2>
-    <div class="vgruppe">
-      <div class="tflow">
+    <div class="tflowwrap" style="margin-top:5vh">
+      <div class="tflow" style="margin:0">
         <div class="linje r d2" style="right:calc((100% - 104px)/4 - 31px)"></div>
         <div class="stationer" style="grid-template-columns:repeat(4,1fr)">
-          <div class="station r d2"><div class="boks">1</div><h5>Muren forsinket</h5><p>Mureren mangler folk og bliver ikke færdig.</p></div>
-          <div class="station r d3"><div class="boks">2</div><h5>Tømrerne venter</h5><p>De kan ikke komme til.</p></div>
-          <div class="station r d4"><div class="boks">3</div><h5>El, VVS og maler venter</h5><p>Hele kæden er gået i stå.</p></div>
-          <div class="station slut r d5"><div class="boks">kr</div><h5>Bøden tikker</h5><p>Pr. arbejdsdag, man er forsinket.</p></div>
+          <div class="station r d2"><div class="boks">1</div><h5>Muren forsinket</h5><p>Mureren mangler folk og bliver ikke færdig.</p><span class="fase">Dag 1</span></div>
+          <div class="station r d3"><div class="boks">2</div><h5>Tømrerne venter</h5><p>De kan ikke komme til.</p><span class="fase">Kæden venter</span></div>
+          <div class="station r d4"><div class="boks">3</div><h5>El, VVS og maler venter</h5><p>Hele kæden er gået i stå.</p><span class="fase">Kæden venter</span></div>
+          <div class="station slut betalt r d5"><div class="boks">kr</div><h5>Bøden tikker</h5><p>For hver arbejdsdag, tidsplanen&nbsp;skrider.</p><span class="fase">Her koster det</span></div>
         </div>
       </div>
     </div>
-    <p class="under bundfast r d6">Typisk <b>1-2 promille af entreprisesummen pr. arbejdsdag</b>. På en 10 mio.-sag: <b>10.000-20.000 kr om dagen.</b></p>
+    <p class="under bundfast r d6">Typisk <b>1-2 promille af entreprisesummen pr. arbejdsdag</b>. På en 10 mio.-sag: <b>10.000-20.000 kr pr. arbejdsdag.</b></p>
   </div>
 </section>
 
 <!-- 6 · REGNINGEN SAMLET (tre tal) -->
 <section class="slide" data-sektion="Regningen">
+  <div class="ghost">04</div>
   <div class="z fyld">
     <div class="kicker r"><span class="knr">04</span><span class="krule"></span><span class="ktxt">Regningen · når de rigtige folk mangler</span></div>
-    <h2 class="r d1">Det her er, hvad dit kald handler om.</h2>
-    <div class="vgruppe">
+    <h2 class="r d1">Det her er dét, dit kald handler om.</h2>
+    <div style="margin-top:5vh">
       <div class="cols" style="margin-top:0">
-        <div class="col first hero" style="grid-column:span 4"><span class="bar"></span><span class="tal">100.000</span><span class="enhed">Kr pr. måned · op mod · tabt omsætning</span><h5>Den tomme plads</h5><p>Opgaverne er der. Manden er der ikke.</p></div>
-        <div class="col" style="grid-column:span 4"><span class="bar"></span><span class="tal">250.000</span><span class="enhed">Kr · op til, pr. fejlansættelse</span><h5>Det forkerte valg</h5><p>Bil, værktøj, oplæring, om-arbejde, fyring.</p></div>
-        <div class="col" style="grid-column:span 4"><span class="bar"></span><span class="tal">20.000</span><span class="enhed">Kr pr. arbejdsdag · op til, i dagbod</span><h5>Forsinkelsen</h5><p>Ét fag i stå, hele kæden venter.</p></div>
+        <div class="col first hero r d2" style="grid-column:span 4"><span class="bar"></span><span class="tal">100.000</span><span class="enhed">Kr pr. måned · op mod</span><h5>Den tomme plads</h5><p>Opgaverne er der. Manden er der ikke.</p></div>
+        <div class="col r d3" style="grid-column:span 4"><span class="bar"></span><span class="tal">250.000</span><span class="enhed">Kr pr. fejlansættelse · op til</span><h5>Det forkerte valg</h5><p>Bil, værktøj, oplæring, omarbejde&nbsp;og&nbsp;fyring.</p></div>
+        <div class="col r d4" style="grid-column:span 4"><span class="bar"></span><span class="tal">20.000</span><span class="enhed">Kr pr. arbejdsdag · op til · 10 mio.-sag</span><h5>Forsinkelsen</h5><p>Ét fag i stå, hele kæden venter.</p></div>
       </div>
     </div>
-    <p class="under bundfast r d5">Derfor er rekruttering aldrig en lille beslutning for kunden. <b>Og derfor er dit kald aldrig ubelejligt.</b></p>
+    <p class="under bundfast r d5">Derfor er rekruttering aldrig en lille beslutning for kunden. Men de investerer alt for lidt i den. <b>Og derfor er dit kald aldrig ubelejligt.</b></p>
   </div>
 </section>
 
@@ -419,11 +420,11 @@ p.under.bundfast{margin-top:auto !important;border-top:1px solid var(--border);p
   <div class="ghost" style="font-size:52vh">?</div>
   <div class="z fyld">
     <div class="kicker r"><span class="knr">05</span><span class="krule"></span><span class="ktxt">Hvor er de dygtige så?</span></div>
-    <div class="vgruppe">
-      <h2 class="r d1" style="font-size:clamp(44px,4.6vw,72px);max-width:16ch">De dygtigste?<br>De er i arbejde.</h2>
-      <p class="under r d2" style="margin-top:4vh;max-width:50ch">Husk fra video 1: <b>De dygtigste er i arbejde. De ser aldrig opslaget.</b> De scroller ikke Jobindex en tirsdag aften. Så virksomhederne kan ikke nå dem. Men det kan vi.</p>
+    <h2 class="r d1" style="font-size:clamp(56px,6.6vw,96px);max-width:13ch;letter-spacing:-.035em">De dygtigste?<br>De er i arbejde.</h2>
+    <div class="skub">
+      <p class="under r d2" style="max-width:50ch">Husk fra video 1: <b>de ser aldrig opslaget.</b> De sidder ikke på Jobindex og Jobnet, for de har et arbejde. Så virksomhederne kan ikke nå dem med et&nbsp;opslag.</p>
+      <p class="under r d3" style="margin-top:2.4vh;border-top:1px solid var(--border);padding-top:18px;max-width:none">Men det kan vi. <b>Og nu kommer tallet, der forklarer hele vores&nbsp;forspring.</b></p>
     </div>
-    <p class="under skub r d3">Og nu kommer tallet, der forklarer <b>hele vores forspring.</b></p>
   </div>
 </section>
 
@@ -433,11 +434,11 @@ p.under.bundfast{margin-top:auto !important;border-top:1px solid var(--border);p
     <div class="venstre">
       <div class="kicker r"><span class="knr">06</span><span class="krule"></span><span class="ktxt">Databasen</span></div>
       <div class="vgruppe">
-        <h2 class="r d1">Adgangen, ingen andre har.</h2>
+        <h2 class="r d1">Adgangen, ingen andre&nbsp;har.</h2>
         <div class="fakta-stak r d2" style="margin-top:4vh">
-          <div class="fakta-r">3-4 år i markedet <span>og altid behandlet folk ordentligt</span></div>
-          <div class="fakta-r">Vi kontakter folk i arbejde <span>en mail eller sms med 1-3 måneders mellemrum: er du glad?</span></div>
-          <div class="fakta-r">Én dårlig dag, og de siger ja <span>mester, løn, firmabil, kultur eller afstand</span></div>
+          <div class="fakta-r">3-4 år i markedet <span>og altid behandlet folk godt</span></div>
+          <div class="fakta-r">Vi holder kontakten til folk i arbejde <span>en sms med 1-3 måneders mellemrum</span></div>
+          <div class="fakta-r">En dag er svaret nej <span>mester, løn, firmabil, kultur eller afstand</span></div>
           <div class="fakta-r">Data, virksomhederne ikke har <span>og aldrig selv kan bygge</span></div>
         </div>
       </div>
@@ -445,7 +446,7 @@ p.under.bundfast{margin-top:auto !important;border-top:1px solid var(--border);p
     <div class="hoejre">
       <div class="r d2" style="text-align:center">
         <div class="kaempe" style="font-size:clamp(90px,9vw,160px)">50.000<i></i></div>
-        <div class="ktag" style="position:static;transform:none;display:block;margin-top:30px">Cirka · håndværkere vi har adgang til</div>
+        <div class="ktag" style="position:static;transform:none;display:block;margin-top:30px">Cirka · håndværkere, vi har adgang til</div>
       </div>
     </div>
   </div>
@@ -455,14 +456,14 @@ p.under.bundfast{margin-top:auto !important;border-top:1px solid var(--border);p
 <section class="slide" data-sektion="Loopet">
   <div class="ghost">07</div>
   <div class="z fyld">
-    <div class="kicker r"><span class="knr">07</span><span class="krule"></span><span class="ktxt">Og databasen vokser selv</span></div>
+    <div class="kicker r"><span class="knr">07</span><span class="krule"></span><span class="ktxt">Loopet · databasen vokser selv</span></div>
     <h2 class="r d1">Glade folk henter flere folk.</h2>
     <div class="tjekliste">
       <div class="trow r d2"><span class="tdot"></span><span class="ttxt">Trygt at skifte <span>han er dækket i hoved og røv hos os</span></span></div>
       <div class="trow r d3"><span class="tdot"></span><span class="ttxt">Glade håndværkere anbefaler os <span>til kolleger og venner fra pladsen</span></span></div>
       <div class="trow r d4"><span class="tdot"></span><span class="ttxt">Branchen er netværk <span>det lærte du i video 1. Vi lever selv efter dens logik</span></span></div>
     </div>
-    <p class="under skub r d5">Hver god oplevelse bliver til den næste kandidat. <b>Databasen vokser af sig selv, fordi folk er glade.</b></p>
+    <p class="under skub r d5">Vi skal ikke selv jagte dem alle sammen. <b><span style="white-space:nowrap">Databasen vokser, fordi folk er glade.</span></b></p>
   </div>
 </section>
 
@@ -470,15 +471,15 @@ p.under.bundfast{margin-top:auto !important;border-top:1px solid var(--border);p
 <section class="slide" data-sektion="En anden bane">
   <div class="ghost">08</div>
   <div class="z fyld">
-    <div class="kicker r"><span class="knr">08</span><span class="krule"></span><span class="ktxt">Derfor vinder vi</span></div>
-    <h2 class="r d1">Vi spiller på en helt anden bane.</h2>
-    <div class="tjekliste">
+    <div class="kicker r"><span class="knr">08</span><span class="krule"></span><span class="ktxt">En anden bane · derfor vinder vi</span></div>
+    <h2 class="r d1">Vi spiller på en helt <span style="white-space:nowrap">anden bane.</span></h2>
+    <div class="tjekliste" style="margin-bottom:3vh">
       <div class="trow r d2"><span class="tdot"></span><span class="ttxt">Virksomheden styrer selv <span>ser matches, opretter jobs og vælger, hvem de møder</span></span></div>
       <div class="trow r d3"><span class="tdot"></span><span class="ttxt">De møder kandidaten, før de prøver ham af <span>telefon, fysisk eller Meet</span></span></div>
       <div class="trow r d4"><span class="tdot"></span><span class="ttxt">Altid mod fastansættelse <span>aldrig vikar</span></span></div>
       <div class="trow r d5"><span class="tdot"></span><span class="ttxt">Håndværkeren matches kun mod sine krav og ønsker <span>aldrig mod det nærmeste job</span></span></div>
     </div>
-    <p class="under skub r d6">Match begge veje. <b><mark>Ja, vi koster mere. Men vi leverer det, ingen andre gør.</mark></b></p>
+    <p class="under skub r d6">Match begge veje. <b>Ja, vi er en smule dyrere. <span style="white-space:nowrap">Men vi leverer det, <mark>ingen andre gør</mark>.</span></b></p>
   </div>
 </section>
 
@@ -489,9 +490,9 @@ p.under.bundfast{margin-top:auto !important;border-top:1px solid var(--border);p
     <div class="kicker r"><span class="knr">09</span><span class="krule"></span><span class="ktxt">Det vigtigste fra i dag</span></div>
     <h2 class="r d1">Tre ting skal sidde fast.</h2>
     <div class="recap">
-      <div class="rrow r d2"><span class="rnr">1</span><span class="rtxt">Tallene: <em>100.000 pr. måned · 250.000 pr. fejl · 20.000 pr. dag.</em></span></div>
+      <div class="rrow r d2"><span class="rnr">1</span><span class="rtxt">Tallene: <em>op&nbsp;mod&nbsp;100.000 pr.&nbsp;måned&nbsp;· op&nbsp;til&nbsp;250.000 pr.&nbsp;fejlansættelse&nbsp;· op&nbsp;til&nbsp;20.000 pr.&nbsp;arbejdsdag på en 10&nbsp;mio.-sag.</em></span></div>
       <div class="rrow r d3"><span class="rnr">2</span><span class="rtxt">De dygtigste er i arbejde. <em>De ser aldrig opslaget.</em></span></div>
-      <div class="rrow r d4"><span class="rnr">3</span><span class="rtxt">Vi når dem alligevel: <em>50.000 håndværkere</em> og en dialog, der aldrig stopper.</span></div>
+      <div class="rrow r d4"><span class="rnr">3</span><span class="rtxt">Vi når dem alligevel: <em>50.000 håndværkere</em>, kontakt hele året, <span style="white-space:nowrap">og <em>matchet begge veje</em>.</span></span></div>
     </div>
     <p class="naeste skub r d5">Næste video: <b>10 spørgsmål til rekruttering.</b> Chatten spørger, Lasse svarer.</p>
   </div>
