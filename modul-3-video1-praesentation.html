@@ -230,7 +230,7 @@ p.under.bundfast{margin-top:auto !important;border-top:1px solid var(--border);p
 .recap .rrow:last-child{border-bottom:1px solid rgba(255,255,255,.16)}
 .recap .rnr{width:46px;height:46px;border-radius:13px;background:var(--gul);color:var(--sort);font-weight:900;font-size:19px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .recap .rtxt{font-size:clamp(18px,1.9vw,25px);font-weight:800;color:#fff;letter-spacing:-.015em}
-.recap .rtxt em{font-style:normal;color:var(--gul)}
+.recap .rtxt em{font-style:normal;color:#fff}
 .moerk .naeste{margin-top:5vh;font-size:14.5px;font-weight:600;color:rgba(255,255,255,.55)}
 .moerk .naeste b{color:#fff}
 .moerk .ghost{-webkit-text-stroke:1.5px rgba(255,255,255,.1)}
@@ -251,17 +251,26 @@ p.under.bundfast{margin-top:auto !important;border-top:1px solid var(--border);p
 .titelgul .ghost{-webkit-text-stroke:2px rgba(17,18,19,.14);font-size:88vh;bottom:-14vh;right:-2vw}
 
 
+.kstrip{margin-top:3.2vh;border-top:1px solid var(--border);padding-top:15px;display:flex;gap:9px;flex-wrap:wrap}
+.kchip{display:flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:100px;padding:7px 13px;
+  font-size:10px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.kchip i{font-style:normal;font-size:13px;font-weight:900;line-height:1}
+.kchip.ja{color:var(--sort);border-color:#DCDCD5}
+.kchip.ja i{color:var(--sort)}
+.kchip.nej i{color:#C4C4BD}
 .kritstrip{margin-top:4vh;border-top:1px solid var(--border);padding-top:16px;display:flex;align-items:baseline;gap:18px;flex-wrap:wrap}
 .kritstrip span{font-size:10.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
 .kritstrip b{font-size:13px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--sort)}
 /* ---------- sammenlignings-matrix ---------- */
-.mx{display:grid;grid-template-columns:1.7fr repeat(4,1fr);align-items:stretch;max-width:1040px}
+.mx{display:grid;grid-template-columns:1.55fr repeat(4,1fr) .62fr;align-items:stretch;max-width:1120px}
+.mx .mxs{border-top:1px solid var(--border);display:flex;align-items:center;justify-content:flex-end;font-size:13px;font-weight:900;color:var(--muted);padding:15px 2px 15px 6px;font-variant-numeric:tabular-nums}
+.mx.pm .mxs{border-top:none;color:var(--sort);padding-right:18px}
 .mx .mxh{font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding:0 6px 12px 0}
 .mx .mxn{font-size:clamp(13.5px,1.25vw,16.5px);font-weight:800;color:var(--sort);border-top:1px solid var(--border);padding:15px 6px 15px 0;display:flex;align-items:center;letter-spacing:-.01em}
 .mx .mxc{border-top:1px solid var(--border);display:flex;align-items:center;font-size:17px;font-weight:900;padding:15px 6px}
 .mx .mxc.ja{color:var(--sort)}
 .mx .mxc.nej{color:var(--muted);font-weight:700}
-.mx.pm{margin-top:14px;background:var(--gul);border-radius:14px;max-width:1040px}
+.mx.pm{margin-top:14px;background:var(--gul);border-radius:14px;max-width:1120px}
 .mx.pm .mxn{padding-left:18px}
 .mx.pm .mxn,.mx.pm .mxc{border-top:none;padding-top:17px;padding-bottom:17px}
 .mx.pm .mxc.ja{color:var(--sort)}
@@ -408,6 +417,7 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-
         <div class="fakta-r">Akavet, når det fejler <span>så skal du fyre din medarbejders ven</span></div>
       </div>
     </div>
+        <div class="kstrip r d4"><span class="kchip ja"><i>✓</i>Kvalitet du beholder</span><span class="kchip nej"><i>✕</i>Minimal egen tid</span><span class="kchip nej"><i>✕</i>Reel screening</span><span class="kchip nej"><i>✕</i>Året rundt</span></div>
     <p class="under skub r d5">God kvalitet, men <b>netværket løber tørt.</b> På et tidspunkt kender <span style="white-space:nowrap">de ikke flere.</span></p>
   </div>
 </section>
@@ -432,6 +442,7 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-
         <div class="fakta-r">Svært uden stor profil</div>
       </div>
     </div>
+        <div class="kstrip r d4"><span class="kchip nej"><i>✕</i>Kvalitet du beholder</span><span class="kchip nej"><i>✕</i>Minimal egen tid</span><span class="kchip nej"><i>✕</i>Reel screening</span><span class="kchip nej"><i>✕</i>Året rundt</span></div>
     <p class="under skub r d5"><b>De dygtigste er i arbejde. De ser aldrig opslaget.</b> Man fisker <span style="white-space:nowrap">kun i den ledige del af søen.</span></p>
   </div>
 </section>
@@ -455,6 +466,7 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-
         <div class="fakta-r">Kræver opslag året rundt <span>den tid og økonomi har de ikke</span></div>
       </div>
     </div>
+        <div class="kstrip r d4"><span class="kchip nej"><i>✕</i>Kvalitet du beholder</span><span class="kchip nej"><i>✕</i>Minimal egen tid</span><span class="kchip nej"><i>✕</i>Reel screening</span><span class="kchip nej"><i>✕</i>Året rundt</span></div>
     <p class="under skub r d5">Der er <b>altid plads til den helt rigtige.</b> Men <span style="white-space:nowrap">ingen tid til at lede efter ham året rundt.</span></p>
   </div>
 </section>
@@ -479,6 +491,7 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-
         <div class="fakta-r">Kvantitet frem for kvalitet</div>
       </div>
     </div>
+        <div class="kstrip r d4"><span class="kchip nej"><i>✕</i>Kvalitet du beholder</span><span class="kchip ja"><i>✓</i>Minimal egen tid</span><span class="kchip nej"><i>✕</i>Reel screening</span><span class="kchip ja"><i>✓</i>Året rundt</span></div>
     <p class="under skub r d5">Når ingen af parterne selv vælger, <b>får du dårlige matches.</b></p>
   </div>
 </section>
@@ -502,6 +515,7 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-
         <div class="fakta-r">Mængde frem for kvalitet</div>
       </div>
     </div>
+        <div class="kstrip r d4"><span class="kchip nej"><i>✕</i>Kvalitet du beholder</span><span class="kchip ja"><i>✓</i>Minimal egen tid</span><span class="kchip nej"><i>✕</i>Reel screening</span><span class="kchip ja"><i>✓</i>Året rundt</span></div>
     <p class="under skub r d5">Vikarbureauet er sjældent et valg. <b>Man bliver tvunget derud.</b></p>
   </div>
 </section>
@@ -526,6 +540,7 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-
         <div class="fakta-r">Væk for 20-30 kr mere i timen <span>på den anden side af gaden</span></div>
       </div>
     </div>
+        <div class="kstrip r d4"><span class="kchip nej"><i>✕</i>Kvalitet du beholder</span><span class="kchip ja"><i>✓</i>Minimal egen tid</span><span class="kchip nej"><i>✕</i>Reel screening</span><span class="kchip nej"><i>✕</i>Året rundt</span></div>
     <p class="under skub r d5">Det er lejet arbejdskraft, aldrig din egen. <b><span style="white-space:nowrap">Ingen stabilitet, ingen fremtid i det.</span></b></p>
   </div>
 </section>
@@ -537,19 +552,19 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-
     <h2 class="r d1">Ingen af de seks leverer <span style="white-space:nowrap">alle fire ting.</span></h2>
     <div class="vgruppe">
       <div class="mx r d2">
-        <div class="mxh"></div><div class="mxh">Høj kvalitet</div><div class="mxh">Minimal egen tid</div><div class="mxh">Reel screening</div><div class="mxh">Året rundt</div>
-        <div class="mxn">Netværk og relationer</div><div class="mxc ja">✓</div><div class="mxc nej">✕</div><div class="mxc nej">✕</div><div class="mxc nej">✕</div>
-        <div class="mxn">Sociale medier</div><div class="mxc nej">✕</div><div class="mxc nej">✕</div><div class="mxc nej">✕</div><div class="mxc nej">✕</div>
-        <div class="mxn">Jobportaler</div><div class="mxc nej">✕</div><div class="mxc nej">✕</div><div class="mxc nej">✕</div><div class="mxc nej">✕</div>
-        <div class="mxn">Rekrutteringsbureauer</div><div class="mxc nej">✕</div><div class="mxc ja">✓</div><div class="mxc nej">✕</div><div class="mxc ja">✓</div>
-        <div class="mxn">Vikarbureauer</div><div class="mxc nej">✕</div><div class="mxc ja">✓</div><div class="mxc nej">✕</div><div class="mxc ja">✓</div>
-        <div class="mxn">Indlejede firmaer</div><div class="mxc ja">✓</div><div class="mxc ja">✓</div><div class="mxc nej">✕</div><div class="mxc nej">✕</div>
+        <div class="mxh"></div><div class="mxh">Kvalitet du beholder</div><div class="mxh">Minimal egen tid</div><div class="mxh">Reel screening</div><div class="mxh">Året rundt</div><div class="mxh" style="text-align:right">Opfyldt</div>
+        <div class="mxn">Netværk og relationer</div><div class="mxc ja">✓</div><div class="mxc nej">✕</div><div class="mxc nej">✕</div><div class="mxc nej">✕</div><div class="mxs">1/4</div>
+        <div class="mxn">Sociale medier</div><div class="mxc nej">✕</div><div class="mxc nej">✕</div><div class="mxc nej">✕</div><div class="mxc nej">✕</div><div class="mxs">0/4</div>
+        <div class="mxn">Jobportaler</div><div class="mxc nej">✕</div><div class="mxc nej">✕</div><div class="mxc nej">✕</div><div class="mxc nej">✕</div><div class="mxs">0/4</div>
+        <div class="mxn">Rekrutteringsbureauer</div><div class="mxc nej">✕</div><div class="mxc ja">✓</div><div class="mxc nej">✕</div><div class="mxc ja">✓</div><div class="mxs">2/4</div>
+        <div class="mxn">Vikarbureauer</div><div class="mxc nej">✕</div><div class="mxc ja">✓</div><div class="mxc nej">✕</div><div class="mxc ja">✓</div><div class="mxs">2/4</div>
+        <div class="mxn">Indlejede firmaer</div><div class="mxc nej">✕</div><div class="mxc ja">✓</div><div class="mxc nej">✕</div><div class="mxc nej">✕</div><div class="mxs">1/4</div>
       </div>
       <div class="mx pm r d4">
-        <div class="mxn">PowerMatch</div><div class="mxc ja">✓</div><div class="mxc ja">✓</div><div class="mxc ja">✓</div><div class="mxc ja">✓</div>
+        <div class="mxn">PowerMatch</div><div class="mxc ja">✓</div><div class="mxc ja">✓</div><div class="mxc ja">✓</div><div class="mxc ja">✓</div><div class="mxs">4/4</div>
       </div>
     </div>
-    <p class="under bundfast r d5">Det hul i markedet er præcis det, PowerMatch er bygget til. <b>Hvordan? Det er næste video.</b></p>
+    <p class="under bundfast r d5">Vi er dyrere. <b>Til gengæld er vi det eneste sted, hvor du får alle fire.</b></p>
   </div>
 </section>
 
