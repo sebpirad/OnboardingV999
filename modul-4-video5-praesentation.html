@@ -1,0 +1,1826 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PowerMatch · Modul 5 · Overenskomster og opsigelsesvarsler</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   POWERMATCH PRÆSENTATIONS-STANDARD v1.3
+   MODUL 5 · Overenskomster og opsigelsesvarsler · 14 slides
+   To kicker-sektioner: Overenskomsten (01-08) og Opsigelsesvarsler (09-14).
+
+   Bygget ORDRET videre på modul4-video4-fagene.html: samme slide-motor,
+   samme farver, samme typografi, samme chrome, samme ikon-stregsprog,
+   samme media queries for 1366x768. Tilføjelserne nedenfor er nye
+   FIGURER, ikke et nyt designsprog.
+
+   DE SEKS KASKADE-FÆLDER SØSTERDECKENE HAR LUKKET. Arvet lukkede:
+   A) en fill-erklæring i en KLASSE på et SVG-tekstelement vinder over
+      fill="#fff" som ATTRIBUT → hvid tekst bliver usynlig. Hvid tekst i
+      SVG sættes derfor ALTID med style="fill:#fff" inline i dette deck.
+   B) .gulflade .kchip står efter .kchip.fuld → sort tekst på sort pille.
+   C) .moerk .kchip står efter .kchip.gul → lys grå tekst på gul pille.
+   D) ikoner over 24 px får stregbredden ganget op → .ik.stor{1.35} og
+      .ik.xl{1.1}. Alle <use> i figurerne har stroke-width delt med skalaen.
+   E) .gulbaand .kchip står efter .kchip.fuld → sort tekst på sort i et
+      gult bånd. Bruges på slide 08, hvor den gule ankerflade har chips.
+   F) .tik var scopet som ".tjekliste .tik", så et flueben brugt UDEN FOR
+      en .tjekliste faldt tilbage til 300x150 og fill:black. .tik står nu
+      også uden scope. Bruges på slide 12.
+
+   DECKETS EGEN NYE FÆLDE, G) LUKKET NEDENFOR:
+   G) v1.3-frik'ens .lab er ABSOLUT placeret (top:100%) og nowrap. Med
+      fire led på under 100 px hver ville labels som SUNDHEDSFORSIKRING
+      overlappe hinanden vandret. .frik.blok lægger .lab tilbage i flowet,
+      top-justerer formlen og giver operatorerne en fast padding-top, så
+      .val-rækken FLUGTER (linteren måler netop .led .val og .led .lab).
+
+   FIRE FUND FRA SCREENSHOT-RUNDEN (14 slides x 1600x900 OG 1366x768, frisk
+   page-objekt pr. hash, plus en programmatisk kontrastscanning hvor HVER
+   svg-tekst blev målt mod den pixelfarve der faktisk ligger bag den, med 3:1
+   som nedre grænse). Kontrastscanningen gav 0 fund; de fire fund var
+   geometriske, og de er rettet på stedet med en kommentar hvert sted:
+   H) S05: pilen ud af årshjulet løb IGENNEM ordet DEC. En tekst der bliver
+      overskrevet af en streg er lige så ulæselig som hvid tekst på hvid
+      flade, og linteren måler ikke streg mod tekst. Pilen går nu til højre
+      for etiketten, og DEC er flyttet ud ad sin egen radius.
+   I) S10: linjen "Det er den forskel vi arbejder i." skar igennem den
+      stiplede ramme om den øverste bane. Den er flyttet ned i luften mellem
+      de to baner, hvor manuset også placerer den.
+   J) S03 og S05: kolonnerne var centrerede lodret (align-items:center), og
+      da den højre kolonne er højere end den venstre, svævede den venstre
+      figur i midten med et tomt bånd over sig. Begge slides er nu
+      TOP-justerede, så zone-titlerne flugter.
+   K) S12 og S13: et tomt bånd på 130-200 px mellem figuren og bundlinjen,
+      fordi tre auto-margener delte luften 1:2. S12 har højere kort og større
+      gab, S13 har fået sin auto-margin tilbage i toppen.
+
+   TO TING DER IKKE MÅ GÅ FORKERT I DETTE DECK:
+   1) Der står PRØVEPERIODE, hver gang. Byggeriets overenskomster har
+      ingen bestemmelse om en prøve-periode af funktionærlovens type, og
+      det ord bruges derfor ikke ét sted i dette deck, heller ikke i en
+      kommentar. Se trænernoten i Blok 17.
+   2) Pension, SH og feriepenge må ikke fremstilles som "den største".
+      .stak på slide 02 genbruger PRÆCIS segmentbredderne fra
+      video2-10-spoergsmaal.html (66 / 9 / 9,5 / 8,5 / 3 / 2,5 / 1,5) OG
+      dens tre gule trin, uændret. Rør ikke bredderne.
+   ============================================================ */
+:root{
+  --gul:#F8E965; --gul-soft:#FDF8D4; --gul-kant:#F0E4A0;
+  --sort:#111213; --tekst:#26282B; --muted:#71757C;
+  --border:#ECECE8; --flade:#F6F6F3; --bg:#FFFFFF;
+  --linje:#C9C9C2;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --mx:7vw;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+body{font-family:'Inter',-apple-system,Arial,sans-serif;color:var(--tekst);background:var(--bg);-webkit-font-smoothing:antialiased}
+b{color:var(--sort)}
+mark{
+  background:linear-gradient(transparent 70%, var(--gul) 70%, var(--gul) 96%, transparent 96%);
+  background-size:0% 100%;background-repeat:no-repeat;color:inherit;padding:0 .05em;
+  transition:background-size .5s var(--ease) .95s;
+}
+.aktiv mark{background-size:100% 100%}
+
+/* ---------- slide-skelet ---------- */
+.slide{
+  position:absolute;inset:0;visibility:hidden;opacity:0;transform:scale(.986);
+  transition:opacity .45s var(--ease),transform .65s var(--ease),visibility 0s .45s;
+  padding:13vh var(--mx) 11vh;overflow:hidden;
+}
+.slide.aktiv{visibility:visible;opacity:1;transform:none;transition:opacity .5s var(--ease),transform .7s var(--ease)}
+.r{opacity:0;transform:translateY(14px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
+.aktiv .r{opacity:1;transform:none}
+.aktiv .d1{transition-delay:.08s}.aktiv .d2{transition-delay:.16s}.aktiv .d3{transition-delay:.24s}
+.aktiv .d4{transition-delay:.32s}.aktiv .d5{transition-delay:.4s}.aktiv .d6{transition-delay:.48s}
+.lm{display:block;overflow:hidden}
+.lm span{display:block;transform:translateY(112%);transition:transform .7s var(--ease)}
+.aktiv .lm span{transform:none}
+.z{position:relative;z-index:1}
+
+/* ---------- typografi ---------- */
+.kicker{display:flex;align-items:center;gap:14px;margin-bottom:26px}
+.kicker .knr{font-size:15px;font-weight:900;color:var(--sort);font-variant-numeric:tabular-nums}
+.kicker .krule{width:46px;height:2px;background:var(--gul)}
+.kicker .ktxt{font-size:12px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+h1{font-size:clamp(46px,5.9vw,88px);font-weight:900;color:var(--sort);letter-spacing:-.033em;line-height:1.03}
+h2{font-size:clamp(30px,3.2vw,48px);font-weight:900;color:var(--sort);letter-spacing:-.027em;line-height:1.07;max-width:26ch}
+p.under{font-size:clamp(15px,1.35vw,19px);line-height:1.6;color:var(--muted);max-width:56ch}
+
+/* spøgelsestal: slidets nummer i SIN EGEN blok, som i søsterdeckene */
+.ghost{
+  position:absolute;right:-.05em;bottom:-.12em;z-index:0;pointer-events:none;user-select:none;
+  font-size:64vh;font-weight:900;line-height:.8;letter-spacing:-.05em;
+  color:transparent;-webkit-text-stroke:1.5px rgba(17,18,19,.09);
+}
+.fyld{display:flex;flex-direction:column;height:100%}
+.vgruppe{margin:auto 0;display:flex;flex-direction:column}
+.skub{margin-top:auto !important;padding-bottom:2vh}
+
+/* ---------- tjekliste ---------- */
+.tjekliste{margin-top:4vh;max-width:900px}
+.tjekliste .trow{display:flex;align-items:baseline;gap:20px;border-top:1px solid var(--border);padding:22px 4px}
+.tjekliste .trow:last-child{border-bottom:1px solid var(--border)}
+.tjekliste .tdot{width:12px;height:12px;border-radius:50%;background:var(--gul);flex-shrink:0;position:relative;top:-2px}
+.tjekliste .ttxt{font-size:clamp(15px,1.55vw,20px);font-weight:800;color:var(--sort)}
+.tjekliste .ttxt span{color:var(--muted);font-weight:500}
+/* KASKADE-FÆLDE F: .tik også uden .tjekliste-scope */
+.tik,.tjekliste .tik{width:17px;height:17px;flex-shrink:0;position:relative;top:2px;color:var(--sort);
+  stroke:currentColor;stroke-width:2.3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------- proces-timeline (workflow) ---------- */
+.tflow{position:relative;margin:auto 0}
+.tflow .linje{position:absolute;left:31px;right:calc((100% - 104px)/5 - 31px);top:31px;height:2px;background:var(--sort)}
+.tflow .stationer{display:grid;grid-template-columns:repeat(5,1fr);column-gap:26px}
+.station{position:relative}
+.station .boks{
+  width:62px;height:62px;background:var(--gul);border-radius:12px;
+  display:flex;align-items:center;justify-content:center;gap:3px;
+  font-size:26px;font-weight:900;color:var(--sort);margin-bottom:24px;position:relative;z-index:1;
+  box-shadow:0 0 0 8px var(--bg);
+}
+.station.slut .boks{background:var(--sort);color:var(--gul)}
+.station h5{font-size:16px;font-weight:800;color:var(--sort);margin-bottom:7px;letter-spacing:-.01em}
+.station p{font-size:13px;line-height:1.5;color:var(--muted);max-width:22ch}
+/* tflow-varianter: gul er anker, så kun ÉT led må være gult */
+.tflow.neutral .boks{background:var(--flade);border:1px solid var(--linje);color:var(--sort)}
+.tflow.neutral .station.staerk .boks{background:var(--gul);border-color:var(--gul);
+  transform:scale(1.1);box-shadow:0 0 0 8px var(--bg),0 0 0 11px var(--gul-soft)}
+.tflow.neutral .station.slut .boks{background:var(--sort);border-color:var(--sort);color:var(--gul);
+  transform:scale(1.1);box-shadow:0 0 0 8px var(--bg)}
+/* NY: sortmarkeret station, når slidets ene gule ligger i en anden figur */
+.tflow.neutral .station.sortmark .boks{background:var(--sort);border-color:var(--sort);color:#fff;
+  transform:scale(1.1);box-shadow:0 0 0 8px var(--bg)}
+/* tflow med fire led: linjens højre-offset følger samme formel som fem-leds */
+.tflow.fire .stationer{grid-template-columns:repeat(4,1fr)}
+.tflow.fire .linje{right:calc((100% - 78px)/4 - 31px)}
+.tflow .boks.tal{font-size:24px;letter-spacing:-.03em}
+.station .boks .ik{width:29px;height:29px}
+.pilned{width:2px;height:22px;background:var(--linje);margin-left:31px;position:relative}
+.pilned::after{content:"";position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  border:5px solid transparent;border-top-color:var(--linje)}
+
+/* ---------- duo ---------- */
+.duo{display:grid;grid-template-columns:1fr 1fr;column-gap:56px}
+.duo .dtitel{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);padding-bottom:12px}
+.duo.spejl{column-gap:54px;align-items:stretch}
+.duo.spejl .dside{display:flex;flex-direction:column}
+.duo.spejl .dtop{display:flex;align-items:center;gap:18px;margin:4px 0 10px}
+.duo.spejl .dbund{margin-top:auto;padding-top:16px}
+
+/* ---------- chips ---------- */
+.kstrip{display:flex;gap:9px;flex-wrap:wrap}
+.kchip{display:flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:100px;padding:7px 13px;
+  font-size:10px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.kchip i{font-style:normal;font-size:13px;font-weight:900;line-height:1}
+.kchip.ja{color:var(--sort);border-color:#DCDCD5}
+.kchip.gul{background:var(--gul);border-color:var(--gul-kant);color:var(--sort)}
+.kchip.fuld{background:var(--sort);border-color:var(--sort);color:#fff}
+.kchip.kant{color:var(--sort);border-color:var(--linje)}
+.kchip.stiplet{border-style:dashed;border-color:var(--linje)}
+.kstrip.stor .kchip{font-size:11.5px;padding:11px 17px;letter-spacing:.1em}
+.kchip .ik{width:14px;height:14px;stroke-width:2}
+
+/* ---------- ikoner: ét stregsprog hele vejen igennem ---------- */
+.ik{width:22px;height:22px;flex-shrink:0;stroke:currentColor;stroke-width:1.7;fill:none;
+  stroke-linecap:round;stroke-linejoin:round}
+/* KASKADE-FÆLDE D: stregbredde divideret med skalaen */
+.ik.stor{width:30px;height:30px;stroke-width:1.35}
+.ik.mini{width:15px;height:15px;stroke-width:1.9}
+.ik.xl{width:44px;height:44px;stroke-width:1.1}
+
+/* ---------- fakta-rækker ---------- */
+.frows{width:100%;max-width:900px}
+.frow{display:flex;align-items:center;gap:16px;border-top:1px solid var(--border);padding:15px 4px}
+.frow:last-child{border-bottom:1px solid var(--border)}
+.frow .fnr{font-size:13px;font-weight:900;color:var(--sort);width:26px;height:26px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-variant-numeric:tabular-nums}
+.frow .ft{font-size:clamp(14.5px,1.45vw,19px);font-weight:800;color:var(--sort);letter-spacing:-.01em}
+.frow .ft span{color:var(--muted);font-weight:500}
+.frow .fnote{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:10px;font-weight:800;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.frow .ik{color:var(--sort)}
+
+/* ---------- formel-linje ---------- */
+.frik{display:flex;align-items:flex-end;gap:clamp(10px,1.2vw,20px);flex-wrap:nowrap;white-space:nowrap}
+.frik .led{position:relative}
+.frik .val{font-size:clamp(19px,1.9vw,30px);font-weight:900;color:var(--sort);letter-spacing:-.03em}
+.frik .op{font-size:clamp(18px,1.9vw,28px);font-weight:800;color:var(--linje)}
+.frik .val.ringet{background:var(--gul);border-radius:10px;padding:.06em .2em}
+.frik .val.sortet{background:var(--sort);color:#fff;border-radius:10px;padding:.06em .2em}
+.frik .lab{position:absolute;left:2px;top:100%;margin-top:11px;font-size:9.5px;font-weight:800;
+  letter-spacing:.14em;color:var(--muted);text-transform:uppercase;white-space:nowrap}
+
+/* ---- KASKADE-FÆLDE G, LUKKET: .frik.blok ------------------------
+   Fire led med rigtige, læsbare labels. .lab lægges tilbage i flowet og
+   må ombryde; .ledik er en FAST 34 px høj ikonrække, og operatorerne får
+   præcis samme padding-top, så .val-rækken og .lab-rækken FLUGTER. Rør
+   ikke de to tal 34 og 36: linteren måler spredningen på .led .val. ---- */
+.frik.blok{align-items:flex-start}
+.frik.blok .led{display:flex;flex-direction:column;align-items:flex-start;position:static}
+.frik.blok .ledik{height:34px;display:flex;align-items:center;color:var(--sort)}
+.frik.blok .val{line-height:1.06;margin-top:2px}
+.frik.blok .lab{position:static;margin-top:11px;white-space:normal;max-width:15ch;line-height:1.45;letter-spacing:.12em}
+.frik.blok .op{padding-top:36px;line-height:1.06}
+/* KASKADE-FÆLDE H (ny, fundet af linteren): .val.ringet og .val.sortet har
+   padding .06em i højden. I .frik.blok ligger .lab i FLOWET under .val, så
+   de 2 x .06em skubbede hero-leddets label 3-4 px længere ned end de andre
+   labels, og "regnestykke-labels flugter ikke" var en FEJL i begge
+   opløsninger. Den lodrette padding neutraliseres med negativ margin: den
+   gule/sorte pille rager stadig .06em ud over teksten, men den optager
+   samme højde som et almindeligt .val. Rør ikke de to tal. */
+.frik.blok .val.ringet,.frik.blok .val.sortet{margin-top:calc(2px - .06em);margin-bottom:-.06em}
+
+/* ---------- kæmpe tal ---------- */
+.heroTal{display:flex;align-items:baseline;gap:22px}
+.heroTal .t{position:relative;font-size:clamp(64px,7.6vw,132px);font-weight:900;color:var(--sort);
+  letter-spacing:-.05em;line-height:1;font-variant-numeric:tabular-nums}
+.heroTal .t i{position:absolute;left:-.04em;right:-.04em;bottom:.05em;height:.22em;background:var(--gul);z-index:-1}
+.heroTal .tl{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
+  max-width:20ch;line-height:1.55}
+.heroTal.ord{flex-direction:column;align-items:flex-start;gap:10px}
+
+/* ---------- bånd, slutlinjer, noter ---------- */
+.gulbaand{margin-top:auto;background:var(--gul);padding:18px var(--mx);
+  margin-left:calc(-1 * var(--mx));margin-right:calc(-1 * var(--mx))}
+.gulbaand .gb{font-size:clamp(19px,2.05vw,30px);font-weight:900;color:var(--sort);letter-spacing:-.022em;line-height:1.14}
+.slutlinje{margin-top:auto;border-top:1px solid var(--border);padding-top:15px;
+  font-size:clamp(17px,1.75vw,25px);font-weight:900;color:var(--sort);letter-spacing:-.022em;line-height:1.15}
+/* NY: slutlinje i den største sats på slidet (slide 14) */
+.storslut{border-top:1px solid var(--border);padding-top:16px;
+  font-size:clamp(21px,2.35vw,37px);font-weight:900;color:var(--sort);letter-spacing:-.026em;line-height:1.14}
+.notelinje{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.03em;line-height:1.5}
+.gtitel{font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);max-width:80ch}
+.fagkortnote{font-size:11px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+/* kildelinje, ordret samme regel som i modul4-video1-branchen.html */
+.pro-kilde{font-size:10px;font-weight:600;letter-spacing:.05em;color:var(--muted);opacity:.75;line-height:1.5}
+.moerkbaand{display:flex;align-items:center;gap:16px;background:var(--sort);border-radius:14px;padding:15px 20px;color:#fff}
+.moerkbaand .mb{font-size:14.5px;font-weight:800;letter-spacing:-.01em}
+.moerkbaand .ik{color:var(--gul)}
+.lagbar{border-radius:8px;padding:10px 16px;font-size:10.5px;font-weight:800;letter-spacing:.15em;text-transform:uppercase}
+.lagbar.sort{background:var(--sort);color:#fff}
+.lagbar.svag{background:var(--flade);border:1px solid var(--border);color:var(--muted)}
+.recap{display:flex;align-items:flex-start;gap:14px;border-top:1px solid var(--border);padding-top:14px}
+.recap .rdot{width:11px;height:11px;border-radius:50%;background:var(--gul);flex-shrink:0;margin-top:5px}
+.recap.n .rdot{background:var(--sort)}
+.recap .rtx{font-size:clamp(14px,1.42vw,19px);font-weight:800;color:var(--sort);letter-spacing:-.012em;line-height:1.45}
+
+/* ---------- synligt tom, stiplet plads: tal der IKKE må gættes ---------- */
+.tomplads{display:inline-flex;align-items:center;gap:10px;border:1.5px dashed var(--linje);border-radius:100px;
+  padding:7px 15px;font-size:10px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.tomplads b{color:var(--sort);letter-spacing:.24em}
+.tomboks{border:1.5px dashed var(--linje);border-radius:14px;padding:12px 15px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.tomboks .tblab{font-size:9.5px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);max-width:38ch;line-height:1.5}
+
+/* ---------- kort ---------- */
+.dkort{border:1px solid var(--border);border-radius:16px;padding:16px 18px;display:flex;flex-direction:column;gap:10px}
+.dkort.svag{background:var(--flade)}
+.dkort.tung{border-color:var(--linje)}
+.dkort .dk-titel{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:900;letter-spacing:.02em;color:var(--sort)}
+.dkort .dk-txt{font-size:13px;font-weight:600;color:var(--muted);line-height:1.5}
+.dkort.svag .dk-titel{color:var(--muted)}
+
+/* ---------- replik-kort: det sælgeren læser op i telefonen ---------- */
+.telefonkicker{display:flex;align-items:center;gap:13px;font-size:11.5px;font-weight:800;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.telefonkicker .ik{width:18px;height:18px;color:var(--sort);stroke-width:1.7}
+.telefonkicker::after{content:"";flex:1;height:1px;background:var(--border)}
+.rkort{position:relative;background:#fff;border:1px solid var(--border);border-radius:18px;
+  padding:19px 22px 21px;display:flex;flex-direction:column;gap:9px;
+  box-shadow:0 14px 28px -24px rgba(17,18,19,.34)}
+.rkort .rq{display:block;height:20px;font-size:36px;font-weight:900;line-height:.86;
+  color:var(--gul);letter-spacing:-.04em}
+.rkort .rk{font-size:clamp(16.5px,1.68vw,24px);font-weight:800;color:var(--sort);
+  letter-spacing:-.024em;line-height:1.19}
+.rkort .rmark{position:absolute;right:17px;top:15px;display:flex;align-items:center;gap:9px;color:var(--muted)}
+.rkort.gul{background:var(--gul);border-color:var(--gul-kant);box-shadow:none}
+.rkort.gul .rq{color:rgba(17,18,19,.42)}
+.rkort.stor{padding:24px 26px 26px;gap:12px}
+.rkort.stor .rq{font-size:44px;height:26px}
+.rkort.stor .rk{font-size:clamp(17.5px,1.92vw,29px);line-height:1.15}
+.skaev1{transform:rotate(-.55deg)}
+/* KASKADE-FÆLDE B/E-familien: chips i gule flader */
+.rkort.gul .kchip{border-color:rgba(17,18,19,.32);color:var(--sort)}
+.gulbaand .kchip{border-color:rgba(17,18,19,.32);color:var(--sort)}
+.gulbaand .kchip .ik{color:var(--sort)}
+.gulbaand .kchip.fuld{background:var(--sort);border-color:var(--sort);color:var(--gul)}
+.gulbaand .kchip.fuld .ik{color:var(--gul)}
+
+/* ---------- figurer ---------- */
+.figur{display:block;width:100%;height:auto}
+.midtret{display:flex;justify-content:center}
+svg text{font-family:'Inter',Arial,sans-serif}
+.svgtxt{font-size:12px;font-weight:800;fill:var(--sort)}
+.svgstor{font-size:19px;font-weight:900;fill:var(--sort);letter-spacing:-.02em}
+.svgmut{font-size:11px;font-weight:700;fill:var(--muted)}
+.svgcap{font-size:10px;font-weight:800;letter-spacing:.13em;fill:var(--muted)}
+.svgval{font-size:12px;font-weight:900;fill:var(--sort);font-variant-numeric:tabular-nums}
+.gab .gtitel{font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;max-width:70ch}
+.gab svg{display:block;width:100%;height:auto}
+.gab .glab{font-family:'Inter',Arial,sans-serif;font-size:10.5px;font-weight:800;letter-spacing:.14em;fill:var(--muted)}
+.gab .gval{font-family:'Inter',Arial,sans-serif;font-size:14.5px;font-weight:900;letter-spacing:-.02em;fill:var(--sort);font-variant-numeric:tabular-nums}
+
+/* ============================================================
+   MODUL 5 · NYE FIGUR-KOMPONENTER (samme tokens, ingen nye farver)
+   1) .stak      · lønnens omkostningsposter, ORDRET genbrug af
+                   video2-10-spoergsmaal.html. LODRET forbudt: den er
+                   vandret, og kontosøjlerne på slide 04 er lodrette,
+                   netop for at de to figurer ikke kan forveksles.
+   2) .uge       · ugen med fire timelønsdage og én helligdag
+   3) .oabar     · arbejdsdag + overarbejde som én smal bjælke
+   4) .satsrow   · SH-satsen pr. overenskomst, samme sats og samme farve
+                   på alle fire rækker, så intet fag ser godt eller dårligt ud
+   5) .ogduo     · to kolonner med et stort "og" imellem (slide 14)
+   ============================================================ */
+
+/* ---- 1) .stak · PRÆCIS samme segmentbredder og samme gule trin som
+   video2-10-spoergsmaal.html slide 2. Pension, SH og ferie ligger på
+   9 / 9,5 / 8,5 procent af søjlen. RØR IKKE BREDDERNE: en søjle der er
+   synligt bredere end de andre påstår at posten er den største. ---- */
+.stak{max-width:900px}
+.stak .s-linje{display:flex;height:74px;border-radius:14px;overflow:hidden;border:1px solid var(--border)}
+.stak .seg{display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:800;
+  letter-spacing:.03em;color:var(--sort);white-space:nowrap;overflow:hidden}
+.stak .seg.loen{background:var(--sort);color:#fff;font-size:14px}
+.stak .seg.g1{background:#F8E965}.stak .seg.g2{background:#FAEE8A}.stak .seg.g3{background:#FCF3AC}
+.stak .seg.g4{background:#FDF8D4}.stak .seg.g5{background:#FEFBE6}.stak .seg.g6{background:#FFFDF2}
+.stak .s-labels{display:flex;justify-content:space-between;margin-top:14px;font-size:11px;font-weight:800;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.stak .s-labels b{font-size:14px;color:var(--sort)}
+/* pilen op til SH-segmentet: SH forklares på de tre næste slides */
+.stak .s-peg{position:relative;height:26px;margin-top:2px}
+.stak .s-peg .pk{position:absolute;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:3px}
+.stak .s-peg .pk i{display:block;width:1.5px;height:9px;background:var(--linje)}
+.stak .s-peg .pk b{font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+
+/* ---- 2) .uge · hvorfor SH findes: fire dage med timeløn, én uden ---- */
+.uge{display:flex;gap:6px;width:100%;max-width:430px}
+.uge .ud{flex:1;min-width:0;height:62px;border-radius:9px;background:var(--gul);border:1px solid var(--gul-kant);
+  display:flex;align-items:center;justify-content:center;text-align:center;padding:5px 3px;
+  font-size:9px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--sort);line-height:1.35}
+.uge .ud.fri{flex:1.75;background:var(--flade);border:1.5px dashed var(--linje);color:var(--muted)}
+
+/* ---- 3) .oabar · arbejdsdagen og overarbejdet ---- */
+.oabar{display:flex;align-items:stretch;gap:5px;width:100%;max-width:640px}
+.oabar .ob{border-radius:8px;display:flex;align-items:center;padding:0 15px;height:44px;
+  font-size:10.5px;font-weight:800;letter-spacing:.13em;text-transform:uppercase}
+.oabar .ob.dag{flex:5;background:var(--sort);color:#fff}
+.oabar .ob.over{flex:1.7;background:var(--flade);border:1.5px dashed var(--linje);color:var(--sort);justify-content:center;padding:0 8px}
+
+/* ---- 4) .satsrow · SH pr. overenskomst. Satsen står i samme sats og
+   samme farve i alle fire rækker, så ingen af fagene ser ud som det
+   gode eller det dårlige. Værdien er tabular, så cifrene flugter. ---- */
+.frow .fsats{margin-left:auto;font-size:clamp(15.5px,1.55vw,21px);font-weight:900;color:var(--sort);
+  letter-spacing:-.02em;font-variant-numeric:tabular-nums;white-space:nowrap;padding-left:16px}
+.frows.satser .frow{padding:12px 4px}
+
+/* ---- 5) .ogduo · to kolonner der gælder samtidig ---- */
+.ogduo{display:grid;grid-template-columns:1fr auto 1fr;column-gap:32px;align-items:stretch;flex:1}
+.ogduo .oside{display:flex;flex-direction:column;justify-content:center}
+.ogduo .otop{display:flex;align-items:center;gap:16px;margin-bottom:14px}
+.ogduo .onavn{font-size:clamp(18px,1.85vw,27px);font-weight:900;color:var(--sort);letter-spacing:-.028em;line-height:1.12}
+.ogduo .omidt{position:relative;width:1px;background:var(--border)}
+.ogduo .omidt span{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--bg);
+  padding:10px 6px;font-size:clamp(24px,2.4vw,38px);font-weight:900;color:var(--sort);letter-spacing:-.03em;line-height:1}
+.ogduo .tjekliste{margin-top:0}
+.ogduo .tjekliste .trow{padding:15px 2px}
+
+/* stiplet ramme om en figur hvis tal ikke er bekræftet */
+.tomramme{border:1.5px dashed var(--linje);border-radius:16px;padding:14px 16px}
+
+/* ---- 6) .mx · fag-til-forbund-matricen (slide 08) ------------------
+   Matricen er deckets opslagsslide og skal kunne læses på et halvt sekund,
+   også når en tillidsmand står og venter i telefonen. Den er bygget som ÉT
+   svg og ikke som et html-grid, fordi de to lodrette klammer skal ramme
+   præcis de rækker de hører til, i begge opløsninger. .mx sætter kun
+   rammen om figuren; alt indhold ligger i svg'en.
+   .mx .mnavn og .mx .mprik står her, så en fremtidig matrix i et andet
+   modul kan bruge samme klasser uden at kopiere inline-styles. ---- */
+.mx{width:100%}
+.mx svg{display:block;width:100%;height:auto}
+.mx .mnavn{font-family:'Inter',Arial,sans-serif;font-size:15px;font-weight:800;
+  fill:var(--sort);letter-spacing:-.01em}
+.mx .mkol{font-family:'Inter',Arial,sans-serif;font-size:10.5px;font-weight:800;
+  letter-spacing:.13em;fill:var(--muted)}
+
+/* ---------- chrome ---------- */
+.meta-tl,.meta-tr{position:fixed;top:30px;z-index:97;font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.meta-tl{left:var(--mx)} .meta-tl b{color:var(--sort)}
+.meta-tr{right:var(--mx)}
+.folio{
+  position:fixed;left:0;right:0;bottom:0;z-index:97;height:58px;
+  display:flex;align-items:center;gap:16px;padding:0 var(--mx);
+  border-top:1px solid var(--border);font-size:11px;font-weight:800;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--muted);background:var(--bg);
+}
+.folio .brand{color:var(--sort);display:flex;align-items:center;gap:10px}
+.folio .brand img{width:22px;height:22px}
+.folio .nr{margin-left:auto;font-size:15px;font-weight:900;color:var(--sort);letter-spacing:.06em;font-variant-numeric:tabular-nums}
+.folio .nr span{color:var(--linje)}
+.progress{position:fixed;bottom:56px;left:0;height:3px;background:var(--gul);width:0;z-index:98;transition:width .4s var(--ease)}
+.pilzone{position:fixed;top:0;bottom:58px;width:12%;z-index:90;cursor:pointer}
+.pilzone.v{left:0}.pilzone.h{right:0}
+
+/* ---------- lav skærm (fx 1366x768): samme udtryk, strammere rytme ---------- */
+@media (max-height:820px){
+  .slide{padding:9vh var(--mx) 8vh}
+  .kicker{margin-bottom:20px}
+  .tjekliste{margin-top:2.6vh}
+  .tjekliste .trow{padding:15px 4px}
+  .frow{padding:11px 4px}
+  .frows.satser .frow{padding:9px 4px}
+  p.under{line-height:1.5}
+  .skub{padding-bottom:1vh}
+  .station .boks{margin-bottom:18px}
+  .gulbaand{padding:14px var(--mx)}
+  .heroTal .t{font-size:clamp(56px,6.6vw,110px)}
+  .rkort{padding:15px 18px 17px;gap:7px}
+  .rkort .rq{font-size:30px;height:17px}
+  .rkort.stor{padding:19px 22px 21px}
+  .rkort.stor .rq{font-size:36px;height:21px}
+  .recap{padding-top:11px}
+  .stak .s-linje{height:58px}
+  .stak .s-labels{margin-top:11px}
+  .uge .ud{height:52px}
+  .oabar .ob{height:38px}
+  .ogduo .tjekliste .trow{padding:11px 2px}
+  .ogduo .otop{margin-bottom:10px}
+  .tomramme{padding:11px 13px}
+  .duo.spejl .dtop{margin:2px 0 6px}
+  .storslut{padding-top:13px}
+}
+@media (max-width:1500px){
+  .frik{gap:clamp(8px,1vw,16px)}
+  .frik .val{font-size:clamp(17px,1.7vw,28px)}
+  .frik .op{font-size:clamp(16px,1.7vw,26px)}
+  .frik .lab{font-size:9px;letter-spacing:.1em}
+  .frik.blok .lab{letter-spacing:.1em}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media print{
+  html,body{overflow:visible}
+  .slide{position:relative;visibility:visible;opacity:1;transform:none;page-break-after:always;height:100vh}
+  .progress,.pilzone,.folio,.meta-tl,.meta-tr{display:none}
+  .r,.lm span{opacity:1;transform:none}
+  mark{background-size:100% 100%}
+}
+
+/* v2 typografi-vagt: forhindrer horeunger og skæve overskrifts-brud */
+h1,h2{text-wrap:balance}
+p,h5,.ttxt,.rtx,.station p,.ft,.dk-txt,.rk,.under,.notelinje,.gtitel,.onavn{text-wrap:pretty}
+</style>
+</head>
+<body>
+
+<!-- ==========================================================
+     IKON-SPRITE: ét stregsprog for hele Modul 5. Sættene fra Modul 4
+     står ORDRET uændret, og Modul 5 lægger seks ikoner til nederst
+     (sundhedsforsikring, sparebøtte, bil, arbejdssko, arbejdstøj,
+     helligdag). Alle nye symboler er tegnet i 24x24, så stregbredden
+     kan divideres med skalaen, når de bruges større (kaskade-fælde D).
+     ========================================================== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="i-hammer" viewBox="0 0 24 24"><path d="M8 3.5h10.5v5.5H8z" fill="currentColor" stroke="none"/><path d="M8 3.5L3.5 6.2 8 9"/><path d="M12.8 9v11"/><path d="M10.8 20h4"/></symbol>
+  <symbol id="i-murerske" viewBox="0 0 24 24"><path d="M3 4.5h12L9 15.5z" fill="currentColor" stroke="none"/><path d="M11.5 12l4 5.5"/><path d="M14.5 15.5l4 3.5"/></symbol>
+  <symbol id="i-rulle" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="14" height="5.5" rx="1.2" fill="currentColor" stroke="none"/><path d="M10.5 9v3.5H6V21"/></symbol>
+  <symbol id="i-stik" viewBox="0 0 24 24"><path d="M9 3v5"/><path d="M15 3v5"/><path d="M6 8h12v3a6 6 0 01-12 0z"/><path d="M12 17v4"/></symbol>
+  <symbol id="i-roertang" viewBox="0 0 24 24"><circle cx="16" cy="8" r="4"/><path d="M13.2 10.8L4 20"/><path d="M4 16l4 4"/></symbol>
+  <symbol id="i-skovl" viewBox="0 0 24 24"><path d="M12 3v10"/><path d="M9.5 3h5"/><path d="M8 13h8v3.5a4 4 0 01-8 0z"/></symbol>
+  <symbol id="i-tillid" viewBox="0 0 24 24"><path d="M12 3l7.5 3v6c0 4.6-3.1 7.8-7.5 9.4C7.6 19.8 4.5 16.6 4.5 12V6z"/><path d="M8.6 12l2.5 2.5L15.8 9.6"/></symbol>
+  <symbol id="i-aftale" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M8.8 13.5l2.2 2.2 4.4-4.4"/></symbol>
+  <symbol id="i-hjelm" viewBox="0 0 24 24"><path d="M4 16.5h16"/><path d="M6.5 16.5v-3.5a5.5 5.5 0 0111 0v3.5"/><path d="M10 8V4.5h4V8"/></symbol>
+  <symbol id="i-telefon" viewBox="0 0 24 24"><path d="M6 3h3.5l1.8 4.4-2.3 1.4a10.5 10.5 0 005.2 5.2l1.4-2.3L20 14.5V18a2.5 2.5 0 01-2.5 2.5C10.6 20.5 3.5 13.4 3.5 5.5A2.5 2.5 0 016 3z"/></symbol>
+  <symbol id="i-ur" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6"/><path d="M12 6.8V12l3.6 2.2"/></symbol>
+  <symbol id="i-stopur" viewBox="0 0 24 24"><circle cx="12" cy="13.5" r="7"/><path d="M12 13.5V9.5"/><path d="M10 3h4"/><path d="M12 3v3.5"/></symbol>
+  <symbol id="i-ok" viewBox="0 0 24 24"><path d="M4 13l5 5L20 6"/></symbol>
+  <symbol id="i-nej" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.5 8.5l7 7"/><path d="M15.5 8.5l-7 7"/></symbol>
+  <symbol id="i-gange" viewBox="0 0 24 24"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 6v12"/><path d="M6 12h12"/></symbol>
+  <symbol id="i-pil" viewBox="0 0 24 24"><path d="M4 12h14"/><path d="M13 7l5 5-5 5"/></symbol>
+  <symbol id="i-op" viewBox="0 0 24 24"><path d="M12 20V5"/><path d="M6 11l6-6 6 6"/></symbol>
+  <symbol id="i-ned" viewBox="0 0 24 24"><path d="M12 4v15"/><path d="M18 13l-6 6-6-6"/></symbol>
+  <symbol id="i-penge" viewBox="0 0 24 24"><path d="M9.5 3h5l-1.4 3.4h-2.2z"/><path d="M13.6 6.4c3.9 1.5 5.9 4.4 5.9 7.8a7.5 7.5 0 01-15 0c0-3.4 2-6.3 5.9-7.8"/><path d="M12 9.6v8"/><path d="M10 12h4"/></symbol>
+  <symbol id="i-loenseddel" viewBox="0 0 24 24"><rect x="2.5" y="3" width="14" height="18" rx="2"/><path d="M5.5 7.5h8"/><path d="M5.5 11h6"/><path d="M5.5 14.5h4"/><circle cx="17.5" cy="16.5" r="4.2"/><path d="M17.5 14v5"/><path d="M16 16.5h3"/></symbol>
+  <symbol id="i-firma" viewBox="0 0 24 24"><path d="M4 20.5V4.5h9.5v16"/><path d="M13.5 10h6.5v10.5"/><path d="M2 20.5h20"/><path d="M6.8 8h1.6M10.4 8H12M6.8 11.5h1.6M10.4 11.5H12M6.8 15h1.6M10.4 15H12M16.2 13.5h1.6M16.2 17h1.6"/></symbol>
+  <symbol id="i-hus" viewBox="0 0 24 24"><path d="M3.5 20V10L12 4l8.5 6v10"/><path d="M3.5 20h17"/><path d="M9.5 20v-5.5h5V20"/></symbol>
+  <symbol id="i-kran" viewBox="0 0 24 24"><path d="M2.5 21h19"/><path d="M4.5 21v-9.5h8V21"/><path d="M6.5 15h4"/><path d="M17 21V3.5"/><path d="M17 3.5h-7"/><path d="M10.5 3.5v3.5"/><path d="M8.8 7h3.4v2.5H8.8z"/></symbol>
+  <symbol id="i-vogn" viewBox="0 0 24 24"><path d="M2 15.2V6.5h11.5l4 4.2H22v4.5"/><path d="M13.5 6.5v4.2H22"/><path d="M2 15.2h2.4M9.6 15.2h5.4M20 15.2h2"/><circle cx="7" cy="15.2" r="2.4"/><circle cx="17.5" cy="15.2" r="2.4"/></symbol>
+  <symbol id="i-bord" viewBox="0 0 24 24"><path d="M2.5 14.5h19"/><path d="M5.5 14.5v6"/><path d="M18.5 14.5v6"/><circle cx="8" cy="6.6" r="2.4"/><circle cx="16" cy="6.6" r="2.4"/><path d="M4.6 14.5c0-1.9 1.5-3.4 3.4-3.4s3.4 1.5 3.4 3.4"/><path d="M12.6 14.5c0-1.9 1.5-3.4 3.4-3.4s3.4 1.5 3.4 3.4"/></symbol>
+  <symbol id="i-doer" viewBox="0 0 24 24"><path d="M5.5 21V3h11v18"/><path d="M3 21h18"/><circle cx="13.5" cy="12" r="1"/></symbol>
+  <symbol id="i-personer" viewBox="0 0 24 24"><circle cx="9" cy="7.4" r="3.3"/><path d="M2.4 21v-1.7a6.6 6.6 0 0113.2 0V21"/><path d="M16.2 4.6a3.3 3.3 0 010 5.6"/><path d="M18 21v-1.7c0-1.6-.5-3.1-1.5-4.3"/></symbol>
+  <symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="7.4" r="3.6"/><path d="M4.8 21v-1.8a7.2 7.2 0 0114.4 0V21"/></symbol>
+  <symbol id="i-sol" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 3v2"/><path d="M12 19v2"/><path d="M3 12h2"/><path d="M19 12h2"/><path d="M5.6 5.6L7 7"/><path d="M17 17l1.4 1.4"/><path d="M18.4 5.6L17 7"/><path d="M7 17l-1.4 1.4"/></symbol>
+  <symbol id="i-sne" viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M4 7.5l16 9"/><path d="M20 7.5l-16 9"/></symbol>
+  <symbol id="i-kalender" viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="15.5" rx="2"/><path d="M3.5 10.5h17"/><path d="M8 3v4.5"/><path d="M16 3v4.5"/></symbol>
+  <symbol id="i-dok" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M9 12.5h6"/><path d="M9 16.5h6"/></symbol>
+  <symbol id="i-jobkort" viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="14" rx="2"/><path d="M9 3.2h6v2.3H9z"/><path d="M6.5 11h11"/><path d="M6.5 15h6.5"/></symbol>
+  <symbol id="i-trappe" viewBox="0 0 24 24"><path d="M3 20h6v-5h6v-5h6"/><path d="M21 10v10H3"/></symbol>
+  <symbol id="i-boble" viewBox="0 0 24 24"><path d="M4 5h16v9.5h-8.5L6.5 19v-4.5H4z"/></symbol>
+  <symbol id="i-vaekst" viewBox="0 0 24 24"><path d="M4 20V14.5"/><path d="M12 20V9"/><path d="M20 20V4"/></symbol>
+  <symbol id="i-lup" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.2"/><path d="M15 15l5.5 5.5"/><path d="M8 9.5h5"/><path d="M8 12.2h3"/></symbol>
+  <symbol id="i-mursten" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="8" rx="1"/><path d="M9 8v8"/><path d="M15 8v8"/></symbol>
+  <symbol id="i-tommestok" viewBox="0 0 24 24"><path d="M3 17l5-9 5 9 5-9"/><path d="M5.5 12.5l1.5.8"/><path d="M15.5 12.5l1.5.8"/></symbol>
+  <symbol id="i-maaler" viewBox="0 0 24 24"><path d="M3.5 17a8.5 8.5 0 1117 0"/><path d="M12 17l5-5.5"/><circle cx="12" cy="17" r="1.5" fill="currentColor" stroke="none"/><path d="M2.5 20.5h19"/></symbol>
+  <symbol id="i-afstand" viewBox="0 0 24 24"><path d="M6.5 3.5A3.5 3.5 0 0110 7c0 2.5-3.5 5.6-3.5 5.6S3 9.5 3 7a3.5 3.5 0 013.5-3.5z"/><path d="M17.5 11.4A3.5 3.5 0 0121 14.9c0 2.5-3.5 5.6-3.5 5.6S14 17.4 14 14.9a3.5 3.5 0 013.5-3.5z"/><path d="M8.6 13.8c1.9 2.6 3.3 3.2 5.6 3.9" stroke-dasharray="2.4 2.4"/></symbol>
+  <symbol id="i-brud" viewBox="0 0 24 24"><path d="M3 12h5l-2 4 5-8-2 4h5"/><path d="M16 12h5"/></symbol>
+  <symbol id="i-svendebrev" viewBox="0 0 24 24"><path d="M5 3.5h11l3.2 3.2V20.5H5z"/><path d="M8 8h8"/><path d="M8 11.5h8"/><path d="M8 15h4"/><circle cx="16" cy="16.6" r="2.6"/></symbol>
+  <symbol id="i-oere" viewBox="0 0 24 24"><path d="M8.5 21v-3.5c0-2.2-2.5-3.2-2.5-7A6 6 0 0118 10.5c0 2.2-1.2 3.5-3.2 3.5-1.6 0-2.3-1-2.3-2.2"/><path d="M10.2 10.4a2.1 2.1 0 013.9.6"/></symbol>
+  <symbol id="f-person" viewBox="0 0 80 124"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="40" cy="20" r="14"/><path d="M40 34v44"/><path d="M40 78l-13 44"/><path d="M40 78l13 44"/><path d="M40 46L21 62"/><path d="M40 46l19 16"/></g></symbol>
+  <symbol id="f-hjelm" viewBox="0 0 80 124"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M22 18h36"/><path d="M28 18v-3.5a12 12 0 0124 0V18"/><circle cx="40" cy="27" r="10"/><path d="M40 38v40"/><path d="M40 78l-13 44"/><path d="M40 78l13 44"/><path d="M40 48L21 62"/><path d="M40 48l19 14"/><path d="M31 62h18"/><rect x="45" y="61" width="13" height="10" rx="2.5"/></g></symbol>
+  <symbol id="f-mester" viewBox="0 0 80 124"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M24 12h32"/><circle cx="40" cy="22" r="13"/><path d="M40 35v43"/><path d="M40 78l-13 44"/><path d="M40 78l13 44"/><path d="M40 46L22 58l6 15"/><path d="M40 46l18 12-6 15"/></g></symbol>
+  <symbol id="f-telefon" viewBox="0 0 80 124"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="40" cy="20" r="14"/><path d="M40 34v44"/><path d="M40 78l-13 44"/><path d="M40 78l13 44"/><path d="M40 47L22 61"/><path d="M40 47l13 7 3-13"/><rect x="50" y="22" width="12" height="19" rx="2.5"/></g></symbol>
+  <!-- MODUL 5 · nye ikoner, samme stregsprog. Tegnet i 24x24, så
+       stregbredden kan divideres med skalaen, når de bruges større. -->
+  <symbol id="i-sundhed" viewBox="0 0 24 24"><path d="M12 3l7.5 3v6c0 4.6-3.1 7.8-7.5 9.4C7.6 19.8 4.5 16.6 4.5 12V6z"/><path d="M12 8.4v7.2"/><path d="M8.4 12h7.2"/></symbol>
+  <symbol id="i-sparebosse" viewBox="0 0 24 24"><path d="M3 13.4c0-3.5 3.5-6.2 8-6.2 1.3 0 2.5.2 3.6.6L17.6 6l-.5 3.1c1.5 1 2.4 2.5 2.4 4.3h2v3.2h-2.1c-.5 1.2-1.5 2.2-2.8 2.9v1.4h-3.1v-.6h-2.9v.6H7.5v-1.5C4.8 18.1 3 15.9 3 13.4z"/><circle cx="8.2" cy="12.4" r=".95" fill="currentColor" stroke="none"/><path d="M11.2 8.2h3.6"/></symbol>
+  <symbol id="i-bil" viewBox="0 0 24 24"><path d="M3 16.6v-4.2l2.1-4.6h13.8l2.1 4.6v4.2"/><path d="M3 12.4h18"/><circle cx="7.2" cy="16.9" r="1.9"/><circle cx="16.8" cy="16.9" r="1.9"/><path d="M3 16.9h2.3M9.1 16.9h5.8M18.7 16.9H21"/></symbol>
+  <symbol id="i-sko" viewBox="0 0 24 24"><path d="M2.5 18.6h19v2.4h-19z"/><path d="M2.5 18.6v-4.3h4.1l3.1-3.1 2.6 2.6h3.9c3.1 0 5.3 2 5.3 4.8"/><path d="M6.9 14.3v-2.2"/><path d="M12.3 14.3h4.4"/></symbol>
+  <symbol id="i-toej" viewBox="0 0 24 24"><path d="M8.6 3.4L4 6.1v5.1h3v9.4h10v-9.4h3V6.1l-4.6-2.7z"/><path d="M8.6 3.4a3.5 3.5 0 006.8 0"/><path d="M10 14.5h4"/></symbol>
+  <symbol id="i-helligdag" viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="15.5" rx="2"/><path d="M3.5 10.5h17"/><path d="M8 3v4.5"/><path d="M16 3v4.5"/><path d="M12 12.8l1.35 2.75 3.05.4-2.2 2.1.52 3-2.72-1.42-2.72 1.42.52-3-2.2-2.1 3.05-.4z"/></symbol>
+</defs></svg>
+
+<div class="meta-tl"><b>PowerMatch</b>&nbsp;·&nbsp;Modul 5&nbsp;·&nbsp;Overenskomster</div>
+<div class="meta-tr">Overenskomster og opsigelsesvarsler</div>
+
+<!-- ############ SEKTION 1 · OVERENSKOMSTEN (slide 01-08) ############
+     Blokkens fem bærende figurer:
+       S02  pensionsformlen som .frik.blok med FIRE led, hvor
+            sundhedsforsikringen er et selvstændigt led med eget ikon,
+            ikke en fodnote, plus .stak-søjlen fra
+            video2-10-spoergsmaal.html med UÆNDREDE segmentbredder.
+       S03  SH-satserne pr. overenskomst som .frows, bygget til at
+            SKIMMES, ikke læses op, med en 2025-mærkning og en chip om
+            at satsen stiger et procentpoint i 2026 og igen i 2027.
+       S04  SH-regnestykket, trappen og de TO LODRETTE kontosøjler.
+       S08  fag-til-forbund-matricen: deckets opslagsslide.
+     Spøgelses-tallet er slidets nummer i SIN EGEN blok, som i
+     søsterdeckene. Folioen tæller videre gennem alle 14.
+     ################################################################ -->
+
+<!-- 01 · VI FØLGER ALTID DEN GÆLDENDE OVERENSKOMST -->
+<!-- Slidet har kun én ting på sig, og den skal fylde. Sælgerens svar når
+     han bliver presset og ikke kan detaljerne. Det gentages som gult bånd
+     på slide 08, så sektionen lukker der hvor den åbnede. Ordet "altid"
+     er slidets ENE gule markering. -->
+<section class="slide" data-sektion="Overenskomsten" data-lint-ok="doedzone">
+  <div class="ghost">1</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">5.1</span><span class="krule"></span><span class="ktxt">Overenskomsten · 1 af 8 · Den vigtigste linje</span></div>
+    <div class="vgruppe">
+      <h1 class="r d1" style="font-size:clamp(40px,4.9vw,72px)">I PowerMatch følger vi <mark>altid</mark><br>overenskomsten. Håndværkeren er<br>dækket som han skal være.</h1>
+      <div class="kstrip stor r d3" style="margin-top:4.4vh">
+        <span class="kchip"><svg class="ik"><use href="#i-hammer"/></svg>Tømrer</span>
+        <span class="kchip"><svg class="ik"><use href="#i-murerske"/></svg>Murer</span>
+        <span class="kchip"><svg class="ik"><use href="#i-stik"/></svg>Elektriker</span>
+        <span class="kchip"><svg class="ik"><use href="#i-roertang"/></svg>VVS-montør</span>
+        <span class="kchip"><svg class="ik"><use href="#i-rulle"/></svg>Bygningsmaler</span>
+      </div>
+      <div class="notelinje r d4" style="margin-top:2vh">Alle fem chips har samme vægt. Ingen af fagene er et særtilfælde.</div>
+    </div>
+    <div class="skub r d5"><span class="fagkortnote">Modul 5 · Overenskomsten</span></div>
+  </div>
+</section>
+
+<!-- 02 · PENSION OG FERIEPENGE -->
+<!-- TO ting er låst på dette slide:
+     1) Led 3, sundhedsforsikringen, er et RIGTIGT led i formlen på linje
+        med de to andre, i samme sats, med eget ikon. Den er en gratis
+        salgspointe OG forklaringen på hvorfor kandidaten kan se to poster
+        på sin lønseddel. Den må ikke blive en fodnote.
+     2) .stak nederst genbruger segmentbredderne fra
+        video2-10-spoergsmaal.html slide 2 ORDRET: 66 / 9 / 9,5 / 8,5 /
+        3 / 2,5 / 1,5, og de tre gule trin g1/g2/g3. Manuset beder om at
+        SH tones ned, fordi SH kommer på de næste slides; det er BEVIDST
+        ikke gjort med farve, fordi en lysere SH-flade ville læses som en
+        mindre post, og "ingen af de tre er den største" er låst i
+        _QA/laaste-fakta.json. SH markeres i stedet med en pil og en
+        etiket under søjlen. Bredderne må ikke røres.
+     Slidets ENE gule flade er .stak. Derfor står formlens sum på SORT
+     flade og feriepengene uden gul understregning. -->
+<section class="slide" data-sektion="Overenskomsten">
+  <div class="ghost">2</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">5.1</span><span class="krule"></span><span class="ktxt">Overenskomsten · 2 af 8 · Pension og feriepenge</span></div>
+    <h2 class="r d1" style="font-size:clamp(23px,2.2vw,33px);max-width:none">Pension og feriepenge.</h2>
+    <div class="vgruppe">
+      <div class="r d2" style="margin-top:2.4vh">
+        <div class="gtitel" style="margin-bottom:12px">Pension</div>
+        <div class="frik blok">
+          <span class="led">
+            <span class="ledik"><svg class="ik stor"><use href="#i-firma"/></svg></span>
+            <span class="val">11 %</span><span class="lab" style="max-width:none">PowerMatch<br>betaler</span>
+          </span>
+          <span class="op">+</span>
+          <span class="led">
+            <span class="ledik"><svg class="ik stor"><use href="#i-hjelm"/></svg></span>
+            <span class="val">2 %</span><span class="lab" style="max-width:none">håndværkeren<br>betaler</span>
+          </span>
+          <span class="op">+</span>
+          <span class="led">
+            <span class="ledik"><svg class="ik stor"><use href="#i-sundhed"/></svg></span>
+            <span class="val">0,15 %</span><span class="lab" style="max-width:none">sundheds-<br>forsikring</span>
+          </span>
+          <span class="op">=</span>
+          <span class="led">
+            <span class="ledik"><svg class="ik stor"><use href="#i-loenseddel"/></svg></span>
+            <span class="val sortet">13,15 %</span><span class="lab">i alt</span>
+          </span>
+        </div>
+        <div style="margin-top:2.2vh;display:flex;gap:30px;flex-wrap:wrap">
+          <span class="notelinje">Pensionen er 13 % · næsten alle byggefag · helt standard</span>
+          <span class="notelinje">13 eller 13,15, det er lige meget hvad du kalder det</span>
+        </div>
+      </div>
+      <div style="border-top:1px solid var(--border);margin:2.4vh 0 2.2vh"></div>
+      <div class="r d3" style="display:grid;grid-template-columns:auto auto;column-gap:46px;align-items:center;justify-content:start">
+        <div>
+          <div class="gtitel" style="margin-bottom:8px">Feriepenge</div>
+          <div class="heroTal"><span class="t" style="font-size:clamp(38px,3.9vw,64px)">12,5 %</span><span class="tl" style="max-width:none">feriepenge</span></div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <svg style="display:block;height:156px;width:auto" viewBox="0 0 202 172" role="img" aria-label="Danmarkskort i én flad farve uden regionsopdeling">
+            <!-- Én flad farve, ingen regionsopdeling: pointen er at der ikke er
+                 noget at forhandle. Proportionerne er rettet, saa Sjaelland er
+                 stoerre end Fyn og Jylland er bredere; foer laeste de tre oeer
+                 som tre ens klatter, og et kort man ikke kan genkende er en
+                 grafik der arbejder imod sig selv. -->
+            <g fill="#C9C9C2" stroke="none">
+              <polygon points="70,4 78,16 81,34 73,44 88,52 92,66 104,70 88,80 82,96 86,114 82,132 74,148 59,156 37,152 31,132 39,112 33,92 43,74 38,54 47,36 54,18 64,6"/>
+              <polygon points="108,92 126,90 135,101 131,117 114,121 104,108"/>
+              <polygon points="142,58 170,55 184,72 180,95 158,104 140,90"/>
+              <polygon points="139,120 170,122 175,133 147,133 134,126"/>
+              <circle cx="194" cy="116" r="5"/>
+            </g>
+          </svg>
+          <span class="fagkortnote" style="font-size:10px">Fast i hele Danmark</span>
+        </div>
+      </div>
+    </div>
+    <div class="skub r d5" style="padding-top:2.2vh">
+      <div class="stak">
+        <div class="s-linje">
+          <div class="seg loen" style="width:66%">LØN</div>
+          <div class="seg g1" style="width:9%">PENSION</div>
+          <div class="seg g2" style="width:9.5%">SH</div>
+          <div class="seg g3" style="width:8.5%">FERIE</div>
+          <div class="seg g4" style="width:3%"></div>
+          <div class="seg g5" style="width:2.5%"></div>
+          <div class="seg g6" style="width:1.5%"></div>
+        </div>
+        <div class="s-peg"><span class="pk" style="left:79.75%"><i></i><b>SH · de næste tre slides</b></span></div>
+        <!-- RETTET 14/8: her lå en labelrække med "200 kr. i løn" og "≈ 300 kr. i
+             timen", løftet fra video2-10-spoergsmaal.html. De to tal står ikke ét
+             sted i Blok 17 og siges ikke i Modul 5. Manuset beder kun om SEGMENT-
+             BREDDERNE fra den søjle, og om ÉN linje under den, som står nedenfor.
+             Bredderne er urørte; labelrækken er væk, og lønsegmentet hedder LØN. -->
+      </div>
+      <div class="notelinje" style="margin-top:12px">Pension, SH og feriepenge ligger tæt. Ingen af dem er den store post. Samme søjle, samme bredder som i Video 2.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 · SH-PENGE, OG HVORFOR DE FINDES -->
+<!-- Satserne er bekræftet af Sebastian 14. august og må stå på skærmen.
+     De skal kunne SKIMMES, ikke læses op: talesporet siger rundingen
+     "omkring 15 procent", og de fire præcise satser står her i samme
+     sats og samme farve, så ingen af fagene ser ud som det gode eller
+     det dårlige. 2025-mærkningen og chippen om 2026 og 2027 er det der
+     holder slidet fra at blive forældet.
+     Slidets ENE gule flade er uge-figuren til venstre. -->
+<section class="slide" data-sektion="Overenskomsten">
+  <div class="ghost">3</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">5.1</span><span class="krule"></span><span class="ktxt">Overenskomsten · 3 af 8 · SH-penge</span></div>
+    <div class="r d1">
+      <h2 style="font-size:clamp(26px,2.5vw,38px);max-width:none">SH-penge</h2>
+      <div class="notelinje" style="margin-top:6px;font-size:13px">kaldes også særlig lønopsparing</div>
+    </div>
+    <!-- Kolonnerne er TOP-justerede, ikke centrerede: den hoejre kolonne er
+         hoejere end den venstre, og med align-items:center kom uge-figuren til
+         at svaeve i midten med et tomt baand over sig. Nu starter begge
+         kolonner i samme hoejde, og luften ligger samlet under den korteste. -->
+    <div class="vgruppe" style="display:grid;grid-template-columns:.44fr .56fr;column-gap:52px;align-items:start">
+      <div class="r d2" style="padding-top:.6vh">
+        <div class="gtitel" style="margin-bottom:12px">Hvorfor de findes</div>
+        <div class="uge" style="max-width:460px">
+          <div class="ud">Timeløn</div>
+          <div class="ud">Timeløn</div>
+          <div class="ud">Timeløn</div>
+          <div class="ud">Timeløn</div>
+          <div class="ud fri">Helligdag<br>ingen timeløn</div>
+        </div>
+        <svg style="display:block;width:100%;max-width:460px;height:auto;margin-top:5px" viewBox="0 0 460 40" role="img" aria-label="En pil fra helligdagsfeltet ned og til venstre hen til sparebøtten">
+          <path d="M392 2V24H62" fill="none" stroke="#C9C9C2" stroke-width="1.8"/>
+          <path d="M50 24l12-5.8v11.6z" fill="#C9C9C2"/>
+        </svg>
+        <div style="display:flex;align-items:center;gap:13px;margin-top:2px">
+          <svg class="ik xl" style="color:var(--sort)"><use href="#i-sparebosse"/></svg>
+          <span class="notelinje" style="font-size:12.5px;max-width:24ch">Derfor: en <b>særlig lønopsparing</b>, så helligdagen også bliver betalt.</span>
+        </div>
+      </div>
+      <div class="r d3">
+        <div style="display:flex;align-items:flex-end;gap:22px;flex-wrap:wrap">
+          <div class="heroTal"><span class="t" style="font-size:clamp(38px,3.7vw,60px)">ca. 15 %</span><span class="tl">af den ferieberettigede løn</span></div>
+        </div>
+        <div class="gtitel" style="margin:2.4vh 0 2px">2025-satser · pr. overenskomst</div>
+        <div class="frows satser">
+          <div class="frow"><svg class="ik"><use href="#i-mursten"/></svg><span class="ft">Bygnings, murer, jord og beton</span><span class="fsats">14,70 %</span></div>
+          <div class="frow"><svg class="ik"><use href="#i-rulle"/></svg><span class="ft">Bygningsmaler</span><span class="fsats">14,55 %</span></div>
+          <div class="frow"><svg class="ik"><use href="#i-roertang"/></svg><span class="ft">VVS</span><span class="fsats">15,00 %</span></div>
+          <div class="frow"><svg class="ik"><use href="#i-stik"/></svg><span class="ft">Elektriker, TEKNIQ</span><span class="fsats">15,20 %</span></div>
+        </div>
+        <div class="kstrip stor" style="margin-top:1.8vh">
+          <span class="kchip fuld"><svg class="ik"><use href="#i-op"/></svg>Stiger 1 procentpoint i 2026 og igen i 2027</span>
+        </div>
+      </div>
+    </div>
+    <div class="skub r d5" style="border-top:1px solid var(--border);padding-top:1.8vh">
+      <span class="notelinje">Procenterne dækker ikke det samme fra overenskomst til overenskomst. Du skal ikke kunne dem i hovedet — du skal kunne slå dem op.</span>
+    </div>
+  </div>
+</section>
+
+<!-- 04 · REGNESTYKKET, OG HVAD DER BLIVER UDBETALT -->
+<!-- BYGGET OM 14/8 · runde 2. DER FINDES INTET LOFT PÅ 1.500 KR. PR.
+     HELLIGDAG. Sebastian, ordret: "Der er ikke noget loft på 1500 kroner
+     per helligdag. Det er bare sådan reglerne er per overenskomst."
+     Det der er væk: <b data-tal="loft-helligdag">1.500 kr.</b>, teksten
+     "pr. helligdag, ikke mere", loft-scenarie-figuren med de tre søjler mod
+     den stiplede 3.000-linje (3.000 var to gange 1.500 og faldt med loftet),
+     beløbene 1.700 og 800, formuleringen "op til" og .tomplads'en.
+     Der må ikke stå et kronebeløb pr. helligdag nogen steder på slidet.
+     Det der står i stedet, er MEKANIKKEN, som holder uanset overenskomst:
+     1) regnestykket 15 % af 100 kr. = 15 kr. i timen. Det er det man
+        husker, og det er urørt. Slidets ENE gule flade ligger her.
+     2) trappen. Trin tre er det eneste markerede, og det er SORT, fordi
+        gul er brugt i regnestykket. Trin tre er nu en HENVISNING til
+        overenskomstens regler, ikke et tal.
+     3) forbeholdet der faktisk gælder: der skal være sparet nok op. To
+        udgaver af den samme kontofigur, samme skala, samme bundlinje, med
+        en stiplet linje for det der skal udbetales. Venstre søjle når over
+        linjen, højre stopper under den. Ingen kronebeløb på nogen af dem:
+        figuren viser mekanikken, ikke et regnestykke. Søjlerne er LODRETTE,
+        fordi .stak på slide 02 er VANDRET, og de to figurer ikke må
+        forveksles. Søjlerne er hverken gule eller sorte: sort er
+        lønsegmentets farve i .stak, og gul er brugt i regnestykket. -->
+<section class="slide" data-sektion="Overenskomsten">
+  <div class="ghost">4</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">5.1</span><span class="krule"></span><span class="ktxt">Overenskomsten · 4 af 8 · Regnestykket og udbetalingen</span></div>
+    <div class="r d1 frik blok" style="margin-top:1vh">
+      <span class="led">
+        <span class="ledik"><svg class="ik stor"><use href="#i-maaler"/></svg></span>
+        <span class="val">15 %</span><span class="lab">SH-sats</span>
+      </span>
+      <span class="op">af</span>
+      <span class="led">
+        <span class="ledik"><svg class="ik stor"><use href="#i-ur"/></svg></span>
+        <span class="val">100 kr.</span><span class="lab">timeløn</span>
+      </span>
+      <span class="op">=</span>
+      <span class="led">
+        <span class="ledik"><svg class="ik stor"><use href="#i-sparebosse"/></svg></span>
+        <span class="val ringet">15 kr.</span><span class="lab" style="max-width:none">opsparet<br>pr. time</span>
+      </span>
+    </div>
+    <div class="vgruppe" style="margin-top:0">
+      <div class="tflow fire neutral r d3" style="margin:2.6vh 0 0">
+        <div class="linje"></div>
+        <div class="stationer">
+          <div class="station">
+            <div class="boks"><svg class="ik"><use href="#i-ur"/></svg></div>
+            <h5>Du arbejder</h5><p>opsparingen<br>vokser time for time</p>
+          </div>
+          <div class="station">
+            <div class="boks"><svg class="ik"><use href="#i-helligdag"/></svg></div>
+            <h5>Der kommer en helligdag</h5><p>og der er ingen timeløn</p>
+          </div>
+          <div class="station sortmark">
+            <div class="boks"><svg class="ik"><use href="#i-penge"/></svg></div>
+            <h5>Der udbetales</h5><p>efter overenskomstens regler</p>
+          </div>
+          <div class="station">
+            <div class="boks"><svg class="ik"><use href="#i-loenseddel"/></svg></div>
+            <h5>Pengene kommer</h5><p>ved næste lønudbetaling</p>
+          </div>
+        </div>
+      </div>
+      <!-- Forbeholdet der faktisk gælder, bygget i .gab-idiomet fra Video 1:
+           .gtitel over, én bundlinje under begge udgaver. To udgaver af den
+           SAMME kontofigur på samme skala, så det er søjlens højde og ikke
+           tekstens der bærer forskellen. Ingen kronebeløb. -->
+      <div class="gab r d5" style="margin-top:1.8vh">
+        <div class="gtitel" style="margin-bottom:6px">Forbeholdet · der skal være sparet nok op</div>
+        <svg class="figur" style="max-height:30vh" viewBox="0 0 900 226" role="img" aria-label="To udgaver af den samme SH-konto på samme bundlinje og samme skala. I venstre udgave når søjlen op over den stiplede linje for det der skal udbetales, og beløbet udbetales. I højre udgave stopper søjlen under linjen, og man får kun det der står på kontoen">
+          <path d="M450 18v140" stroke="#ECECE8" stroke-width="1.4"/>
+          <path d="M20 150h410" stroke="#111213" stroke-width="1.6"/>
+          <path d="M470 150h410" stroke="#111213" stroke-width="1.6"/>
+          <path d="M20 66h410" stroke="#C9C9C2" stroke-width="1.6" stroke-dasharray="7 6"/>
+          <path d="M470 66h410" stroke="#C9C9C2" stroke-width="1.6" stroke-dasharray="7 6"/>
+          <text x="430" y="58" text-anchor="end" class="svgcap">DET DER SKAL UDBETALES</text>
+          <text x="880" y="58" text-anchor="end" class="svgcap">DET DER SKAL UDBETALES</text>
+          <g fill="#F6F6F3" stroke="#111213" stroke-width="1.8">
+            <rect x="120" y="40" width="116" height="110"/>
+            <rect x="570" y="98" width="116" height="52"/>
+          </g>
+          <g class="svgcap" text-anchor="middle">
+            <text x="178" y="170">DIN SH-KONTO</text>
+            <text x="628" y="170">DIN SH-KONTO</text>
+          </g>
+          <g class="svgstor" text-anchor="middle" style="font-size:15px">
+            <text x="178" y="196">Der er sparet nok op</text>
+            <text x="628" y="196">Der er ikke sparet nok op</text>
+          </g>
+          <g class="svgmut" text-anchor="middle">
+            <text x="178" y="216">beløbet udbetales</text>
+            <text x="628" y="216">man får det der står på kontoen</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="skub r d6" style="border-top:1px solid var(--border);padding-top:1.6vh">
+      <span class="notelinje" style="font-size:12px">Man kan aldrig få mere udbetalt end der står på kontoen.</span>
+    </div>
+  </div>
+</section>
+
+<!-- 05 · DE TO GANGE PENGENE KOMMER UD -->
+<!-- Manuset beskriver to VANDRETTE zoner med en hairline imellem. Her står
+     de to zoner side om side med en lodret hairline. Grunden er 1366x768:
+     årshjulet skal fylde mest, og stablet lodret ville hjulet skulle skrumpe
+     til under 200 px. Side om side kan det stå på 250-330 px i begge
+     opløsninger. Rækkefølgen læses stadig venstre mod højre: den lille
+     regel først, årshjulet derefter.
+     Slidets ENE gule flade er december-udsnittet i hjulet. Derfor står hans
+     egen slutsætning som .slutlinje i sort, ikke som gult bånd. -->
+<section class="slide" data-sektion="Overenskomsten">
+  <div class="ghost">5</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">5.1</span><span class="krule"></span><span class="ktxt">Overenskomsten · 5 af 8 · De to gange pengene kommer ud</span></div>
+    <h2 class="r d1" style="font-size:clamp(23px,2.2vw,33px);max-width:none">SH-opsparingen kommer ud to gange.</h2>
+    <!-- TOP-justerede kolonner, samme grund som slide 03: zone-titlerne
+         "1 · Naar han stopper hos os" og "2 · Hvert aar i december" skal staa i
+         samme hoejde, ellers laeses de ikke som to trin i samme regel. -->
+    <div class="vgruppe" style="display:grid;grid-template-columns:.4fr .6fr;column-gap:44px;align-items:start">
+      <div class="r d2" style="padding-right:8px">
+        <div class="gtitel" style="margin-bottom:14px">1 · Når han stopper hos os</div>
+        <div class="notelinje" style="margin-bottom:14px;font-size:12.5px">Stopper han hos os for at blive fastansat.</div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <svg class="ik xl" style="color:var(--sort)"><use href="#i-hjelm"/></svg>
+          <svg class="ik" style="color:var(--linje)"><use href="#i-pil"/></svg>
+          <div style="display:flex;align-items:center;gap:10px">
+            <svg class="ik xl" style="color:var(--sort)"><use href="#i-firma"/></svg>
+            <span class="kchip kant">fastansat</span>
+          </div>
+        </div>
+        <div class="pilned" style="margin-left:16px;margin-top:10px"></div>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:8px">
+          <svg class="ik xl" style="color:var(--sort)"><use href="#i-penge"/></svg>
+          <span class="notelinje" style="font-size:12.5px;max-width:26ch">Resten af SH-opsparingen udbetales <b>til næste løn</b>.</span>
+        </div>
+      </div>
+      <div class="r d3" style="border-left:1px solid var(--border);padding-left:44px">
+        <div class="gtitel" style="margin-bottom:6px">2 · Hvert år i december</div>
+        <div class="midtret">
+          <svg style="display:block;width:100%;max-width:400px;height:auto" viewBox="0 0 340 320" role="img" aria-label="Et årshjul delt i tolv måneder. December er markeret i fuld gul. En pil går ud af cirklen fra december til et felt hvor der står at hele SH-opsparingen udbetales, og derfra går en pil tilbage ind i cirklen ved januar hvor der står starter forfra. Midt i cirklen står sidste hverdag i december">
+            <rect x="26" y="4" width="288" height="46" rx="12" fill="#F6F6F3" stroke="#C9C9C2" stroke-width="1.4"/>
+            <text x="170" y="23" text-anchor="middle" class="svgcap" style="font-size:10.5px;fill:#111213">HELE SH-OPSPARINGEN</text>
+            <text x="170" y="39" text-anchor="middle" class="svgcap" style="font-size:10.5px;fill:#111213">UDBETALES</text>
+<!-- Pilen ud af hjulet gaar til HOEJRE for DEC-etiketten. Ruten laa foer
+                 igennem ordet DEC, og en tekst der bliver overskrevet af en streg
+                 er lige saa ulaeselig som hvid tekst paa hvid flade. DEC er
+                 samtidig flyttet laengere ud ad sin egen radius, saa der er 20 px
+                 luft mellem bogstaverne og stregen i begge oploesninger. -->
+            <path d="M128 110C134 90 138 70 140 58" fill="none" stroke="#111213" stroke-width="1.7"/>
+            <path d="M140 51l-5.8 9.5 10.8-.6z" fill="#111213"/>
+            <path d="M238 54C234 72 212 88 186 95" fill="none" stroke="#C9C9C2" stroke-width="1.7" stroke-dasharray="6 5"/>
+            <path d="M178 97l10.4 2-1.6-10.6z" fill="#C9C9C2"/>
+            <text x="336" y="76" text-anchor="end" class="svgcap" style="font-size:9.5px">STARTER FORFRA</text>
+            <circle cx="170" cy="196" r="96" fill="#FFFFFF" stroke="#C9C9C2" stroke-width="1.5"/>
+            <path d="M170 196L102.1 128.1A96 96 0 0 1 145.2 103.3Z" fill="#F8E965" stroke="#111213" stroke-width="1.7"/>
+            <g stroke="#ECECE8" stroke-width="1.2">
+              <path d="M158.6 153.5L145.2 103.3M181.4 153.5L194.8 103.3M201.1 173.2L237.9 128.1M211.1 200.6L262.7 171.2M211.1 191.4L262.7 220.8M201.1 218.8L237.9 263.9M181.4 238.5L194.8 288.7M158.6 238.5L145.2 288.7M138.9 218.8L102.1 263.9M128.9 191.4L77.3 220.8M128.9 200.6L77.3 171.2M138.9 173.2L102.1 128.1"/>
+            </g>
+            <circle cx="170" cy="196" r="46" fill="#FFFFFF"/>
+            <g class="svgcap" text-anchor="middle" style="font-size:10px">
+              <text x="170" y="83">JAN</text><text x="228" y="99">FEB</text><text x="270" y="141">MAR</text><text x="286" y="199">APR</text>
+              <text x="270" y="257">MAJ</text><text x="228" y="299">JUN</text><text x="170" y="315">JUL</text><text x="112" y="299">AUG</text>
+              <text x="70" y="257">SEP</text><text x="54" y="199">OKT</text><text x="70" y="141">NOV</text>
+              <text x="99" y="104" style="fill:#111213">DEC</text>
+            </g>
+            <g text-anchor="middle" class="svgtxt" style="font-size:13px">
+              <text x="170" y="192">sidste hverdag</text><text x="170" y="211">i december</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="skub r d5"><div class="slutlinje">Du behøver ikke nørde den. Det vigtigste er at vi følger den gældende overenskomst.</div></div>
+  </div>
+</section>
+
+<!-- 06 · KØRSELSGODTGØRELSE -->
+<!-- Hele salgspitchen står som .rkort, fordi den bliver læst op i telefonen.
+     Kortet er slidets ENE gule flade; derfor har .heroTal ingen gul
+     understregning.
+     LUKKET 14/8 · runde 2. Sebastian, ordret: "Ja, 750 til 1500 kroner det
+     pr. måned skattefrit penge." Beløbet er 750-1.500 kr. PR. MÅNED og det
+     er SKATTEFRIT, ved 20-40 minutters transport i egen bil. Den stiplede
+     .tomboks og de to .tomplads er væk, og "pr. måned, skattefrit" står nu
+     i fuld vægt lige under beløbet: et månedsbeløb og et ugebeløb er to
+     vidt forskellige tilbud til en kandidat.
+     KM-SATSEN NÆVNES INGEN STEDER, og det er med vilje: der findes fire
+     forskellige satser og to forskellige målepunkter på tværs af
+     overenskomsterne, og sælgeren bliver brændt på den. Beløbet står som
+     Sebastians tommelfingerregel, ikke som en sats. -->
+<section class="slide" data-sektion="Overenskomsten">
+  <div class="ghost">6</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">5.1</span><span class="krule"></span><span class="ktxt">Overenskomsten · 6 af 8 · Kørselsgodtgørelse</span></div>
+    <div class="r d1">
+      <h2 style="font-size:clamp(24px,2.3vw,34px);max-width:none">Kørselsgodtgørelse</h2>
+      <div class="notelinje" style="margin-top:6px;font-size:13px">et skattefrit beløb pr. kilometer, når håndværkeren bruger egen bil</div>
+    </div>
+    <div class="vgruppe" style="display:grid;grid-template-columns:.56fr .44fr;column-gap:44px;align-items:center;margin:0">
+      <div class="r d2" style="margin-top:2.2vh">
+        <svg class="figur" style="max-height:19vh" viewBox="0 0 560 150" role="img" aria-label="Et hus, en stiplet vej med en bil på, og en arbejdsplads. Over vejen står 20 til 40 minutter, under vejen står et lille beløb pr. kilometer, skattefrit">
+          <g fill="none" stroke="#111213" stroke-width="1.15" stroke-linecap="round" stroke-linejoin="round">
+            <use href="#i-hus" x="6" y="66" width="52" height="52"/>
+          </g>
+          <text x="32" y="134" text-anchor="middle" class="svgcap" style="font-size:9px">HJEMME</text>
+          <path d="M68 96h414" stroke="#C9C9C2" stroke-width="1.8" stroke-dasharray="8 7"/>
+          <g fill="none" stroke="#111213" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+            <use href="#i-bil" x="252" y="72" width="44" height="44"/>
+          </g>
+          <g fill="none" stroke="#111213" stroke-width="1.15" stroke-linecap="round" stroke-linejoin="round">
+            <use href="#i-kran" x="492" y="66" width="52" height="52"/>
+          </g>
+          <text x="518" y="134" text-anchor="middle" class="svgcap" style="font-size:9px">ARBEJDSPLADS</text>
+          <text x="274" y="52" text-anchor="middle" class="svgstor" style="font-size:16px">20-40 minutter</text>
+          <text x="274" y="140" text-anchor="middle" class="svgcap" style="font-size:9.5px">ET LILLE BELØB PR. KM, SKATTEFRIT</text>
+        </svg>
+      </div>
+      <div class="r d3" style="margin-top:2.2vh">
+        <div class="heroTal ord">
+          <span class="t" style="font-size:clamp(30px,3vw,48px)" data-tal="km-beloeb">750-1.500 kr.</span>
+          <span class="tl" style="max-width:none;color:var(--sort)">pr. måned, skattefrit</span>
+        </div>
+        <div class="kstrip stor" style="margin-top:1.6vh">
+          <span class="kchip fuld"><svg class="ik"><use href="#i-lup"/></svg>Tommelfingerregel, ikke en sats</span>
+        </div>
+      </div>
+    </div>
+    <div class="r d4" style="margin-top:2.2vh">
+      <div class="duo" style="column-gap:44px">
+        <div>
+          <div class="dtitel">Får kørselsgodtgørelse</div>
+          <div class="dkort tung">
+            <div class="dk-titel"><svg class="tik"><use href="#i-ok"/></svg><svg class="ik stor"><use href="#i-bil"/></svg>Egen bil</div>
+            <div class="dk-txt">Han kører selv. Så får han kørselsgodtgørelse.</div>
+          </div>
+        </div>
+        <div>
+          <div class="dtitel">Får ingen kørselsgodtgørelse</div>
+          <div class="dkort svag">
+            <div class="dk-titel" style="color:var(--muted)"><svg class="ik" style="color:var(--muted)"><use href="#i-gange"/></svg><svg class="ik stor" style="color:var(--muted)"><use href="#i-vogn"/></svg>Firmabil · bliver hentet</div>
+            <div class="dk-txt">Bruger han firmabil, eller bliver han hentet, er der ingen godtgørelse.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="skub r d5" style="padding-top:2vh">
+      <div class="telefonkicker" style="margin-bottom:11px"><svg class="ik"><use href="#i-telefon"/></svg>Sig det sådan i telefonen</div>
+      <div class="rkort gul stor skaev1">
+        <span class="rq">&ldquo;</span>
+        <div class="rk">Skal du bruge egen bil, så kan du være helt rolig. Vi sørger for at du får nogle skattefrie penge du kan bruge på benzin.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 · OVERARBEJDE OG ARBEJDSTØJ -->
+<!-- Overarbejde holdes kort med vilje: ingen satser, ingen procenter,
+     ingen tabel. Kun at der kommer tillæg. Zonen er bevidst den mindste.
+     Ordet PRØVEPERIODE står som det står, og der findes ingen anden
+     variant af ordet nogen steder i dette deck. Byggeriets overenskomster
+     har ingen bestemmelse af den type; det der findes, er korte varsler
+     der stiger med anciennitet, og de ligger i sektion 2.
+     Slidets ENE gule flade er det gule bånd nederst. Derfor er
+     arbejdsdags-bjælken sort og overarbejdet stiplet. -->
+<section class="slide" data-sektion="Overenskomsten" data-lint-ok="doedzone">
+  <div class="ghost">7</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">5.1</span><span class="krule"></span><span class="ktxt">Overenskomsten · 7 af 8 · Overarbejde og arbejdstøj</span></div>
+    <h2 class="r d1" style="font-size:clamp(23px,2.2vw,33px);max-width:none">Overarbejde og arbejdstøj.</h2>
+    <div class="vgruppe">
+      <div class="r d2" style="margin-top:2.4vh">
+        <div class="gtitel" style="margin-bottom:12px">Overarbejde</div>
+        <div style="display:flex;align-items:center;gap:22px;flex-wrap:wrap">
+          <div class="oabar">
+            <div class="ob dag">Arbejdsdag</div>
+            <div class="ob over">Overarbejde</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:11px">
+            <svg class="ik" style="color:var(--linje)"><use href="#i-pil"/></svg>
+            <span class="kchip kant"><svg class="ik"><use href="#i-plus"/></svg>Der kommer tillæg</span>
+          </div>
+        </div>
+        <div class="notelinje" style="margin-top:12px">Ikke noget vi behøver nørde. Ingen satser, ingen tabel. Der kommer tillæg.</div>
+      </div>
+      <div style="border-top:1px solid var(--border);margin:2.8vh 0 2.4vh"></div>
+      <div class="r d3" style="display:grid;grid-template-columns:.58fr .42fr;column-gap:44px;align-items:center">
+        <div>
+          <div class="gtitel" style="margin-bottom:4px">Arbejdstøj</div>
+          <div class="tjekliste" style="margin-top:1.2vh;max-width:none">
+            <div class="trow"><svg class="tik"><use href="#i-ok"/></svg><span class="ttxt">Mangler han en arbejdssko</span></div>
+            <div class="trow"><svg class="tik"><use href="#i-ok"/></svg><span class="ttxt">Mangler han arbejdstøj</span></div>
+            <div class="trow"><svg class="tik"><use href="#i-ok"/></svg><span class="ttxt">Vi dækker det</span></div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-start;gap:16px">
+          <div style="display:flex;align-items:center;gap:20px;color:var(--sort)">
+            <svg class="ik xl"><use href="#i-sko"/></svg>
+            <svg class="ik xl"><use href="#i-toej"/></svg>
+            <svg class="ik xl"><use href="#i-hjelm"/></svg>
+          </div>
+          <span class="kchip fuld">Ikke 100 % overenskomst, men noget af det er</span>
+        </div>
+      </div>
+    </div>
+    <!-- RETTET 14/8: der stod "I prøveperioden gennem os dækker vi det." Ordet
+         prøveperiode er taget ud af både talespor og skærmtekst i Blok 17 slide 7:
+         der findes ingen prøvetidsbestemmelse i byggeriets overenskomster, og
+         Blok 18's trænernote gentager forbuddet. Hullet står synligt. -->
+    <div class="gulbaand r d5"><div class="gb">I starten gennem os dækker vi det.</div></div>
+    <div class="r d6" style="margin-top:14px"></div>
+  </div>
+</section>
+
+<!-- 08 · DE FIRE OVERENSKOMSTER, OG HVOR TEKNIQ KOMMER IND -->
+<!-- DETTE ER DECKETS OPSLAGSSLIDE. En tillidsmand spørger, og sælgeren skal
+     kunne læse svaret på to sekunder: hvilket fag hører under hvilket
+     forbund, og hvor TEKNIQ kommer ind.
+     Fem greb gør det til et opslag og ikke en tabel man skal studere:
+       1) SEKS rækker, ÉN markering pr. række. Tomme felter er HELT tomme,
+          ikke gråtonede, så øjet kun ser prikkerne.
+       2) Prikkerne er SORTE, ikke gule. Manuset beder om gule prikker, men
+          gul på hvid er den laveste kontrast i paletten, og på et
+          opslagsslide er kontrast det eneste der tæller. Slidets ene gule
+          flade er i stedet det gule bånd nederst, som er ekkoet af slide 01
+          — så sektionen lukker der hvor den åbnede.
+       3) 3F-kolonnen har en lys flade bag sig og er BREDERE end de to
+          andre, fordi den står for mest. Fire prikker, synligt samlet.
+       4) De to lodrette klammer har hver sin vægt og hver sin etiket-form:
+          DI er en TYND klamme i muted med en hairline-etiket, TEKNIQ er en
+          TYK sort klamme med en fyldt sort pille. De to kan ikke forveksles,
+          og det er hele pointen på slidet.
+       5) Matricen er SVG, ikke et HTML-grid, så klammerne rammer præcis de
+          rækker de skal, i begge opløsninger.
+     KASKADE-FÆLDE A: den hvide tekst i TEKNIQ-pillen er sat med
+     style="fill:#fff" INLINE. En fill i en klasse ville vinde over
+     fill-attributten og gøre teksten usynlig. -->
+<section class="slide" data-sektion="Overenskomsten">
+  <div class="ghost">8</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">5.1</span><span class="krule"></span><span class="ktxt">Overenskomsten · 8 af 8 · Fag, forbund og TEKNIQ</span></div>
+    <h2 class="r d1" style="font-size:clamp(22px,2.1vw,31px);max-width:none">Hvilket fag hører under hvilket forbund.</h2>
+    <div class="vgruppe">
+      <div class="mx r d2" style="margin-top:1.8vh">
+        <svg class="figur" viewBox="0 0 1060 244" role="img" aria-label="Matrix med seks fag i rækker og tre forbund i kolonner. 3F har tømrer, murer, bygningsmaler og jord og beton. Dansk El-Forbund har elektrikeren. Blik og Rør har VVS-montøren. En tynd klamme samler de fire 3F-rækker under Dansk Industri, og en tyk klamme samler el- og VVS-rækkerne under TEKNIQ-overenskomsten">
+          <rect x="274" y="44" width="178" height="198" fill="#F6F6F3"/>
+          <text x="363" y="27" text-anchor="middle" style="font-size:17px;font-weight:900;fill:#111213;letter-spacing:-.02em">3F</text>
+          <text x="542" y="22" text-anchor="middle" class="mkol">DANSK EL-FORBUND</text>
+          <text x="542" y="37" text-anchor="middle" class="svgmut" style="font-size:9px">kaldes også El-Forbundet</text>
+          <text x="694" y="22" text-anchor="middle" class="mkol">BLIK OG RØR</text>
+          <g stroke="#ECECE8" stroke-width="1.2">
+            <path d="M0 44h756M0 77h756M0 110h756M0 143h756M0 176h756M0 209h756"/>
+          </g>
+          <path d="M0 242h756" stroke="#C9C9C2" stroke-width="1.4"/>
+          <g fill="none" stroke="#111213" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round">
+            <use href="#i-hammer" x="6" y="49" width="23" height="23"/>
+            <use href="#i-murerske" x="6" y="82" width="23" height="23"/>
+            <use href="#i-rulle" x="6" y="115" width="23" height="23"/>
+            <use href="#i-skovl" x="6" y="148" width="23" height="23"/>
+            <use href="#i-stik" x="6" y="181" width="23" height="23"/>
+            <use href="#i-roertang" x="6" y="214" width="23" height="23"/>
+          </g>
+          <g class="mnavn">
+            <text x="40" y="66">Tømrer</text>
+            <text x="40" y="99">Murer</text>
+            <text x="40" y="132">Bygningsmaler</text>
+            <text x="40" y="165">Jord og beton</text>
+            <text x="40" y="198">Elektriker</text>
+            <text x="40" y="231">VVS-montør</text>
+          </g>
+          <g fill="#111213">
+            <circle cx="363" cy="60.5" r="9"/>
+            <circle cx="363" cy="93.5" r="9"/>
+            <circle cx="363" cy="126.5" r="9"/>
+            <circle cx="363" cy="159.5" r="9"/>
+            <circle cx="542" cy="192.5" r="9"/>
+            <circle cx="694" cy="225.5" r="9"/>
+          </g>
+          <path d="M780 48H768V172H780" fill="none" stroke="#71757C" stroke-width="1.6"/>
+          <text x="792" y="106" class="svgcap" style="font-size:10.5px">DANSK INDUSTRI</text>
+          <text x="792" y="121" class="svgmut" style="font-size:9px">vi er medlem</text>
+          <path d="M782 180H766V238H782" fill="none" stroke="#111213" stroke-width="3.2"/>
+          <rect x="794" y="194" width="252" height="30" rx="15" fill="#111213"/>
+          <text x="920" y="213" text-anchor="middle" style="font-size:10.5px;font-weight:800;letter-spacing:.13em;fill:#fff">TEKNIQ-OVERENSKOMSTEN</text>
+        </svg>
+      </div>
+      <div class="r d3" style="margin-top:1.8vh;border-top:1px solid var(--border);padding-top:1.6vh">
+        <span class="notelinje">Dansk El-Forbund og Blik og Rør er ikke dækket gennem Dansk Industri, men gennem TEKNIQ-overenskomsten. Vi følger den til punkt og prikke, og vi er stadig medlem af Dansk Industri.</span>
+      </div>
+    </div>
+    <div class="gulbaand r d5">
+      <div class="gb" style="margin-bottom:12px">Vi følger overenskomsten. De får altid:</div>
+      <div class="kstrip">
+        <span class="kchip"><svg class="ik"><use href="#i-sparebosse"/></svg>SH-penge</span>
+        <span class="kchip"><svg class="ik"><use href="#i-tillid"/></svg>Pension</span>
+        <span class="kchip"><svg class="ik"><use href="#i-sol"/></svg>Feriepenge</span>
+        <span class="kchip"><svg class="ik"><use href="#i-bil"/></svg>Kørselsgodtgørelse</span>
+        <span class="kchip"><svg class="ik"><use href="#i-toej"/></svg>Arbejdstøj</span>
+        <!-- RETTET 14/8: sjette chip hed "Sundhedsforsikring". Manusets liste og
+             talesporet slutter på "og de ting de skal have", og skærmen må ikke
+             tilføje et led oplæseren ikke siger. -->
+        <span class="kchip"><svg class="ik"><use href="#i-ok"/></svg>Og det de skal have</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ############ SEKTION 2 · OPSIGELSESVARSLER (slide 09-14) ############
+     BYGGET OM 14/8 · runde 2 efter RESEARCH_OPSIGELSESVARSLER.md, og det er
+     sektionens største ændring. Sebastian bekræftede at varslerne kommer
+     direkte fra overenskomsten og bad selv om researchen. Researchen viser
+     at hans tal ikke holder, og konsekvensen er trukket igennem:
+       · DER STÅR IKKE ÉT DAGTAL I TALESPORET. Alle dagtal er skærmens, og
+         de står med kilde og enhed.
+       · S09 proportionsfiguren: en nimåneders-bjælke mod TO bittesmå
+            dags-kvadrater. Tallet er 2 arbejdsdage, ikke 3.
+       · S10 sammenligningen: begge baner er nu dokumenterede, og den
+            stiplede ramme er væk. "Op til omkring en uge" er dokumenteret
+            forkert for fire fag og må ikke skrives ind igen.
+       · S11 varsel-trappen er nu en TABEL, ikke to baner: de seks fag deler
+            ikke én trappe. Kun tømrer, elektriker, VVS og bygningsmaler har
+            tal. Murer, jord og beton og bygge og anlæg står som MARKERET
+            HUL. data-varsel-attributterne er væk sammen med den gamle figur.
+     Spøgelses-tallet starter forfra på 1, som i søsterdeckene.
+     ##################################################################### -->
+
+<!-- 09 · OPSIGELSESVARSLERNE, OG HVORFOR VI LEVER AF DEM -->
+<!-- RETTET 14/8 · runde 2 efter RESEARCH_OPSIGELSESVARSLER.md.
+     DER STÅR IKKE ÉT DAGTAL I TALESPORET. Sebastian siger "et par dages
+     opsigelse", og alle dagtal er skærmens.
+     Tallet er rettet fra 3 til 2 ARBEJDSDAGE: 8-9 måneder ligger inde i
+     Bygningsoverenskomstens interval "efter 8 uger og indtil 1 år", hvor
+     varslet er 2 arbejdsdage. De 3 arbejdsdage findes, men først efter
+     1 års ansættelse, og de står nu i trappen på slide 11.
+     Figuren har ingen pil, ingen forklaring og ingen tekstboks. Hele pointen
+     er størrelsesforholdet mellem den lange bjælke og de TO kvadrater.
+     De to kvadrater er tegnet 9x9 px i et 1000 px koordinatsystem, altså
+     under en tredjedel af ét af de ni felter. Den matematisk korrekte
+     proportion, 2 dage af 270, ville give 3 px pr. kvadrat og gøre dem
+     usynlige; her er de så små som de kan være og stadig kunne ses.
+     Slidets ENE gule markering er mark'en i sætningen. Derfor er bjælken
+     lys og kvadraterne sorte. -->
+<section class="slide" data-sektion="Opsigelsesvarsler" data-lint-ok="doedzone">
+  <div class="ghost">1</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">5.2</span><span class="krule"></span><span class="ktxt">Opsigelsesvarsler · 1 af 6 · Hvorfor vi lever af dem</span></div>
+    <h2 class="r d1" style="font-size:clamp(26px,2.6vw,40px);max-width:none">Opsigelsesvarsler</h2>
+    <h2 class="r d2" style="margin-top:1.4vh;max-width:none">Det er noget af det vi<br><mark>lever allermest af</mark> i byggebranchen.</h2>
+    <div class="vgruppe">
+      <div class="r d4" style="display:flex;align-items:flex-end;justify-content:flex-end;gap:16px;margin-bottom:1vh">
+        <span class="kchip">en tømrer</span>
+        <div style="text-align:right">
+          <div class="heroTal" style="justify-content:flex-end"><span class="t" style="font-size:clamp(32px,3.2vw,54px)">2 arbejdsdage</span></div>
+          <div class="pro-kilde" style="margin-top:6px">Bygningsoverenskomsten, efter 8 uger og indtil 1 år · arbejdsdage, ikke kalenderdage</div>
+        </div>
+      </div>
+      <div class="r d5">
+        <svg class="figur" style="max-height:22vh" viewBox="0 0 1000 140" role="img" aria-label="En lang bjælke delt i ni lige store felter med etiketten ni måneder ansat i firmaet, og helt ude i højre ende to bittesmå kvadrater med etiketten et par arbejdsdages opsigelse">
+          <rect x="8" y="40" width="822" height="44" fill="#F6F6F3" stroke="#C9C9C2" stroke-width="1.5"/>
+          <g stroke="#C9C9C2" stroke-width="1.2">
+            <path d="M99.3 40v44M190.7 40v44M282 40v44M373.3 40v44M464.7 40v44M556 40v44M647.3 40v44M738.7 40v44"/>
+          </g>
+          <text x="419" y="106" text-anchor="middle" class="svgcap" style="font-size:10.5px">9 MÅNEDER ANSAT I FIRMAET</text>
+          <rect x="843" y="27" width="52" height="70" fill="none" stroke="#C9C9C2" stroke-width="1.4" stroke-dasharray="5 4"/>
+          <g fill="#111213">
+            <rect x="858" y="75" width="9" height="9"/>
+            <rect x="872" y="75" width="9" height="9"/>
+          </g>
+          <text x="869" y="106" text-anchor="middle" class="svgcap" style="font-size:9.5px;fill:#111213">ET PAR</text>
+          <text x="869" y="118" text-anchor="middle" class="svgcap" style="font-size:9.5px;fill:#111213">ARBEJDSDAGES</text>
+          <text x="869" y="130" text-anchor="middle" class="svgcap" style="font-size:9.5px;fill:#111213">OPSIGELSE</text>
+        </svg>
+      </div>
+    </div>
+    <!-- RETTET 14/8 · runde 2: hullet om hjemlen er LUKKET. Sebastian, ordret:
+         "C1, ja, det kommer direkte fra overenskomsten." Varslerne er
+         overenskomstbestemte, ikke vores praksis, og .tomplads er væk. -->
+    <div class="skub r d6" style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+      <span class="fagkortnote">Modul 5 · Opsigelsesvarsler</span>
+    </div>
+  </div>
+</section>
+
+<!-- 10 · OG DET ER INGENTING -->
+<!-- Sammenligningsslidet. To vandrette bjælker på PRÆCIS samme skala og med
+     samme venstrekant, så længdeforskellen er hele beskeden. Én akse, én
+     skala: 0 til 4 måneder over 960 px, altså 240 px pr. måned. En uge er
+     55 px. Der er ikke to akser og ikke to skalaer.
+     BYGGET OM 14/8 · runde 2 efter RESEARCH_OPSIGELSESVARSLER.md.
+     BEGGE BANER ER NU DOKUMENTEREDE, og den stiplede ramme om den øverste
+     er derfor væk. Etiketten "op til omkring en uge" er DOKUMENTERET FORKERT
+     for fire fag (elektrikeren når 25 arbejdsdage, VVS'eren er over en uge
+     allerede efter 9 måneder, tømreren rammer 10 efter 2 år) og må ikke
+     skrives ind igen. Den øverste bane viser i stedet SPÆNDET i de fag hvor
+     trappen er fundet: fra malerens dag-til-dag og tømrerens ene arbejdsdag
+     i bunden til elektrikerens 25 arbejdsdage i toppen.
+     Den nederste er funktionærloven § 2. Ingen af tallene siges højt; alle
+     dagtal på dette slide er skærmens.
+     Slidets ENE gule flade er stumpen i den øverste bane. -->
+<section class="slide" data-sektion="Opsigelsesvarsler" data-lint-ok="doedzone">
+  <div class="ghost">2</div>
+  <div class="z fyld">
+    <div class="r d1">
+      <div class="kicker" style="margin-bottom:18px"><span class="knr">5.2</span><span class="krule"></span><span class="ktxt">Opsigelsesvarsler · 2 af 6 · Ingenting sammenlignet med hvad</span></div>
+      <h2 style="font-size:clamp(30px,3.1vw,46px);max-width:none">Og det er ingenting.</h2>
+      <div class="notelinje" style="margin-top:8px;font-size:13px">ingenting sammenlignet med hvad?</div>
+    </div>
+    <div class="vgruppe r d3">
+      <svg class="figur" style="max-height:38vh" viewBox="0 0 1000 200" role="img" aria-label="To vandrette bjælker på samme skala. Øverst en timelønnet håndværker på overenskomst med en kort stump der går fra en enkelt arbejdsdag til nogle få uger, og resten af banen står tom. Nederst en funktionær i fuld længde med et segment på en måned de første seks måneders ansættelse og et segment på tre måneder derefter">
+        <text x="8" y="20" class="svgcap" style="font-size:10.5px;fill:#111213">TIMELØNNET HÅNDVÆRKER PÅ OVERENSKOMST</text>
+        <rect x="12" y="36" width="952" height="32" fill="#FFFFFF" stroke="#ECECE8" stroke-width="1.2"/>
+        <rect x="12" y="36" width="277" height="32" fill="#F8E965" stroke="#111213" stroke-width="1.5"/>
+        <text x="302" y="57" class="svgstor" style="font-size:14px">fra en enkelt arbejdsdag til nogle få uger, alt efter fag og anciennitet</text>
+        <text x="8" y="104" class="svgcap" style="font-size:10.5px">FUNKTIONÆR, FOR EKSEMPEL EN KONTORANSAT</text>
+        <rect x="12" y="112" width="238" height="32" fill="#DDDDD6" stroke="#C9C9C2" stroke-width="1.2"/>
+        <rect x="250" y="112" width="714" height="32" fill="#EFEFEA" stroke="#C9C9C2" stroke-width="1.2"/>
+        <text x="131" y="133" text-anchor="middle" class="svgcap" style="font-size:10px;fill:#111213">1 MÅNED</text>
+        <text x="607" y="133" text-anchor="middle" class="svgcap" style="font-size:10px;fill:#111213">3 MÅNEDER</text>
+        <text x="131" y="160" text-anchor="middle" class="svgmut" style="font-size:9.5px">de første 6 måneders ansættelse</text>
+        <text x="607" y="160" text-anchor="middle" class="svgmut" style="font-size:9.5px">derefter</text>
+        <text x="12" y="182" class="svgmut" style="font-size:9.5px">funktionærloven § 2</text>
+        <!-- Linjen staar MELLEM de to baner, i hoejre side hvor den oeverste bane
+             er tom og den nederste er fyldt. Teksten laa foer paa y=86 og skar
+             igennem den stiplede ramme om den oeverste bane (bund y=76). Den er
+             flyttet ned i luften mellem banerne, hvor der er 28 px at staa paa. -->
+        <path d="M700 78v34" stroke="#C9C9C2" stroke-width="1.4" stroke-dasharray="5 5"/>
+        <text x="712" y="101" class="svgstor" style="font-size:14px">Det er den forskel vi arbejder i.</text>
+      </svg>
+    </div>
+    <div class="skub r d5" style="border-top:1px solid var(--border);padding-top:1.8vh">
+      <span class="notelinje">Håndværkeren er ikke omfattet af funktionærloven. Han har kun det overenskomsten giver.</span>
+    </div>
+  </div>
+</section>
+
+<!-- 11 · VARSEL-TRAPPEN, FAG FOR FAG -->
+<!-- BYGGET OM FRA BUNDEN 14/8 · runde 2 efter RESEARCH_OPSIGELSESVARSLER.md.
+     Sebastian, ordret: "C1, ja, det kommer direkte fra overenskomsten. Du må
+     også gerne bekræfte og lave noget research på overenskomsten og få de
+     præcise tal." Researchen er lavet, og hans tal holder ikke.
+     DEN GAMLE FIGUR ER VÆK. Den var to baner på én akse med værdierne
+     3 dage / 1 uge / 1 uge og 5-6 dage / 1 uge / et par uger. Fire af de
+     seks tal er dokumenteret forkerte, og figuren forudsatte at de seks fag
+     deler én trappe. Det gør de ikke, og derfor er den nu en TABEL.
+     REGLEN FOR DENNE TABEL: kun de fag hvor trappen er DOKUMENTERET står med
+     tal — tømrer, elektriker, VVS og bygningsmaler. Murer, jord og beton og
+     bygge og anlæg står som MARKERET HUL, skraveret og med "ikke fundet" i
+     hvert felt. Forbundenes servere blokerede hentningen. Hullerne skal se
+     ud som huller og ikke som nuller, og tallene må ALDRIG lånes fra
+     tømreren: overenskomsterne har forskellige parter, forskellig
+     kapitelstruktur og forskellig paragrafnummerering.
+     TRE TING ER FREMHÆVET, og det er de tre pointer figuren findes for:
+       · elektrikerkolonnen har ramme om — den eneste der bliver ved med at
+         stige, og den ender højest.
+       · VVS-kolonnen har en lodret markering — alle fire tal er ens, altså
+         ingen trappe overhovedet.
+       · øverste række har gul flade over de fire dokumenterede fag — det er
+         dér Sebastians pointe ligger. Den gule flade dækker IKKE hul-
+         kolonnerne, for der ved vi ikke om pointen holder.
+     Den gule flade er slidets ENE gule markering. Derfor er chippen nederst
+     .kant og ikke .fuld.
+     Ingen af tallene siges højt. Talesporet nævner ikke ét dagtal. -->
+<section class="slide" data-sektion="Opsigelsesvarsler" data-lint-ok="doedzone">
+  <div class="ghost">3</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">5.2</span><span class="krule"></span><span class="ktxt">Opsigelsesvarsler · 3 af 6 · Varsel-trappen fag for fag</span></div>
+    <h2 class="r d1" style="font-size:clamp(23px,2.2vw,33px);max-width:none">Varslet vokser med ancienniteten. Og det er ikke ens fra fag til fag.</h2>
+    <div class="gtitel r d2" style="margin-top:1.2vh">Fra arbejdsgiverens side · arbejdsdage, ikke kalenderdage</div>
+    <div class="vgruppe r d3" style="margin-top:.6vh">
+      <svg class="figur" style="max-height:50vh" viewBox="0 0 1000 300" role="img" aria-label="En tabel med ancienniteten nedad i venstre kolonne og seks fag hen over toppen. Tømrer har 1 til 2, 3, 10 og 10 arbejdsdage. Elektriker har 5, 5, 15 og 25 og er markeret med en ramme fordi kolonnen bliver ved med at stige. VVS har 10 i alle fire felter og er markeret med en lodret klamme fordi der ingen trappe er. Bygningsmaler har dag til dag, 5, 7 og 7. Murer og jord og beton står som skraverede huller med teksten ikke fundet i hvert felt. Den øverste række er gul over de fire fag hvor tallene er dokumenteret">
+        <defs>
+          <pattern id="skrav" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <rect width="9" height="9" fill="#F6F6F3"/>
+            <path d="M0 0v9" stroke="#C9C9C2" stroke-width="1.1"/>
+          </pattern>
+        </defs>
+        <text x="0" y="14" class="svgcap" style="font-size:9px">HER VILLE EN FUNKTIONÆR LIGGE · 1-6 MÅNEDER</text>
+        <path d="M330 10h660" stroke="#C9C9C2" stroke-width="1.5" stroke-dasharray="6 5"/>
+        <rect x="132" y="66" width="572" height="56" fill="#F8E965"/>
+        <rect x="704" y="66" width="286" height="224" fill="url(#skrav)"/>
+        <g stroke="#ECECE8" stroke-width="1.2">
+          <path d="M0 66h990M0 122h990M0 178h990M0 234h990M0 290h990"/>
+          <path d="M132 34v256M275 34v256M418 34v256M561 34v256M704 34v256M847 34v256"/>
+        </g>
+        <rect x="275" y="34" width="143" height="256" fill="none" stroke="#111213" stroke-width="2"/>
+        <path d="M545 80h8v196h-8" fill="none" stroke="#111213" stroke-width="2.6" stroke-linejoin="round"/>
+        <g class="svgcap" text-anchor="middle" style="font-size:10px;fill:#111213">
+          <text x="203" y="50">TØMRER</text>
+          <text x="346" y="50">ELEKTRIKER</text>
+          <text x="489" y="50">VVS</text>
+          <text x="632" y="50">BYGNINGSMALER</text>
+          <text x="775" y="50">MURER</text>
+          <text x="918" y="50">JORD OG BETON</text>
+        </g>
+        <g class="svgmut" text-anchor="middle" style="font-size:8.5px">
+          <text x="346" y="61">bliver ved med at stige</text>
+          <text x="489" y="61">ingen trappe</text>
+        </g>
+        <g class="svgcap" text-anchor="end" style="font-size:9.5px">
+          <text x="122" y="99">UNDER 1 ÅR</text>
+          <text x="122" y="155">EFTER 1 ÅR</text>
+          <text x="122" y="211">EFTER 2 ÅR</text>
+          <text x="122" y="267">EFTER 8 ÅR</text>
+        </g>
+        <g class="svgstor" text-anchor="middle" style="font-size:16px">
+          <text x="203" y="90">1-2</text>
+          <text x="346" y="90">5</text>
+          <text x="489" y="90">10</text>
+          <text x="632" y="90" style="font-size:13px">dag til dag</text>
+          <text x="203" y="155">3</text>
+          <text x="346" y="155">5</text>
+          <text x="489" y="155">10</text>
+          <text x="632" y="155">5</text>
+          <text x="203" y="211">10</text>
+          <text x="346" y="211">15</text>
+          <text x="489" y="211">10</text>
+          <text x="632" y="211">7</text>
+          <text x="203" y="267">10</text>
+          <text x="346" y="267">25</text>
+          <text x="489" y="267">10</text>
+          <text x="632" y="267">7</text>
+        </g>
+        <g class="svgmut" text-anchor="middle" style="font-size:8.5px">
+          <text x="346" y="106">fra 3 mdr.</text>
+          <text x="489" y="106">fra 9 mdr.</text>
+        </g>
+        <g class="svgmut" text-anchor="middle" style="font-size:10px">
+          <text x="775" y="98">ikke fundet</text>
+          <text x="918" y="98">ikke fundet</text>
+          <text x="775" y="154">ikke fundet</text>
+          <text x="918" y="154">ikke fundet</text>
+          <text x="775" y="210">ikke fundet</text>
+          <text x="918" y="210">ikke fundet</text>
+          <text x="775" y="266">ikke fundet</text>
+          <text x="918" y="266">ikke fundet</text>
+        </g>
+      </svg>
+    </div>
+    <div class="skub r d5" style="padding-top:1.2vh">
+      <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap">
+        <span class="kchip kant"><svg class="ik"><use href="#i-brud"/></svg>Medarbejderens eget varsel er kortere i el, VVS og maler</span>
+        <span class="notelinje" style="margin-left:auto">Presses du på et varsel: &bdquo;det afhænger af din overenskomst og din anciennitet&ldquo;.</span>
+      </div>
+      <div class="notelinje" style="margin-top:10px">Murernes og jord og betons trapper kunne ikke hentes: forbundenes servere blokerede. Tallene må ikke lånes fra tømreren. Det samme gælder bygge og anlæg.</div>
+      <div class="pro-kilde" style="margin-top:8px">Kilder: Bygningsoverenskomsten § 72 (ordlyd læst i 2010-udgaven) · TEKNIQ Arbejdsgiverne, afskedigelse af elektrikere og vvs'ere · Danske Malermestre og 3F § 16. Se RESEARCH_OPSIGELSESVARSLER.md for konfidens pr. tal.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 12 · HVAD DET BETYDER FOR OS -->
+<!-- Slidet har én figur og én linje, ikke mere.
+     .duo'en er ÉT udsagn delt i to, ikke to modsætninger. Derfor har de to
+     kolonner samme farve, samme vægt og samme flueben. Bliver den ene
+     nedtonet, lærer slidet noget andet end det Sebastian siger.
+     Den nederste linje er et SKÆRMELEMENT, ikke talespor. Den står der for
+     at forhindre at sælgeren siger "i jeres branche skifter folk hele
+     tiden" til den forkerte mester. Den er sat MINDRE end .frik og står
+     IKKE på gul flade, som produktionsnoten kræver.
+     Slidets ENE gule flade er formlens hero-led. -->
+<section class="slide" data-sektion="Opsigelsesvarsler">
+  <div class="ghost">4</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">5.2</span><span class="krule"></span><span class="ktxt">Opsigelsesvarsler · 4 af 6 · Hvad det betyder for os</span></div>
+    <h2 class="r d1" style="font-size:clamp(23px,2.2vw,33px);max-width:none">Kort varsel er vores forretning.</h2>
+    <div class="vgruppe">
+      <div class="frik blok r d2">
+        <span class="led">
+          <span class="ledik"><svg class="ik stor"><use href="#i-hjelm"/></svg></span>
+          <!-- RETTET 14/8 · runde 2: labelen stod som "3 dage til en uge". Den
+               må ikke være et dagtal — de præcise tal står på slide 11, hvor de
+               har kilde og enhed ved sig, og "3 dage til en uge" er dokumenteret
+               forkert for fire fag. -->
+          <span class="val">Kort varsel</span><span class="lab" style="max-width:none">nogle få dage<br>det første år</span>
+        </span>
+        <span class="op">+</span>
+        <span class="led">
+          <span class="ledik"><svg class="ik stor"><use href="#i-telefon"/></svg></span>
+          <span class="val">Vi ringer i dag</span><span class="lab">vi er hurtige</span>
+        </span>
+        <span class="op">=</span>
+        <span class="led">
+          <span class="ledik"><svg class="ik stor"><use href="#i-ok"/></svg></span>
+          <span class="val ringet">Vi kan levere</span><span class="lab" style="max-width:none">det vi lever<br>allermest af</span>
+        </span>
+      </div>
+      <!-- Kortene er hoejere og gabet mellem dem stoerre end standard .duo:
+           slidet har kun to elementer, og uden det laa der et tomt baand paa
+           knap 200 px mellem kortene og bundlinjen i begge oploesninger. -->
+      <div class="duo r d4" style="column-gap:64px;margin-top:9vh">
+        <div class="dkort tung" style="padding:26px 24px 28px">
+          <div class="dk-titel"><svg class="tik"><use href="#i-ok"/></svg><svg class="ik stor"><use href="#i-hjelm"/></svg>Kan manden komme hurtigt</div>
+          <div class="dk-txt">Kort varsel betyder at han kan flytte sig med det samme.</div>
+        </div>
+        <div class="dkort tung" style="padding:26px 24px 28px">
+          <div class="dk-titel"><svg class="tik"><use href="#i-ok"/></svg><svg class="ik stor"><use href="#i-aftale"/></svg>Kan vi levere hurtigt</div>
+          <div class="dk-txt">Kort varsel betyder at vi kan levere ham med det samme.</div>
+        </div>
+      </div>
+      <div class="notelinje r d5" style="margin-top:1.4vh;text-align:center">Ét udsagn delt i to. Ikke to modsætninger.</div>
+    </div>
+    <div class="skub r d6">
+      <div style="border:1px solid var(--linje);border-radius:12px;padding:14px 18px">
+        <span class="notelinje" style="font-size:13px">Han <b>kan</b> skifte hurtigt. Det er ikke det samme som at han <b>gør</b> det.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 13 · SAMME DAG ELLER DAGEN EFTER -->
+<!-- De to kolonner øverst må IKKE se forskellige ud i vægt: han siger selv
+     at det gælder både den ledige og den der er i arbejde.
+     Station to i .tflow er den eneste i fuld farve, og ordene "samme dag
+     eller dagen efter" står i samme vægt som stationens overskrift.
+     Den femte station er ikke en station, men en afstikker: pilen peger UD
+     af figuren, væk fra flowet, så man ser hvilken vej kandidaten
+     forsvinder.
+     Slidets ENE gule flade er station to. -->
+<section class="slide" data-sektion="Opsigelsesvarsler">
+  <div class="ghost">5</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">5.2</span><span class="krule"></span><span class="ktxt">Opsigelsesvarsler · 5 af 6 · Samme dag eller dagen efter</span></div>
+    <!-- Baandet staar i FULD BREDDE over begge kolonner, som manuset beder om:
+         det er én regel der gaelder begge situationer, ikke en label paa den
+         foerste af dem. Baandet er sort, ikke gult; slidets ene gule flade er
+         station to i .tflow. -->
+    <div class="r d1"><div class="lagbar sort" style="display:block">Det gælder begge to</div></div>
+    <div class="r d2" style="margin-top:1.8vh">
+      <div class="duo" style="column-gap:48px">
+        <div class="dkort tung">
+          <div class="dk-titel"><svg class="ik stor"><use href="#i-person"/></svg>Han er ledig</div>
+          <div class="dk-txt">Har ikke noget arbejde lige nu.</div>
+        </div>
+        <div class="dkort tung">
+          <div class="dk-titel"><svg class="ik stor"><use href="#i-hjelm"/></svg>Han er i arbejde</div>
+          <div class="dk-txt">Bliver han utilfreds med sit nuværende arbejde, kan han hurtigt finde noget nyt.</div>
+        </div>
+      </div>
+    </div>
+    <!-- .vgruppe beholder sin auto-margin i BEGGE ender. Med margin-top:0 laa al
+         luften samlet under afstikkeren som et tomt baand paa 130-170 px; nu
+         fordeles den over og under proceslinjen. -->
+    <div class="vgruppe">
+      <div class="gtitel r d3" style="margin:2.6vh 0 1.6vh">Så hurtigt som muligt, hele vejen</div>
+      <div class="tflow fire neutral r d4" style="margin:0">
+        <div class="linje"></div>
+        <div class="stationer">
+          <div class="station">
+            <div class="boks"><svg class="ik"><use href="#i-telefon"/></svg></div>
+            <h5>Vi snakker med ham</h5><p>første kontakt</p>
+          </div>
+          <div class="station staerk">
+            <div class="boks"><svg class="ik"><use href="#i-bord"/></svg></div>
+            <h5>Jobsamtale samme dag eller dagen efter</h5><p>ikke i næste uge</p>
+          </div>
+          <div class="station">
+            <div class="boks"><svg class="ik"><use href="#i-firma"/></svg></div>
+            <h5>Ud og besøge virksomheden</h5><p>sat op med det samme</p>
+          </div>
+          <div class="station">
+            <div class="boks"><svg class="ik"><use href="#i-doer"/></svg></div>
+            <h5>Starte der</h5><p>og så er han vores</p>
+          </div>
+        </div>
+      </div>
+      <div class="r d5" style="display:flex;align-items:center;justify-content:flex-end;gap:14px;margin-top:1.6vh">
+        <span class="notelinje" style="font-size:12.5px">Gør vi ikke noget, finder han selv noget.</span>
+        <svg style="display:block;flex-shrink:0" width="150" height="52" viewBox="0 0 150 52" role="img" aria-label="En pil der går ned og væk fra proceslinjen og peger ud af figuren">
+          <path d="M4 4C44 6 68 22 124 42" fill="none" stroke="#71757C" stroke-width="2" stroke-dasharray="7 5"/>
+          <path d="M134 45l-13.6-7.6 1.4 12.6z" fill="#71757C"/>
+        </svg>
+      </div>
+    </div>
+    <div class="skub r d6"><div class="slutlinje">Vi skal være hurtige. Det er det vi lever af.</div></div>
+  </div>
+</section>
+
+<!-- 14 · HURTIGE PÅ AFTRÆKKEREN, STILLE OG ROLIGE I DIALOGEN -->
+<!-- Sektionens vigtigste slide og det eneste sælgeren skal kunne huske i
+     sin helhed. Begge kolonner i fuld farve, præcis samme vægt, samme sats,
+     samme størrelse ikon. INGEN af de to må nedtones: det er ikke en
+     rigtig-og-forkert-figur, det er to ting der skal gælde samtidig.
+     Ordet mellem kolonnerne er "og", ikke "eller". Bliver det "eller",
+     eller bliver den ene kolonne nedtonet, har slidet lært det modsatte af
+     det Sebastian siger.
+     Slidets ENE gule markering er mark'en i bundsætningen, som er slidets
+     største sats. Sætningen står IKKE som gult bånd, fordi kun ordene
+     "må det ikke" skal ligge på gul. -->
+<section class="slide" data-sektion="Opsigelsesvarsler">
+  <div class="ghost">6</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">5.2</span><span class="krule"></span><span class="ktxt">Opsigelsesvarsler · 6 af 6 · Hurtige og rolige på samme tid</span></div>
+    <div class="ogduo r d2" style="margin-top:1.4vh">
+      <div class="oside">
+        <div class="otop">
+          <svg class="ik xl" style="color:var(--sort)"><use href="#i-stopur"/></svg>
+          <span class="onavn">Hurtige på aftrækkeren</span>
+        </div>
+        <div class="tjekliste" style="max-width:none">
+          <div class="trow"><svg class="tik"><use href="#i-ok"/></svg><span class="ttxt">Jobsamtale samme dag eller dagen efter</span></div>
+          <div class="trow"><svg class="tik"><use href="#i-ok"/></svg><span class="ttxt">Sæt det op med det samme</span></div>
+          <div class="trow"><svg class="tik"><use href="#i-ok"/></svg><span class="ttxt">Få dem ud til virksomheden</span></div>
+        </div>
+      </div>
+      <div class="omidt"><span>og</span></div>
+      <div class="oside">
+        <div class="otop">
+          <svg class="ik xl" style="color:var(--sort)"><use href="#i-bord"/></svg>
+          <span class="onavn">Stille og rolige i dialogen</span>
+        </div>
+        <div class="tjekliste" style="max-width:none">
+          <div class="trow"><svg class="tik"><use href="#i-ok"/></svg><span class="ttxt">Vi skynder os ikke igennem samtalen</span></div>
+          <div class="trow"><svg class="tik"><use href="#i-ok"/></svg><span class="ttxt">Vi løber ikke kandidaten igennem</span></div>
+          <div class="trow"><svg class="tik"><use href="#i-ok"/></svg><span class="ttxt">Kvaliteten må ikke falde</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="skub r d5">
+      <div class="storslut">Fordi det går hurtigt, <mark>må det ikke</mark> gå ud over vores kvalitet.</div>
+    </div>
+  </div>
+</section>
+
+<div class="progress" id="progress"></div>
+<div class="pilzone v" onclick="gaa(-1)"></div>
+<div class="pilzone h" onclick="gaa(1)"></div>
+<div class="folio">
+  <span class="brand"><img src="data:image/png;base64,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0Bst/nk2il5+YfHPBRQILAAAliMzBAAAAgsAQGABAAgsAAAEFgCAwAIAEFgAAAgsAACBBQAgsAAAEFgAAAILAEBgAQAILAAABBYAgMACABBYAAAILAAAgQUAILAAABBYAAACCwBAYAEAILAAAAQWAIDAAgAQWAAACCwAAIEFACCwAAAQWAAAAgsAQGABACCwAAAEFgCAwAIAQGABAAgsAACBBQAgsAAAEFgAAAILAEBgAQAgsAAABBYAgMACAEBgAQAILAAAgQUAgMACABBYAAACCwBAYAEAILAAAAQWAIDAAgBAYAEACCwAAIEFAIDAAgAQWAAAAgsAQGABACCwAAAEFgCAwAIAQGABAAgsAACBBQCAwAIAEFgAAAILAACBBQAgsAAABBYAgMACAEBgAQAILAAAgQUAgMACABBYAAACCwAAgQUAILAAAAQWAAACCwBAYAEACCwAAIEFAIDAAgAQWAAAAgsAAIEFACCwAAAEFgAAAgsAQGABAAgsAAAEFgCAwAIAEFgAAAILAACBBQAgsAAABBYAAAILAEBgAQAILAAABBYAgMACABBYAAACCwAAgQUAILAAAAQWAAACCwCgEf4/Paatms/mpuAAAAAASUVORK5CYII=" alt="">PowerMatch</span>
+  <span id="folioSektion">Overenskomsten</span>
+  <span class="nr" id="taeller">01 <span>/ 14</span></span>
+</div>
+
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+let i=Math.max(0,Math.min(slides.length-1,(parseInt(location.hash.slice(1))||1)-1));
+function pad(n){return String(n).padStart(2,'0')}
+function vis(n){
+  slides.forEach(s=>s.classList.remove('aktiv'));
+  i=Math.max(0,Math.min(slides.length-1,n));
+  slides[i].classList.add('aktiv');
+  document.getElementById('taeller').innerHTML=pad(i+1)+' <span>/ '+pad(slides.length)+'</span>';
+  document.getElementById('progress').style.width=((i+1)/slides.length*100)+'%';
+  document.getElementById('folioSektion').textContent=slides[i].dataset.sektion||'';
+  document.body.classList.toggle('moerk-chrome',slides[i].classList.contains('moerk'));
+  document.body.classList.toggle('gul-chrome',slides[i].classList.contains('gulflade'));
+  history.replaceState(null,'','#'+(i+1));
+}
+function gaa(d){vis(i+d)}
+addEventListener('keydown',e=>{
+  if(['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)){e.preventDefault();gaa(1)}
+  if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();gaa(-1)}
+  if(e.key==='Home')vis(0); if(e.key==='End')vis(slides.length-1);
+  if(e.key==='f'||e.key==='F'){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen()}
+});
+let tx=null;
+addEventListener('touchstart',e=>tx=e.touches[0].clientX);
+addEventListener('touchend',e=>{if(tx===null)return;const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)gaa(dx<0?1:-1);tx=null});
+vis(i);
+</script>
+
+<!-- ============================================================================
+     KAPITELNAVIGATION v1.0 · BYTE-IDENTISK BLOK
+     Denne blok står ORDRET ENS i alle fem decks i Modul 4 og Modul 5. Skal den
+     rettes, rettes den ét sted og kopieres byte for byte til de fire andre —
+     præcis som kaskade-rettelsesblokken i grundlaget v1.3. Blokken indsættes
+     nederst i body, efter deckets egen slide-motor, og den rører ikke ét
+     eksisterende element: den læser data-sektion fra slidene og bygger selv
+     både kapitellisten og fremdriftsindikatoren ind i DOM'en. Derfor kan den
+     lægges ind i et deck uden at der ændres en eneste anden linje.
+
+     HVAD DEN GØR
+     1) KAPITELLISTE. Tasten K (eller M) åbner en liste over deckets kapitler
+        med slidenumre. Klik eller taltast 1-9 hopper direkte. Pil op/ned
+        flytter markeringen, Enter åbner, Escape lukker. Listen er LUKKET som
+        udgangspunkt (display:none), så den kan ikke komme med på et
+        screenshot og kan ikke forstyrre en optagelse. Mens den er åben,
+        spiser den piletasterne, så man ikke kommer til at bladre bagved.
+     2) KAPITLERNE ER BLOKKENE. De udledes af data-sektion på hvert slide,
+        altså præcis det navn der står i kicker-linjen på slidet. Navigationen
+        og indholdet kan derfor ikke komme til at sige to forskellige ting.
+     3) FREMDRIFTSINDIKATOR i folio-linjen: kapitlets navn står der i forvejen
+        (#folioSektion), og blokken føjer en hårfin 1 px streg og et lille
+        "3 / 6" til i folioens egen sats. Det er bevidst næsten usynligt og
+        må ikke gøres til en fed statusbjælke.
+     4) STABILE HASH-LINKS PR. KAPITEL. #toemreren, #jord-og-beton,
+        #opsigelsesvarsler osv. åbner decket på kapitlets første slide.
+        Sluggen står ved hvert kapitel i listen, så den kan læses og sendes
+        videre. DE GAMLE HASH-LINKS PR. SLIDENUMMER VIRKER UÆNDRET: #4 er
+        stadig slide 4, og motoren skriver stadig selv #N i adressefeltet,
+        så deep-link-testen i deck-lint.js er urørt.
+
+     DESIGNSYSTEM v1.3. Ingen nye farver og ingen ny typografi: --gul #F8E965,
+     --sort #111213, --tekst #26282B, --muted #71757C, --border #ECECE8,
+     --flade #F6F6F3, --linje #C9C9C2, Inter 400-900. Reglen om maksimalt én
+     gul flade pr. slide er ikke rørt — den gule streg i listen sidder på det
+     AKTIVE kapitel i overlejringen, ikke på slidet, og overlejringen ligger
+     oven på indholdet og tæller derfor ikke med.
+     ============================================================================ -->
+<style>
+#kapitelmenu{position:fixed;inset:0;z-index:120;display:none;align-items:center;justify-content:center;
+  background:rgba(17,18,19,.5);padding:4vh 4vw;font-family:'Inter',-apple-system,Arial,sans-serif}
+#kapitelmenu.aaben{display:flex}
+#kapitelmenu .kpanel{width:100%;max-width:660px;max-height:92vh;overflow:auto;background:#FFFFFF;
+  border:1px solid var(--border);border-radius:16px;padding:26px 30px 22px;
+  box-shadow:0 24px 70px rgba(17,18,19,.28)}
+#kapitelmenu .khoved{display:flex;align-items:baseline;gap:14px;margin-bottom:16px}
+#kapitelmenu .ktitel{font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+#kapitelmenu .kdeck{margin-left:auto;font-size:11px;font-weight:800;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--linje);font-variant-numeric:tabular-nums}
+#kapitelmenu .krow{display:flex;align-items:center;gap:16px;width:100%;text-align:left;cursor:pointer;
+  background:none;border:0;border-top:1px solid var(--border);border-left:2px solid transparent;
+  padding:14px 10px 14px 12px;color:var(--tekst);font-family:inherit}
+#kapitelmenu .krow:last-of-type{border-bottom:1px solid var(--border)}
+#kapitelmenu .krow:hover,#kapitelmenu .krow.valgt{background:var(--flade)}
+#kapitelmenu .krow.nu{border-left-color:var(--gul)}
+#kapitelmenu .knum{font-size:12px;font-weight:900;color:var(--muted);font-variant-numeric:tabular-nums;
+  width:16px;flex-shrink:0}
+#kapitelmenu .knavn{font-size:16px;font-weight:800;color:var(--sort);letter-spacing:-.015em}
+#kapitelmenu .khash{font-size:10px;font-weight:700;letter-spacing:.06em;color:var(--linje);margin-left:10px}
+#kapitelmenu .kspan{margin-left:auto;font-size:12px;font-weight:800;color:var(--muted);
+  font-variant-numeric:tabular-nums;letter-spacing:.04em;flex-shrink:0}
+#kapitelmenu .kfod{margin-top:15px;font-size:10px;font-weight:700;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--linje)}
+.kmeter{width:54px;height:1px;background:var(--border);position:relative;flex-shrink:0}
+.kmeter i{position:absolute;left:0;top:0;height:1px;width:0;background:var(--linje);
+  transition:width .4s var(--ease)}
+.kpos{font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--linje);
+  font-variant-numeric:tabular-nums}
+.moerk-chrome .kmeter{background:rgba(255,255,255,.16)}
+.moerk-chrome .kmeter i{background:rgba(255,255,255,.5)}
+.moerk-chrome .kpos{color:rgba(255,255,255,.35)}
+.gul-chrome .kmeter{background:rgba(17,18,19,.14)}
+.gul-chrome .kmeter i{background:rgba(17,18,19,.42)}
+.gul-chrome .kpos{color:rgba(17,18,19,.42)}
+@media print{#kapitelmenu{display:none!important}.kmeter,.kpos{display:none}}
+@media (prefers-reduced-motion:reduce){.kmeter i{transition:none}}
+</style>
+<script>
+(function(){
+  var alleSlides=[].slice.call(document.querySelectorAll('.slide'));
+  if(!alleSlides.length)return;
+
+  /* slug: dansk -> ascii, saa #toemreren og #jord-og-beton er stabile og kan skrives i hånden */
+  function slug(s){
+    return String(s).toLowerCase()
+      .replace(/æ/g,'ae').replace(/ø/g,'oe').replace(/å/g,'aa')
+      .replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+  }
+
+  /* kapitlerne ER blokkene: sammenhaengende loeb af samme data-sektion */
+  var kap=[];
+  alleSlides.forEach(function(s,n){
+    var navn=(s.dataset.sektion||'').trim();
+    var sidste=kap[kap.length-1];
+    if(sidste&&sidste.navn===navn){sidste.slut=n;return;}
+    kap.push({navn:navn,slug:slug(navn),start:n,slut:n});
+  });
+
+  /* ---- fremdriftsindikator i folio-linjen: haarfin, ikke en statusbjaelke ---- */
+  var folio=document.querySelector('.folio');
+  var sekEl=document.getElementById('folioSektion');
+  var meter=null,meterFyld=null,posEl=null;
+  if(folio&&sekEl){
+    meter=document.createElement('span');meter.className='kmeter';meter.setAttribute('aria-hidden','true');
+    meterFyld=document.createElement('i');meter.appendChild(meterFyld);
+    posEl=document.createElement('span');posEl.className='kpos';
+    sekEl.parentNode.insertBefore(meter,sekEl.nextSibling);
+    meter.parentNode.insertBefore(posEl,meter.nextSibling);
+  }
+
+  /* ---- kapitellisten. Lukket som udgangspunkt, saa den ikke kan komme med paa
+         et screenshot og ikke kan forstyrre en optagelse. ---- */
+  var menu=document.createElement('div');
+  menu.id='kapitelmenu';menu.setAttribute('role','dialog');menu.setAttribute('aria-label','Kapitler');
+  var panel=document.createElement('div');panel.className='kpanel';
+  var hoved=document.createElement('div');hoved.className='khoved';
+  var titel=document.createElement('span');titel.className='ktitel';titel.textContent='Kapitler';
+  var deckNavn=document.createElement('span');deckNavn.className='kdeck';
+  deckNavn.textContent=kap.length+' kapitler · '+alleSlides.length+' slides';
+  hoved.appendChild(titel);hoved.appendChild(deckNavn);panel.appendChild(hoved);
+
+  var raekker=kap.map(function(k,n){
+    var r=document.createElement('button');r.type='button';r.className='krow';
+    var num=document.createElement('span');num.className='knum';num.textContent=(n+1);
+    var navn=document.createElement('span');navn.className='knavn';navn.textContent=k.navn;
+    var hash=document.createElement('span');hash.className='khash';hash.textContent='#'+k.slug;
+    var span=document.createElement('span');span.className='kspan';
+    span.textContent=(k.start+1===k.slut+1)?('slide '+(k.start+1)):('slide '+(k.start+1)+'-'+(k.slut+1));
+    r.appendChild(num);r.appendChild(navn);r.appendChild(hash);r.appendChild(span);
+    r.addEventListener('click',function(){gaaTilKapitel(n);});
+    panel.appendChild(r);
+    return r;
+  });
+
+  var fod=document.createElement('div');fod.className='kfod';
+  fod.textContent='1-9 spring · pil op og ned vælger · Enter åbner · Esc lukker · K åbner listen igen';
+  panel.appendChild(fod);
+  menu.appendChild(panel);
+  menu.addEventListener('click',function(e){if(e.target===menu)luk();});
+  document.body.appendChild(menu);
+
+  var aaben=false,valgt=0;
+
+  function kapitelFor(n){
+    for(var x=0;x<kap.length;x++){if(n>=kap[x].start&&n<=kap[x].slut)return x;}
+    return 0;
+  }
+  function markerValgt(){
+    raekker.forEach(function(r,n){r.classList.toggle('valgt',n===valgt);});
+  }
+  function opdater(){
+    var n=kapitelFor(i),k=kap[n],ial=k.slut-k.start+1,nu=i-k.start+1;
+    if(meterFyld)meterFyld.style.width=(nu/ial*100)+'%';
+    if(posEl)posEl.textContent=nu+' / '+ial;
+    if(meter)meter.title=k.navn+' · '+nu+' af '+ial;
+    raekker.forEach(function(r,x){r.classList.toggle('nu',x===n);});
+  }
+  function aab(){
+    valgt=kapitelFor(i);markerValgt();aaben=true;menu.classList.add('aaben');
+  }
+  function luk(){aaben=false;menu.classList.remove('aaben');}
+  function gaaTilKapitel(n){
+    luk();
+    vis(kap[Math.max(0,Math.min(kap.length-1,n))].start);
+  }
+
+  /* ---- hash: baade #12 (slidenummer, uaendret) og #toemreren (kapitel) ----
+     VIGTIGT: motoren har allerede kaldt vis() og skrevet #N i adressefeltet, før
+     denne blok koerer. Det ORIGINALE fragment fra selve navigationen hentes
+     derfor fra PerformanceNavigationTiming, som beholder det. Uden det ville et
+     kapitel-link altid lande paa slide 1. */
+  function fragmentVedIndlaesning(){
+    var e=performance.getEntriesByType?performance.getEntriesByType('navigation')[0]:null;
+    var raa=(e&&e.name)?e.name:location.href;
+    var n=raa.indexOf('#');
+    return n<0?'':raa.slice(n+1);
+  }
+  function losHash(raa){
+    var h='';
+    try{h=decodeURIComponent(String(raa||'')).trim();}catch(x){h=String(raa||'').trim();}
+    if(!h)return false;
+    if(/^\d+$/.test(h)){vis(parseInt(h,10)-1);return true;}
+    var s=slug(h);
+    for(var x2=0;x2<kap.length;x2++){
+      if(kap[x2].slug===s){vis(kap[x2].start);return true;}
+    }
+    return false;
+  }
+
+  /* motoren skal blive ved med at skrive #N, saa deep-link pr. slide er urørt.
+     Her lægges kun opdateringen af fremdriftsindikatoren oven på. */
+  var motorVis=window.vis;
+  window.vis=function(n){motorVis(n);opdater();};
+
+  addEventListener('hashchange',function(){losHash(String(location.hash||'').slice(1));});
+
+  addEventListener('keydown',function(e){
+    if(e.metaKey||e.ctrlKey||e.altKey)return;
+    var t=e.key;
+    if(!aaben){
+      if(t==='k'||t==='K'||t==='m'||t==='M'){e.preventDefault();e.stopPropagation();aab();}
+      return;
+    }
+    e.preventDefault();e.stopPropagation();
+    if(t==='Escape'||t==='k'||t==='K'||t==='m'||t==='M'){luk();return;}
+    if(t==='ArrowDown'||t==='ArrowRight'){valgt=Math.min(kap.length-1,valgt+1);markerValgt();return;}
+    if(t==='ArrowUp'||t==='ArrowLeft'){valgt=Math.max(0,valgt-1);markerValgt();return;}
+    if(t==='Enter'||t===' '){gaaTilKapitel(valgt);return;}
+    if(/^[1-9]$/.test(t)){var n=parseInt(t,10)-1;if(n<kap.length)gaaTilKapitel(n);return;}
+  },true);
+
+  var start=fragmentVedIndlaesning();
+  if(!(start&&!/^\d+$/.test(start)&&losHash(start)))opdater();
+})();
+</script>
+</body>
+</html>
