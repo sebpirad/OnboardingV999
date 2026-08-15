@@ -11,7 +11,7 @@
   --sort:#111213; --tekst:#26282B; --muted:#71757C;
   --border:#ECECE8; --flade:#F6F6F3; --bg:#FFFFFF;
   --ease:cubic-bezier(.22,1,.36,1);
-  --mx:5vw; --chatb:400px;
+  --mx:5vw; --chatb:0px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;overflow:hidden}
@@ -39,7 +39,7 @@ p.under{font-size:clamp(14px,1.25vw,17px);line-height:1.6;color:var(--muted);max
 .skub{margin-top:auto !important;padding-bottom:1vh}
 
 /* spørgsmåls-pop */
-.qpop{position:absolute;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;
+.qpop{position:absolute;inset:0;right:var(--chatb);z-index:60;display:flex;align-items:center;justify-content:center;
   background:rgba(255,255,255,.93);backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .45s var(--ease)}
 .qpop.vis{opacity:1}
 .qpop .qkort{max-width:980px;text-align:center;padding:0 60px;transform:scale(.9);transition:transform .55s var(--ease)}
@@ -85,8 +85,6 @@ p.under{font-size:clamp(14px,1.25vw,17px);line-height:1.6;color:var(--muted);max
 .heroTal .t i{position:absolute;left:-.04em;right:-.04em;bottom:.04em;height:.22em;background:var(--gul);z-index:-1}
 .heroTal .tl{font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
 
-.livebadge{display:inline-flex;align-items:center;gap:10px;background:var(--sort);color:#fff;border-radius:100px;padding:10px 22px;font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:4vh;width:fit-content}
-.livebadge .dot{width:10px;height:10px;border-radius:50%;background:#E5484D;animation:puls 1.6s infinite}
 @keyframes puls{0%,100%{opacity:1}50%{opacity:.35}}
 
 /* mørk outro */
@@ -101,22 +99,6 @@ p.under{font-size:clamp(14px,1.25vw,17px);line-height:1.6;color:var(--muted);max
 .moerk .rnr{width:40px;height:40px;border-radius:12px;background:var(--gul);color:var(--sort);font-weight:900;font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .moerk .rtxt{font-size:clamp(16px,1.6vw,21px);font-weight:800;color:#fff}
 .moerk .rtxt em{font-style:normal;color:var(--gul)}
-
-/* chatpanel */
-.chat{position:absolute;top:0;right:0;bottom:0;width:var(--chatb);border-left:1px solid var(--border);background:#fff;display:flex;flex-direction:column;z-index:70}
-.chat-h{padding:20px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
-.chat-h .dot{width:9px;height:9px;border-radius:50%;background:#E5484D;animation:puls 1.6s infinite}
-.chat-h b{font-size:13.5px;color:var(--sort)}
-.chat-h span{margin-left:auto;font-size:11px;font-weight:800;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
-.chat-str{flex:1;overflow:hidden;padding:18px 20px;display:flex;flex-direction:column;justify-content:flex-end;gap:14px}
-.msg{display:flex;gap:11px;align-items:flex-start;opacity:0;transform:translateY(16px);transition:opacity .4s var(--ease),transform .4s var(--ease)}
-.msg.vis{opacity:1;transform:none}
-.msg .av{width:30px;height:30px;border-radius:10px;background:var(--gul);color:var(--sort);font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.msg .mb .navn{font-size:12px;font-weight:800;color:var(--sort)}
-.msg .mb .txt{font-size:13.5px;line-height:1.45;color:var(--tekst);margin-top:2px}
-.msg.spg{background:var(--gul-soft);border:1px solid var(--gul-kant);border-radius:14px;padding:12px 14px;margin:0 -4px}
-.msg.spg .tag{display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:.16em;color:var(--sort);background:var(--gul);border-radius:100px;padding:3px 9px;margin-bottom:5px;text-transform:uppercase}
-.chat-f{border-top:1px solid var(--border);padding:14px 20px;font-size:12.5px;color:#C9C9C2;font-weight:600}
 
 /* chrome */
 .folio{position:fixed;left:0;right:var(--chatb);bottom:0;z-index:97;height:52px;display:flex;align-items:center;gap:14px;
@@ -154,40 +136,39 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-
 </style></head>
 <body>
 
-<section class="slide aktiv" data-chat='[["N","NyIMarken_Nick","er der lyd? 🎧",600],["M","MurerMads87","LASSE LASSE LASSE",1400],["V","VVS_Viktor","første dag i dag 💪",2200],["T","TømrerThomas","fed start 👊",3000]]'>
+<section class="slide aktiv">
   <div class="scene">
-    <span class="livebadge r"><span class="dot"></span>PowerMatch · Onboarding Live</span>
     <div style="margin:auto 0">
       <h1 class="r d1">10 spørgsmål til<br><mark>forretningsmodellen</mark>.</h1>
-      <p class="under r d2" style="margin-top:3vh">Dem du selv sidder med. Dem virksomhederne stiller. Og dem håndværkerne stiller. Chatten spørger, Lasse svarer.</p>
+      <p class="under r d2" style="margin-top:3vh">Dem du selv sidder med. Dem virksomhederne stiller. Og dem håndværkerne stiller. Spørgsmål først. Svar bagefter.</p>
     </div>
     <p class="under skub r d3">Kan du svare på alle 10 bagefter, så forstår du forretningen.</p>
   </div>
 </section>
 
-<section class="slide" data-q="Hvad koster en medarbejder egentlig PowerMatch?" data-chat='[["N","NysgerrigNiklas","Hvad koster en medarbejder egentlig JER? 🤔",600,"spg"],["M","MurerMads87","godt spørgsmål",1800],["L","LagerLars","nu bliver det nørdet 🔥",2600],["E","El_Emil","den vil jeg også gerne vide",3400]]'>
+<section class="slide" data-q="Hvad koster en medarbejder egentlig PowerMatch?">
   <div class="scene">
-    <div class="kicker r"><span class="knr">01</span><span class="krule"></span><span class="ktxt">Spørgsmål 1 af 10 · fra chatten</span></div>
+    <div class="kicker r"><span class="knr">01</span><span class="krule"></span><span class="ktxt">Spørgsmål 1 af 10</span></div>
     <h2 class="r d1">Hvad koster en medarbejder egentlig PowerMatch?</h2>
     <div class="stak r d2">
       <div class="s-linje">
         <div class="seg loen" style="width:66%">LØN · 200 KR</div>
-        <div class="seg g1" style="width:10%">PENSION</div>
-        <div class="seg g2" style="width:8%">SH</div>
-        <div class="seg g3" style="width:5.5%"></div>
-        <div class="seg g4" style="width:4.5%"></div>
-        <div class="seg g5" style="width:3%"></div>
-        <div class="seg g6" style="width:3%"></div>
+        <div class="seg g1" style="width:9%">PENSION</div>
+        <div class="seg g2" style="width:9.5%">SH</div>
+        <div class="seg g3" style="width:8.5%">FERIE</div>
+        <div class="seg g4" style="width:3%"></div>
+        <div class="seg g5" style="width:2.5%"></div>
+        <div class="seg g6" style="width:1.5%"></div>
       </div>
-      <div class="s-labels"><b>200 kr. i løn</b><span>+ ferie · syge · tøj · km</span><b>≈ 300 kr. i timen</b></div>
+      <div class="s-labels"><b>200 kr. i løn</b><span>+ ferie · tøj · km · syge</span><b>≈ 300 kr. i timen</b></div>
     </div>
-    <p class="under skub r d3">Pensionen er den største post. Og spændet går fra <b>~45 %</b> (firmabil, ingen sygedage) til <b>~60 %</b>. Forskelligt fra mand til mand.</p>
+    <p class="under skub r d3">Pension, SH og feriepenge er de tre store, og de ligger tæt. Og spændet går fra <b>~45 %</b> (firmabil, ingen sygedage) til <b>~60 %</b>. Forskelligt fra mand til mand.</p>
   </div>
 </section>
 
-<section class="slide" data-q="Hvorfor er gangfaktoren forskellig?" data-chat='[["M","MurerMads87","hvorfor er faktoren ikke bare ens for alle??",600,"spg"],["T","TømrerThomas","tænkte det samme",1800],["E","El_Emil","el-drengene koster 😎",2600],["V","VVS_Viktor","sådan Lasse 👊",3400]]'>
+<section class="slide" data-q="Hvorfor er gangfaktoren forskellig?">
   <div class="scene">
-    <div class="kicker r"><span class="knr">02</span><span class="krule"></span><span class="ktxt">Spørgsmål 2 af 10 · fra chatten</span></div>
+    <div class="kicker r"><span class="knr">02</span><span class="krule"></span><span class="ktxt">Spørgsmål 2 af 10</span></div>
     <h2 class="r d1">Hvorfor er gangfaktoren forskellig?</h2>
     <div class="frows">
       <div class="frow r d1"><span class="fnr">01</span><span class="ft">Jobtitlen <span>el og VVS koster mere ude hos kundens kunder, så virksomheden vil betale mere</span></span></div>
@@ -198,12 +179,12 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-
   </div>
 </section>
 
-<section class="slide" data-q="Hvorfor lige 518 arbejdstimer?" data-chat='[["K","KloakKarl","hvorfor lige præcis 518? virker random lol",600,"spg"],["L","LagerLars","haha ja hvorfor ikke bare 500",1800],["T","TømrerThomas","der er styr på det, bare vent",2600],["MM","MalerMette","👂",3400]]'>
+<section class="slide" data-q="Hvorfor lige 518 arbejdstimer?">
   <div class="scene">
-    <div class="kicker r"><span class="knr">03</span><span class="krule"></span><span class="ktxt">Spørgsmål 3 af 10 · fra chatten</span></div>
+    <div class="kicker r"><span class="knr">03</span><span class="krule"></span><span class="ktxt">Spørgsmål 3 af 10</span></div>
     <h2 class="r d1">Hvorfor lige 518 arbejdstimer?</h2>
     <div class="frows">
-      <div class="frow r d1"><span class="fnr">01</span><span class="ft">En rigtig prøvetid <span>518 timer ÷ 37 timer pr. uge ≈ 14 uger, cirka 3 måneder</span></span></div>
+      <div class="frow r d1"><span class="fnr">01</span><span class="ft">En rigtig prøveperiode <span>518 timer ÷ 37 timer pr. uge ≈ 14 uger, cirka 3 måneder</span></span></div>
       <div class="frow r d2"><span class="fnr">02</span><span class="ft">Begge parter ser hinanden an <span>virksomheden ser ham an, og han ser virksomheden an</span></span></div>
       <div class="frow r d3"><span class="fnr">03</span><span class="ft">Prisbalancen holder <span>vi tjener penge, kunden kan betale, og hans løn presses ikke</span></span></div>
     </div>
@@ -211,25 +192,25 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-
   </div>
 </section>
 
-<section class="slide" data-q="Hvad hvis virksomheden vil fastansætte efter en måned?" data-chat='[["T","TømrerThomas","hvad hvis kunden vil fastansætte allerede efter en måned?",600,"spg"],["A","Anlægs_Anders","sket for mig i sidste uge!!",1800],["N","NyIMarken_Nick","godt svar incoming",2600],["M","MurerMads87","🔥🔥",3400]]'>
+<section class="slide" data-q="Hvad hvis virksomheden vil fastansætte efter en måned?">
   <div class="scene">
-    <div class="kicker r"><span class="knr">04</span><span class="krule"></span><span class="ktxt">Spørgsmål 4 af 10 · fra chatten</span></div>
+    <div class="kicker r"><span class="knr">04</span><span class="krule"></span><span class="ktxt">Spørgsmål 4 af 10</span></div>
     <h2 class="r d1">Hvad hvis virksomheden vil fastansætte efter en måned?</h2>
     <div class="frik r d2">
-      <span class="led"><span class="val">Resterende timer</span><span class="lab">fx 400 tilbage</span></span>
+      <span class="led"><span class="val">Resterende timer</span><span class="lab">fx ~350 tilbage</span></span>
       <span class="op">×</span>
       <span class="led"><span class="val">vores indtjening pr. time</span><span class="lab">indtjeningen vi mister</span></span>
       <span class="op">−</span>
       <span class="led"><span class="val hero">20 %</span><span class="lab">rabatten</span></span>
     </div>
-    <p class="under skub r d3">Kan de ikke få armene ned, kan han købes fri før tid, og <b>de sparer 20 % i forhold til at lade timerne løbe.</b> <span style="white-space:nowrap">Alle tre parter vinder stadig.</span></p>
+    <p class="under skub r d3">Kan de ikke få armene ned, kan han købes fri før tid, og <b>de får 20 % rabat på frikøbsbeløbet.</b> <span style="white-space:nowrap">Alle tre parter vinder stadig.</span></p>
   </div>
 </section>
 
-<section class="slide" data-q="Hvis han laver en fejl og bygger noget forkert, hvem hæfter?" data-chat='[["S","SmedeSimon","hvis han bygger noget forkert, hvem hæfter så?",600,"spg"],["MM","MalerMette","uha den er god 😅",1800],["V","VVS_Viktor","spændt på den her",2600],["K","KloakKarl","👀👀",3400]]'>
+<section class="slide" data-q="Hvis han bygger noget forkert, hvem hæfter?">
   <div class="scene">
-    <div class="kicker r"><span class="knr">05</span><span class="krule"></span><span class="ktxt">Spørgsmål 5 af 10 · fra chatten</span></div>
-    <h2 class="r d1">Hvis han laver en fejl og bygger noget forkert, hvem hæfter?</h2>
+    <div class="kicker r"><span class="knr">05</span><span class="krule"></span><span class="ktxt">Spørgsmål 5 af 10</span></div>
+    <h2 class="r d1">Hvis han bygger noget forkert, hvem hæfter?</h2>
     <div class="svarhero r d2">
       <div class="sv">Virksomheden.<br><mark>Altid.</mark></div>
       <div class="svu">Det hedder <b>instruktionspligten</b>: Det er virksomheden, der fortæller ham, hvad han skal lave, og hvordan han skal gøre det. Skal noget laves om, er det virksomhedens regning.</div>
@@ -238,9 +219,9 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-
   </div>
 </section>
 
-<section class="slide" data-q="Hvis han får en arbejdsskade, hvis forsikring dækker?" data-chat='[["B","BrolæggerBo","og hvis han kommer til skade på pladsen? hvis forsikring gælder?",600,"spg"],["M","MurerMads87","vigtigt spørgsmål",1800],["E","El_Emil","godt spurgt Bo",2600],["T","TømrerThomas","👍",3400]]'>
+<section class="slide" data-q="Hvis han får en arbejdsskade, hvis forsikring dækker?">
   <div class="scene">
-    <div class="kicker r"><span class="knr">06</span><span class="krule"></span><span class="ktxt">Spørgsmål 6 af 10 · fra chatten</span></div>
+    <div class="kicker r"><span class="knr">06</span><span class="krule"></span><span class="ktxt">Spørgsmål 6 af 10</span></div>
     <h2 class="r d1">Hvis han får en arbejdsskade, hvis forsikring dækker?</h2>
     <div class="svarhero r d2">
       <div class="sv">Virksomhedens<br><mark>forsikring.</mark></div>
@@ -250,9 +231,9 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-
   </div>
 </section>
 
-<section class="slide" data-q="Hvad hvis han bliver syg eller holder ferie i prøveperioden?" data-chat='[["V","VVS_Viktor","hvad hvis han bliver syg eller skal på ferie midt i det hele?",600,"spg"],["L","LagerLars","sommerferie incoming ☀️",1800],["T","TømrerThomas","godt tænkt",2600],["S","SmedeSimon","W",3400]]'>
+<section class="slide" data-q="Hvad hvis han bliver syg eller holder ferie i prøveperioden?">
   <div class="scene">
-    <div class="kicker r"><span class="knr">07</span><span class="krule"></span><span class="ktxt">Spørgsmål 7 af 10 · fra chatten</span></div>
+    <div class="kicker r"><span class="knr">07</span><span class="krule"></span><span class="ktxt">Spørgsmål 7 af 10</span></div>
     <h2 class="r d1">Hvad hvis han bliver syg eller holder ferie i prøveperioden?</h2>
     <div class="svarhero r d2">
       <div class="sv">Perioden<br><mark>forlænges bare.</mark></div>
@@ -262,31 +243,31 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-
   </div>
 </section>
 
-<section class="slide" data-q="Hvor længe er den typiske kandidat ansat ved PowerMatch?" data-chat='[["MM","MalerMette","hvor længe er folk egentlig ansat hos jer i snit?",600,"spg"],["S","SmedeSimon","mit gæt: 100 timer",1800],["T","TømrerThomas","mere, helt sikkert",2600],["V","VVS_Viktor","spændt 👀",3400]]'>
+<section class="slide" data-q="Hvor længe er folk i snit ansat hos jer?">
   <div class="scene">
-    <div class="kicker r"><span class="knr">08</span><span class="krule"></span><span class="ktxt">Spørgsmål 8 af 10 · fra chatten</span></div>
-    <h2 class="r d1">Hvor længe er den typiske kandidat ansat ved PowerMatch?</h2>
+    <div class="kicker r"><span class="knr">08</span><span class="krule"></span><span class="ktxt">Spørgsmål 8 af 10</span></div>
+    <h2 class="r d1">Hvor længe er folk i snit ansat hos jer?</h2>
     <div class="heroTal r d2"><span class="t">380<i></i></span><span class="tl">Timer i snit<br>pr. kandidat</span></div>
     <p class="under skub r d3">Meget højt for branchen, og vi vil højere op. Nogle skifter undervejs og fortsætter gennem os et nyt sted. Og mange fortsætter <b>langt over de 518</b>: 600, 800, helt op til 2.000 timer.</p>
   </div>
 </section>
 
-<section class="slide" data-q="Hvad får en kandidat ud af at være ansat gennem PowerMatch?" data-chat='[["N","NyIMarken_Nick","hvorfor skulle en håndværker vælge at være ansat gennem JER?",600,"spg"],["MM","MalerMette","medlemskabet 🔥",1800],["S","SmedeSimon","spin the wheel!!",2600],["L","LagerLars","pølse og booster 😂",3400]]'>
+<section class="slide" data-q="Hvorfor skulle en håndværker vælge at være ansat gennem jer?">
   <div class="scene">
-    <div class="kicker r"><span class="knr">09</span><span class="krule"></span><span class="ktxt">Spørgsmål 9 af 10 · fra chatten</span></div>
-    <h2 class="r d1">Hvad får en kandidat ud af at være ansat gennem PowerMatch?</h2>
+    <div class="kicker r"><span class="knr">09</span><span class="krule"></span><span class="ktxt">Spørgsmål 9 af 10</span></div>
+    <h2 class="r d1">Hvorfor skulle en håndværker vælge at være ansat gennem jer?</h2>
     <div class="frows">
       <div class="frow r d1"><span class="fnr">01</span><span class="ft">PowerMatch har altid din ryg <span>er der ballade ude på pladsen, tager vi kampen, og er han utilfreds, finder vi et nyt job</span></span></div>
       <div class="frow r d2"><span class="fnr">02</span><span class="ft">Han prøver virksomheden af <span>er den ikke rigtig for ham, står vi klar med det næste match</span></span></div>
-      <div class="frow r d3"><span class="fnr">03</span><span class="ft">Medlemskabet <span>fordele, point og præmier, som ingen andre i markedet har</span></span></div>
+      <div class="frow r d3"><span class="fnr">03</span><span class="ft">Medlemskabet <span>Power Points til Power Shop, Spin the Wheel og faste fordele</span></span></div>
     </div>
     <p class="under skub r d4"><b>Ingen andre i markedet har noget, der ligner.</b></p>
   </div>
 </section>
 
-<section class="slide" data-q="Hvorfor skulle virksomheden ikke bare fastansætte fra dag 1?" data-chat='[["N","NysgerrigNiklas","og virksomheden? hvorfor ikke bare fastansætte fra dag 1?",600,"spg"],["M","MurerMads87","sidste spørgsmål 😢",1800],["V","VVS_Viktor","det har været fedt Lasse",2600],["T","TømrerThomas","GG",3400]]'>
+<section class="slide" data-q="Hvorfor skulle virksomheden ikke bare fastansætte fra dag 1?">
   <div class="scene">
-    <div class="kicker r"><span class="knr">10</span><span class="krule"></span><span class="ktxt">Spørgsmål 10 af 10 · fra chatten</span></div>
+    <div class="kicker r"><span class="knr">10</span><span class="krule"></span><span class="ktxt">Spørgsmål 10 af 10</span></div>
     <h2 class="r d1">Hvorfor skulle virksomheden ikke bare fastansætte fra dag&nbsp;1?</h2>
     <div class="frows">
       <div class="frow r d1"><span class="fnr">01</span><span class="ft">Ingen forpligtelse i prøveperioden <span>passer han ikke, ligger nye matches klar</span></span></div>
@@ -297,9 +278,9 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-
   </div>
 </section>
 
-<section class="slide moerk" data-chat='[["M","MurerMads87","W stream 🔥",600],["MM","MalerMette","tak Lasse!!",1400],["S","SmedeSimon","quiz-tid 💪",2200],["E","El_Emil","GG",3000]]'>
+<section class="slide moerk">
   <div class="scene">
-    <div class="kicker r"><span class="knr">12</span><span class="krule"></span><span class="ktxt">Det var alle 10</span></div>
+    <div class="kicker r"><span class="knr">10</span><span class="krule"></span><span class="ktxt">Det var alle 10</span></div>
     <h1 class="r d1">Kan du svare på alle 10,<br>forstår du forretningen.</h1>
     <div class="recap">
       <div class="rrow r d2"><span class="rnr">1</span><span class="rtxt">Er du i tvivl om ét af dem, så <em>se svaret igen</em>. De kommer i dine kundesamtaler.</span></div>
@@ -310,11 +291,6 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-
 </section>
 <div class="qpop" id="qpop"><div class="qkort"><span class="qtag" id="qtag"></span><h3 id="qtekst"></h3></div></div>
 
-<div class="chat">
-  <div class="chat-h"><span class="dot"></span><b>Onboarding-chatten</b><span>247 ser med</span></div>
-  <div class="chat-str" id="chatStr"></div>
-  <div class="chat-f">Skriv en besked ...</div>
-</div>
 
 <div class="progress" id="progress"></div>
 <div class="pilzone v" onclick="gaa(-1)"></div>
@@ -326,30 +302,11 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-
 
 <script>
 const slides=[...document.querySelectorAll('.slide')];
-const chatStr=document.getElementById('chatStr');
 const qpop=document.getElementById('qpop');
 let i=0, timere=[];
 let qnr=0;
 
 function ryd(){timere.forEach(clearTimeout);timere=[];qpop.classList.remove('vis')}
-
-function visChat(slide){
-  chatStr.innerHTML='';
-  const msgs=JSON.parse(slide.dataset.chat||'[]');
-  msgs.forEach(m=>{
-    const [ini,navn,txt,delay,type]=m;
-    timere.push(setTimeout(()=>{
-      const el=document.createElement('div');
-      el.className='msg'+(type==='spg'?' spg':'');
-      el.innerHTML=`<span class="av">${ini}</span><span class="mb">`+
-        (type==='spg'?`<span class="tag">Spørgsmål</span><br>`:'')+
-        `<span class="navn">${navn}</span><div class="txt">${txt}</div></span>`;
-      chatStr.appendChild(el);
-      requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.add('vis')));
-      while(chatStr.children.length>7)chatStr.removeChild(chatStr.firstChild);
-    },delay));
-  });
-}
 
 function vis(n){
   const m=Math.max(0,Math.min(slides.length-1,n));
@@ -360,9 +317,8 @@ function vis(n){
   const s=slides[i];
   s.classList.add('aktiv');
   document.getElementById('taeller').innerHTML=String(i+1).padStart(2,'0')+' <span>/ '+String(slides.length).padStart(2,'0')+'</span>';
-  document.getElementById('progress').style.width='calc((100vw - 400px) * '+((i+1)/slides.length)+')';
+  document.getElementById('progress').style.width=((i+1)/slides.length*100)+'vw';
   document.body.classList.toggle('moerk-chrome',s.classList.contains('moerk'));
-  visChat(s);
   if(s.dataset.q){
     // spørgsmålet popper op midt på skærmen først, så Las kan læse det højt
     const qi=slides.filter(x=>x.dataset.q).indexOf(s)+1;

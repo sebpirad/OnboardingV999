@@ -11,7 +11,7 @@
   --sort:#111213; --tekst:#26282B; --muted:#71757C;
   --border:#ECECE8; --flade:#F6F6F3; --bg:#FFFFFF;
   --ease:cubic-bezier(.22,1,.36,1);
-  --mx:5vw; --chatb:400px;
+  --mx:5vw; --chatb:0px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;overflow:hidden}
@@ -39,7 +39,7 @@ p.under{font-size:clamp(14px,1.25vw,17px);line-height:1.6;color:var(--muted);max
 .skub{margin-top:auto !important;padding-bottom:1vh}
 
 /* spørgsmåls-pop */
-.qpop{position:absolute;inset:0;right:var(--chatb);right:var(--chatb);z-index:60;display:flex;align-items:center;justify-content:center;
+.qpop{position:absolute;inset:0;right:var(--chatb);z-index:60;display:flex;align-items:center;justify-content:center;
   background:rgba(255,255,255,.93);backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .45s var(--ease)}
 .qpop.vis{opacity:1}
 .qpop .qkort{max-width:980px;text-align:center;padding:0 60px;transform:scale(.9);transition:transform .55s var(--ease)}
@@ -77,8 +77,6 @@ p.under{font-size:clamp(14px,1.25vw,17px);line-height:1.6;color:var(--muted);max
 .heroTal .t i{position:absolute;left:-.04em;right:-.04em;bottom:.04em;height:.22em;background:var(--gul);z-index:-1}
 .heroTal .tl{font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
 
-.livebadge{display:inline-flex;align-items:center;gap:10px;background:var(--sort);color:#fff;border-radius:100px;padding:10px 22px;font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:4vh;width:fit-content}
-.livebadge .dot{width:10px;height:10px;border-radius:50%;background:#E5484D;animation:puls 1.6s infinite}
 @keyframes puls{0%,100%{opacity:1}50%{opacity:.35}}
 
 
@@ -111,22 +109,6 @@ p.under{font-size:clamp(14px,1.25vw,17px);line-height:1.6;color:var(--muted);max
 .moerk .rtxt{font-size:clamp(16px,1.6vw,21px);font-weight:800;color:#fff}
 .moerk .rtxt em{font-style:normal;color:var(--gul)}
 
-/* chatpanel */
-.chat{position:absolute;top:0;right:0;bottom:0;width:var(--chatb);border-left:1px solid var(--border);background:#fff;display:flex;flex-direction:column;z-index:70}
-.chat-h{padding:20px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
-.chat-h .dot{width:9px;height:9px;border-radius:50%;background:#E5484D;animation:puls 1.6s infinite}
-.chat-h b{font-size:13.5px;color:var(--sort)}
-.chat-h span{margin-left:auto;font-size:11px;font-weight:800;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
-.chat-str{flex:1;overflow:hidden;padding:18px 20px;display:flex;flex-direction:column;justify-content:flex-end;gap:14px}
-.msg{display:flex;gap:11px;align-items:flex-start;opacity:0;transform:translateY(16px);transition:opacity .4s var(--ease),transform .4s var(--ease)}
-.msg.vis{opacity:1;transform:none}
-.msg .av{width:30px;height:30px;border-radius:10px;background:var(--gul);color:var(--sort);font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.msg .mb .navn{font-size:12px;font-weight:800;color:var(--sort)}
-.msg .mb .txt{font-size:13.5px;line-height:1.45;color:var(--tekst);margin-top:2px}
-.msg.spg{background:var(--gul-soft);border:1px solid var(--gul-kant);border-radius:14px;padding:12px 14px;margin:0 -4px}
-.msg.spg .tag{display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:.16em;color:var(--sort);background:var(--gul);border-radius:100px;padding:3px 9px;margin-bottom:5px;text-transform:uppercase}
-.chat-f{border-top:1px solid var(--border);padding:14px 20px;font-size:12.5px;color:#C9C9C2;font-weight:600}
-
 /* chrome */
 .folio{position:fixed;left:0;right:var(--chatb);bottom:0;z-index:97;height:52px;display:flex;align-items:center;gap:14px;
   padding:0 var(--mx);border-top:1px solid var(--border);font-size:10.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);background:var(--bg)}
@@ -155,20 +137,19 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-
 </style></head>
 <body>
 
-<section class="slide aktiv" data-chat='[["N","NyIMarken_Nick","er der lyd? 🎧 (undskyld, tradition)",600],["K","KranKaj","logget på oppe fra kranen 🏗️",1400],["P","Praktikant_Palle","lige tilbage fra kaffepause, hvad går jeg glip af? ☕",2200],["M","MurerMads87","LASSE LASSE LASSE",3000]]'>
+<section class="slide aktiv">
   <div class="scene">
-    <span class="livebadge r"><span class="dot"></span>PowerMatch · Onboarding Live</span>
     <div style="margin:auto 0">
       <h1 class="r d1">10 spørgsmål til<br><mark>rekruttering</mark>.</h1>
-      <p class="under r d2" style="margin-top:3vh">Dem kunderne stiller. Dem håndværkerne stiller. Og dem du selv sidder med efter de sidste to videoer. Chatten spørger, Lasse&nbsp;svarer.</p>
+      <p class="under r d2" style="margin-top:3vh">Dem kunderne stiller. Dem håndværkerne stiller. Og dem du selv sidder med efter de sidste to videoer. Spørgsmål først. Svar bagefter.</p>
     </div>
     <p class="under skub r d3"><b>Kan du svare på alle 10 bagefter, så kender du markedet.</b></p>
   </div>
 </section>
 
-<section class="slide" data-q="Hvad har dagbøder og forsinkelser med rekruttering at gøre?" data-chat='[["A","Anlægs_Anders","jeg forstår ikke det med dagbøder... hvad har det med rekruttering at gøre? 🤔",600,"spg"],["T","TømrerThomas","vi venter stadig på mureren 💀",1800],["M","MurerMads87","HEY. vi venter på beton",2600],["K","KranKaj","jeg venter på jer alle sammen 🏗️",3400]]'>
+<section class="slide" data-q="Hvad har dagbøder og forsinkelser med rekruttering at gøre?">
   <div class="scene">
-    <div class="kicker r"><span class="knr">01</span><span class="krule"></span><span class="ktxt">Spørgsmål 1 af 10 · fra chatten</span></div>
+    <div class="kicker r"><span class="knr">01</span><span class="krule"></span><span class="ktxt">Spørgsmål 1 af 10</span></div>
     <h2 class="r d1">Hvad har dagbøder og forsinkelser med rekruttering at gøre?</h2>
     <div class="frows">
       <div class="frow r d1"><span class="fnr">01</span><span class="ft">De rigtige folk forebygger bøderne <span>god rekruttering skal sørge for, at du helt undgår dem</span></span></div>
@@ -179,18 +160,18 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-
   </div>
 </section>
 
-<section class="slide" data-q="Hvordan kan det være, at PowerMatch har så mange kandidater i databasen?" data-chat='[["N","NysgerrigNiklas","hvordan har I SÅ mange kandidater i databasen??",600,"spg"],["S","SmedeSimon","I har garanteret også min gamle profil 😅",1800],["MM","MalerMette","de glemmer aldrig en håndværker 🥹",2600],["L","LagerLars","nu bliver det nørdet 🔥",3400]]'>
+<section class="slide" data-q="Hvordan kan det være, at PowerMatch har så mange kandidater i databasen?">
   <div class="scene">
-    <div class="kicker r"><span class="knr">02</span><span class="krule"></span><span class="ktxt">Spørgsmål 2 af 10 · fra chatten</span></div>
+    <div class="kicker r"><span class="knr">02</span><span class="krule"></span><span class="ktxt">Spørgsmål 2 af 10</span></div>
     <h2 class="r d1">Hvordan kan det være, at PowerMatch har så mange kandidater i databasen?</h2>
     <div class="heroTal r d2"><span class="t">20-50<i></i></span><span class="tl">Nye profiler<br>hver eneste dag</span></div>
     <p class="under skub r d3">Og med hans samtykke gemmer vi hans krav og ønsker, også efter han har fået job. Bliver han utilfreds om to år, går der <b>én sms fra os, og han har nye jobmuligheder inden for få timer.</b> Vi gemmer ikke bare profiler. <b>Vi gemmer, hvad folk gerne vil.</b></p>
   </div>
 </section>
 
-<section class="slide" data-q="Hvorfor er PowerMatch ikke et rekrutteringsbureau eller vikarbureau?" data-chat='[["B","BrolæggerBo","er I ikke bare et vikarbureau med ekstra trin? 👀",600,"spg"],["M","MurerMads87","UHHH den var modig",1800],["T","TømrerThomas","nu bliver Lasse varm 🔥",2600],["V","VVS_Viktor","🍿",3400]]'>
+<section class="slide" data-q="Hvorfor er PowerMatch ikke et rekrutteringsbureau eller vikarbureau?">
   <div class="scene">
-    <div class="kicker r"><span class="knr">03</span><span class="krule"></span><span class="ktxt">Spørgsmål 3 af 10 · fra chatten</span></div>
+    <div class="kicker r"><span class="knr">03</span><span class="krule"></span><span class="ktxt">Spørgsmål 3 af 10</span></div>
     <h2 class="r d1">Hvorfor er PowerMatch ikke et rekrutteringsbureau eller vikarbureau?</h2>
     <div class="svarhero r d2">
       <div class="sv">En platform.<br><mark>Ikke et bureau.</mark></div>
@@ -200,9 +181,9 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-
   </div>
 </section>
 
-<section class="slide" data-q="Er PowerMatch dyrere end konkurrenterne?" data-chat='[["T","TømrerThomas","helt ærligt Lasse: er I dyrere end de andre?",600,"spg"],["K","KloakKarl","direkte spørgsmål, respekt",1800],["MO","Malermester_Mogens","det her vil jeg gerne høre 👂",2600],["S","SmedeSimon","🍿🍿",3400]]'>
+<section class="slide" data-q="Er PowerMatch dyrere end konkurrenterne?">
   <div class="scene">
-    <div class="kicker r"><span class="knr">04</span><span class="krule"></span><span class="ktxt">Spørgsmål 4 af 10 · fra chatten</span></div>
+    <div class="kicker r"><span class="knr">04</span><span class="krule"></span><span class="ktxt">Spørgsmål 4 af 10</span></div>
     <h2 class="r d1">Er PowerMatch dyrere end konkurrenterne?</h2>
     <div class="svarhero r d2">
       <div class="sv">Ja.<br><mark>En smule.</mark></div>
@@ -212,9 +193,9 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-
   </div>
 </section>
 
-<section class="slide" data-q="Kvalitet hele vejen eller bare folk nok?" data-chat='[["A","Anlægs_Anders","vil kunderne ha topkvalitet eller bare folk nok til at nå i mål?",600,"spg"],["S","SmedeSimon","10 mand ind, 7 bliver. det kalder jeg statistik 📊",1800],["MO","Malermester_Mogens","kvalitet. altid. (skriver fra kontoret)",2600],["K","KloakKarl","bare der er kaffe på pladsen ☕",3400]]'>
+<section class="slide" data-q="Kvalitet hele vejen eller bare folk nok?">
   <div class="scene">
-    <div class="kicker r"><span class="knr">05</span><span class="krule"></span><span class="ktxt">Spørgsmål 5 af 10 · fra chatten</span></div>
+    <div class="kicker r"><span class="knr">05</span><span class="krule"></span><span class="ktxt">Spørgsmål 5 af 10</span></div>
     <h2 class="r d1">Kvalitet hele vejen eller bare folk nok? Det afhænger af kunden.</h2>
     <div class="frows">
       <div class="frow r d1"><span class="fnr">01</span><span class="ft">Nogle vil kun have de helt rigtige <span>tager hellere færre opgaver ind. Vi skruer kravene op i databasen</span></span></div>
@@ -225,9 +206,9 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-
   </div>
 </section>
 
-<section class="slide" data-q="Hvorfor får PowerMatch bedre kandidater end fx JobTeam og JKS?" data-chat='[["E","El_Emil","hvorfor får I bedre folk end JobTeam og JKS? 😎",600,"spg"],["M","MurerMads87","kom nu med Trustpilot-tallet 👀",1800],["K","KranKaj","kan bekræfte. kan se anmeldelserne heroppefra",2600],["T","TømrerThomas","W firma",3400]]'>
+<section class="slide" data-q="Hvorfor får PowerMatch bedre kandidater end fx JobTeam og JKS?">
   <div class="scene">
-    <div class="kicker r"><span class="knr">06</span><span class="krule"></span><span class="ktxt">Spørgsmål 6 af 10 · fra chatten</span></div>
+    <div class="kicker r"><span class="knr">06</span><span class="krule"></span><span class="ktxt">Spørgsmål 6 af 10</span></div>
     <h2 class="r d1">Hvorfor får PowerMatch bedre kandidater end fx JobTeam og JKS?</h2>
     <div class="trust r d2">
       <div class="t-tal">4,7<i></i></div>
@@ -237,9 +218,9 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-
   </div>
 </section>
 
-<section class="slide" data-q="Hvor lang er prøveperioden hos de andre?" data-chat='[["V","VVS_Viktor","hvor lang er prøvetiden egentlig hos de andre?",600,"spg"],["L","LagerLars","sig ikke det er et halvt år igen 😩",1800],["MM","MalerMette","😂😂",2600],["S","SmedeSimon","man kan bygge et parcelhus på kortere tid",3400]]'>
+<section class="slide" data-q="Hvor lang er prøveperioden hos de andre?">
   <div class="scene">
-    <div class="kicker r"><span class="knr">07</span><span class="krule"></span><span class="ktxt">Spørgsmål 7 af 10 · fra chatten</span></div>
+    <div class="kicker r"><span class="knr">07</span><span class="krule"></span><span class="ktxt">Spørgsmål 7 af 10</span></div>
     <h2 class="r d1">Hvor lang er prøveperioden hos de andre?</h2>
     <div class="skala r d2">
       <div class="sk-track"><span class="sk-band"></span><span class="sk-pm" style="left:14%"><i></i>PowerMatch · ca. 3-3,5 mdr.</span></div>
@@ -249,9 +230,9 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-
   </div>
 </section>
 
-<section class="slide" data-q="Hvem er PowerMatchs største konkurrent?" data-chat='[["N","NyIMarken_Nick","hvem er jeres største konkurrent egentlig?",600,"spg"],["S","SmedeSimon","JKS incoming 👀",1800],["K","KloakKarl","10 kr på at han IKKE siger JKS",2600],["T","TømrerThomas","den svarer han aldrig ærligt på... eller? 👀",3400]]'>
+<section class="slide" data-q="Hvem er PowerMatchs største konkurrent?">
   <div class="scene">
-    <div class="kicker r"><span class="knr">08</span><span class="krule"></span><span class="ktxt">Spørgsmål 8 af 10 · fra chatten</span></div>
+    <div class="kicker r"><span class="knr">08</span><span class="krule"></span><span class="ktxt">Spørgsmål 8 af 10</span></div>
     <h2 class="r d1">Hvem er PowerMatchs største konkurrent?</h2>
     <div class="svarhero r d2">
       <div class="sv">Ikke bureauerne.<br><mark>Fordommen.</mark></div>
@@ -261,9 +242,9 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-
   </div>
 </section>
 
-<section class="slide" data-q="Hvad er den hyppigste måde at rekruttere på i byggebranchen?" data-chat='[["K","KloakKarl","hvad er den mest brugte måde at rekruttere på herude?",600,"spg"],["P","PensioneretPreben","netværk. næste spørgsmål",1800],["E","El_Emil","Preben on fire i dag 🔥",2600],["M","MurerMads87","giv Preben mikrofonen",3400]]'>
+<section class="slide" data-q="Hvad er den hyppigste måde at rekruttere på i byggebranchen?">
   <div class="scene">
-    <div class="kicker r"><span class="knr">09</span><span class="krule"></span><span class="ktxt">Spørgsmål 9 af 10 · fra chatten</span></div>
+    <div class="kicker r"><span class="knr">09</span><span class="krule"></span><span class="ktxt">Spørgsmål 9 af 10</span></div>
     <h2 class="r d1">Hvad er den hyppigste måde at rekruttere på i byggebranchen?</h2>
     <div class="svarhero r d2">
       <div class="sv">Netværk og<br><mark>relationer.</mark></div>
@@ -273,9 +254,9 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-
   </div>
 </section>
 
-<section class="slide" data-q="Rekrutterer malere anderledes end fx elektrikere?" data-chat='[["MM","MalerMette","rekrutterer malere anderledes end fx elektrikere? spørger for en ven 🎨",600,"spg"],["E","El_Emil","vi er bare grundige 😎",1800],["MM","MalerMette","vi er bare hurtige 😤",2600],["T","TømrerThomas","FIGHT",3400]]'>
+<section class="slide" data-q="Rekrutterer malere anderledes end fx elektrikere?">
   <div class="scene">
-    <div class="kicker r"><span class="knr">10</span><span class="krule"></span><span class="ktxt">Spørgsmål 10 af 10 · fra chatten</span></div>
+    <div class="kicker r"><span class="knr">10</span><span class="krule"></span><span class="ktxt">Spørgsmål 10 af 10</span></div>
     <h2 class="r d1">Rekrutterer malere anderledes end fx elektrikere?</h2>
     <div class="frows">
       <div class="frow r d1"><span class="fnr">01</span><span class="ft">Ja. Fagene er forskellige <span>en malervirksomhed og en elektrikervirksomhed rekrutterer ikke ens</span></span></div>
@@ -286,7 +267,7 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-
   </div>
 </section>
 
-<section class="slide moerk" data-chat='[["MM","MalerMette","tak Lasse!! 🎉",600],["P","PensioneretPreben","godkendt. og det siger jeg aldrig",1400],["S","SmedeSimon","W stream, quiz så 💪",2200],["K","KranKaj","ses i næste modul. jeg bliver heroppe 🏗️",3000]]'>
+<section class="slide moerk">
   <div class="scene">
     <div class="kicker r"><span class="knr">10</span><span class="krule"></span><span class="ktxt">Det var alle 10</span></div>
     <h1 class="r d1">Kan du svare på alle 10,<br>kender du markedet.</h1>
@@ -300,11 +281,6 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-
 
 <div class="qpop" id="qpop"><div class="qkort"><span class="qtag" id="qtag"></span><h3 id="qtekst"></h3></div></div>
 
-<div class="chat">
-  <div class="chat-h"><span class="dot"></span><b>Onboarding-chatten</b><span>312 ser med</span></div>
-  <div class="chat-str" id="chatStr"></div>
-  <div class="chat-f">Skriv en besked ...</div>
-</div>
 
 <div class="progress" id="progress"></div>
 <div class="pilzone v" onclick="gaa(-1)"></div>
@@ -316,30 +292,11 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-
 
 <script>
 const slides=[...document.querySelectorAll('.slide')];
-const chatStr=document.getElementById('chatStr');
 const qpop=document.getElementById('qpop');
 let i=0, timere=[];
 let qnr=0;
 
 function ryd(){timere.forEach(clearTimeout);timere=[];qpop.classList.remove('vis')}
-
-function visChat(slide){
-  chatStr.innerHTML='';
-  const msgs=JSON.parse(slide.dataset.chat||'[]');
-  msgs.forEach(m=>{
-    const [ini,navn,txt,delay,type]=m;
-    timere.push(setTimeout(()=>{
-      const el=document.createElement('div');
-      el.className='msg'+(type==='spg'?' spg':'');
-      el.innerHTML=`<span class="av">${ini}</span><span class="mb">`+
-        (type==='spg'?`<span class="tag">Spørgsmål</span><br>`:'')+
-        `<span class="navn">${navn}</span><div class="txt">${txt}</div></span>`;
-      chatStr.appendChild(el);
-      requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.add('vis')));
-      while(chatStr.children.length>7)chatStr.removeChild(chatStr.firstChild);
-    },delay));
-  });
-}
 
 function vis(n){
   const m=Math.max(0,Math.min(slides.length-1,n));
@@ -352,7 +309,6 @@ function vis(n){
   document.getElementById('taeller').innerHTML=String(i+1).padStart(2,'0')+' <span>/ '+String(slides.length).padStart(2,'0')+'</span>';
   document.getElementById('progress').style.width='calc((100vw - var(--chatb)) * '+((i+1)/slides.length)+')';
   document.body.classList.toggle('moerk-chrome',s.classList.contains('moerk'));
-  visChat(s);
   if(s.dataset.q){
     // spørgsmålet popper op midt på skærmen først, så Las kan læse det højt
     const qi=slides.filter(x=>x.dataset.q).indexOf(s)+1;
