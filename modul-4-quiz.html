@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PowerMatch - Quiz · Modul 4 · Byggebranchen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gul:#F8E965; --gul-soft:#FDF8D4; --gul-kant:#F0E4A0;
+  --sort:#111213; --tekst:#26282B; --muted:#71757C;
+  --border:#ECECE8; --flade:#F6F6F3; --bg:#FFFFFF;
+  --groen:#2E7D32; --roed:#C62828;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',-apple-system,Arial,sans-serif;color:var(--tekst);background:var(--bg);-webkit-font-smoothing:antialiased;min-height:100vh}
+b{color:var(--sort)}
+
+.top{position:sticky;top:0;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);z-index:10}
+.top-inner{max-width:860px;margin:0 auto;padding:18px 28px;display:flex;align-items:center;gap:14px}
+.top img{width:26px;height:26px}
+.top .navn{font-weight:800;font-size:14px;color:var(--sort)}
+.top .sep{color:#C9C9C2}
+.top .titel{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.top .taeller{margin-left:auto;font-size:14px;font-weight:900;color:var(--sort);font-variant-numeric:tabular-nums}
+.top .taeller span{color:#C9C9C2}
+.pbar{height:3px;background:var(--flade)}
+.pbar i{display:block;height:100%;width:0;background:var(--gul);transition:width .4s var(--ease)}
+
+.wrap{max-width:860px;margin:0 auto;padding:54px 28px 90px}
+.kicker{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.kicker .knr{font-size:14px;font-weight:900;color:var(--sort);font-variant-numeric:tabular-nums}
+.kicker .krule{width:40px;height:2px;background:var(--gul)}
+.kicker .ktxt{font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+h2{font-size:clamp(24px,3.2vw,34px);font-weight:900;color:var(--sort);letter-spacing:-.02em;line-height:1.18;margin-bottom:34px}
+
+.opt{
+  display:flex;align-items:baseline;gap:18px;width:100%;text-align:left;cursor:pointer;
+  background:none;border:none;border-top:1px solid var(--border);padding:20px 6px;
+  font-family:inherit;font-size:16.5px;font-weight:600;color:var(--tekst);line-height:1.5;
+  transition:background .15s ease;
+}
+.opt:last-of-type{border-bottom:1px solid var(--border)}
+.opt:hover:not(:disabled){background:var(--flade)}
+.opt .bogstav{
+  flex-shrink:0;width:32px;height:32px;border-radius:10px;background:var(--flade);
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:var(--sort);
+  position:relative;top:6px;
+}
+.opt.rigtig{background:var(--gul-soft)}
+.opt.rigtig .bogstav{background:var(--gul)}
+.opt.forkert{opacity:.55}
+.opt.forkert .bogstav{background:#FBE9E7;color:var(--roed)}
+.opt:disabled{cursor:default}
+
+.forklaring{
+  margin-top:26px;border-left:3px solid var(--gul);padding:4px 0 4px 22px;
+  font-size:15px;line-height:1.65;color:var(--muted);display:none;
+}
+.forklaring.vis{display:block}
+.forklaring .dom{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;display:block;margin-bottom:6px}
+.forklaring .dom.ok{color:var(--groen)}
+.forklaring .dom.fejl{color:var(--roed)}
+
+.naeste{
+  margin-top:34px;background:var(--sort);color:#fff;font-weight:800;font-size:15px;
+  padding:15px 34px;border-radius:100px;border:none;cursor:pointer;font-family:inherit;display:none;
+}
+.naeste.vis{display:inline-block}
+.naeste:hover{transform:translateY(-1px)}
+
+/* resultat */
+.resultat{text-align:center;padding-top:6vh;display:none}
+.resultat.vis{display:block}
+.resultat .kaempe{font-size:clamp(90px,16vw,190px);font-weight:900;letter-spacing:-.05em;line-height:1;color:var(--sort)}
+.resultat .kaempe .mk{background:linear-gradient(transparent 66%, var(--gul) 66%, var(--gul) 96%, transparent 96%);padding:0 10px}
+.resultat h3{font-size:clamp(24px,3vw,34px);font-weight:900;color:var(--sort);letter-spacing:-.02em;margin:30px 0 12px}
+.resultat p{font-size:16px;color:var(--muted);max-width:52ch;margin:0 auto;line-height:1.65}
+.resultat .naeste{display:inline-block;margin-top:36px}
+.gennemgang{max-width:640px;margin:44px auto 0;text-align:left}
+.g-row{display:flex;gap:14px;align-items:baseline;border-top:1px solid var(--border);padding:14px 4px;font-size:14px;color:var(--muted)}
+.g-row b{font-weight:800}
+.g-row .ik{flex-shrink:0;font-weight:900}
+.g-row .ik.ok{color:var(--groen)}
+.g-row .ik.fejl{color:var(--roed)}
+
+footer{border-top:1px solid var(--border);padding:18px 28px;display:flex;align-items:center;gap:10px;max-width:860px;margin:0 auto;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+footer img{width:20px;height:20px}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="top-inner">
+    <img src="data:image/png;base64,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0Bst/nk2il5+YfHPBRQILAAAliMzBAAAAgsAQGABAAgsAAAEFgCAwAIAEFgAAAgsAACBBQAgsAAAEFgAAAILAEBgAQAILAAABBYAgMACABBYAAAILAAAgQUAILAAABBYAAACCwBAYAEAILAAAAQWAIDAAgAQWAAACCwAAIEFACCwAAAQWAAAAgsAQGABACCwAAAEFgCAwAIAQGABAAgsAACBBQAgsAAAEFgAAAILAEBgAQAgsAAABBYAgMACAEBgAQAILAAAgQUAgMACABBYAAACCwBAYAEAILAAAAQWAIDAAgBAYAEACCwAAIEFAIDAAgAQWAAAAgsAQGABACCwAAAEFgCAwAIAQGABAAgsAACBBQCAwAIAEFgAAAILAACBBQAgsAAABBYAgMACAEBgAQAILAAAgQUAgMACABBYAAACCwAAgQUAILAAAAQWAAACCwBAYAEACCwAAIEFAIDAAgAQWAAAAgsAAIEFACCwAAAEFgAAAgsAQGABAAgsAAAEFgCAwAIAEFgAAAILAACBBQAgsAAABBYAAAILAEBgAQAILAAABBYAgMACABBYAAACCwAAgQUAILAAAAQWAAACCwCgEf4/Paatms/mpuAAAAAASUVORK5CYII=" alt="">
+    <span class="navn">PowerMatch</span>
+    <span class="sep">·</span>
+    <span class="titel">Quiz · Modul 4 · Byggebranchen</span>
+    <span class="taeller" id="taeller">1 <span>/ 20</span></span>
+  </div>
+  <div class="pbar"><i id="pbar"></i></div>
+</div>
+
+<div class="wrap">
+  <div id="quiz"></div>
+
+  <div class="resultat" id="resultat">
+    <div class="kaempe"><span class="mk" id="scoreTal">0/20</span></div>
+    <h3 id="scoreTitel"></h3>
+    <p id="scoreTekst"></p>
+    <div class="gennemgang" id="gennemgang"></div>
+    <button class="naeste" onclick="location.reload()">Prøv igen</button>
+  </div>
+</div>
+
+<footer><img src="data:image/png;base64,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0Bst/nk2il5+YfHPBRQILAAAliMzBAAAAgsAQGABAAgsAAAEFgCAwAIAEFgAAAgsAACBBQAgsAAAEFgAAAILAEBgAQAILAAABBYAgMACABBYAAAILAAAgQUAILAAABBYAAACCwBAYAEAILAAAAQWAIDAAgAQWAAACCwAAIEFACCwAAAQWAAAAgsAQGABACCwAAAEFgCAwAIAQGABAAgsAACBBQAgsAAAEFgAAAILAEBgAQAgsAAABBYAgMACAEBgAQAILAAAgQUAgMACABBYAAACCwBAYAEAILAAAAQWAIDAAgBAYAEACCwAAIEFAIDAAgAQWAAAAgsAQGABACCwAAAEFgCAwAIAQGABAAgsAACBBQCAwAIAEFgAAAILAACBBQAgsAAABBYAgMACAEBgAQAILAAAgQUAgMACABBYAAACCwAAgQUAILAAAAQWAAACCwBAYAEACCwAAIEFAIDAAgAQWAAAAgsAAIEFACCwAAAEFgAAAgsAQGABAAgsAAAEFgCAwAIAEFgAAAILAACBBQAgsAAABBYAAAILAEBgAQAILAAABBYAgMACABBYAAACCwAAgQUAILAAAAQWAAACCwCgEf4/Paatms/mpuAAAAAASUVORK5CYII=" alt="">PowerMatch Sælger-onboarding · Bestået = 16 af 20</footer>
+
+<script>
+const SPG = [
+  // SPG 01 · KILDE: Modul 4 · Video 1 · Blok 1 · slide 6-7 (de to telefoner)
+  {
+    t:"Scenarie",
+    q:"SCENARIE: Mesteren begynder at fortælle om deres arbejdsopgaver, og du kender ikke halvdelen af ordene. Hvad gør du?",
+    opts:[
+      "Bruger så mange fagtermer du overhovedet kan, så han ikke opdager det",
+      "Skifter emne over til prisen, hvor du er på hjemmebane",
+      "Gengiver det han siger, spørger ind til det og lytter mere end du taler - fagtermerne bygger du på løbende",
+      "Siger, at du er ny, og at en kollega ringer tilbage"
+    ],
+    rigtig:2,
+    fk:"Mestre er meget hurtige til at høre, om du forstår faget, og lige så hurtige til at cutte snakken. Men modgiften er ikke at lyde klog. Den er at gengive hans egne ord, vise forståelse og lave ping pong. Til at starte med: brug lidt færre fagtermer, vær mere lyttende og lær. Så bygger du på dialog for dialog - og den dag han stoler på dig, siger han bare 'det gør vi da bare', når du foreslår ham tre tømrere."
+  },
+  // SPG 02 · KILDE: Modul 4 · Video 1 · Blok 2 · slide 1 og 4 (markedet og kundetyperne)
+  {
+    t:"Spørgsmål",
+    q:"Øverst på din emneliste står Bravida og Kemp & Lauritzen. En kollega siger: 'Dem er vi alt for små til.' Har han ret?",
+    opts:[
+      "Ja - vi arbejder kun med de lokale virksomheder med 3-10 ansatte",
+      "Nej - vores kunder går fra den lokale tømrervirksomhed med tre ansatte til nogle af landets største byggevirksomheder med op imod 3.000 ansatte",
+      "Ja - de store har deres egen HR-afdeling",
+      "Nej, men de store må kun bruge os til vikarer"
+    ],
+    rigtig:1,
+    fk:"Vi er i hele branchen, fra tre ansatte til tre tusind. Og hold dig for øje, hvor lidt af markedet vi har: der er omkring 210.000 mennesker beskæftiget i byggebranchen, og vi har omkring 250 aktive håndværkere ude. Markedsandelen er minimal, og det er ikke et problem - det er hele pointen. Der er masser af rum at vækste i, og salgene står og venter derude."
+  },
+  // SPG 03 · KILDE: Modul 4 · Video 1 · Blok 3 · slide 5-6 (fagene hænger sammen, flere jobtitler)
+  {
+    t:"Scenarie",
+    q:"Du har en tømrervirksomhed i røret, og snakken går godt. Hvad er det spørgsmål, der kan fordoble kunden?",
+    opts:[
+      "'Hvor mange års erfaring skal folk have?'",
+      "'Hvornår skal I bruge ham?'",
+      "'Har I også andre jobtitler ansat end tømrere?'",
+      "'Hvem er jeres største konkurrent?'"
+    ],
+    rigtig:2,
+    fk:"Rigtig mange byggevirksomheder har flere fag: både tømrer og murer, både murer og jord og beton, eller el og VVS. Fagene hænger sammen på pladsen - først entreprenørerne, så murerne, så tømrerne, så el og VVS, og til sidst malerne - og derfor hænger de også sammen inde i virksomheden. Spørger du ikke, sælger du én jobtitel til en kunde, der havde tre."
+  },
+  // SPG 04 · KILDE: Modul 4 · Video 1 · Blok 4 · slide 1-4 (dækningsgraden og prisen)
+  {
+    t:"Indvending",
+    q:"INDVENDING: 'I tager alt for høje priser for en håndværker.' Hvilken forståelse svarer du ud fra?",
+    opts:[
+      "At vi er billigere end vikarbureauerne",
+      "At prisen er sat af ledelsen, og at du ikke kan gøre noget",
+      "At priserne bare følger inflationen",
+      "At han selv fakturerer sine kunder høje priser og har en høj dækningsgrad på sine folk - vores pris ligger inde i hans pris og kan kun være der, fordi han selv tjener på manden"
+    ],
+    rigtig:3,
+    fk:"Byggebranchen har en rigtig god økonomi, og der er høj dækningsgrad for virksomhederne på medarbejdere. Det er hele grunden til, at vores gangfaktor overhovedet kan bære: kunne mesteren ikke selv tjene penge på manden, kunne vi ikke tage den pris vi tager. Og efterspørgslen presser hans egne priser opad år for år. Du sælger ikke en udgift, du sælger en mand han tjener på."
+  },
+  // SPG 05 · KILDE: Modul 4 · Video 1 · Blok 5 · slide 1-3 · Video 4 · Blok 16 · slide 2-3 (årshjulet)
+  {
+    t:"Spørgsmål",
+    q:"En kollega spørger, hvorfor et byggefirma som os overhovedet er gået ind i metal og lager. Hvad er svaret?",
+    opts:[
+      "Fordi der er flere kandidater i de brancher",
+      "Fordi de ikke bliver ramt af vinteren: smede og svejsere er meget på værkstedet og har efterspørgsel hele året, og lager er indendørs, så efterspørgslen er høj om vinteren",
+      "Fordi byggebranchen er på vej ned",
+      "Fordi de er nemmere at sælge til"
+    ],
+    rigtig:1,
+    fk:"Branchen kan godt være sæsonbaseret. Når det bliver koldt, falder efterspørgslen en smule på de fag, der arbejder meget udenfor - tømrer, murer, maler, entreprenør og jord og beton. Elektriker og VVS bliver ikke ramt af vinteren. Metal og lager er kommet til af præcis samme grund, og anlægsgartneren ligger i den modsatte ende og trækker om sommeren. Så vi altid har fag med høj efterspørgsel at gå efter."
+  },
+  // SPG 06 · KILDE: Modul 4 · Video 2 · Blok 6 · slide 6-9 (sælger eller rådgiver)
+  {
+    t:"Scenarie",
+    q:"SCENARIE: Mesteren har fået tre opkald fra vikarbureauer i denne uge. Du er den fjerde, der ringer. Hvad åbner du med?",
+    opts:[
+      "'Jeg har tre tømrere klar, du kan få i morgen'",
+      "'Jeg ved du får mange opkald, men vi er faktisk anderledes'",
+      "Spørgsmål om hans virksomhed: hvordan de gør derude, hvad han lægger vægt på i en medarbejder, og hvor han gerne vil vækste hen",
+      "En gennemgang af vores priser, så han kan se, at det kan betale sig"
+    ],
+    rigtig:2,
+    fk:"Virksomhedsejerne er trætte af at få den ene håndværker efter den anden presset ud til sig af folk, der ikke matcher dem. Kommer du med tre mand i hånden, er du nummer fire i rækken. Kommer du med spørgsmål, er du en rådgiver. De elsker at snakke om deres egen virksomhed, og det er dér tilliden starter. Og vær konkret, kort og lige til - bliv ikke for kontoragtig eller HR-fin, det gider de ikke."
+  },
+  // SPG 07 · KILDE: Modul 4 · Video 2 · Blok 6 · slide 10-11 (flere der rekrutterer)
+  {
+    t:"Scenarie",
+    q:"Du har fat i ejeren af en virksomhed med 30 ansatte. Han er travl og flyver rundt. Hvad spørger du om, inden I lægger på?",
+    opts:[
+      "Om han vil have tilsendt en brochure",
+      "Om han kan love at svare på din mail",
+      "Om han vil booke et fysisk møde næste uge",
+      "Om det kun er ham, der står for rekrutteringen, eller om der er andre - og om de har flere jobtitler"
+    ],
+    rigtig:3,
+    fk:"En god tommelfingerregel er én der hjælper med rekruttering pr. 10 ansatte. Ved 30 ansatte er der altså ofte tre, måske fire: højre hånden der står for den daglige drift, en projektchef, en entrepriseleder. Får du fat i dem, har du tre indgange i én virksomhed i stedet for én travl mand, der aldrig har tid. Og det samme spørgsmål åbner for de andre jobtitler."
+  },
+  // SPG 08 · KILDE: Modul 4 · Video 2 · Blok 7 · slide 5-6 (relationen og assisten)
+  {
+    t:"Scenarie",
+    q:"SCENARIE: Du ringer til en håndværker med en konkret jobmulighed. Hvad gør du, før du pitcher jobbet?",
+    opts:[
+      "Pitcher med det samme - han er eftertragtet, og du skal nå det, før andre gør",
+      "Screener ham igen, så du er sikker på, at han er god nok",
+      "Bruger 3-5 minutter på ham: hvordan dagen går, hvad der betyder noget for ham i et arbejde, og hvorfor han ikke er helt glad der, hvor han går",
+      "Sender jobbeskrivelsen på sms, så han kan læse den i fred"
+    ],
+    rigtig:2,
+    fk:"De 3-5 minutter er ikke smalltalk, det er en assist til dig selv. Screeningen har allerede gjort deres, så du spørger ikke for at vurdere ham - du spørger for at vide, hvad du skal pitche ud fra. Ved du, hvad der gør ham glad i et arbejde, ved du også, hvilken del af jobbet du skal starte med. Og han må aldrig få den mindste lugt af en sælger, der bare vil af med et job."
+  },
+  // SPG 09 · KILDE: Modul 4 · Video 2 · Blok 7 · slide 11 (kontrolcirklen)
+  {
+    t:"Spørgsmål",
+    q:"En kandidat kommer skuffet hjem fra en jobsamtale. Hvad lå inden for din kontrolcirkel?",
+    opts:[
+      "Hvad virksomheden sagde til samtalen",
+      "Hvilke arbejdsopgaver de har derude",
+      "Om mesteren var i godt humør den dag",
+      "Om han var forberedt, om han kendte jobbet ned til detaljen, og om vi havde bygget en relation, der gjorde, at han ville have jobbet"
+    ],
+    rigtig:3,
+    fk:"Vi kan ikke styre, hvad virksomheden siger, og vi kan ikke styre, hvilke opgaver de har derude. Det vi kan styre, er relationen, forberedelsen og hvor meget han vil have jobbet. Og det trækker begge veje: er han godt forberedt og vil jobbet, går samtalen bedre - virker vi forhastede og useriøse, kan selv et rigtig godt job gå i vasken på vores arbejde."
+  },
+  // SPG 10 · KILDE: Modul 4 · Video 3 · Blok 8 · slide 5 (spørgsmålene i telefonen)
+  {
+    t:"Scenarie",
+    q:"SCENARIE: Mesteren siger: 'Vi laver mest renovering.' Hvad er dit næste spørgsmål?",
+    opts:[
+      "'Hvor mange mand er I?'",
+      "'Hvad er det for en type renovering, I laver?'",
+      "'Laver I også nybyg?'",
+      "'Hvad betaler I i timen?'"
+    ],
+    rigtig:1,
+    fk:"Renovering er hovedopgaven. Underopgaven er, hvad han renoverer: døre, vinduer, gulve, lejligheder, skillevægge. Det spørgsmål giver dig både et skarpere match og lærer dig faget, mens du sidder i telefonen. Samme greb i alle fag: siger han nybyg, spørger du hvad de bygger. Siger han spjæld og service, spørger du, om de kører hos Hr. og Fru Jensen eller ude hos erhverv."
+  },
+  // SPG 11 · KILDE: Modul 4 · Video 3 · Blok 8 · slide 4 og 6 (vægtning i matchet)
+  {
+    t:"Spørgsmål",
+    q:"Hvorfor vægter hovedopgaven højere end underopgaven i matchet?",
+    opts:[
+      "Fordi virksomhederne kun skriver hovedopgaver ind",
+      "Fordi underopgaverne er nye i platformen",
+      "Fordi hovedopgaver er sværere at udføre",
+      "Fordi en, der har renoveret i fem år, også kan renovere et gulv han ikke har prøvet - hvor en, der kun har lavet nybyg, har længere vej til renovering"
+    ],
+    rigtig:3,
+    fk:"Det er en meget logisk tankegang: erfaring inden for hovedopgaven smitter af på underopgaverne, men ikke omvendt. Derfor scorer manden med fem års renovering højt, selvom han aldrig har haft det gulv i hånden, og derfor scorer nybyg-manden lavere på renovering, selvom han sagtens kan lære det. Praktisk for dig: start i hovedopgaverne, og læg højst en eller to underopgaver på, indtil du kender fagene."
+  },
+  // SPG 12 · KILDE: Modul 4 · Video 3 · Blok 9 · slide 5-6 og 9 (tømrerens to profiler)
+  {
+    t:"Scenarie",
+    q:"En tømrervirksomhed siger: 'Vi kører spjæld og service.' Hvilken mand leder du efter?",
+    opts:[
+      "En der er stærk, har fysikken og er vant til at gå i sjak",
+      "En der er god til kundekontakt og detaljer, er til at stole på, har kørekort og er okay med at køre alene",
+      "En specialist i køkkener, bordplader og reoler",
+      "En der helst arbejder på de store byggepladser"
+    ],
+    rigtig:1,
+    fk:"Spjæld og service er de mindre opgaver ude hos Hr. og Fru Jensen eller hos erhverv. Man kører alene i firmabilen, højst med en lærling, så kørekort er et krav, og manden er virksomhedens ansigt ude hos kunden. Havde han sagt renovering og tagarbejde, var det den anden profil: en der går i sjak, er stærk og har fysikken - for det er de længere entreprisesager, hvor man er to, tre eller seks om det."
+  },
+  // SPG 13 · KILDE: Modul 4 · Video 3 · Blok 10 · slide 5-6 og 8 (fliser og klinker)
+  {
+    t:"Scenarie",
+    q:"En murervirksomhed søger en, der skal lave fliser og klinker. Hvad ved du med det samme om jobbet?",
+    opts:[
+      "At det er akkord",
+      "At han skal kunne skalmure",
+      "At det stort set altid er badeværelser, og at det ofte er noget man laver alene - lidt a la spjæld og service",
+      "At det er tagarbejde om sommeren"
+    ],
+    rigtig:2,
+    fk:"Fliser og klinker er lig med badeværelser, i nybyggeri og i renovering. Det kan blive til svømmehaller på de helt store sager, men det er undtagelsen. Flisemureren kører ofte rundt alene, og derfor hænger fliser og spjæld og service godt sammen - kan han det ene, kan han typisk også det andet. Nybyg og renovering klumper sig sammen i den anden ende af murerfaget, og nybyg hedder også skalmuring."
+  },
+  // SPG 14 · KILDE: Modul 4 · Video 3 · Blok 11 · slide 1-4 (akkord)
+  {
+    t:"Scenarie",
+    q:"SCENARIE: 'Vi kører kun akkord her.' Hvad foreslår du?",
+    opts:[
+      "At de laver om til ren timeløn, mens manden er hos os",
+      "At vi lægger vores gangfaktor oven på hele akkorden",
+      "At vi ikke kan hjælpe dem",
+      "At håndværkeren får sin grundløn i timen gennem os, som vi fakturerer virksomheden for - og at bonussen oven på grundlønnen udbetaler virksomheden selv, uden om os"
+    ],
+    rigtig:3,
+    fk:"Akkord betyder betaling på resultater: hvor mange mursten der bliver lagt, hvor mange bjælker der bliver sat op. Vores løsning er timelønsbaseret, og vi kan ikke stå på pladsen og måle output. Men i en akkordsag ligger der næsten altid en grundløn i timen under bonussen, og den kan køre gennem os. Så vinder alle tre parter. Husk også, at mange håndværkere slet ikke gider akkord, fordi det er hårdt, og fordi man går flere om samme akkord."
+  },
+  // SPG 15 · KILDE: Modul 4 · Video 4 · Blok 12 · slide 4-6 (elektrikeren er enten eller)
+  {
+    t:"Scenarie",
+    q:"Du har en elektriker i røret. Hvad skal du have afklaret først?",
+    opts:[
+      "Om han har firmabil i dag",
+      "Om han vil lave spjæld og service, eller om han slet ikke vil - for i el er det meget enten eller",
+      "Om han kan starte i morgen",
+      "Om han har kørt akkord før"
+    ],
+    rigtig:1,
+    fk:"Elektrikerfaget er mere delt op end tømrer og murer. Enten vil de spjæld og service, eller også vil de det slet ikke - og vil de ikke, er de til gengæld typisk åbne for både nybyg, renovering og industri og erhverv. Det er samtidig det største hul i markedet: næsten alle elektrikervirksomheder i hele landet mangler spjæld og service-elektrikere. Ved du, hvor han står, ved du med det samme, hvilke kunder han passer til."
+  },
+  // SPG 16 · KILDE: Modul 4 · Video 4 · Blok 12 · slide 7-8 (industri og erhverv)
+  {
+    t:"Scenarie",
+    q:"SCENARIE: 'Vi laver meget industri og erhverv.' Hvad spørger du om?",
+    opts:[
+      "'Hvor mange kabler trækker I om ugen?'",
+      "'Er der krav om bestemte kurser, eller noget bestemt de skal have lavet før?'",
+      "'Har I også spjæld og service?'",
+      "'Hvor stor er jeres største kunde?'"
+    ],
+    rigtig:1,
+    fk:"Industri og erhverv bliver en af de sværeste at lære, og den kommer kun gennem dialog. Den kan være helt bred, hvor de tager alle ind, og den kan være meget specialiseret, hvor de kun vil have folk, der har lavet noget helt bestemt. Der findes certificeringer i den ende af faget, og forskellen afgør, om din kandidat overhovedet må lave arbejdet. Ét spørgsmål afklarer det - stil det, i stedet for at gætte."
+  },
+  // SPG 17 · KILDE: Modul 4 · Video 4 · Blok 12 · slide 9 (elektrikeren som type)
+  {
+    t:"Scenarie",
+    q:"En elektriker passer på løn og afstand, men opgaverne matcher ikke helt det, han siger, han vil lave. Hvad gør du?",
+    opts:[
+      "Sætter samtalen op - løn og afstand er det vigtigste",
+      "Sætter samtalen op og lader mesteren afgøre det",
+      "Lader være med at sætte samtalen op, og finder en anden kandidat til jobbet",
+      "Sætter samtalen op uden at nævne opgaverne"
+    ],
+    rigtig:2,
+    fk:"Elektrikeren er den, der går mest op i præcis, hvad han skal lave. Hvor en tømrer, murer, maler eller jord- og betonmand oftere siger 'vi laver sgu bare det hele', er elektrikeren meget præcis på, hvad han vil og ikke vil. Sætter du samtalen op alligevel, brænder du både kandidaten, kunden og din egen troværdighed. Sikr dig at det matcher præcist - ellers find en anden."
+  },
+  // SPG 18 · KILDE: Modul 4 · Video 4 · Blok 13 · slide 2 og 7 (bygningsmaleren)
+  {
+    t:"Spørgsmål",
+    q:"Hvad går bygningsmaleren mest op i, når du skal matche ham?",
+    opts:[
+      "At arbejdsopgaverne passer helt præcist",
+      "Løn, afstand og kultur",
+      "Om der er akkord på sagen",
+      "Om han kan komme på kursus"
+    ],
+    rigtig:1,
+    fk:"Malerfaget er det mest lige til af de seks store fag, og malerne laver meget på kryds og tværs - slet ikke lige så specialiseret som el og VVS, hvor opgaven skal passe perfekt. Det er løn, afstand og kultur, der afgør. Én ting skal du dog sikre dig: søger virksomheden en spjæld og service-maler, så spørg om din maler også vil det. De fleste vil, men der er nogle få, der ikke gider køre alene rundt."
+  },
+  // SPG 19 · KILDE: Modul 4 · Video 4 · Blok 14 · slide 3, 5 og 6 (VVS'erens to klumper)
+  {
+    t:"Scenarie",
+    q:"En VVS-virksomhed skal bruge folk til et stort lejlighedskompleks, hvor vandrør og toiletter skal på plads. Hvilke hovedopgaver taler I om?",
+    opts:[
+      "Spjæld og service",
+      "Nybyg og renovering",
+      "Varmeinstallation",
+      "Ventilation og klima"
+    ],
+    rigtig:1,
+    fk:"I VVS klumper opgaverne sig i to. Skal man på de større pladser og entrepriser, er det nybyg og renovering: nye installationer i en ny bygning, eller rør og toiletter der skal rettes i et helt kompleks. Vil man i stedet køre rundt i bil fra sted til sted, er det spjæld og service - og varmeinstallation og ventilation og klima hænger godt sammen med den, for det er også ofte ude hos Hr. og Fru Jensen. Og som i el er spjæld og service meget enten eller."
+  },
+  // SPG 20 · KILDE: Modul 4 · Video 4 · Blok 15 · slide 1 og 4 · Video 1 · Blok 3 · slide 3 (entreprenørbranchen)
+  {
+    t:"Spørgsmål",
+    q:"En kandidat til en jord- og betonstilling har ikke svendebrev. Er det et problem?",
+    opts:[
+      "Ja - svendebrev er et krav i alle vores fag",
+      "Nej - i entreprenørbranchen er der ikke uddannelseskrav på samme måde. I tømrer, murer, elektriker, VVS og bygningsmaler er svendebrev derimod altid et krav",
+      "Ja, men kun hvis han skal lave betonarbejde",
+      "Nej - svendebrev er aldrig et krav i byggeriet"
+    ],
+    rigtig:1,
+    fk:"Jord og beton hører under entreprenørbranchen, som er et af vores nye fag. Det er et blandet fag, hvor folk laver det hele på kryds og tværs, og der er ikke uddannelseskrav som i de øvrige fag. To andre ting skal du kunne om dem: de kommer aller aller først på pladsen, fordi de gør klar til alle de andre - og de har seks hovedopgaver, men ingen spjæld og service. Den findes i næsten alle fag undtagen entreprenør, jord og beton."
+  }
+];
+
+let idx=0, score=0, svar=[];
+const quizEl=document.getElementById('quiz');
+
+function visSpg(){
+  const s=SPG[idx];
+  document.getElementById('taeller').innerHTML=(idx+1)+' <span>/ '+SPG.length+'</span>';
+  document.getElementById('pbar').style.width=(idx/SPG.length*100)+'%';
+  quizEl.innerHTML=`
+    <div class="kicker"><span class="knr">${String(idx+1).padStart(2,'0')}</span><span class="krule"></span><span class="ktxt">${s.t}</span></div>
+    <h2>${s.q}</h2>
+    ${s.opts.map((o,k)=>`<button class="opt" onclick="vaelg(${k})"><span class="bogstav">${'ABCD'[k]}</span><span>${o}</span></button>`).join('')}
+    <div class="forklaring" id="fk"><span class="dom" id="dom"></span>${s.fk}</div>
+    <button class="naeste" id="naeste" onclick="næste()">${idx===SPG.length-1?'Se dit resultat →':'Næste spørgsmål →'}</button>
+  `;
+}
+function vaelg(k){
+  const s=SPG[idx];
+  const opts=[...document.querySelectorAll('.opt')];
+  opts.forEach((o,i)=>{o.disabled=true; if(i===s.rigtig)o.classList.add('rigtig'); else if(i===k)o.classList.add('forkert');});
+  const ok=(k===s.rigtig);
+  if(ok)score++;
+  svar.push(ok);
+  const dom=document.getElementById('dom');
+  dom.textContent=ok?'Rigtigt':'Forkert - det rigtige svar er markeret';
+  dom.className='dom '+(ok?'ok':'fejl');
+  document.getElementById('fk').classList.add('vis');
+  document.getElementById('naeste').classList.add('vis');
+}
+function næste(){
+  idx++;
+  if(idx<SPG.length){visSpg();scrollTo(0,0)}
+  else visResultat();
+}
+function visResultat(){
+  document.getElementById('pbar').style.width='100%';
+  quizEl.style.display='none';
+  const r=document.getElementById('resultat');
+  r.classList.add('vis');
+  document.getElementById('scoreTal').textContent=score+'/'+SPG.length;
+  const bestaaet=score>=16;
+  document.getElementById('scoreTitel').textContent=bestaaet?'Bestået. Du kan tale med en mester.':'Ikke bestået endnu - se videoerne igen.';
+  document.getElementById('scoreTekst').textContent=bestaaet
+    ?'Du kan fagene, hovedopgaverne og de spørgsmål der får mesteren i snak. Tag videoerne igen inden din første uge i telefonen - især fagblokkene, for de sidder først efter tredje gennemsyn.'
+    :'Du skal have mindst 16 rigtige ud af 20. Gense især hovedopgaverne fag for fag og de spørgsmål du stiller mesteren, når han nævner en opgave - det er dem, der bærer dine første hundrede dialoger.';
+  document.getElementById('gennemgang').innerHTML=svar.map((ok,i)=>
+    `<div class="g-row"><span class="ik ${ok?'ok':'fejl'}">${ok?'✓':'✗'}</span><span><b>${String(i+1).padStart(2,'0')}</b> · ${SPG[i].q}</span></div>`
+  ).join('');
+  scrollTo(0,0);
+}
+visSpg();
+</script>
+</body>
+</html>

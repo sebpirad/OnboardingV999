@@ -1,0 +1,1891 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PowerMatch · Modul 4 · Video 1 · Branchen og markedet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   POWERMATCH PRÆSENTATIONS-STANDARD v1.3
+   Modul 4 · Video 1 · Branchen og markedet
+   Bygget videre på modul-3-video1-praesentation.html:
+   samme slide-motor, samme farver, samme typografi, samme chrome.
+   Tilføjelserne nedenfor er nye FIGURER, ikke et nyt designsprog.
+   ============================================================ */
+:root{
+  --gul:#F8E965; --gul-soft:#FDF8D4; --gul-kant:#F0E4A0;
+  --sort:#111213; --tekst:#26282B; --muted:#71757C;
+  --border:#ECECE8; --flade:#F6F6F3; --bg:#FFFFFF;
+  --linje:#C9C9C2;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --mx:7vw;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+body{font-family:'Inter',-apple-system,Arial,sans-serif;color:var(--tekst);background:var(--bg);-webkit-font-smoothing:antialiased}
+b{color:var(--sort)}
+mark{
+  background:linear-gradient(transparent 70%, var(--gul) 70%, var(--gul) 96%, transparent 96%);
+  background-size:0% 100%;background-repeat:no-repeat;color:inherit;padding:0 .05em;
+  transition:background-size .5s var(--ease) .95s;
+}
+.aktiv mark{background-size:100% 100%}
+
+/* ---------- slide-skelet ---------- */
+.slide{
+  position:absolute;inset:0;visibility:hidden;opacity:0;transform:scale(.986);
+  transition:opacity .45s var(--ease),transform .65s var(--ease),visibility 0s .45s;
+  padding:13vh var(--mx) 11vh;overflow:hidden;
+}
+.slide.aktiv{visibility:visible;opacity:1;transform:none;transition:opacity .5s var(--ease),transform .7s var(--ease)}
+.r{opacity:0;transform:translateY(14px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
+.aktiv .r{opacity:1;transform:none}
+.aktiv .d1{transition-delay:.08s}.aktiv .d2{transition-delay:.16s}.aktiv .d3{transition-delay:.24s}
+.aktiv .d4{transition-delay:.32s}.aktiv .d5{transition-delay:.4s}.aktiv .d6{transition-delay:.48s}
+.lm{display:block;overflow:hidden}
+.lm span{display:block;transform:translateY(112%);transition:transform .7s var(--ease)}
+.aktiv .lm span{transform:none}
+.aktiv .lm:nth-child(2) span{transition-delay:.08s}
+.aktiv .lm:nth-child(3) span{transition-delay:.16s}
+.z{position:relative;z-index:1}
+
+/* ---------- typografi ---------- */
+.kicker{display:flex;align-items:center;gap:14px;margin-bottom:26px}
+.kicker .knr{font-size:15px;font-weight:900;color:var(--sort);font-variant-numeric:tabular-nums}
+.kicker .krule{width:46px;height:2px;background:var(--gul)}
+.kicker .ktxt{font-size:12px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+h1{font-size:clamp(46px,5.9vw,88px);font-weight:900;color:var(--sort);letter-spacing:-.033em;line-height:1.03}
+h2{font-size:clamp(30px,3.2vw,48px);font-weight:900;color:var(--sort);letter-spacing:-.027em;line-height:1.07;max-width:26ch}
+p.under{font-size:clamp(15px,1.35vw,19px);line-height:1.6;color:var(--muted);max-width:56ch}
+
+/* spøgelsestal */
+.ghost{
+  position:absolute;right:-.05em;bottom:-.12em;z-index:0;pointer-events:none;user-select:none;
+  font-size:64vh;font-weight:900;line-height:.8;letter-spacing:-.05em;
+  color:transparent;-webkit-text-stroke:1.5px rgba(17,18,19,.09);
+}
+.fyld{display:flex;flex-direction:column;height:100%}
+.vgruppe{margin:auto 0;display:flex;flex-direction:column}
+.skub{margin-top:auto !important;padding-bottom:2vh}
+
+/* ---------- tjekliste ---------- */
+.tjekliste{margin-top:4vh;max-width:900px}
+.tjekliste .trow{display:flex;align-items:baseline;gap:20px;border-top:1px solid var(--border);padding:22px 4px}
+.tjekliste .trow:last-child{border-bottom:1px solid var(--border)}
+.tjekliste .tdot{width:12px;height:12px;border-radius:50%;background:var(--gul);flex-shrink:0;position:relative;top:-2px}
+.tjekliste .ttxt{font-size:clamp(15px,1.55vw,20px);font-weight:800;color:var(--sort)}
+.tjekliste .ttxt span{color:var(--muted);font-weight:500}
+
+/* ---------- proces-timeline (workflow) ---------- */
+.tflow{position:relative;margin:auto 0}
+.tflow .linje{position:absolute;left:31px;right:calc((100% - 104px)/5 - 31px);top:31px;height:2px;background:var(--sort)}
+.tflow .stationer{display:grid;grid-template-columns:repeat(5,1fr);column-gap:26px}
+.station{position:relative}
+.station .boks{
+  width:62px;height:62px;background:var(--gul);border-radius:12px;
+  display:flex;align-items:center;justify-content:center;gap:3px;
+  font-size:26px;font-weight:900;color:var(--sort);margin-bottom:24px;position:relative;z-index:1;
+  box-shadow:0 0 0 8px var(--bg);
+}
+.station.slut .boks{background:var(--sort);color:var(--gul)}
+.station h5{font-size:16px;font-weight:800;color:var(--sort);margin-bottom:7px;letter-spacing:-.01em}
+.station p{font-size:13px;line-height:1.5;color:var(--muted);max-width:22ch}
+
+/* ---------- gul effekt-slide ---------- */
+.slide.gulflade{background:var(--gul)}
+.gulflade .kicker .krule{background:var(--sort)}
+.gulflade .kicker .ktxt,.gulflade .kicker .knr{color:var(--sort)}
+.gulflade h2{max-width:none}
+.gulflade p.under{color:rgba(17,18,19,.68)}
+
+/* ---------- split ---------- */
+.split{position:absolute;inset:0;display:grid;grid-template-columns:46% 54%}
+.split .venstre{padding:13vh 3vw 11vh var(--mx);display:flex;flex-direction:column}
+.split .hoejre{position:relative;overflow:hidden;border-left:1px solid var(--border);display:flex;align-items:center;justify-content:center}
+.kaempe{
+  position:relative;font-size:clamp(180px,17vw,300px);font-weight:900;letter-spacing:-.05em;
+  line-height:1;color:var(--sort);font-variant-numeric:tabular-nums;
+}
+.kaempe i{position:absolute;left:-.05em;right:-.05em;bottom:.03em;height:.24em;background:var(--gul);z-index:-1}
+.fakta-stak{display:flex;flex-direction:column}
+.fakta-r{border-top:1px solid var(--border);padding:15px 0;font-size:15px;font-weight:700;color:var(--sort)}
+.fakta-r:last-child{border-bottom:1px solid var(--border)}
+.fakta-r span{color:var(--muted);font-weight:500}
+
+/* ---------- hero + gab-graf + statlinje ---------- */
+.hoejre.pro{flex-direction:column;align-items:stretch;justify-content:space-between;padding:13vh 7vw 11vh 4vw}
+.pro-hero{text-align:center;padding-top:1vh}
+.pro-hero .kaempe{display:inline-block}
+.pro-hero .ptag{margin-top:20px;font-size:12px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.gab .gtitel{font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;max-width:70ch}
+.gab svg{display:block;width:100%;height:auto}
+.gab .glab{font-family:'Inter',Arial,sans-serif;font-size:10.5px;font-weight:800;letter-spacing:.14em;fill:var(--muted)}
+.gab .gval{font-family:'Inter',Arial,sans-serif;font-size:14.5px;font-weight:900;letter-spacing:-.02em;fill:var(--sort);font-variant-numeric:tabular-nums}
+.gab .gval.hvid{fill:#fff}
+.pro-stats{display:grid;grid-template-columns:1fr 1.2fr;column-gap:30px}
+.pro-stats.en{grid-template-columns:1fr}
+.pro-stats.tre{grid-template-columns:repeat(3,1fr)}
+.pro-stats .pcell{border-left:1px solid var(--border);padding-left:26px}
+.pro-stats .pcell:first-child{border-left:none;padding-left:0}
+.pro-stats .pval{font-size:clamp(24px,2.1vw,34px);font-weight:900;color:var(--sort);letter-spacing:-.03em;font-variant-numeric:tabular-nums;line-height:1}
+.pro-stats .plab{margin-top:8px;font-size:10.5px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);line-height:1.55}
+.pro-stats .pnote{margin-top:8px;font-size:10.5px;font-weight:600;color:var(--muted);opacity:.85}
+.pro-kilde{margin-top:18px;font-size:10px;font-weight:600;letter-spacing:.05em;color:var(--muted);opacity:.75;line-height:1.5}
+
+p.under.bundfast{margin-top:auto !important;border-top:1px solid var(--border);padding-top:18px;padding-bottom:1vh;max-width:none}
+
+/* ---------- mørk flade ---------- */
+.slide.moerk{background:var(--sort)}
+.moerk .kicker .ktxt{color:rgba(255,255,255,.5)}
+.moerk .kicker .knr{color:#fff}
+.moerk h2{color:#fff}
+.moerk p.under{color:rgba(255,255,255,.6)}
+.moerk .ghost{-webkit-text-stroke:1.5px rgba(255,255,255,.1)}
+.moerk .tjekliste .trow{border-color:rgba(255,255,255,.16)}
+.moerk .tjekliste .ttxt{color:#fff}
+.moerk .tjekliste .ttxt span{color:rgba(255,255,255,.6)}
+.moerk .dtitel{color:rgba(255,255,255,.5)}
+
+/* duo */
+.duo{display:grid;grid-template-columns:1fr 1fr;column-gap:56px}
+.duo .dtitel{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);padding-bottom:12px}
+
+/* KABOOM-titel (gul fuldflade) */
+.titelgul h1{line-height:.98;letter-spacing:-.04em;text-transform:uppercase}
+.titelgul .boxline{display:inline-block;background:var(--sort);color:var(--gul);padding:.02em .14em;border-radius:10px}
+.titelgul .ghost{-webkit-text-stroke:2px rgba(17,18,19,.14);font-size:88vh;bottom:-14vh;right:-2vw}
+
+/* chips */
+.kstrip{display:flex;gap:9px;flex-wrap:wrap}
+.kchip{display:flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:100px;padding:7px 13px;
+  font-size:10px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.kchip i{font-style:normal;font-size:13px;font-weight:900;line-height:1}
+.kchip.ja{color:var(--sort);border-color:#DCDCD5}
+.kchip.gul{background:var(--gul);border-color:var(--gul-kant);color:var(--sort)}
+.kchip.fuld{background:var(--sort);border-color:var(--sort);color:#fff}
+.kchip.kant{color:var(--sort);border-color:var(--linje)}
+.kchip.stiplet{border-style:dashed;border-color:var(--linje)}
+.kstrip.stor .kchip{font-size:11.5px;padding:11px 17px;letter-spacing:.1em}
+.gulflade .kchip{border-color:rgba(17,18,19,.32);color:var(--sort)}
+.moerk .kchip{border-color:rgba(255,255,255,.24);color:rgba(255,255,255,.72)}
+
+/* ============================================================
+   MODUL 4 · NYE FIGUR-KOMPONENTER (samme tokens, ingen nye farver)
+   ============================================================ */
+
+/* ikoner: ét stregsprog hele vejen igennem modulet */
+.ik{width:22px;height:22px;flex-shrink:0;stroke:currentColor;stroke-width:1.7;fill:none;
+  stroke-linecap:round;stroke-linejoin:round}
+.ik.stor{width:30px;height:30px;stroke-width:1.6}
+.ik.mini{width:15px;height:15px;stroke-width:1.9}
+.ik.xl{width:44px;height:44px;stroke-width:1.4}
+.station .boks .ik{width:29px;height:29px}
+.station .boks.duoik .ik{width:21px;height:21px}
+.kchip .ik{width:14px;height:14px;stroke-width:2}
+
+/* fakta-rækker med nummer og ikon (fra Modul 3 · Video 3) */
+.frows{width:100%;max-width:900px}
+.frow{display:flex;align-items:center;gap:16px;border-top:1px solid var(--border);padding:15px 4px}
+.frow:last-child{border-bottom:1px solid var(--border)}
+.frow .fnr{font-size:13px;font-weight:900;color:var(--sort);width:26px;height:26px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-variant-numeric:tabular-nums}
+.frow .ft{font-size:clamp(14.5px,1.45vw,19px);font-weight:800;color:var(--sort);letter-spacing:-.01em}
+.frow .ft span{color:var(--muted);font-weight:500}
+.frow .fnote{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:10px;font-weight:800;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.frow.hero .fnr{background:var(--gul);border-radius:8px}
+.frow.svag .ft,.frow.svag .fnr,.frow.svag .ik{color:var(--muted)}
+.moerk .frow{border-color:rgba(255,255,255,.16)}
+.moerk .frow .ft{color:#fff}
+
+/* formel-linje (fra Video 2 · 10 spørgsmål) */
+.frik{display:flex;align-items:flex-end;gap:clamp(10px,1.2vw,20px);flex-wrap:nowrap;white-space:nowrap}
+.frik .led{position:relative}
+.frik .val{font-size:clamp(19px,1.9vw,30px);font-weight:900;color:var(--sort);letter-spacing:-.03em}
+.frik .op{font-size:clamp(18px,1.9vw,28px);font-weight:800;color:var(--linje)}
+.frik .val.ringet{background:var(--gul);border-radius:10px;padding:.06em .2em}
+.frik .lab{position:absolute;left:2px;top:100%;margin-top:11px;font-size:9.5px;font-weight:800;
+  letter-spacing:.14em;color:var(--muted);text-transform:uppercase;white-space:nowrap}
+
+/* kæmpe tal / kæmpe ord */
+.heroTal{display:flex;align-items:baseline;gap:22px}
+.heroTal .t{position:relative;font-size:clamp(64px,7.6vw,132px);font-weight:900;color:var(--sort);
+  letter-spacing:-.05em;line-height:1;font-variant-numeric:tabular-nums}
+.heroTal .t i{position:absolute;left:-.04em;right:-.04em;bottom:.05em;height:.22em;background:var(--gul);z-index:-1}
+.heroTal .tl{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
+  max-width:20ch;line-height:1.55}
+.heroTal.ord{flex-direction:column;align-items:flex-start;gap:10px}
+.heroTal.ord .t{font-size:clamp(24px,2.5vw,38px);letter-spacing:-.03em;line-height:1.08;max-width:11ch}
+
+/* svar-kort: replikken man husker */
+.svarkort{background:var(--gul);border-radius:16px;padding:18px 22px}
+.svarkort .sv{font-size:clamp(19px,2vw,30px);font-weight:900;color:var(--sort);letter-spacing:-.03em;line-height:1.1}
+.svarkort .svu{margin-top:8px;font-size:11px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:rgba(17,18,19,.6)}
+
+/* gul ankerflade i bunden af et slide */
+.gulbaand{margin-top:auto;background:var(--gul);padding:18px var(--mx);
+  margin-left:calc(-1 * var(--mx));margin-right:calc(-1 * var(--mx))}
+.gulbaand .gb{font-size:clamp(19px,2.05vw,30px);font-weight:900;color:var(--sort);letter-spacing:-.022em;line-height:1.14}
+/* slutlinje: samme rolle som en gul ankerflade, men uden gul, når gul er brugt i figuren */
+.slutlinje{margin-top:auto;border-top:1px solid var(--border);padding-top:15px;
+  font-size:clamp(17px,1.75vw,25px);font-weight:900;color:var(--sort);letter-spacing:-.022em;line-height:1.15}
+.notelinje{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.03em;line-height:1.5}
+.advarsel{display:flex;gap:11px;align-items:flex-start;border-left:3px solid var(--linje);padding-left:12px;
+  font-size:11.5px;font-weight:700;color:var(--muted);line-height:1.5;max-width:100ch}
+.advarsel .ik{width:15px;height:15px;margin-top:1px}
+
+/* synligt tom, stiplet plads: tal der mangler, og som IKKE må gættes */
+.tomplads{display:inline-flex;align-items:center;gap:10px;border:1.5px dashed var(--linje);border-radius:100px;
+  padding:7px 15px;font-size:10px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.tomplads b{color:var(--sort);letter-spacing:.24em}
+.tomboks{border:1.5px dashed var(--linje);border-radius:14px;padding:12px 15px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.tomboks .tblab{font-size:9.5px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);max-width:38ch;line-height:1.5}
+
+/* kort */
+.dkort{border:1px solid var(--border);border-radius:16px;padding:16px 18px;display:flex;flex-direction:column;gap:10px}
+.dkort.svag{background:var(--flade)}
+.dkort.tung{border-color:var(--linje);background:var(--flade)}
+.dkort .dk-titel{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:900;letter-spacing:.02em;color:var(--sort)}
+.dkort .dk-txt{font-size:13px;font-weight:600;color:var(--muted);line-height:1.5}
+.dkort.svag .dk-titel{color:var(--muted)}
+.gulflade .dkort{border-color:rgba(17,18,19,.3)}
+.gulflade .dkort .dk-txt{color:rgba(17,18,19,.66)}
+.matchboks{background:var(--sort);color:var(--gul);border-radius:16px;padding:16px 24px;
+  font-size:clamp(19px,2.2vw,32px);font-weight:900;letter-spacing:-.02em;align-self:center}
+
+/* replik-rækker */
+.rep{display:flex;align-items:center;gap:12px;border-top:1px solid var(--border);padding:12px 2px}
+.rep:last-of-type{border-bottom:1px solid var(--border)}
+.rep .rt{font-size:14px;font-weight:700;color:var(--sort);line-height:1.4}
+.rep .ik{color:var(--muted)}
+.rep.svag .rt{color:var(--muted)}
+.rep .pp{margin-left:auto}
+
+/* mørkt bånd med brud */
+.moerkbaand{display:flex;align-items:center;gap:16px;background:var(--sort);border-radius:14px;padding:15px 20px;color:#fff}
+.moerkbaand .mb{font-size:14.5px;font-weight:800;letter-spacing:-.01em}
+.moerkbaand .ik{color:var(--gul)}
+
+/* figurer */
+.figur{display:block;width:100%;height:auto}
+.figurmax{margin:0 auto}
+svg text{font-family:'Inter',Arial,sans-serif}
+.svgtxt{font-size:12px;font-weight:800;fill:var(--sort)}
+.svgstor{font-size:19px;font-weight:900;fill:var(--sort);letter-spacing:-.02em}
+.svgmut{font-size:11px;font-weight:700;fill:var(--muted)}
+.svgcap{font-size:10px;font-weight:800;letter-spacing:.13em;fill:var(--muted)}
+.svgval{font-size:12px;font-weight:900;fill:var(--sort);font-variant-numeric:tabular-nums}
+.svgvalhvid{font-size:12px;font-weight:900;fill:#fff;font-variant-numeric:tabular-nums}
+.gtitel{font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);max-width:80ch}
+
+/* fagkæden: MASTERFIGUR. Genbruges i Video 4 ved at sætte ÉN klasse på .kaede:
+   .fremhaev-jordbeton | .fremhaev-murer | .fremhaev-toemrer | .fremhaev-elvvs | .fremhaev-maler
+   Uden fremhæv-klasse står alle fem stationer lige stærkt (dette slide). */
+.kaede .boks{background:var(--sort);border:none;color:var(--gul)}
+.kaede .station{transition:opacity .45s var(--ease)}
+.kaede .boks{transition:transform .45s var(--ease)}
+.kaede[class*="fremhaev-"] .station{opacity:.34}
+.kaede.fremhaev-jordbeton .st-jordbeton,
+.kaede.fremhaev-murer .st-murer,
+.kaede.fremhaev-toemrer .st-toemrer,
+.kaede.fremhaev-elvvs .st-elvvs,
+.kaede.fremhaev-maler .st-maler{opacity:1}
+.kaede.fremhaev-jordbeton .st-jordbeton .boks,
+.kaede.fremhaev-murer .st-murer .boks,
+.kaede.fremhaev-toemrer .st-toemrer .boks,
+.kaede.fremhaev-elvvs .st-elvvs .boks,
+.kaede.fremhaev-maler .st-maler .boks{background:var(--gul);color:var(--sort);transform:scale(1.1)}
+
+/* tflow-varianter: gul er anker, så kun ÉT led må være gult */
+.tflow.neutral .boks{background:var(--flade);border:1px solid var(--linje);color:var(--sort)}
+.tflow.neutral .station.staerk .boks{background:var(--gul);border-color:var(--gul);
+  transform:scale(1.1);box-shadow:0 0 0 8px var(--bg),0 0 0 11px var(--gul-soft)}
+.tflow .stationer.fem-tal{grid-template-columns:repeat(5,1fr)}
+.pilned{width:2px;height:22px;background:var(--linje);margin-left:31px;position:relative}
+.pilned::after{content:"";position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  border:5px solid transparent;border-top-color:var(--linje)}
+
+/* 12-måneders bånd: SAMME skala og samme nedtoning som årshjulet på slide 26 */
+.aarbaand{display:flex;align-items:center;gap:14px}
+.aarbaand .abnavn{width:112px;flex-shrink:0;text-align:right;font-size:10px;font-weight:800;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+.aarbaand .abnavn.gulchip{background:var(--gul);color:var(--sort);border-radius:100px;padding:5px 0;
+  text-align:center;width:112px}
+.aarbaand .abfelter{flex:1;display:grid;grid-template-columns:repeat(12,1fr);gap:3px}
+.aarbaand .m{height:24px;border-radius:4px;background:var(--sort);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:900;letter-spacing:.02em}
+.aarbaand .m.ned{background:#DDDDD6;color:var(--muted)}
+
+/* årshjul */
+.hjulwrap{display:flex;justify-content:center;align-items:center}
+.hjul{display:block;width:100%;max-width:500px;height:auto}
+.hjul .mnd{font-size:14px;font-weight:800;letter-spacing:.05em;fill:var(--muted)}
+.hjul .banenavn{font-size:13px;font-weight:900;letter-spacing:.16em;paint-order:stroke;stroke-width:4px;stroke-linejoin:round}
+.hjul .midt{font-size:14.5px;font-weight:800;fill:var(--sort)}
+
+/* ---------- chrome ---------- */
+.meta-tl,.meta-tr{position:fixed;top:30px;z-index:97;font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.meta-tl{left:var(--mx)} .meta-tl b{color:var(--sort)}
+.meta-tr{right:var(--mx)}
+.moerk-chrome .meta-tl,.moerk-chrome .meta-tr{color:rgba(255,255,255,.55)}
+.moerk-chrome .meta-tl b{color:#fff}
+.gul-chrome .meta-tl,.gul-chrome .meta-tr{color:rgba(17,18,19,.6)}
+.gul-chrome .meta-tl b{color:var(--sort)}
+.folio{
+  position:fixed;left:0;right:0;bottom:0;z-index:97;height:58px;
+  display:flex;align-items:center;gap:16px;padding:0 var(--mx);
+  border-top:1px solid var(--border);font-size:11px;font-weight:800;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--muted);background:var(--bg);
+}
+.folio .brand{color:var(--sort);display:flex;align-items:center;gap:10px}
+.folio .brand img{width:22px;height:22px}
+.folio .nr{margin-left:auto;font-size:15px;font-weight:900;color:var(--sort);letter-spacing:.06em;font-variant-numeric:tabular-nums}
+.folio .nr span{color:var(--linje)}
+.moerk-chrome .folio{background:var(--sort);border-color:rgba(255,255,255,.14);color:rgba(255,255,255,.5)}
+.moerk-chrome .folio .brand,.moerk-chrome .folio .nr{color:#fff}
+.moerk-chrome .folio .nr span{color:rgba(255,255,255,.35)}
+.gul-chrome .folio{background:var(--gul);border-color:rgba(17,18,19,.18);color:rgba(17,18,19,.6)}
+.gul-chrome .folio .brand,.gul-chrome .folio .nr{color:var(--sort)}
+.progress{position:fixed;bottom:56px;left:0;height:3px;background:var(--gul);width:0;z-index:98;transition:width .4s var(--ease)}
+.moerk-chrome .progress,.gul-chrome .progress{background:var(--sort)}
+.pilzone{position:fixed;top:0;bottom:58px;width:12%;z-index:90;cursor:pointer}
+.pilzone.v{left:0}.pilzone.h{right:0}
+
+/* ============================================================
+   DE SEKS KASKADE-FÆLDER I GRUNDLAGET v1.3, lukket samlet her, så alle
+   fire decks i Modul 4 står på samme grundlag og ingen af dem kan arve
+   en usynlighedsfejl videre. Reglerne står ordret som i Video 1/Video 4:
+   A) en fill-erklæring i en KLASSE på et SVG-tekstelement vinder over
+      fill="#fff" som ATTRIBUT → hvid eller lys tekst bliver usynlig på
+      mørk flade. Hvid tekst i SVG sættes derfor altid med
+      style="fill:#fff" inline i dette deck.
+   B) .gulflade .kchip står efter .kchip.fuld → sort tekst på sort pille.
+   C) .moerk .kchip står efter .kchip.gul → lys grå tekst på gul pille.
+   D) .gulbaand .kchip står efter .kchip.fuld → samme som B. Fundet i V4.
+   E) .tik er scopet som ".tjekliste .tik", så et flueben brugt UDEN FOR
+      en .tjekliste faldt tilbage til 300x150 og fill:black og kunne fylde
+      det halve slide. Her får .tik samme regel uden scope. Fundet i V4.
+   F) et ikon skaleret over 24 px får sin stregbredde ganget op og bliver
+      en klat. .ik.stor (30 px), .ik.xl (44 px) og ikoner i en station-boks
+      (29 px) får stregbredden divideret med skalaen. :not(.duoik) er
+      nødvendig, fordi dobbeltikoner ellers bliver for tynde.
+   ============================================================ */
+.gulflade .kchip.fuld{background:var(--sort);border-color:var(--sort);color:#fff}
+.moerk .kchip.gul{background:var(--gul);border-color:var(--gul);color:var(--sort)}
+.moerk .kchip.gul .ik{color:var(--sort)}
+.gulbaand .kchip{border-color:rgba(17,18,19,.32);color:var(--sort)}
+.gulbaand .kchip .ik{color:var(--sort)}
+.gulbaand .kchip.fuld{background:var(--sort);border-color:var(--sort);color:var(--gul)}
+.gulbaand .kchip.fuld .ik{color:var(--gul)}
+.tik{width:17px;height:17px;flex-shrink:0;color:var(--sort);
+  stroke:currentColor;stroke-width:2.3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.ik.stor{stroke-width:1.35}
+.ik.xl{stroke-width:1.1}
+.station .boks:not(.duoik) .ik{stroke-width:1.4}
+
+/* ---------- lav skærm (fx 1366x768): samme udtryk, strammere lodret rytme ---------- */
+@media (max-height:820px){
+  .slide{padding:9vh var(--mx) 8vh}
+  .split .venstre{padding:9vh 3vw 8vh var(--mx)}
+  .hoejre.pro{padding:9vh 7vw 8vh 4vw}
+  .kicker{margin-bottom:20px}
+  .tjekliste{margin-top:2.6vh}
+  .tjekliste .trow{padding:15px 4px}
+  .frow{padding:11px 4px}
+  .rep{padding:9px 2px}
+  p.under{line-height:1.5}
+  .skub{padding-bottom:1vh}
+  .station .boks{margin-bottom:18px}
+  .hjul{max-width:462px}
+  .gulbaand{padding:14px var(--mx)}
+  .heroTal .t{font-size:clamp(56px,6.6vw,110px)}
+}
+@media (max-width:1500px){
+  .frik{gap:clamp(8px,1vw,16px)}
+  .frik .val{font-size:clamp(17px,1.7vw,28px)}
+  .frik .op{font-size:clamp(16px,1.7vw,26px)}
+  .frik .lab{font-size:9px;letter-spacing:.1em}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media print{
+  html,body{overflow:visible}
+  .slide{position:relative;visibility:visible;opacity:1;transform:none;page-break-after:always;height:100vh}
+  .progress,.pilzone,.folio,.meta-tl,.meta-tr{display:none}
+  .r,.lm span{opacity:1;transform:none}
+  mark{background-size:100% 100%}
+}
+
+/* v2 typografi-vagt: forhindrer horeunger (kort sidste linje) og skæve overskrifts-brud */
+h1,h2{text-wrap:balance}
+p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.ft,.dk-txt,.rt,.under,.notelinje,.gtitel{text-wrap:pretty}
+</style>
+</head>
+<body>
+
+<!-- ==========================================================
+     IKON-SPRITE: ét stregsprog for hele Modul 4.
+     Samme sæt genbruges i Video 2-4, så fagene ser ens ud hele vejen.
+     ========================================================== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="i-hammer" viewBox="0 0 24 24"><path d="M8 3.5h10.5v5.5H8z" fill="currentColor" stroke="none"/><path d="M8 3.5L3.5 6.2 8 9"/><path d="M12.8 9v11"/><path d="M10.8 20h4"/></symbol>
+  <symbol id="i-murerske" viewBox="0 0 24 24"><path d="M3 4.5h12L9 15.5z" fill="currentColor" stroke="none"/><path d="M11.5 12l4 5.5"/><path d="M14.5 15.5l4 3.5"/></symbol>
+  <symbol id="i-rulle" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="14" height="5.5" rx="1.2" fill="currentColor" stroke="none"/><path d="M10.5 9v3.5H6V21"/></symbol>
+  <symbol id="i-tang" viewBox="0 0 24 24"><path d="M9 3v7l-3 3v8"/><path d="M15 3v7l3 3v8"/><path d="M9 10h6"/></symbol>
+  <symbol id="i-stik" viewBox="0 0 24 24"><path d="M9 3v5"/><path d="M15 3v5"/><path d="M6 8h12v3a6 6 0 01-12 0z"/><path d="M12 17v4"/></symbol>
+  <symbol id="i-roertang" viewBox="0 0 24 24"><circle cx="16" cy="8" r="4"/><path d="M13.2 10.8L4 20"/><path d="M4 16l4 4"/></symbol>
+  <symbol id="i-skovl" viewBox="0 0 24 24"><path d="M12 3v10"/><path d="M9.5 3h5"/><path d="M8 13h8v3.5a4 4 0 01-8 0z"/></symbol>
+  <symbol id="i-mursten" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="8" rx="1"/><path d="M9 8v8"/><path d="M15 8v8"/></symbol>
+  <symbol id="i-tommestok" viewBox="0 0 24 24"><path d="M3 17l5-9 5 9 5-9"/><path d="M5.5 12.5l1.5.8"/><path d="M15.5 12.5l1.5.8"/></symbol>
+  <symbol id="i-graver" viewBox="0 0 24 24"><path d="M3 20h18"/><rect x="4" y="12.5" width="7" height="5" rx="1"/><path d="M11 13.5l5-4 3.5 3.5"/><path d="M19.5 13l-2 4.5"/></symbol>
+  <symbol id="i-svejs" viewBox="0 0 24 24"><path d="M6 4h12v8.5a6 6 0 01-12 0z"/><path d="M8.5 9h7"/></symbol>
+  <symbol id="i-palle" viewBox="0 0 24 24"><path d="M3 12h18"/><path d="M3 16.5h18"/><path d="M5 12v4.5"/><path d="M12 12v4.5"/><path d="M19 12v4.5"/><path d="M6 8h12v4H6z"/></symbol>
+  <symbol id="i-plante" viewBox="0 0 24 24"><path d="M12 21v-7.5"/><path d="M12 13.5c-4 0-5.5-2.5-5.5-5.5 3.5 0 5.5 2.5 5.5 5.5z"/><path d="M12 13.5c4 0 5.5-2.5 5.5-5.5-3.5 0-5.5 2.5-5.5 5.5z"/></symbol>
+  <symbol id="i-telefon" viewBox="0 0 24 24"><path d="M6 3h3.5l1.8 4.4-2.3 1.4a10.5 10.5 0 005.2 5.2l1.4-2.3L20 14.5V18a2.5 2.5 0 01-2.5 2.5C10.6 20.5 3.5 13.4 3.5 5.5A2.5 2.5 0 016 3z"/></symbol>
+  <symbol id="i-boble" viewBox="0 0 24 24"><path d="M4 5h16v9.5h-8.5L6.5 19v-4.5H4z"/></symbol>
+  <symbol id="i-boblesp" viewBox="0 0 24 24"><path d="M4 5h16v9.5h-8.5L6.5 19v-4.5H4z"/><text x="12" y="13" text-anchor="middle" font-size="9" font-weight="900" stroke="none" fill="currentColor">?</text></symbol>
+  <symbol id="i-boblex2" viewBox="0 0 24 24"><path d="M2 4h11v6.5H6.5L4 13v-2.5H2z"/><path d="M22 11H11v6.5h6.5L20 20v-2.5H22z"/></symbol>
+  <symbol id="i-oere" viewBox="0 0 24 24"><path d="M8.5 21v-3.5c0-2.2-2.5-3.2-2.5-7A6 6 0 0118 10.5c0 2.2-1.2 3.5-3.2 3.5-1.6 0-2.3-1-2.3-2.2"/><path d="M10.2 10.4a2.1 2.1 0 013.9.6"/></symbol>
+  <symbol id="i-oerenej" viewBox="0 0 24 24"><path d="M8.5 21v-3.5c0-2.2-2.5-3.2-2.5-7A6 6 0 0118 10.5c0 2.2-1.2 3.5-3.2 3.5-1.6 0-2.3-1-2.3-2.2"/><path d="M3.5 20.5L20.5 3.5"/></symbol>
+  <symbol id="i-tillid" viewBox="0 0 24 24"><path d="M12 3l7.5 3v6c0 4.6-3.1 7.8-7.5 9.4C7.6 19.8 4.5 16.6 4.5 12V6z"/><path d="M8.6 12l2.5 2.5L15.8 9.6"/></symbol>
+  <symbol id="i-aftale" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M8.8 13.5l2.2 2.2 4.4-4.4"/></symbol>
+  <symbol id="i-hjelm" viewBox="0 0 24 24"><path d="M4 16.5h16"/><path d="M6.5 16.5v-3.5a5.5 5.5 0 0111 0v3.5"/><path d="M10 8V4.5h4V8"/></symbol>
+  <symbol id="i-knage" viewBox="0 0 24 24"><path d="M4 3h16"/><path d="M12 3v3"/><path d="M6.5 20v-4a5.5 5.5 0 0111 0v4"/><path d="M4 20h16"/></symbol>
+  <symbol id="i-prisop" viewBox="0 0 24 24"><path d="M3 11.5L11 3.5h7v7l-8 8z"/><circle cx="14.5" cy="7" r="1.3"/><path d="M18 21v-6"/><path d="M15.5 17.5L18 15l2.5 2.5"/></symbol>
+  <symbol id="i-gange" viewBox="0 0 24 24"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></symbol>
+  <symbol id="i-vaekst" viewBox="0 0 24 24"><path d="M4 20V14.5"/><path d="M12 20V9"/><path d="M20 20V4"/></symbol>
+  <symbol id="i-tegninger" viewBox="0 0 24 24"><path d="M3.5 8L12 4l8.5 4L12 12z"/><path d="M3.5 12L12 16l8.5-4"/><path d="M3.5 16L12 20l8.5-4"/></symbol>
+  <symbol id="i-dok" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M9 12.5h6"/><path d="M9 16.5h6"/></symbol>
+  <symbol id="i-doknej" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M3.5 20.5L20.5 3.5"/></symbol>
+  <symbol id="i-hus" viewBox="0 0 24 24"><path d="M3.5 20V10L12 4l8.5 6v10"/><path d="M3.5 20h17"/><path d="M9.5 20v-5.5h5V20"/></symbol>
+  <symbol id="i-kran" viewBox="0 0 24 24"><path d="M2.5 21h19"/><path d="M4.5 21v-9.5h8V21"/><path d="M6.5 15h4"/><path d="M17 21V3.5"/><path d="M17 3.5h-7"/><path d="M10.5 3.5v3.5"/><path d="M8.8 7h3.4v2.5H8.8z"/></symbol>
+  <symbol id="i-etage" viewBox="0 0 24 24"><rect x="4.5" y="3.5" width="15" height="17" rx="1"/><path d="M8 7.5h3M13 7.5h3M8 12h3M13 12h3M8 16.5h3M13 16.5h3"/></symbol>
+  <symbol id="i-renover" viewBox="0 0 24 24"><path d="M3.5 20.5V11L12 5l8.5 6v9.5"/><path d="M6.5 20.5v-5h4v5"/><path d="M17 12.5a3.6 3.6 0 10-3.4 4.8"/><path d="M14 10.5l3 2-2.4 2.2"/></symbol>
+  <symbol id="i-robot" viewBox="0 0 24 24"><rect x="4.5" y="8" width="15" height="10.5" rx="2.5"/><circle cx="9.5" cy="13" r="1.1"/><circle cx="14.5" cy="13" r="1.1"/><path d="M12 8V5"/><circle cx="12" cy="4" r="1.2"/></symbol>
+  <symbol id="i-platform" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M3 9h18"/><path d="M7 13h6"/><path d="M7 16h9"/></symbol>
+  <symbol id="i-sol" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 3v2"/><path d="M12 19v2"/><path d="M3 12h2"/><path d="M19 12h2"/><path d="M5.6 5.6L7 7"/><path d="M17 17l1.4 1.4"/><path d="M18.4 5.6L17 7"/><path d="M7 17l-1.4 1.4"/></symbol>
+  <symbol id="i-sne" viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M4 7.5l16 9"/><path d="M20 7.5l-16 9"/></symbol>
+  <symbol id="i-stopur" viewBox="0 0 24 24"><circle cx="12" cy="13.5" r="7"/><path d="M12 13.5V9.5"/><path d="M10 3h4"/><path d="M12 3v3.5"/></symbol>
+  <symbol id="i-trappe" viewBox="0 0 24 24"><path d="M3 20h6v-5h6v-5h6"/><path d="M21 10v10H3"/></symbol>
+  <symbol id="i-op" viewBox="0 0 24 24"><path d="M12 20V5"/><path d="M6 11l6-6 6 6"/></symbol>
+  <symbol id="i-ned" viewBox="0 0 24 24"><path d="M12 4v15"/><path d="M18 13l-6 6-6-6"/></symbol>
+  <symbol id="i-nej" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.5 8.5l7 7"/><path d="M15.5 8.5l-7 7"/></symbol>
+  <symbol id="i-ok" viewBox="0 0 24 24"><path d="M4 13l5 5L20 6"/></symbol>
+  <symbol id="i-saks" viewBox="0 0 24 24"><circle cx="6" cy="18" r="2.6"/><circle cx="18" cy="18" r="2.6"/><path d="M7.6 15.9L18 4"/><path d="M16.4 15.9L6 4"/></symbol>
+  <symbol id="i-brud" viewBox="0 0 24 24"><path d="M3 12h5l-2 4 5-8-2 4h5"/><path d="M16 12h5"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 6v12"/><path d="M6 12h12"/></symbol>
+  <symbol id="i-pil" viewBox="0 0 24 24"><path d="M4 12h14"/><path d="M13 7l5 5-5 5"/></symbol>
+</defs></svg>
+
+<div class="meta-tl"><b>PowerMatch</b>&nbsp;·&nbsp;Modul 4&nbsp;·&nbsp;Video 1</div>
+<div class="meta-tr">Branchen og markedet</div>
+
+<!-- ############ BLOK 1 · PRODUKTVIDEN (slide 1-7) ############ -->
+
+<!-- 1 · GUL ÅBNING: PRODUKTVIDEN -->
+<section class="slide gulflade titelgul" data-sektion="Produktviden">
+  <div class="ghost">1</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">01</span><span class="krule"></span><span class="ktxt">Produktviden · 1 af 7</span></div>
+    <div class="vgruppe" style="display:grid;grid-template-columns:1.1fr .9fr;column-gap:40px;align-items:center">
+      <div>
+        <h1><span class="lm"><span>Produktviden</span></span></h1>
+        <p class="r d2" style="font-size:clamp(18px,1.95vw,28px);font-weight:800;color:var(--sort);letter-spacing:-.02em;margin-top:20px">En af de vigtigste ting generelt i salg.</p>
+      </div>
+      <!-- hoved i profil, og indeni fire værktøjer i stedet for en hjerne -->
+      <div class="r d3">
+        <svg class="figur figurmax" style="max-width:330px" viewBox="0 0 260 262" role="img" aria-label="Et hoved i profil med fire værktøjer indeni: hammer, murerske, malerrulle og tang">
+          <path d="M84 250V196C54 182 40 156 40 122 40 74 78 38 126 38 172 38 208 72 208 118 208 134 200 142 200 152l13 15-17 7v18c0 9-8 13-18 13v47"
+                fill="none" stroke="#111213" stroke-width="3.4" stroke-linejoin="round"/>
+          <g stroke="#111213" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <use href="#i-hammer" x="70" y="76" width="48" height="48"/>
+            <use href="#i-murerske" x="124" y="76" width="48" height="48"/>
+            <use href="#i-rulle" x="70" y="130" width="48" height="48"/>
+            <use href="#i-tang" x="124" y="130" width="48" height="48"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="kstrip stor skub r d4">
+      <span class="kchip">Fagtermerne</span>
+      <span class="kchip">Hvad håndværkeren lægger vægt på</span>
+      <span class="kchip">Hvad mesteren lægger vægt på</span>
+    </div>
+  </div>
+</section>
+
+<!-- 2 · HVAD HAN SIDDER OG TÆNKER OM DIG -->
+<section class="slide" data-sektion="Produktviden">
+  <div class="ghost">2</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">01</span><span class="krule"></span><span class="ktxt">Produktviden · 2 af 7 · Problemet</span></div>
+    <h2 class="r d1">Han skal have en forståelse af at du forstår faget.</h2>
+    <div class="vgruppe r d2">
+      <!-- beskeden kommer ikke igennem: pilen er brudt på midten -->
+      <svg class="figur" style="max-width:1000px;max-height:38vh" viewBox="0 0 900 250" role="img" aria-label="En sælger i telefon til venstre, en mester til højre, og imellem dem en brudt pil. Over mesteren en taleboble: han ved ikke noget som helst om mit fag">
+        <g stroke="#26282B" stroke-width="2.6" fill="none" stroke-linecap="round">
+          <circle cx="70" cy="150" r="17"/>
+          <path d="M70 167v46"/><path d="M70 213l-14 32"/><path d="M70 213l14 32"/>
+          <path d="M70 176l-18 10"/><path d="M70 176l16 -12"/>
+          <rect x="80" y="130" width="12" height="22" rx="3"/>
+        </g>
+        <text x="70" y="112" text-anchor="middle" class="svgcap">SÆLGER</text>
+        <g stroke="var(--linje)" stroke-width="2.6" fill="none" stroke-linecap="round">
+          <path d="M120 178h150"/><path d="M340 178h140"/>
+        </g>
+        <path d="M480 178l-13-7v14z" fill="var(--linje)"/>
+        <g stroke="#26282B" stroke-width="2.6" fill="none" stroke-linecap="round">
+          <path d="M292 158l12 40"/><path d="M312 158l12 40"/>
+        </g>
+        <text x="308" y="220" text-anchor="middle" class="svgcap">BESKEDEN KOMMER IKKE IGENNEM</text>
+        <g stroke="#26282B" stroke-width="2.6" fill="none" stroke-linecap="round">
+          <circle cx="620" cy="150" r="17"/>
+          <path d="M600 133h40"/><path d="M609 133v-8h22v8"/>
+          <path d="M620 167v46"/><path d="M620 213l-14 32"/><path d="M620 213l14 32"/>
+          <path d="M620 176l-20 14"/><path d="M620 176l20 14"/>
+        </g>
+        <text x="676" y="128" class="svgcap">MESTER</text>
+        <path d="M540 10h348v78H620l-26 22V88h-54z" fill="var(--flade)" stroke="var(--linje)" stroke-width="1.6"/>
+        <text x="566" y="44" class="svgstor">Han ved ikke noget som helst</text>
+        <text x="566" y="70" class="svgstor">om mit fag.</text>
+      </svg>
+    </div>
+    <div class="frows skub r d4" style="max-width:820px">
+      <div class="frow"><svg class="ik mini" style="color:var(--muted)"><use href="#i-nej"/></svg><span class="ft">Du kan ikke overbevise ham om <span>at du har det rigtige match</span></span></div>
+      <div class="frow"><svg class="ik mini" style="color:var(--muted)"><use href="#i-nej"/></svg><span class="ft">Du kan ikke overbevise ham om <span>at du har den helt rigtige kandidat</span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 · FJERNSYNET (modulets billede) -->
+<section class="slide" data-sektion="Produktviden">
+  <div class="ghost">3</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">01</span><span class="krule"></span><span class="ktxt">Produktviden · 3 af 7 · Fjernsynet</span></div>
+    <div class="duo vgruppe" style="column-gap:44px">
+      <div class="r d2">
+        <!-- samme motiv to gange, kun ekspedienten og kunden er forskellige -->
+        <svg class="figur" viewBox="0 0 380 250" role="img" aria-label="En ekspedient der ikke ved noget om fjernsynet, og en kunde der vender sig væk og selv peger på fjernsynet">
+          <rect x="126" y="46" width="132" height="86" rx="5" fill="none" stroke="#111213" stroke-width="3"/>
+          <rect x="137" y="57" width="110" height="64" rx="2" fill="var(--flade)"/>
+          <path d="M192 132v18" stroke="#111213" stroke-width="3"/>
+          <path d="M166 150h52" stroke="#111213" stroke-width="3" stroke-linecap="round"/>
+          <g stroke="#26282B" stroke-width="2.6" fill="none" stroke-linecap="round">
+            <circle cx="56" cy="106" r="15"/>
+            <path d="M56 121v42"/><path d="M56 163l-13 30"/><path d="M56 163l13 30"/>
+            <path d="M56 130l-22-18"/><path d="M56 130l22-18"/>
+          </g>
+          <text x="56" y="72" text-anchor="middle" font-size="30" font-weight="900" fill="var(--muted)">?</text>
+          <g stroke="#26282B" stroke-width="2.6" fill="none" stroke-linecap="round">
+            <circle cx="330" cy="112" r="15"/>
+            <path d="M330 127v40"/><path d="M330 167l-12 28"/><path d="M330 167l12 28"/>
+            <path d="M328 136l-42-8"/>
+          </g>
+          <path d="M286 128l14-6v12z" fill="#26282B"/>
+          <text x="330" y="216" text-anchor="middle" class="svgcap">KUNDEN</text>
+          <text x="56" y="216" text-anchor="middle" class="svgcap">VED INTET</text>
+        </svg>
+        <div style="margin-top:2.4vh;font-size:clamp(19px,2.05vw,30px);font-weight:900;color:var(--sort);letter-spacing:-.025em">Så vælger du selv.</div>
+      </div>
+      <div class="r d3">
+        <svg class="figur" viewBox="0 0 380 250" role="img" aria-label="En ekspedient der forklarer skærmen, en kunde der læner sig ind, og hundrede procent over kunden">
+          <rect x="126" y="46" width="132" height="86" rx="5" fill="none" stroke="#111213" stroke-width="3"/>
+          <rect x="137" y="57" width="110" height="64" rx="2" fill="var(--flade)"/>
+          <path d="M192 132v18" stroke="#111213" stroke-width="3"/>
+          <path d="M166 150h52" stroke="#111213" stroke-width="3" stroke-linecap="round"/>
+          <g stroke="#26282B" stroke-width="2.6" fill="none" stroke-linecap="round">
+            <circle cx="56" cy="106" r="15"/>
+            <path d="M56 121v42"/><path d="M56 163l-13 30"/><path d="M56 163l13 30"/>
+            <path d="M56 130l-18 20"/><path d="M58 130l48-24"/>
+          </g>
+          <path d="M106 106l-14 3 5 10z" fill="#26282B"/>
+          <g stroke="#26282B" stroke-width="2.6" fill="none" stroke-linecap="round">
+            <circle cx="322" cy="118" r="15"/>
+            <path d="M324 133l10 36"/><path d="M334 169l-14 26"/><path d="M334 169l16 26"/>
+            <path d="M322 142l-38 -4"/>
+          </g>
+          <rect x="268" y="24" width="104" height="20" fill="var(--gul)"/>
+          <text x="320" y="42" text-anchor="middle" font-size="40" font-weight="900" fill="#111213" letter-spacing="-2">100 %</text>
+          <text x="56" y="216" text-anchor="middle" class="svgcap">VED ALT</text>
+          <text x="322" y="216" text-anchor="middle" class="svgcap">KUNDEN</text>
+        </svg>
+        <div style="margin-top:2.4vh;font-size:clamp(19px,2.05vw,30px);font-weight:900;color:var(--sort);letter-spacing:-.025em">Så køber du hvad han siger.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 · LEARNED BY DOING -->
+<section class="slide" data-sektion="Produktviden" data-lint-ok="doedzone">
+  <div class="ghost">4</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">01</span><span class="krule"></span><span class="ktxt">Produktviden · 4 af 7 · Learned by doing</span></div>
+    <h2 class="r d1">Meget kommer af sig selv. Men startpunktet er dit eget.</h2>
+    <div class="vgruppe r d2" style="width:100%">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:14px">
+        <span class="gtitel">Learned by doing</span>
+        <span class="kchip kant"><svg class="ik"><use href="#i-tang"/></svg>Hænderne i maskinen</span>
+      </div>
+      <svg class="figur" style="max-height:42vh" viewBox="0 0 900 300" role="img" aria-label="To kurver: med fagtermerne fra start ligger hele vejen over uden forarbejde, og afstanden er størst på dag 1">
+        <path d="M60 262h800" stroke="var(--border)" stroke-width="1.5"/>
+        <g stroke="var(--border)" stroke-width="1.5"><path d="M120 262v8"/><path d="M450 262v8"/><path d="M800 262v8"/></g>
+        <text x="120" y="290" text-anchor="middle" class="svgcap">DAG 1</text>
+        <text x="450" y="290" text-anchor="middle" class="svgcap">DIALOG 20</text>
+        <text x="800" y="290" text-anchor="middle" class="svgcap">DIALOG 100</text>
+        <path d="M120 236C400 226 640 168 800 106" fill="none" stroke="var(--linje)" stroke-width="3" stroke-dasharray="7 6"/>
+        <path d="M120 156C400 144 640 96 800 44" fill="none" stroke="#111213" stroke-width="4.5"/>
+        <rect x="112" y="156" width="16" height="80" fill="var(--gul)"/>
+        <text x="146" y="188" class="svgtxt">Jo mere du ved fra start,</text>
+        <text x="146" y="208" class="svgtxt">jo nemmere er det</text>
+        <text x="800" y="30" text-anchor="end" class="svgtxt">Med fagtermerne fra start</text>
+        <text x="800" y="150" text-anchor="end" class="svgmut">Uden forarbejde</text>
+      </svg>
+    </div>
+    <p class="under skub r d5">Du lærer mest af dialogerne selv. <b>Kurven starter bare højere, når fagtermerne er der fra start.</b></p>
+  </div>
+</section>
+
+<!-- 5 · TILLIDS-KÆDEN -->
+<section class="slide" data-sektion="Produktviden">
+  <div class="ghost">5</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">01</span><span class="krule"></span><span class="ktxt">Produktviden · 5 af 7 · Tillids-kæden</span></div>
+    <h2 class="r d1">Faget skaber tillid. Tillid skaber aftaler.</h2>
+    <!-- gul er anker: kun tillids-leddet er gult. AFVIGELSE: leddet er ikke gjort
+         fysisk større, men ringet ind, så stationstitlerne stadig flugter. -->
+    <div class="tflow neutral vgruppe r d2">
+      <div class="linje"></div>
+      <div class="stationer">
+        <div class="station">
+          <div class="boks"><svg class="ik"><use href="#i-tang"/></svg></div>
+          <h5>Du kan fagtermerne</h5><p>ordene de selv bruger</p>
+        </div>
+        <div class="station">
+          <div class="boks"><svg class="ik"><use href="#i-boblex2"/></svg></div>
+          <h5>Du forstår hvad de søger</h5><p>både mester og håndværker</p>
+        </div>
+        <div class="station staerk">
+          <div class="boks"><svg class="ik"><use href="#i-tillid"/></svg></div>
+          <h5>Tillid</h5><p>branchen er rigtig meget baseret på tillid</p>
+        </div>
+        <div class="station">
+          <div class="boks"><svg class="ik"><use href="#i-oere"/></svg></div>
+          <h5>Han lytter til dit råd</h5><p>og han følger det</p>
+        </div>
+        <div class="station">
+          <div class="boks"><svg class="ik"><use href="#i-aftale"/></svg></div>
+          <h5>De tager en samtale</h5><p>og de lukker en aftale</p>
+        </div>
+      </div>
+    </div>
+    <div class="moerkbaand skub r d5">
+      <svg class="ik stor"><use href="#i-brud"/></svg>
+      <span class="mb">Uden faget knækker kæden i første led. Det er umuligt at blive top performer i PowerMatch.</span>
+    </div>
+  </div>
+</section>
+
+<!-- 6 · DE TO TELEFONER -->
+<section class="slide" data-sektion="Produktviden" data-lint-ok="doedzone">
+  <div class="ghost">6</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">01</span><span class="krule"></span><span class="ktxt">Produktviden · 6 af 7 · De to telefoner</span></div>
+    <h2 class="r d1">Samme opkald, to udfald.</h2>
+    <div class="duo vgruppe" style="column-gap:48px;align-items:start">
+      <div class="r d2">
+        <div class="dtitel" style="display:flex;align-items:center;gap:10px"><svg class="ik" style="color:var(--muted)"><use href="#i-telefon"/></svg>Du er blank</div>
+        <div class="rep svag"><svg class="ik"><use href="#i-boble"/></svg><span class="rt">Mesteren nævner arbejdsopgaverne</span></div>
+        <div class="rep svag"><svg class="ik"><use href="#i-boblesp"/></svg><span class="rt">Du stiller underlige spørgsmål</span></div>
+        <div class="rep svag"><svg class="ik"><use href="#i-oerenej"/></svg><span class="rt">Han mister interessen</span></div>
+        <div class="rep svag"><svg class="ik"><use href="#i-saks"/></svg><span class="rt">Han cutter snakken og kommer videre</span></div>
+      </div>
+      <div class="r d3">
+        <div class="dtitel" style="display:flex;align-items:center;gap:10px;color:var(--sort)"><svg class="ik" style="color:var(--sort)"><use href="#i-telefon"/></svg>Du kan faget</div>
+        <div class="rep"><svg class="ik" style="color:var(--sort)"><use href="#i-boble"/></svg><span class="rt">Mesteren nævner arbejdsopgaverne</span></div>
+        <div class="rep"><svg class="ik" style="color:var(--sort)"><use href="#i-boblex2"/></svg><span class="rt">Du gengiver det og viser forståelse</span><span class="kchip kant pp">Ping pong</span></div>
+        <div class="rep"><svg class="ik" style="color:var(--sort)"><use href="#i-oere"/></svg><span class="rt">Han lytter til dig</span></div>
+        <div class="svarkort" style="margin-top:16px">
+          <div class="sv">Det gør vi da bare.</div>
+          <div class="svu">Hans svar, når du foreslår tre tømrere</div>
+        </div>
+      </div>
+    </div>
+    <p class="under skub r d5">Samme mester. Samme arbejdsopgaver. <b>Forskellen er dig.</b></p>
+  </div>
+</section>
+
+<!-- 7 · SÅDAN GÅR DU TIL DAG ÉT (mørk) -->
+<section class="slide moerk" data-sektion="Produktviden" data-lint-ok="doedzone">
+  <div class="ghost">7</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">01</span><span class="krule"></span><span class="ktxt">Produktviden · 7 af 7 · Dag ét</span></div>
+    <h2 class="r d1">De dømmer hurtigt. Så byg det op stille og roligt.</h2>
+    <div class="r d2" style="display:flex;align-items:center;gap:22px;margin-top:2.6vh;color:rgba(255,255,255,.72)">
+      <svg class="ik stor"><use href="#i-knage"/></svg>
+      <svg class="ik stor"><use href="#i-stopur"/></svg>
+      <span style="font-size:14px;font-weight:800;letter-spacing:.02em">Mestre og håndværkere er meget hurtige til at dømme og meget hurtige til at høre det.</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 210px;column-gap:40px;align-items:center;flex:1">
+      <div class="tjekliste" style="max-width:none">
+        <div class="trow r d3"><span class="tdot"></span><span class="ttxt">Brug lidt færre fagtermer til start</span></div>
+        <div class="trow r d4"><span class="tdot"></span><span class="ttxt">Vær mere lyttende, og lær <span>det er dem der har faget</span></span></div>
+        <div class="trow r d5"><span class="tdot"></span><span class="ttxt">Byg stille og roligt på i dine dialoger</span></div>
+      </div>
+      <div class="r d5">
+        <svg class="figur" viewBox="0 0 200 170" role="img" aria-label="Tre trin der peger opad: fagforståelse bygges over tid">
+          <g fill="rgba(255,255,255,.16)">
+            <rect x="14" y="110" width="50" height="40"/><rect x="66" y="70" width="50" height="80"/><rect x="118" y="30" width="50" height="120"/>
+          </g>
+          <g stroke="rgba(255,255,255,.55)" stroke-width="2.6" fill="none" stroke-linecap="round">
+            <path d="M14 150v-40h50V70h52V30h50"/>
+            <path d="M10 152h162"/>
+          </g>
+          <text x="164" y="20" text-anchor="end" class="svgcap" style="fill:rgba(255,255,255,.6)">DIALOG FOR DIALOG</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ############ BLOK 2 · MARKEDET (slide 8-11) ############ -->
+
+<!-- 8 · MARKEDET, OG HVOR LILLE EN DEL VI HAR -->
+<section class="slide" data-sektion="Markedet">
+  <div class="ghost">1</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">02</span><span class="krule"></span><span class="ktxt">Markedet · 1 af 4 · Vores andel</span></div>
+    <div class="heroTal r d1" style="margin-top:1vh">
+      <span class="t">210.000</span>
+      <span class="tl">Mennesker beskæftiget i byggebranchen</span>
+    </div>
+    <div class="gab r d3" style="margin-top:3.4vh">
+      <svg class="figur" viewBox="0 0 900 150" role="img" aria-label="Hele markedet som en fuld bjælke, og PowerMatchs aktive håndværkere som en næsten tom bjælke på samme skala">
+        <text x="0" y="10" class="glab">HELE MARKEDET</text>
+        <rect x="0" y="18" width="900" height="34" fill="#111213"/>
+        <text x="884" y="41" text-anchor="end" class="gval hvid">210.000</text>
+        <text x="0" y="94" class="glab">POWERMATCH · AKTIVE HÅNDVÆRKERE</text>
+        <rect x="1" y="102" width="898" height="34" fill="var(--flade)" stroke="#111213" stroke-width="1.5"/>
+        <!-- Stumpen er tegnet i den rigtige proportion: 250 af 210.000 er en
+             tusindedel, altsaa under 1 px af de 898. Den staar paa 5 px, som er
+             det mindste der kan ses, og bliver dermed stadig laest som "den
+             forsvinder". Tallet staar UDEN FOR stumpen, fordi der ikke er
+             plads i den. Manus beder om et GULT .kchip her; slidet har
+             allerede sin ene gule flade i .gulbaand nederst, og reglen om
+             maksimalt een gul markering pr. slide vinder. Afvigelsen er
+             bevidst: tallet staar i sort .gval, som er lige saa taet paa. -->
+        <rect x="1" y="102" width="5" height="34" fill="#111213"/>
+        <text x="20" y="118" class="gval">cirka 250</text>
+        <text x="20" y="133" class="svgmut">cirka én ud af tusind</text>
+        <text x="560" y="125" class="svgmut">det her er rummet</text>
+      </svg>
+    </div>
+    <div class="pro-kilde r d4" style="margin-top:16px">Danmarks Statistik, BYG1A 2025 · 208.440 beskæftigede ved byggeri og anlæg</div>
+    <div class="gulbaand r d5">
+      <div class="gb">Der er så mange salg derude der venter på dig.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 9 · HVAD BRANCHEN VEJER I DANMARK -->
+<section class="slide" data-sektion="Markedet">
+  <div class="ghost">2</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">02</span><span class="krule"></span><span class="ktxt">Markedet · 2 af 4 · Branchens vægt</span></div>
+    <h2 class="r d1">En branche i kæmpe vækst.</h2>
+    <div class="pro-stats tre r d2" style="margin-top:4vh">
+      <div class="pcell"><div class="pval">cirka 6 %</div><div class="plab">Af alle beskæftigede i Danmark arbejder i bygge og anlæg</div></div>
+      <div class="pcell"><div class="pval">381,7 mia. kr.</div><div class="plab">Byggeriets omsætning i 2025</div></div>
+      <div class="pcell"><div class="pval">+10,9 %</div><div class="plab">Vækst i omsætningen på ét år</div><div class="pnote">omsætning, ikke antal ansatte</div></div>
+    </div>
+    <div class="vgruppe r d4" style="margin-top:2vh">
+      <svg class="figur" style="max-height:30vh" viewBox="0 0 900 190" role="img" aria-label="Omsætningen vokser fra 2024 til 2025">
+        <path d="M0 158h900" stroke="var(--border)" stroke-width="1.5"/>
+        <path d="M70 132L820 44v114H70z" fill="var(--flade)"/>
+        <path d="M70 132L820 44" stroke="#111213" stroke-width="4"/>
+        <circle cx="70" cy="132" r="6" fill="#fff" stroke="#111213" stroke-width="3"/>
+        <circle cx="820" cy="44" r="11" fill="var(--gul)" stroke="#111213" stroke-width="2.5"/>
+        <text x="70" y="182" text-anchor="middle" class="svgcap">2024</text>
+        <text x="820" y="182" text-anchor="middle" class="svgcap">2025</text>
+        <text x="820" y="24" text-anchor="middle" class="svgval">+10,9 %</text>
+        <text x="0" y="24" class="svgcap">OMSÆTNING</text>
+      </svg>
+    </div>
+    <div class="pro-kilde skub r d5">Kilder: Danmarks Statistik, BYGOMS2A og BYG1A, 2025 · andelen af alle beskæftigede: Danmarks Statistik</div>
+  </div>
+</section>
+
+<!-- 10 · OG DEN MANGLER FOLK (samme figur som Modul 2 · Video 1, slide 3) -->
+<section class="slide" data-sektion="Markedet" style="padding:0">
+  <div class="ghost" style="right:54%">3</div>
+  <div class="split">
+    <div class="venstre">
+      <div class="kicker r"><span class="knr">02</span><span class="krule"></span><span class="ktxt">Markedet · 3 af 4 · Manglen</span></div>
+      <div class="vgruppe">
+        <h2 class="r d1">Det er en branche der mangler medarbejdere.</h2>
+        <p class="under r d2" style="margin-top:3.2vh">Det er dét, efterspørgslen på vores produkt hviler på: <b>folk mangler håndværkere.</b></p>
+        <!-- RETTET 14/8: "dobbelt" → "næsten dobbelt" (19 mod 10,5 er 1,81 gange),
+             "jern og metal" → "jern, metal og auto · de to sværeste erhvervsgrupper",
+             begge dele ordret som i Blok 2 slide 3. Tredje linje, "ikke om kunden
+             mangler folk, kun hvornår", er fjernet: den findes ikke i talesporet
+             og ikke i manuset, og skærmen må ikke påstå mere end der bliver sagt. -->
+        <div class="fakta-stak r d3" style="margin-top:4vh">
+          <div class="fakta-r">Næsten dobbelt så svært som resten af arbejdsmarkedet</div>
+          <div class="fakta-r">Sammen med jern, metal og auto <span style="display:block">de to sværeste erhvervsgrupper i Danmark</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="hoejre pro">
+      <div class="pro-hero r d2">
+        <div class="kaempe" style="font-size:clamp(84px,8.4vw,150px)">19 %<i></i></div>
+        <div class="ptag">Af rekrutteringerne i bygge og anlæg endte uden en ansættelse</div>
+      </div>
+      <div class="gab r d4">
+        <div class="gtitel">Næsten dobbelt så svært som resten af arbejdsmarkedet</div>
+        <svg viewBox="0 0 688 118" role="img" aria-label="19 procent af rekrutteringsforsøgene i bygge og anlæg endte uden en ansættelse, mod 10,5 procent på hele arbejdsmarkedet">
+          <text x="0" y="10" class="glab">BYGGE OG ANLÆG</text>
+          <rect x="0" y="18" width="688" height="26" fill="#111213"/>
+          <text x="676" y="36" text-anchor="end" class="gval hvid">19 %</text>
+          <text x="0" y="84" class="glab">HELE ARBEJDSMARKEDET</text>
+          <rect x="1" y="91" width="379" height="25" fill="#F6F6F3" stroke="#111213" stroke-width="1.5"/>
+          <text x="394" y="109" class="gval">10,5 %</text>
+        </svg>
+      </div>
+      <div class="r d5">
+        <div class="pro-stats en">
+          <div class="pcell"><div class="pval">op mod 100.000</div><div class="plab">Faglærte i hele Danmark i 2030</div></div>
+        </div>
+        <div class="pro-kilde">Kilder: STAR, Rekrutteringssurvey forår 2026 · op mod 100.000 faglærte: Arbejderbevægelsens Erhvervsråd, 2021, om hele arbejdsmarkedet og alle faglærte uddannelser i 2030, ikke byggebranchen alene</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 · FRA TRE ANSATTE TIL TRE TUSIND -->
+<section class="slide" data-sektion="Markedet" data-lint-ok="doedzone">
+  <div class="ghost">4</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">02</span><span class="krule"></span><span class="ktxt">Markedet · 4 af 4 · Kundefladen</span></div>
+    <h2 class="r d1">Vores kunder er hele branchen. Der er ikke huller i båndet.</h2>
+    <div class="vgruppe r d2">
+      <svg class="figur" style="max-height:44vh" viewBox="0 0 900 250" role="img" aria-label="Fra de lokale virksomheder med tre til fem ansatte til de største med op imod 3000 ansatte, og et ubrudt bånd hen over hele spændet">
+        <text x="10" y="52" class="svgcap">HER ER DER FLEST AF DEM</text>
+        <path d="M10 112V100 M23 112V100 M36 112V100 M49 112V100 M62 112V100 M75 112V100 M88 112V100 M101 112V100 M114 112V100 M127 112V100 M140 112V100 M153 112V100 M166 112V100 M179 112V100" stroke="#26282B" stroke-width="5" stroke-linecap="round" opacity=".5"/>
+        <path d="M10 130V118 M23 130V118 M36 130V118 M49 130V118 M62 130V118 M75 130V118 M88 130V118 M101 130V118 M114 130V118 M127 130V118 M140 130V118 M153 130V118 M166 130V118 M179 130V118" stroke="#26282B" stroke-width="5" stroke-linecap="round" opacity=".5"/>
+        <path d="M10 148V136 M23 148V136 M36 148V136 M49 148V136 M62 148V136 M75 148V136 M88 148V136 M101 148V136 M114 148V136 M127 148V136 M140 148V136 M153 148V136 M166 148V136 M179 148V136" stroke="#26282B" stroke-width="5" stroke-linecap="round" opacity=".5"/>
+        <text x="10" y="72" class="svgmut">De lokale tømrervirksomheder med 3, 4, 5 ansatte</text>
+        <g fill="none" stroke="#111213" stroke-width="2.2">
+          <rect x="596" y="34" width="290" height="34" rx="8"/>
+          <rect x="596" y="78" width="290" height="34" rx="8"/>
+          <rect x="596" y="122" width="290" height="34" rx="8"/>
+        </g>
+        <text x="616" y="56" class="svgtxt">Kemp &amp; Lauritzen</text>
+        <text x="616" y="100" class="svgtxt">Bravida</text>
+        <text x="616" y="144" class="svgtxt">Wicotec Kirkebjerg</text>
+        <rect x="0" y="182" width="900" height="30" fill="var(--gul)"/>
+        <text x="450" y="202" text-anchor="middle" class="svgtxt" letter-spacing="3">VI ARBEJDER I HELE BRANCHEN</text>
+        <text x="0" y="238" class="svgcap">3 ANSATTE</text>
+        <text x="900" y="238" text-anchor="end" class="svgcap">OP IMOD 3.000 ANSATTE</text>
+      </svg>
+    </div>
+    <div class="skub r d5" style="display:flex;align-items:center;gap:18px;flex-wrap:wrap">
+      <!-- RETTET 14/8 · runde 2: "C5 også rigtigt." De tre store kunder med op
+           imod 3.000 ansatte er bekræftet, og .tomplads er fjernet. -->
+      <p class="under" style="margin:0">Fra de helt små til de største i landet. <b>Alle kunder er kunder.</b></p>
+    </div>
+  </div>
+</section>
+
+<!-- ############ BLOK 3 · FAGENE (slide 12-17) ############ -->
+
+<!-- 12 · VORES SEKS HOVEDFAG -->
+<section class="slide" data-sektion="Fagene" data-lint-ok="doedzone">
+  <div class="ghost">1</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">03</span><span class="krule"></span><span class="ktxt">Fagene · 1 af 6 · Rangorden</span></div>
+    <h2 class="r d1">Vores seks hovedfag.</h2>
+    <div class="vgruppe">
+      <div class="dtitel r d2" style="padding-bottom:10px">Rangordnet efter hvor mange vi har ansat i PowerMatch</div>
+      <div class="frows r d2" style="max-width:960px">
+        <div class="frow hero"><span class="fnr">1</span><svg class="ik"><use href="#i-hammer"/></svg><span class="ft">Tømrer</span><span class="fnote">Vores største jobtitel, og det har det altid været</span></div>
+        <div class="frow"><span class="fnr">2</span><svg class="ik"><use href="#i-stik"/></svg><span class="ft">Elektriker</span><span class="fnote"><svg class="ik mini"><use href="#i-op"/></svg>Fornyeligt overhalet murer</span></div>
+        <div class="frow"><span class="fnr">3</span><svg class="ik"><use href="#i-murerske"/></svg><span class="ft">Murer</span><span class="fnote"><svg class="ik mini"><use href="#i-ned"/></svg>Overhalet af el</span></div>
+        <div class="frow"><span class="fnr">4</span><svg class="ik"><use href="#i-rulle"/></svg><span class="ft">Bygningsmaler</span></div>
+        <div class="frow"><span class="fnr">5</span><svg class="ik"><use href="#i-roertang"/></svg><span class="ft">VVS-montør</span></div>
+        <div class="frow"><span class="fnr">6</span><svg class="ik"><use href="#i-skovl"/></svg><span class="ft">Jord og beton</span></div>
+      </div>
+    </div>
+    <p class="under skub r d5">Rækkefølgen er vores egen. <b>Tallene kommer nu.</b></p>
+  </div>
+</section>
+
+<!-- 13 · HVOR STORE FAGENE ER I DANMARK -->
+<section class="slide" data-sektion="Fagene">
+  <div class="ghost">2</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">03</span><span class="krule"></span><span class="ktxt">Fagene · 2 af 6 · Fagenes størrelse</span></div>
+    <h2 class="r d1" style="max-width:34ch">Hvor store fagene egentlig er.</h2>
+    <!-- RETTET 14/8 · runde 2: den TREDJE bjælke pr. fag med PowerMatchs egne tal
+         er fjernet HELT, ikke sat som stiplet plads. Sebastian, ordret:
+         "Hvor mange per fag er lige meget? Det behøver vi ikke skrive ind."
+         Figuren tegnes derfor færdig med to bjælker pr. fag, og legenden har
+         kun to poster. Grupperytmen er uændret (62 px pr. fag), men de to
+         bjælker er centreret i gruppen, så der ikke står et hul hvor den
+         tredje lå. Der må ikke lægges en tredje bjælke ind igen. -->
+    <div class="r d2" style="display:grid;grid-template-columns:1fr 250px;column-gap:26px;align-items:start;margin-top:1.6vh">
+      <svg class="figur" style="max-height:46vh" viewBox="0 0 980 384" role="img" aria-label="Grupperet soejlediagram med to bjaelker pr. fag: branchen og faget, for hvert af de seks fag">
+        <rect x="158" y="0" width="16" height="9" fill="#111213"/><text x="180" y="9" class="svgcap">BRANCHEN</text>
+        <rect x="262" y="0" width="16" height="9" fill="var(--flade)" stroke="#111213" stroke-width="1.2"/><text x="284" y="9" class="svgcap">FAGET</text>
+        <g>
+          <text x="150" y="51" text-anchor="end" class="svgtxt">Tømrer</text>
+          <rect x="158" y="32" width="700.0" height="13" fill="#111213"/><text x="866.0" y="42.5" class="svgval">43.449</text>
+          <rect x="158.7" y="49" width="256.2" height="13" fill="var(--flade)" stroke="#111213" stroke-width="1.4"/><text x="422.2" y="59.5" class="svgval">15.902</text>
+        </g>
+        <g>
+          <text x="150" y="113" text-anchor="end" class="svgtxt">Elektriker</text>
+          <rect x="158" y="94" width="504.3" height="13" fill="#111213"/><text x="670.3" y="104.5" class="svgval">31.303</text>
+          <rect x="158.7" y="111" width="284.1" height="13" fill="var(--flade)" stroke="#111213" stroke-width="1.4"/><text x="450.1" y="121.5" class="svgval">17.635</text>
+        </g>
+        <g>
+          <text x="150" y="175" text-anchor="end" class="svgtxt">Murer</text>
+          <rect x="158" y="156" width="203.8" height="13" fill="#111213"/><text x="369.8" y="166.5" class="svgval">12.648</text>
+          <rect x="158.7" y="173" width="60.7" height="13" fill="var(--flade)" stroke="#111213" stroke-width="1.4"/><text x="226.7" y="183.5" class="svgval">3.767</text>
+        </g>
+        <g>
+          <text x="150" y="237" text-anchor="end" class="svgtxt">Bygningsmaler</text>
+          <rect x="158" y="218" width="190.6" height="13" fill="#111213"/><text x="356.6" y="228.5" class="svgval">11.830</text>
+          <rect x="158.7" y="235" width="74.3" height="13" fill="var(--flade)" stroke="#111213" stroke-width="1.4"/><text x="240.3" y="245.5" class="svgval">4.610</text>
+        </g>
+        <g>
+          <text x="150" y="299" text-anchor="end" class="svgtxt">VVS</text>
+          <rect x="158" y="280" width="325.9" height="13" fill="#111213"/><text x="491.9" y="290.5" class="svgval">20.230</text>
+          <rect x="158.7" y="297" width="125.1" height="13" fill="var(--flade)" stroke="#111213" stroke-width="1.4"/><text x="291.1" y="307.5" class="svgval">7.766</text>
+        </g>
+        <g>
+          <text x="150" y="361" text-anchor="end" class="svgtxt">Jord og beton</text>
+          <rect x="158" y="342" width="400.2" height="13" fill="#111213"/><text x="566.2" y="352.5" class="svgval">24.841</text>
+          <text x="158.7" y="369.5" class="svgmut">Ikke opgjort som fag</text>
+        </g>
+      </svg>
+      <svg class="figur" style="max-height:46vh" viewBox="0 0 250 412" role="img" aria-label="Vores raekkefoelge holdt op mod branchens raekkefoelge. Jord og beton er branchens tredjestoerste og vores mindste">
+        <text x="0" y="9" class="svgcap">VORES</text><text x="250" y="9" text-anchor="end" class="svgcap">BRANCHENS</text>
+        <g stroke="var(--linje)" stroke-width="1.4" fill="none">
+          <path d="M84 47 H166" />
+          <path d="M84 109 H166" />
+          <path d="M84 171 L166 295"/>
+          <path d="M84 233 L166 357"/>
+          <path d="M84 295 L166 233"/>
+        </g>
+        <path d="M84 357 L166 171" stroke="#111213" stroke-width="2.6" fill="none"/>
+        <g>
+          <text x="0" y="51" class="svgtxt">1 Tømrer</text>
+          <text x="0" y="113" class="svgtxt">2 Elektriker</text>
+          <text x="0" y="175" class="svgtxt">3 Murer</text>
+          <text x="0" y="237" class="svgtxt">4 Maler</text>
+          <text x="0" y="299" class="svgtxt">5 VVS</text>
+          <text x="0" y="361" class="svgtxt">6 Jord og beton</text>
+        </g>
+        <g text-anchor="end">
+          <text x="250" y="51" class="svgtxt">Tømrer 1</text>
+          <text x="250" y="113" class="svgtxt">Elektriker 2</text>
+          <text x="250" y="175" class="svgtxt">Jord og beton 3</text>
+          <text x="250" y="237" class="svgtxt">VVS 4</text>
+          <text x="250" y="299" class="svgtxt">Murer 5</text>
+          <text x="250" y="361" class="svgtxt">Maler 6</text>
+        </g>
+        <rect x="25" y="384" width="200" height="26" rx="13" fill="var(--gul)"/>
+        <text x="125" y="401" text-anchor="middle" class="svgtxt" letter-spacing="1">HER ER DER MEST AT HENTE</text>
+      </svg>
+    </div>
+    <div class="advarsel skub r d5">
+      <svg class="ik"><use href="#i-nej"/></svg>
+      <span>Fagsøjlen dækker kun virksomheder med mindst 10 ansatte, og 91,8 % af byggefirmaerne har under 10. Murerens 3.767 er ikke antallet af murere i Danmark. Alle fagtal er kraftigt undervurderede.</span>
+    </div>
+    <div class="pro-kilde r d5">Kilder: Danmarks Statistik, BYG1A 2025 (branchen) og LONS20 2024 (faget)</div>
+  </div>
+</section>
+
+<!-- 14 · ENTREPRENØRBRANCHEN -->
+<section class="slide" data-sektion="Fagene" data-lint-ok="doedzone">
+  <div class="ghost">3</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">03</span><span class="krule"></span><span class="ktxt">Fagene · 3 af 6 · Entreprenørbranchen</span></div>
+    <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap">
+      <h2 class="r d1" style="max-width:24ch">Entreprenørbranchen er ét fag med tre kasketter.</h2>
+      <!-- Chippen var .kchip.gul. Den er sat til .kchip.fuld, fordi slidets ENE
+           gule markering nu er ordet "altid" i svendebrev-kortet nedenfor, som
+           er blokkens låste pointe fra 14/8 runde 2. Se kortet. -->
+      <span class="kchip fuld r d1">Nyt fag hos os</span>
+    </div>
+    <div class="vgruppe r d2">
+      <svg class="figur" style="max-width:900px;max-height:30vh" viewBox="0 0 900 200" role="img" aria-label="Jord og beton, kloakrørlægger og brolægger med pile på kryds og tværs mellem alle tre">
+        <g fill="none" stroke="#111213" stroke-width="2">
+          <rect x="10" y="14" width="250" height="44" rx="22" fill="#111213"/>
+          <rect x="325" y="14" width="250" height="44" rx="22" fill="#111213"/>
+          <rect x="640" y="14" width="250" height="44" rx="22" fill="#111213"/>
+        </g>
+        <text x="135" y="42" text-anchor="middle" class="svgtxt" style="fill:#fff" letter-spacing="1.6">JORD OG BETON</text>
+        <text x="450" y="42" text-anchor="middle" class="svgtxt" style="fill:#fff" letter-spacing="1.6">KLOAKRØRLÆGGER</text>
+        <text x="765" y="42" text-anchor="middle" class="svgtxt" style="fill:#fff" letter-spacing="1.6">BROLÆGGER</text>
+        <g stroke="var(--linje)" stroke-width="1.8" fill="none">
+          <path d="M135 66L450 128"/><path d="M450 66L135 128"/>
+          <path d="M450 66L765 128"/><path d="M765 66L450 128"/>
+          <path d="M135 70C300 160 600 160 765 70"/>
+        </g>
+        <text x="450" y="176" text-anchor="middle" class="svgtxt">Folk laver det hele på kryds og tværs</text>
+      </svg>
+      <div class="duo r d4" style="margin-top:2.4vh;column-gap:40px">
+        <!-- RETTET 14/8 · runde 2: hullet om svendebrev er LUKKET. Sebastian,
+             ordret: "Svendborg er et krav. Altid et krav i tømrer, mure,
+             elektriker, VVS-monitor og maler." Formuleringen "nogle kunder vil
+             se svendebrevet" er ude af hele modulet, og .tomplads er fjernet.
+             Ordet "altid" er slidets ENE gule markering. -->
+        <div class="dkort">
+          <div class="dk-titel"><svg class="ik"><use href="#i-dok"/></svg>Tømrer, murer, elektriker, VVS-montør og bygningsmaler</div>
+          <div class="dk-txt">Svendebrev er <mark>altid</mark> et krav.</div>
+        </div>
+        <div class="dkort svag">
+          <div class="dk-titel"><svg class="ik"><use href="#i-doknej"/></svg>Entreprenørbranchen</div>
+          <div class="dk-txt">Ikke uddannelseskrav på samme måde som i de øvrige fag.</div>
+        </div>
+      </div>
+    </div>
+    <p class="under skub r d5">Jord og beton hører under entreprenørbranchen.</p>
+  </div>
+</section>
+
+<!-- 15 · DE FAG VI ER GÅET IND I FOR NYLIGT -->
+<section class="slide" data-sektion="Fagene" data-lint-ok="doedzone">
+  <div class="ghost">4</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">03</span><span class="krule"></span><span class="ktxt">Fagene · 4 af 6 · Nye fag</span></div>
+    <h2 class="r d1">Tre nye fag. Og seks der vejer mere.</h2>
+    <div class="vgruppe" style="display:grid;grid-template-columns:.8fr 1.2fr;column-gap:48px;align-items:center">
+      <div class="r d2">
+        <div class="dtitel" style="padding-bottom:8px">Nye fag</div>
+        <div class="frows" style="max-width:none">
+          <div class="frow svag"><svg class="ik"><use href="#i-svejs"/></svg><span class="ft">Metal <span>smed og svejser</span></span></div>
+          <div class="frow svag"><svg class="ik"><use href="#i-palle"/></svg><span class="ft">Lager</span></div>
+          <div class="frow svag"><svg class="ik"><use href="#i-plante"/></svg><span class="ft">Anlægsgartner</span></div>
+        </div>
+      </div>
+      <div class="dkort tung r d3" style="padding:22px 24px">
+        <div style="display:flex;align-items:center;gap:12px"><span class="kchip gul">Hovedfagene</span><span class="notelinje">her betyder den faglige forståelse aller allermest</span></div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:6px">
+          <div class="dkort" style="background:#fff;padding:13px;gap:7px"><svg class="ik"><use href="#i-hammer"/></svg><div class="dk-titel">Tømrer</div></div>
+          <div class="dkort" style="background:#fff;padding:13px;gap:7px"><svg class="ik"><use href="#i-stik"/></svg><div class="dk-titel">Elektriker</div></div>
+          <div class="dkort" style="background:#fff;padding:13px;gap:7px"><svg class="ik"><use href="#i-murerske"/></svg><div class="dk-titel">Murer</div></div>
+          <div class="dkort" style="background:#fff;padding:13px;gap:7px"><svg class="ik"><use href="#i-rulle"/></svg><div class="dk-titel">Bygningsmaler</div></div>
+          <div class="dkort" style="background:#fff;padding:13px;gap:7px"><svg class="ik"><use href="#i-roertang"/></svg><div class="dk-titel">VVS-montør</div></div>
+          <div class="dkort" style="background:#fff;padding:13px;gap:7px"><svg class="ik"><use href="#i-skovl"/></svg><div class="dk-titel">Jord og beton</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="skub r d5" style="display:flex;align-items:center;gap:18px;flex-wrap:wrap">
+      <p class="under" style="margin:0">De nye fag får ikke forfærdelig meget fokus nu.</p>
+      <span class="kchip">De resterende fag kommer senere i modulet</span>
+    </div>
+  </div>
+</section>
+
+<!-- 16 · RÆKKEFØLGEN PÅ EN BYGGEPLADS (MASTERFIGUR: .kaede) -->
+<section class="slide" data-sektion="Fagene">
+  <div class="ghost">5</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">03</span><span class="krule"></span><span class="ktxt">Fagene · 5 af 6 · Rækkefølgen på en byggeplads</span></div>
+    <h2 class="r d1">Fagene hænger sammen. Altid i samme rækkefølge.</h2>
+    <!-- MASTERFIGUR. Genbruges i Video 4: sæt .fremhaev-maler eller .fremhaev-jordbeton
+         på .kaede, og resten nedtones automatisk. Rør ikke markup'et.
+         AFVIGELSE fra manus: stationerne står i sort i stedet for gul, fordi gul er
+         anker og maksimalt må bruges ét sted pr. slide. Fremhævning gør leddet gult.
+         NB til Video 4: når du sætter en fremhaev-klasse på, bliver det fremhævede led
+         slidets gule anker. Fjern så anden gul markering på det slide (her: mark'en i
+         bundlinjen), ellers er der to gule flader. -->
+    <div class="tflow kaede r d2" style="margin:3vh 0 0">
+      <div class="linje"></div>
+      <div class="stationer">
+        <div class="station st-jordbeton">
+          <div class="boks"><svg class="ik"><use href="#i-skovl"/></svg></div>
+          <h5>Jord og beton</h5><p>jorder, betoner og gør klar</p>
+        </div>
+        <div class="station st-murer">
+          <div class="boks"><svg class="ik"><use href="#i-murerske"/></svg></div>
+          <h5>Murer</h5><p>lægger mursten og bygger op</p>
+        </div>
+        <div class="station st-toemrer">
+          <div class="boks"><svg class="ik"><use href="#i-hammer"/></svg></div>
+          <h5>Tømrer</h5><p>sætter deres arbejde op</p>
+        </div>
+        <div class="station st-elvvs">
+          <div class="boks duoik"><svg class="ik"><use href="#i-stik"/></svg><svg class="ik"><use href="#i-roertang"/></svg></div>
+          <h5>El og VVS</h5><p>laver deres ting</p>
+        </div>
+        <div class="station st-maler">
+          <div class="boks"><svg class="ik"><use href="#i-rulle"/></svg></div>
+          <h5>Maler</h5><p>kommer til sidst</p>
+        </div>
+      </div>
+    </div>
+    <div class="frows r d4" style="max-width:820px;margin-top:1vh">
+      <div class="frow"><svg class="ik"><use href="#i-hus"/></svg><span class="ft">Et nyt hus</span></div>
+      <div class="frow"><svg class="ik"><use href="#i-etage"/></svg><span class="ft">Flere hundrede lejligheder</span></div>
+      <div class="frow"><svg class="ik"><use href="#i-renover"/></svg><span class="ft">En renovering</span></div>
+    </div>
+    <p class="under skub r d5">Kæden er den samme, uanset opgavens størrelse. <b><mark style="white-space:nowrap">Alle fagene er afhængige af hinanden.</mark></b></p>
+  </div>
+</section>
+
+<!-- 17 · DERFOR HAR MANGE VIRKSOMHEDER FLERE FAG -->
+<section class="slide" data-sektion="Fagene" data-lint-ok="doedzone">
+  <div class="ghost">6</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">03</span><span class="krule"></span><span class="ktxt">Fagene · 6 af 6 · Mersalget</span></div>
+    <h2 class="r d1">Mange virksomheder har flere fag. Så spørg.</h2>
+    <div class="vgruppe" style="display:grid;grid-template-columns:1.25fr .75fr;column-gap:44px;align-items:center">
+      <div>
+        <div class="r d2" style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+          <div class="dkort" style="align-items:center;text-align:center">
+            <div style="display:flex;align-items:center;gap:8px;justify-content:center"><svg class="ik"><use href="#i-hammer"/></svg><svg class="ik mini" style="color:var(--linje)"><use href="#i-plus"/></svg><svg class="ik"><use href="#i-murerske"/></svg></div>
+            <div class="dk-titel" style="justify-content:center">Tømrer og murer</div>
+          </div>
+          <div class="dkort" style="align-items:center;text-align:center">
+            <div style="display:flex;align-items:center;gap:8px;justify-content:center"><svg class="ik"><use href="#i-murerske"/></svg><svg class="ik mini" style="color:var(--linje)"><use href="#i-plus"/></svg><svg class="ik"><use href="#i-skovl"/></svg></div>
+            <div class="dk-titel" style="justify-content:center">Murer og jord</div>
+          </div>
+          <div class="dkort" style="align-items:center;text-align:center">
+            <div style="display:flex;align-items:center;gap:8px;justify-content:center"><svg class="ik"><use href="#i-stik"/></svg><svg class="ik mini" style="color:var(--linje)"><use href="#i-plus"/></svg><svg class="ik"><use href="#i-roertang"/></svg></div>
+            <div class="dk-titel" style="justify-content:center">El og VVS</div>
+          </div>
+        </div>
+        <div class="notelinje r d2" style="margin-top:12px">Det er meget forskelligt fra virksomhed til virksomhed.</div>
+        <div class="svarkort r d3" style="margin-top:2.4vh">
+          <div class="sv">Har I også andre jobtitler ansat?</div>
+          <div class="svu">Vær ikke bange for at spørge</div>
+        </div>
+      </div>
+      <!-- AFVIGELSE fra manus: værdikæde-aksen med de fem byggepladstrin er skåret her,
+           fordi den ligger på slide 16 to slides før. Kagen står alene. -->
+      <div class="r d4">
+        <svg class="figur" viewBox="0 0 300 220" role="img" aria-label="Tre cirkler hvor det udskårne stykke vokser fra ét fag til tre fag">
+          <g fill="var(--flade)" stroke="#111213" stroke-width="1.6">
+            <circle cx="50" cy="70" r="40"/><circle cx="150" cy="70" r="40"/><circle cx="250" cy="70" r="40"/>
+          </g>
+          <path d="M50 70V30A40 40 0 0173.5 102.4z" fill="#111213"/>
+          <path d="M150 70V30A40 40 0 01150 110z" fill="#111213"/>
+          <path d="M250 70V30A40 40 0 11226.5 102.4z" fill="#111213"/>
+          <text x="50" y="132" text-anchor="middle" class="svgcap">ÉT FAG</text>
+          <text x="150" y="132" text-anchor="middle" class="svgcap">TO FAG</text>
+          <text x="250" y="132" text-anchor="middle" class="svgcap">TRE FAG</text>
+          <text x="150" y="176" text-anchor="middle" class="svgtxt">Jo mere af værdikæden man ejer,</text>
+          <text x="150" y="196" text-anchor="middle" class="svgtxt">jo større del af kagen kan man få</text>
+        </svg>
+      </div>
+    </div>
+    <p class="under skub r d5">Flere jobtitler hos samme kunde er den nemmeste vej til mersalg.</p>
+  </div>
+</section>
+
+<!-- ############ BLOK 4 · ØKONOMI OG FREMTID (slide 18-23) ############ -->
+
+<!-- 18 · EN KÆMPE BRANCHE MED EN RIGTIG GOD ØKONOMI -->
+<section class="slide" data-sektion="Økonomi og fremtid">
+  <div class="ghost">1</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">04</span><span class="krule"></span><span class="ktxt">Økonomi og fremtid · 1 af 6 · Dækningsgraden</span></div>
+    <h2 class="r d1">En kæmpe branche med en rigtig god økonomi.</h2>
+    <!-- AFVIGELSE fra manus: den gule klamme er slidets ene gule element, så den
+         afsluttende sætning står som sort slutlinje i stedet for gul ankerflade. -->
+    <div class="vgruppe" style="display:grid;grid-template-columns:1.05fr .95fr;column-gap:48px;align-items:center">
+      <div class="r d2">
+        <svg class="figur" style="max-height:42vh" viewBox="0 0 540 320" role="img" aria-label="Hvad en medarbejder koster virksomheden, og hvad virksomheden får ind på den medarbejder. Forskellen er dækningsgraden">
+          <path d="M20 268h500" stroke="var(--border)" stroke-width="1.5"/>
+          <rect x="30" y="168" width="84" height="100" fill="var(--flade)" stroke="#111213" stroke-width="2"/>
+          <rect x="200" y="52" width="84" height="216" fill="#111213"/>
+          <g stroke="var(--linje)" stroke-width="1.4" stroke-dasharray="5 4">
+            <path d="M114 168h186"/><path d="M284 52h16"/>
+          </g>
+          <rect x="300" y="52" width="18" height="116" fill="var(--gul)"/>
+          <text x="332" y="104" class="svgstor">Dækningsgraden</text>
+          <text x="332" y="128" class="svgmut">forskellen er hans forretning</text>
+          <text x="72" y="292" text-anchor="middle" class="svgcap">HVAD HAN KOSTER</text>
+          <text x="242" y="292" text-anchor="middle" class="svgcap">HVAD HAN GIVER IND</text>
+        </svg>
+      </div>
+      <div class="frows r d3" style="max-width:none">
+        <div class="frow"><svg class="ik"><use href="#i-op"/></svg><span class="ft">Kæmpe branche</span></div>
+        <div class="frow"><svg class="ik"><use href="#i-op"/></svg><span class="ft">Rigtig rigtig god økonomi</span></div>
+        <div class="frow"><svg class="ik"><use href="#i-op"/></svg><span class="ft">Høj dækningsgrad på medarbejdere</span></div>
+      </div>
+    </div>
+    <div class="slutlinje r d5">Det er derfor vi kan tage de priser vi tager.</div>
+  </div>
+</section>
+
+<!-- 19 · VORES PRIS LIGGER INDE I HANS PRIS -->
+<section class="slide" data-sektion="Økonomi og fremtid">
+  <div class="ghost">2</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">04</span><span class="krule"></span><span class="ktxt">Økonomi og fremtid · 2 af 6 · Vores pris i hans pris</span></div>
+    <h2 class="r d1" style="max-width:26ch;margin-bottom:2.6vh">Vores pris ligger inde i hans pris.</h2>
+    <div class="frik r d1" style="padding-bottom:30px">
+      <span class="led"><span class="val">Timeløn</span><span class="lab">Håndværkerens</span></span>
+      <span class="op">×</span>
+      <span class="led"><span class="val ringet">Gangfaktor</span><span class="lab">Vores</span></span>
+      <span class="op">=</span>
+      <span class="led"><span class="val">Vores pris</span><span class="lab">Det virksomheden betaler os</span></span>
+    </div>
+    <!-- RETTET 14/8 · runde 2: Sebastian, ordret: "Ja, gangefaktor må gerne
+         sige højt." Den stiplede .tomboks og forbeholdet er væk. De to
+         gangfaktorer står nu frit som to .kchip ved siden af formlen, som
+         manus beder om. Spørgsmålet er lukket og må ikke stilles igen. -->
+    <div class="kstrip r d2" style="margin-top:14px">
+      <span class="kchip kant">Elektriker 2,1</span><span class="kchip kant">Tømrer 1,9</span>
+    </div>
+    <div class="vgruppe r d3">
+      <svg class="figur" preserveAspectRatio="xMinYMid meet" style="max-height:30vh" viewBox="0 0 900 232" role="img" aria-label="Tre priser på samme skala: håndværkerens timeløn, det virksomheden betaler os, og det virksomheden fakturerer sin egen kunde, som fortsætter ud over kanten">
+        <text x="0" y="10" class="svgcap">HÅNDVÆRKERENS TIMELØN</text>
+        <rect x="1" y="17" width="230" height="26" fill="var(--flade)" stroke="#111213" stroke-width="1.5"/>
+        <text x="0" y="72" class="svgcap">DET VIRKSOMHEDEN BETALER OS</text>
+        <rect x="1" y="79" width="450" height="26" fill="var(--flade)" stroke="#111213" stroke-width="1.5"/>
+        <rect x="1" y="79" width="230" height="26" fill="#111213"/>
+        <g stroke="#111213" stroke-width="1.6" fill="none">
+          <path d="M231 110v8h220v-8"/>
+        </g>
+        <text x="455" y="124" class="svgtxt">Vores avance</text>
+        <text x="0" y="158" class="svgcap">DET VIRKSOMHEDEN FAKTURERER SIN EGEN KUNDE</text>
+        <path d="M1 165H860 M1 191H860 M1 165V191" fill="none" stroke="#111213" stroke-width="1.5"/>
+        <g stroke="#111213" stroke-width="1.5" fill="none" opacity=".55">
+          <path d="M866 172l8 6-8 6"/><path d="M880 172l8 6-8 6"/>
+        </g>
+        <g stroke="#111213" stroke-width="1.6" fill="none">
+          <path d="M451 198v8h409v-8"/>
+        </g>
+        <text x="464" y="222" class="svgtxt">Hans avance</text>
+        <text x="0" y="222" class="svgmut">Vi kender ikke hans præcise timepris, men den ligger over vores</text>
+      </svg>
+    </div>
+    <div class="slutlinje r d5">Vi kunne ikke få den avance vi gør, hvis virksomhederne ikke selv kunne tjene penge.</div>
+  </div>
+</section>
+
+<!-- 20 · HVORFOR MANGLER VIRKSOMHEDERNE FOLK? -->
+<section class="slide" data-sektion="Økonomi og fremtid">
+  <div class="ghost">3</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">04</span><span class="krule"></span><span class="ktxt">Økonomi og fremtid · 3 af 6 · Årsagskæden</span></div>
+    <h2 class="r d1">Hvorfor mangler virksomhederne folk?</h2>
+    <div class="pilned r d1"></div>
+    <!-- Fem selvstændige led, så kæden kan genbruges som recap-figur senere i modulet. -->
+    <div class="tflow neutral r d2" style="margin:1vh 0 0">
+      <div class="linje"></div>
+      <div class="stationer">
+        <div class="station">
+          <div class="boks"><svg class="ik"><use href="#i-tegninger"/></svg></div>
+          <h5>De får så mange opgaver ind</h5><p>efterspørgslen er så stor</p>
+        </div>
+        <div class="station">
+          <div class="boks"><svg class="ik"><use href="#i-knage"/></svg></div>
+          <h5>Så mangler de folk</h5><p>hjelmen hænger alene</p>
+        </div>
+        <div class="station">
+          <div class="boks"><svg class="ik"><use href="#i-prisop"/></svg></div>
+          <h5>Så stiger priserne</h5><p>derude på markedet</p>
+        </div>
+        <div class="station">
+          <div class="boks"><svg class="ik"><use href="#i-gange"/></svg></div>
+          <h5>Så kan vi tage vores gangfaktor</h5><p>prisen bærer den</p>
+        </div>
+        <div class="station staerk">
+          <div class="boks"><svg class="ik"><use href="#i-vaekst"/></svg></div>
+          <h5>Så tjener vi flere penge</h5><p>kæden lander her</p>
+        </div>
+      </div>
+    </div>
+    <p class="under skub r d5">Efterspørgslen på håndværkervirksomheder er så stor.</p>
+  </div>
+</section>
+
+<!-- 21 · DET BLIVER DYRERE OG DYRERE AT FÅ EN HÅNDVÆRKER -->
+<section class="slide" data-sektion="Økonomi og fremtid">
+  <div class="ghost">4</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">04</span><span class="krule"></span><span class="ktxt">Økonomi og fremtid · 4 af 6 · Ti år</span></div>
+    <h2 class="r d1">Over de sidste ti år er de steget hurtigere end inflationen.</h2>
+    <!-- AFVIGELSE fra manus: der findes ikke en offentlig årsserie vi kan stå på for
+         begge indeks, så kurverne går i rette linjer mellem de MÅLTE endepunkter
+         2015 = 100 og 2025. Årsdetaljen bæres af de ti felter nedenfor. -->
+    <div class="vgruppe r d2">
+      <svg class="figur" style="max-height:38vh" viewBox="0 0 900 280" role="img" aria-label="Byggeriets arbejdsomkostninger steg 27,6 procent fra 2015 til 2025, forbrugerpriserne 21,1 procent">
+        <rect x="484" y="46" width="160" height="186" fill="var(--flade)"/>
+        <text x="564" y="38" text-anchor="middle" class="svgcap">2021-2022 · INFLATIONEN VAR HURTIGERE</text>
+        <path d="M40 232h824" stroke="var(--border)" stroke-width="1.5"/>
+        <g stroke="var(--border)" stroke-width="1.5">
+          <path d="M44 232v7"/><path d="M124 232v7"/><path d="M204 232v7"/><path d="M284 232v7"/><path d="M364 232v7"/><path d="M444 232v7"/><path d="M524 232v7"/><path d="M604 232v7"/><path d="M684 232v7"/><path d="M764 232v7"/><path d="M844 232v7"/>
+        </g>
+        <g class="svgcap" text-anchor="middle">
+          <text x="44" y="266">2015</text><text x="124" y="266">2016</text><text x="204" y="266">2017</text><text x="284" y="266">2018</text><text x="364" y="266">2019</text><text x="444" y="266">2020</text><text x="524" y="266">2021</text><text x="604" y="266">2022</text><text x="684" y="266">2023</text><text x="764" y="266">2024</text><text x="844" y="266">2025</text>
+        </g>
+        <path d="M44 214L844 100" fill="none" stroke="var(--linje)" stroke-width="2.4" stroke-dasharray="7 6"/>
+        <path d="M44 214L844 52" fill="none" stroke="#111213" stroke-width="4"/>
+        <circle cx="44" cy="214" r="5" fill="#111213"/>
+        <circle cx="844" cy="52" r="5" fill="#111213"/>
+        <g>
+          <path d="M40 74h30" stroke="#111213" stroke-width="4"/>
+          <text x="80" y="79" class="svgval">+27,6 % · byggeriets arbejdsomkostninger</text>
+          <path d="M40 102h30" stroke="var(--linje)" stroke-width="2.4" stroke-dasharray="7 6"/>
+          <text x="80" y="107" class="svgmut">+21,1 % · forbrugerpriserne, altså inflationen</text>
+          <text x="40" y="134" class="svgcap">INDEKS 2015 = 100</text>
+        </g>
+      </svg>
+      <div class="notelinje r d3" style="margin-top:10px">Virksomhedens omkostning til arbejdskraft, ikke håndværkerens timepris ud til kunden.</div>
+    </div>
+    <div class="r d4" style="display:flex;align-items:flex-end;gap:34px;flex-wrap:wrap">
+      <div>
+        <div class="gtitel" style="margin-bottom:9px">8 af de 10 seneste år</div>
+        <svg class="figur" style="width:212px" viewBox="0 0 212 20" role="img" aria-label="Otte af de ti seneste år steg arbejdsomkostningerne mere end inflationen">
+          <g fill="#111213"><rect x="0" y="0" width="18" height="18"/><rect x="22" y="0" width="18" height="18"/><rect x="44" y="0" width="18" height="18"/><rect x="66" y="0" width="18" height="18"/><rect x="88" y="0" width="18" height="18"/><rect x="110" y="0" width="18" height="18"/><rect x="132" y="0" width="18" height="18"/><rect x="154" y="0" width="18" height="18"/></g>
+          <g fill="none" stroke="var(--linje)" stroke-width="1.5"><rect x="176.7" y=".7" width="17" height="17"/><rect x="194.3" y=".7" width="17" height="17"/></g>
+        </svg>
+      </div>
+      <span class="kchip gul">Lige nu: arbejdsomkostninger +3,1 % mod inflation +1,7 %</span>
+    </div>
+    <div class="pro-kilde skub r d5">Danmarks Statistik, BYG43 arbejdsomkostninger, årsgennemsnit af kvartaler · PRIS8 og PRIS111 forbrugerpriser · 2015-2025 · seneste tal 2026K1 og juli 2026</div>
+  </div>
+</section>
+
+<!-- 22 · TEKNOLOGIEN OG VORES BRANCHE
+     RETTET 14/8 efter Blok 4 slide 5: der lå her et søjlediagram med AI-brug pr.
+     branche (ITAV19: 24 % mod 42 %) og to robot-kort (3 % mod 38 %), og
+     overskriften var påstanden "Vores branche bruger AI mindst af alle brancher".
+     Superlativen er ude af talesporet, og manuset kræver nu et slide UDEN ét
+     eneste tal: hans vurdering må ikke se ud som en måling. Tallene og kilden
+     ligger i trænernoterne i MANUS_Modul4_Blok04_Oekonomi_og_fremtid.md.
+     BYG IKKE DIAGRAMMET TILBAGE. Slidets ene gule markering er afstandspilen. -->
+<section class="slide" data-sektion="Økonomi og fremtid" data-lint-ok="doedzone">
+  <div class="ghost">5</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">04</span><span class="krule"></span><span class="ktxt">Økonomi og fremtid · 5 af 6 · Teknologien</span></div>
+    <h2 class="r d1">Teknologien og vores branche.</h2>
+    <div class="vgruppe r d2">
+      <svg class="figur" style="max-height:52vh" viewBox="0 0 900 330" role="img" aria-label="Til venstre en tæt klump af brancher med AI-mærker på. Til højre, med tydelig luft imellem, står vores branche som en bygning under opførelse uden AI-mærke. Ingen tal på figuren.">
+        <!-- den store sætning, slidets eneste tekstlinje i stor sats -->
+        <text x="450" y="34" text-anchor="middle" style="font-size:27px;font-weight:900;fill:#111213;letter-spacing:-.02em">ikke så påvirket af alle de her teknologier</text>
+
+        <!-- afstandsmarkering: slidets ene gule markering -->
+        <g stroke="var(--gul)" stroke-width="5" fill="none" stroke-linecap="round">
+          <path d="M336 76h228"/>
+        </g>
+        <g fill="var(--gul)">
+          <path d="M320 76l18-9v18z"/><path d="M580 76l-18-9v18z"/>
+        </g>
+
+        <!-- VENSTRE: klumpen af brancher, tæt, grå, alle med AI-mærke -->
+        <g stroke="#C9C9C2" stroke-width="1.8" fill="none" stroke-linejoin="round">
+          <rect x="34" y="196" width="52" height="96"/><path d="M46 214h12M70 214h4M46 236h12M70 236h4M46 258h12M70 258h4"/>
+          <rect x="96" y="164" width="58" height="128"/><path d="M110 184h14M136 184h6M110 210h14M136 210h6M110 236h14M136 236h6M110 262h14M136 262h6"/>
+          <rect x="164" y="214" width="46" height="78"/><path d="M176 232h10M196 232h2M176 254h10M196 254h2"/>
+          <rect x="220" y="180" width="54" height="112"/><path d="M234 200h12M258 200h4M234 226h12M258 226h4M234 252h12M258 252h4"/>
+          <rect x="41" y="152" width="38" height="34" rx="4"/><path d="M50 162h20M50 172h14"/>
+          <rect x="164" y="176" width="42" height="30" rx="4"/><path d="M173 186h22M173 196h13"/>
+          <path d="M282 292v-56l24-18 24 18v56"/><path d="M296 292v-30h20v30"/>
+        </g>
+        <g fill="#F6F6F3" stroke="#C9C9C2" stroke-width="1.4">
+          <rect x="52" y="180" width="26" height="15" rx="7.5"/>
+          <rect x="114" y="148" width="26" height="15" rx="7.5"/>
+          <rect x="176" y="198" width="26" height="15" rx="7.5"/>
+          <rect x="238" y="164" width="26" height="15" rx="7.5"/>
+          <rect x="293" y="204" width="26" height="15" rx="7.5"/>
+        </g>
+        <g style="font-size:9px;font-weight:900;fill:#71757C;letter-spacing:.06em" text-anchor="middle">
+          <text x="65" y="191">AI</text><text x="127" y="159">AI</text><text x="189" y="209">AI</text><text x="251" y="175">AI</text><text x="306" y="215">AI</text>
+        </g>
+        <path d="M20 292h320" stroke="#ECECE8" stroke-width="2"/>
+        <text x="180" y="316" text-anchor="middle" class="svgcap">DE FLESTE BRANCHER</text>
+
+        <!-- HØJRE: vores branche, én bygning under opførelse, fuld farve, uden AI-mærke -->
+        <g stroke="#111213" stroke-width="2.4" fill="none" stroke-linejoin="round">
+          <path d="M636 292v-118h116v118"/>
+          <path d="M636 214h116M636 254h116M676 174v118M714 174v118"/>
+          <path d="M604 292V150h176"/>
+          <path d="M604 186h176M604 226h176M604 264h176"/>
+          <path d="M844 292V96"/><path d="M844 96h-92"/><path d="M752 96v22"/>
+          <path d="M742 118h20v16h-20z"/>
+          <path d="M844 96l24 10"/>
+        </g>
+        <path d="M580 292h300" stroke="#111213" stroke-width="2.4"/>
+        <text x="722" y="316" text-anchor="middle" class="svgcap">VORES BRANCHE</text>
+      </svg>
+    </div>
+    <div class="skub r d5"><span class="notelinje" style="color:rgba(17,18,19,.6)">Vurdering, ikke måling.</span></div>
+  </div>
+</section>
+
+<!-- 23 · EN BRANCHE MED EN KÆMPE FREMTID (gul fuldflade, ingen tal) -->
+<section class="slide gulflade" data-sektion="Økonomi og fremtid">
+  <div class="ghost">6</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">04</span><span class="krule"></span><span class="ktxt">Økonomi og fremtid · 6 af 6 · Fremtiden</span></div>
+    <h2 class="r d1" style="font-size:clamp(30px,3.7vw,58px);max-width:30ch">Byggebranchen ligner en branche med kæmpe fremtidsmuligheder.</h2>
+    <div class="vgruppe r d3" style="display:grid;grid-template-columns:1fr auto 1fr;column-gap:26px;align-items:center">
+      <div class="dkort" style="padding:26px 28px;gap:16px">
+        <div class="dk-titel"><svg class="ik xl"><use href="#i-kran"/></svg></div>
+        <div class="dk-txt" style="font-size:15.5px;font-weight:700">En branche der næsten ikke bruger den nye teknologi</div>
+        <div style="display:flex;justify-content:flex-end;color:rgba(17,18,19,.5)"><svg class="ik stor"><use href="#i-pil"/></svg></div>
+      </div>
+      <div class="matchboks">match</div>
+      <div class="dkort" style="padding:26px 28px;gap:16px">
+        <div class="dk-titel"><svg class="ik xl"><use href="#i-platform"/></svg></div>
+        <div class="dk-txt" style="font-size:15.5px;font-weight:700">Et produkt der er bygget på AI og automatisering</div>
+        <div style="display:flex;color:rgba(17,18,19,.5)"><svg class="ik stor" style="transform:rotate(180deg)"><use href="#i-pil"/></svg></div>
+      </div>
+    </div>
+    <div class="skub r d5"><span class="notelinje" style="color:rgba(17,18,19,.6)">Vurdering, ikke måling.</span></div>
+  </div>
+</section>
+
+<!-- ############ BLOK 5 · SÆSONEN (slide 24-27) ############ -->
+
+<!-- 24 · BRANCHEN KAN GODT VÆRE SÆSONBASERET -->
+<section class="slide" data-sektion="Sæsonen">
+  <div class="ghost">1</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">05</span><span class="krule"></span><span class="ktxt">Sæsonen · 1 af 4 · Sommeren</span></div>
+    <h2 class="r d1">I nogle sæsoner er nogle fag mere efterspurgte end andre.</h2>
+    <p class="under r d1" style="margin-top:14px">Og det er noget vi tilrettelægger vores fokus efter.</p>
+    <div class="vgruppe" style="display:grid;grid-template-columns:1fr 250px;column-gap:40px;align-items:center">
+      <div class="r d2">
+        <div class="gtitel" style="margin-bottom:12px">Arbejder utrolig meget udenfor</div>
+        <div class="kstrip stor">
+          <span class="kchip kant"><svg class="ik"><use href="#i-tommestok"/></svg>Tømrer</span>
+          <span class="kchip kant"><svg class="ik"><use href="#i-mursten"/></svg>Murer</span>
+          <span class="kchip kant"><svg class="ik"><use href="#i-rulle"/></svg>Maler</span>
+          <span class="kchip kant"><svg class="ik"><use href="#i-graver"/></svg>Entreprenør</span>
+          <span class="kchip kant"><svg class="ik"><use href="#i-skovl"/></svg>Jord og beton</span>
+        </div>
+      </div>
+      <div class="heroTal ord r d3">
+        <span class="t">Kæmpe efterspørgsel</span>
+        <span class="tl">Om sommeren</span>
+      </div>
+    </div>
+    <!-- AFVIGELSE fra manus: maanedsbaandet ligger OVER den gule ankerflade, ikke under.
+         Ved 1366x768 ville et baand under fladen ligge oven i folio-bjaelken. -->
+    <div class="aarbaand r d4" style="margin-top:auto;margin-bottom:20px">
+      <span class="abnavn">Byggefagene</span>
+      <span class="abfelter">
+        <span class="m ned">J</span><span class="m ned">F</span><span class="m ned">M</span><span class="m">A</span><span class="m">M</span><span class="m">J</span><span class="m">J</span><span class="m">A</span><span class="m">S</span><span class="m">O</span><span class="m ned">N</span><span class="m ned">D</span>
+      </span>
+    </div>
+    <div class="gulbaand r d5" style="margin-top:0">
+      <div class="gb">Dem vil alle have fat i, og dem mangler alle.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 25 · OM VINTEREN, OG HVEM DER IKKE BLIVER RAMT -->
+<section class="slide" data-sektion="Sæsonen">
+  <div class="ghost">2</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">05</span><span class="krule"></span><span class="ktxt">Sæsonen · 2 af 4 · Vinteren</span></div>
+    <h2 class="r d1">Elektriker og VVS bliver ikke ramt af vinteren.</h2>
+    <div class="r d2" style="margin-top:2.6vh;display:flex;flex-direction:column;gap:10px">
+      <div class="aarbaand">
+        <span class="abnavn">Byggefagene</span>
+        <span class="abfelter">
+          <span class="m ned">J</span><span class="m ned">F</span><span class="m ned">M</span><span class="m">A</span><span class="m">M</span><span class="m">J</span><span class="m">J</span><span class="m">A</span><span class="m">S</span><span class="m">O</span><span class="m ned">N</span><span class="m ned">D</span>
+        </span>
+      </div>
+      <div class="aarbaand">
+        <span class="abnavn gulchip">El og VVS</span>
+        <span class="abfelter">
+          <span class="m">J</span><span class="m">F</span><span class="m">M</span><span class="m">A</span><span class="m">M</span><span class="m">J</span><span class="m">J</span><span class="m">A</span><span class="m">S</span><span class="m">O</span><span class="m">N</span><span class="m">D</span>
+        </span>
+      </div>
+    </div>
+    <div class="gab vgruppe r d3">
+      <div class="gtitel">Andel af virksomhederne der melder dårligt vejr som produktionsbegrænsning i januar</div>
+      <svg class="figur" style="max-height:30vh" viewBox="0 0 900 200" role="img" aria-label="El 3 procent, VVS 5 procent, tømrer 17 procent, anlæg 29 procent, murer 30 procent">
+        <g><text x="92" y="26" text-anchor="end" class="svgtxt">El</text><rect x="100" y="12" width="76" height="20" fill="#111213"/><text x="186" y="27" class="svgval">3 %</text></g>
+        <g><text x="92" y="66" text-anchor="end" class="svgtxt">VVS</text><rect x="100" y="52" width="127" height="20" fill="#111213"/><text x="237" y="67" class="svgval">5 %</text></g>
+        <g><text x="92" y="106" text-anchor="end" class="svgtxt">Tømrer</text><rect x="100.7" y="92.7" width="431" height="19" fill="var(--flade)" stroke="#111213" stroke-width="1.4"/><text x="542" y="107" class="svgval">17 %</text></g>
+        <g><text x="92" y="146" text-anchor="end" class="svgtxt">Anlæg</text><rect x="100.7" y="132.7" width="735" height="19" fill="var(--flade)" stroke="#111213" stroke-width="1.4"/><text x="846" y="147" class="svgval">29 %</text></g>
+        <g><text x="92" y="186" text-anchor="end" class="svgtxt">Murer</text><rect x="100.7" y="172.7" width="760" height="19" fill="var(--flade)" stroke="#111213" stroke-width="1.4"/><text x="871" y="187" class="svgval">30 %</text></g>
+      </svg>
+      <div class="kstrip" style="margin-top:16px">
+        <span class="kchip">Gennemsnit af seks vintre, 2021 til 2026</span>
+        <span class="kchip">El ligger lavest i hvert enkelt år</span>
+      </div>
+    </div>
+    <div class="advarsel skub r d5">
+      <svg class="ik"><use href="#i-nej"/></svg>
+      <span>Det her er vejr, ikke efterspørgsel. To forskellige ting.</span>
+    </div>
+    <div class="pro-kilde r d5" style="margin-top:10px">Danmarks Statistik, konjunkturbarometer for byggeri og anlæg, KBB03, januar 2021-2026</div>
+  </div>
+</section>
+
+<!-- 26 · ÅRSHJULET -->
+<section class="slide" data-sektion="Sæsonen">
+  <div class="ghost">3</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">05</span><span class="krule"></span><span class="ktxt">Sæsonen · 3 af 4 · Årshjulet</span></div>
+    <div class="vgruppe" style="display:grid;grid-template-columns:1.3fr .7fr;column-gap:34px;align-items:center">
+      <!-- ÅRSHJULET · masterfigur, genbruges uændret i Blok 16.
+           Radier: byggefagene 210 (bredde 24) · el og VVS 178 (22) · metal 146 (26)
+           · lager 116 (20) · RESERVERET TOM BANE: radius 86, bredde 20, som Blok 16
+           lægger anlægsgartneren ind på uden at flytte noget.
+           Bevis: metal og el/VVS er fulde hele vejen rundt, så der findes ikke
+           én måned hvor alle baner er nedtonede. -->
+      <div class="hjulwrap r d2">
+        <svg class="hjul" viewBox="0 0 520 522" role="img" aria-label="Årshjul med fire baner: byggefagene nedtonet om vinteren, el og VVS lukket hele året, metal lukket hele året, lager nedtonet om sommeren">
+          <defs>
+            <path id="buebygge" d="M129.5 424.2A215 215 0 0 0 390.5 424.2"/>
+            <path id="bueelvvs" d="M161.3 119.1A172 172 0 0 1 358.7 119.1"/>
+            <path id="buemetal" d="M179.7 145.3A140 140 0 0 1 340.3 145.3"/>
+            <path id="buelager" d="M196.9 169.9A110 110 0 0 1 323.1 169.9"/>
+          </defs>
+          <circle cx="260" cy="260" r="210" fill="none" stroke="#DDDDD6" stroke-width="24"/>
+          <path d="M462.8 205.6A210 210 0 1 1 57.2 205.6" fill="none" stroke="#111213" stroke-width="24"/>
+          <circle cx="260" cy="260" r="178" fill="none" stroke="#111213" stroke-width="22"/>
+          <circle cx="260" cy="260" r="146" fill="none" stroke="var(--gul)" stroke-width="26"/>
+          <circle cx="260" cy="260" r="133" fill="none" stroke="#111213" stroke-width="1.2"/>
+          <circle cx="260" cy="260" r="159" fill="none" stroke="#111213" stroke-width="1.2"/>
+          <circle cx="260" cy="260" r="116" fill="none" stroke="#DDDDD6" stroke-width="20"/>
+          <path d="M148 230A116 116 0 0 1 372 230" fill="none" stroke="#111213" stroke-width="20"/>
+          <path d="M232.6 157.6L202.5 45.6 M287.4 157.6L317.5 45.6 M335.0 185.0L417.0 103.0 M362.4 232.6L474.4 202.5 M362.4 287.4L474.4 317.5 M335.0 335.0L417.0 417.0 M287.4 362.4L317.5 474.4 M232.6 362.4L202.5 474.4 M185.0 335.0L103.0 417.0 M157.6 287.4L45.6 317.5 M157.6 232.6L45.6 202.5 M185.0 185.0L103.0 103.0" stroke="#FFFFFF" stroke-width="3" fill="none"/>
+          <text class="banenavn" fill="#fff" stroke="#111213"><textPath href="#buebygge" startOffset="50%" text-anchor="middle">BYGGEFAGENE</textPath></text>
+          <text class="banenavn" fill="#fff" stroke="#111213"><textPath href="#bueelvvs" startOffset="50%" text-anchor="middle">EL OG VVS</textPath></text>
+          <text class="banenavn" fill="#111213" stroke="#F8E965"><textPath href="#buemetal" startOffset="50%" text-anchor="middle">METAL</textPath></text>
+          <text class="banenavn" fill="#fff" stroke="#111213"><textPath href="#buelager" startOffset="50%" text-anchor="middle">LAGER</textPath></text>
+          <g class="mnd" text-anchor="middle">
+            <text x="260" y="27">JAN</text><text x="379" y="58.9">FEB</text><text x="466.1" y="146">MAR</text><text x="498" y="265">APR</text>
+            <text x="466.1" y="384">MAJ</text><text x="379" y="471.1">JUN</text><text x="260" y="503">JUL</text><text x="141" y="471.1">AUG</text>
+            <text x="53.9" y="384">SEP</text><text x="22" y="265">OKT</text><text x="53.9" y="146">NOV</text><text x="141" y="58.9">DEC</text>
+          </g>
+          <g class="midt" text-anchor="middle">
+            <text x="260" y="248">Altid et fag</text><text x="260" y="268">med høj</text><text x="260" y="288">efterspørgsel</text>
+          </g>
+        </svg>
+      </div>
+      <div>
+        <div class="dkort r d3" style="margin-bottom:14px">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+            <div class="dk-titel"><svg class="ik stor"><use href="#i-svejs"/></svg>Metal</div><span class="kchip">Nyt fag</span>
+          </div>
+          <div class="dk-txt">Meget på værkstedet</div>
+          <div style="display:flex"><span class="kchip kant">Hele året</span></div>
+        </div>
+        <div class="dkort r d4">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+            <div class="dk-titel"><svg class="ik stor"><use href="#i-palle"/></svg>Lager</div><span class="kchip">Nyt fag</span>
+          </div>
+          <div class="dk-txt">Indendørs</div>
+          <div style="display:flex"><span class="kchip kant">Om vinteren</span></div>
+        </div>
+      </div>
+    </div>
+    <!-- AFVIGELSE fra manus: metal-banen er slidets ene gule flade, så konklusionen
+         står som sort slutlinje i stedet for gul ankerflade. -->
+    <div class="slutlinje r d5">Så vi hele tiden har fag med høj efterspørgsel vi kan gå efter.</div>
+  </div>
+</section>
+
+<!-- 27 · HVAD DU GØR MED DET -->
+<section class="slide" data-sektion="Sæsonen">
+  <div class="ghost">4</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">05</span><span class="krule"></span><span class="ktxt">Sæsonen · 4 af 4 · Hvad du gør</span></div>
+    <h2 class="r d1">Ring ind på det fag der har sæson.</h2>
+    <div class="duo r d2" style="margin-top:2.6vh;column-gap:48px">
+      <div>
+        <div class="aarbaand" style="margin-bottom:16px">
+          <span class="abfelter">
+            <span class="m">J</span><span class="m">F</span><span class="m">M</span><span class="m ned">A</span><span class="m ned">M</span><span class="m ned">J</span><span class="m ned">J</span><span class="m ned">A</span><span class="m ned">S</span><span class="m ned">O</span><span class="m">N</span><span class="m">D</span>
+          </span>
+        </div>
+        <div class="dk-titel" style="font-size:clamp(17px,1.7vw,24px);letter-spacing:-.02em;margin-bottom:14px"><svg class="ik stor"><use href="#i-sne"/></svg>November til marts</div>
+        <div class="kstrip">
+          <span class="kchip fuld">El</span><span class="kchip fuld">VVS</span><span class="kchip fuld">Metal</span><span class="kchip fuld">Lager</span>
+        </div>
+        <div class="notelinje" style="margin-top:12px">Det er dem du ringer ind på.</div>
+      </div>
+      <div>
+        <div class="aarbaand" style="margin-bottom:16px">
+          <span class="abfelter">
+            <span class="m ned">J</span><span class="m ned">F</span><span class="m ned">M</span><span class="m">A</span><span class="m">M</span><span class="m">J</span><span class="m">J</span><span class="m">A</span><span class="m">S</span><span class="m">O</span><span class="m ned">N</span><span class="m ned">D</span>
+          </span>
+        </div>
+        <div class="dk-titel" style="font-size:clamp(17px,1.7vw,24px);letter-spacing:-.02em;margin-bottom:14px"><svg class="ik stor"><use href="#i-sol"/></svg>April til oktober</div>
+        <div class="kstrip">
+          <span class="kchip fuld">Tømrer</span><span class="kchip fuld">Murer</span><span class="kchip fuld">Maler</span><span class="kchip fuld">Entreprenør</span><span class="kchip fuld">Jord og beton</span>
+        </div>
+        <div class="notelinje" style="margin-top:12px">Det er dem du ringer ind på.</div>
+      </div>
+    </div>
+    <div class="tjekliste" style="max-width:none">
+      <div class="trow r d3"><span class="tdot"></span><span class="ttxt">Ring ind på det fag der har sæson <span>ikke på det fag du ringede til sidst</span></span></div>
+      <div class="trow r d4"><span class="tdot"></span><span class="ttxt">Har din kunde flere fag, så flyt dialogen <span>over på det fag der har sæson lige nu</span></span></div>
+      <div class="trow r d5"><span class="tdot"></span><span class="ttxt">Du har altid mindst fire fag med høj efterspørgsel <span>uanset hvilken måned det er</span></span></div>
+    </div>
+    <div class="advarsel skub r d6">
+      <svg class="ik"><use href="#i-nej"/></svg>
+      <span>Sig til murermesteren i januar at han ikke kan komme til at arbejde, ikke at han mangler kunder. Det er to forskellige ting, og han ved godt hvilken en det er.</span>
+    </div>
+  </div>
+</section>
+
+<div class="progress" id="progress"></div>
+<div class="pilzone v" onclick="gaa(-1)"></div>
+<div class="pilzone h" onclick="gaa(1)"></div>
+<div class="folio">
+  <span class="brand"><img src="data:image/png;base64,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0Bst/nk2il5+YfHPBRQILAAAliMzBAAAAgsAQGABAAgsAAAEFgCAwAIAEFgAAAgsAACBBQAgsAAAEFgAAAILAEBgAQAILAAABBYAgMACABBYAAAILAAAgQUAILAAABBYAAACCwBAYAEAILAAAAQWAIDAAgAQWAAACCwAAIEFACCwAAAQWAAAAgsAQGABACCwAAAEFgCAwAIAQGABAAgsAACBBQAgsAAAEFgAAAILAEBgAQAgsAAABBYAgMACAEBgAQAILAAAgQUAgMACABBYAAACCwBAYAEAILAAAAQWAIDAAgBAYAEACCwAAIEFAIDAAgAQWAAAAgsAQGABACCwAAAEFgCAwAIAQGABAAgsAACBBQCAwAIAEFgAAAILAACBBQAgsAAABBYAgMACAEBgAQAILAAAgQUAgMACABBYAAACCwAAgQUAILAAAAQWAAACCwBAYAEACCwAAIEFAIDAAgAQWAAAAgsAAIEFACCwAAAEFgAAAgsAQGABAAgsAAAEFgCAwAIAEFgAAAILAACBBQAgsAAABBYAAAILAEBgAQAILAAABBYAgMACABBYAAACCwAAgQUAILAAAAQWAAACCwCgEf4/Paatms/mpuAAAAAASUVORK5CYII=" alt="">PowerMatch</span>
+  <span id="folioSektion">Produktviden</span>
+  <span class="nr" id="taeller">01 <span>/ 27</span></span>
+</div>
+
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+let i=Math.max(0,Math.min(slides.length-1,(parseInt(location.hash.slice(1))||1)-1));
+function pad(n){return String(n).padStart(2,'0')}
+function vis(n){
+  slides.forEach(s=>s.classList.remove('aktiv'));
+  i=Math.max(0,Math.min(slides.length-1,n));
+  slides[i].classList.add('aktiv');
+  document.getElementById('taeller').innerHTML=pad(i+1)+' <span>/ '+pad(slides.length)+'</span>';
+  document.getElementById('progress').style.width=((i+1)/slides.length*100)+'%';
+  document.getElementById('folioSektion').textContent=slides[i].dataset.sektion||'';
+  document.body.classList.toggle('moerk-chrome',slides[i].classList.contains('moerk'));
+  document.body.classList.toggle('gul-chrome',slides[i].classList.contains('gulflade'));
+  history.replaceState(null,'','#'+(i+1));
+}
+function gaa(d){vis(i+d)}
+addEventListener('keydown',e=>{
+  if(['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)){e.preventDefault();gaa(1)}
+  if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();gaa(-1)}
+  if(e.key==='Home')vis(0); if(e.key==='End')vis(slides.length-1);
+  if(e.key==='f'||e.key==='F'){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen()}
+});
+let tx=null;
+addEventListener('touchstart',e=>tx=e.touches[0].clientX);
+addEventListener('touchend',e=>{if(tx===null)return;const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)gaa(dx<0?1:-1);tx=null});
+vis(i);
+</script>
+
+<!-- ============================================================================
+     KAPITELNAVIGATION v1.0 · BYTE-IDENTISK BLOK
+     Denne blok står ORDRET ENS i alle fem decks i Modul 4 og Modul 5. Skal den
+     rettes, rettes den ét sted og kopieres byte for byte til de fire andre —
+     præcis som kaskade-rettelsesblokken i grundlaget v1.3. Blokken indsættes
+     nederst i body, efter deckets egen slide-motor, og den rører ikke ét
+     eksisterende element: den læser data-sektion fra slidene og bygger selv
+     både kapitellisten og fremdriftsindikatoren ind i DOM'en. Derfor kan den
+     lægges ind i et deck uden at der ændres en eneste anden linje.
+
+     HVAD DEN GØR
+     1) KAPITELLISTE. Tasten K (eller M) åbner en liste over deckets kapitler
+        med slidenumre. Klik eller taltast 1-9 hopper direkte. Pil op/ned
+        flytter markeringen, Enter åbner, Escape lukker. Listen er LUKKET som
+        udgangspunkt (display:none), så den kan ikke komme med på et
+        screenshot og kan ikke forstyrre en optagelse. Mens den er åben,
+        spiser den piletasterne, så man ikke kommer til at bladre bagved.
+     2) KAPITLERNE ER BLOKKENE. De udledes af data-sektion på hvert slide,
+        altså præcis det navn der står i kicker-linjen på slidet. Navigationen
+        og indholdet kan derfor ikke komme til at sige to forskellige ting.
+     3) FREMDRIFTSINDIKATOR i folio-linjen: kapitlets navn står der i forvejen
+        (#folioSektion), og blokken føjer en hårfin 1 px streg og et lille
+        "3 / 6" til i folioens egen sats. Det er bevidst næsten usynligt og
+        må ikke gøres til en fed statusbjælke.
+     4) STABILE HASH-LINKS PR. KAPITEL. #toemreren, #jord-og-beton,
+        #opsigelsesvarsler osv. åbner decket på kapitlets første slide.
+        Sluggen står ved hvert kapitel i listen, så den kan læses og sendes
+        videre. DE GAMLE HASH-LINKS PR. SLIDENUMMER VIRKER UÆNDRET: #4 er
+        stadig slide 4, og motoren skriver stadig selv #N i adressefeltet,
+        så deep-link-testen i deck-lint.js er urørt.
+
+     DESIGNSYSTEM v1.3. Ingen nye farver og ingen ny typografi: --gul #F8E965,
+     --sort #111213, --tekst #26282B, --muted #71757C, --border #ECECE8,
+     --flade #F6F6F3, --linje #C9C9C2, Inter 400-900. Reglen om maksimalt én
+     gul flade pr. slide er ikke rørt — den gule streg i listen sidder på det
+     AKTIVE kapitel i overlejringen, ikke på slidet, og overlejringen ligger
+     oven på indholdet og tæller derfor ikke med.
+     ============================================================================ -->
+<style>
+#kapitelmenu{position:fixed;inset:0;z-index:120;display:none;align-items:center;justify-content:center;
+  background:rgba(17,18,19,.5);padding:4vh 4vw;font-family:'Inter',-apple-system,Arial,sans-serif}
+#kapitelmenu.aaben{display:flex}
+#kapitelmenu .kpanel{width:100%;max-width:660px;max-height:92vh;overflow:auto;background:#FFFFFF;
+  border:1px solid var(--border);border-radius:16px;padding:26px 30px 22px;
+  box-shadow:0 24px 70px rgba(17,18,19,.28)}
+#kapitelmenu .khoved{display:flex;align-items:baseline;gap:14px;margin-bottom:16px}
+#kapitelmenu .ktitel{font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+#kapitelmenu .kdeck{margin-left:auto;font-size:11px;font-weight:800;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--linje);font-variant-numeric:tabular-nums}
+#kapitelmenu .krow{display:flex;align-items:center;gap:16px;width:100%;text-align:left;cursor:pointer;
+  background:none;border:0;border-top:1px solid var(--border);border-left:2px solid transparent;
+  padding:14px 10px 14px 12px;color:var(--tekst);font-family:inherit}
+#kapitelmenu .krow:last-of-type{border-bottom:1px solid var(--border)}
+#kapitelmenu .krow:hover,#kapitelmenu .krow.valgt{background:var(--flade)}
+#kapitelmenu .krow.nu{border-left-color:var(--gul)}
+#kapitelmenu .knum{font-size:12px;font-weight:900;color:var(--muted);font-variant-numeric:tabular-nums;
+  width:16px;flex-shrink:0}
+#kapitelmenu .knavn{font-size:16px;font-weight:800;color:var(--sort);letter-spacing:-.015em}
+#kapitelmenu .khash{font-size:10px;font-weight:700;letter-spacing:.06em;color:var(--linje);margin-left:10px}
+#kapitelmenu .kspan{margin-left:auto;font-size:12px;font-weight:800;color:var(--muted);
+  font-variant-numeric:tabular-nums;letter-spacing:.04em;flex-shrink:0}
+#kapitelmenu .kfod{margin-top:15px;font-size:10px;font-weight:700;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--linje)}
+.kmeter{width:54px;height:1px;background:var(--border);position:relative;flex-shrink:0}
+.kmeter i{position:absolute;left:0;top:0;height:1px;width:0;background:var(--linje);
+  transition:width .4s var(--ease)}
+.kpos{font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--linje);
+  font-variant-numeric:tabular-nums}
+.moerk-chrome .kmeter{background:rgba(255,255,255,.16)}
+.moerk-chrome .kmeter i{background:rgba(255,255,255,.5)}
+.moerk-chrome .kpos{color:rgba(255,255,255,.35)}
+.gul-chrome .kmeter{background:rgba(17,18,19,.14)}
+.gul-chrome .kmeter i{background:rgba(17,18,19,.42)}
+.gul-chrome .kpos{color:rgba(17,18,19,.42)}
+@media print{#kapitelmenu{display:none!important}.kmeter,.kpos{display:none}}
+@media (prefers-reduced-motion:reduce){.kmeter i{transition:none}}
+</style>
+<script>
+(function(){
+  var alleSlides=[].slice.call(document.querySelectorAll('.slide'));
+  if(!alleSlides.length)return;
+
+  /* slug: dansk -> ascii, saa #toemreren og #jord-og-beton er stabile og kan skrives i hånden */
+  function slug(s){
+    return String(s).toLowerCase()
+      .replace(/æ/g,'ae').replace(/ø/g,'oe').replace(/å/g,'aa')
+      .replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+  }
+
+  /* kapitlerne ER blokkene: sammenhaengende loeb af samme data-sektion */
+  var kap=[];
+  alleSlides.forEach(function(s,n){
+    var navn=(s.dataset.sektion||'').trim();
+    var sidste=kap[kap.length-1];
+    if(sidste&&sidste.navn===navn){sidste.slut=n;return;}
+    kap.push({navn:navn,slug:slug(navn),start:n,slut:n});
+  });
+
+  /* ---- fremdriftsindikator i folio-linjen: haarfin, ikke en statusbjaelke ---- */
+  var folio=document.querySelector('.folio');
+  var sekEl=document.getElementById('folioSektion');
+  var meter=null,meterFyld=null,posEl=null;
+  if(folio&&sekEl){
+    meter=document.createElement('span');meter.className='kmeter';meter.setAttribute('aria-hidden','true');
+    meterFyld=document.createElement('i');meter.appendChild(meterFyld);
+    posEl=document.createElement('span');posEl.className='kpos';
+    sekEl.parentNode.insertBefore(meter,sekEl.nextSibling);
+    meter.parentNode.insertBefore(posEl,meter.nextSibling);
+  }
+
+  /* ---- kapitellisten. Lukket som udgangspunkt, saa den ikke kan komme med paa
+         et screenshot og ikke kan forstyrre en optagelse. ---- */
+  var menu=document.createElement('div');
+  menu.id='kapitelmenu';menu.setAttribute('role','dialog');menu.setAttribute('aria-label','Kapitler');
+  var panel=document.createElement('div');panel.className='kpanel';
+  var hoved=document.createElement('div');hoved.className='khoved';
+  var titel=document.createElement('span');titel.className='ktitel';titel.textContent='Kapitler';
+  var deckNavn=document.createElement('span');deckNavn.className='kdeck';
+  deckNavn.textContent=kap.length+' kapitler · '+alleSlides.length+' slides';
+  hoved.appendChild(titel);hoved.appendChild(deckNavn);panel.appendChild(hoved);
+
+  var raekker=kap.map(function(k,n){
+    var r=document.createElement('button');r.type='button';r.className='krow';
+    var num=document.createElement('span');num.className='knum';num.textContent=(n+1);
+    var navn=document.createElement('span');navn.className='knavn';navn.textContent=k.navn;
+    var hash=document.createElement('span');hash.className='khash';hash.textContent='#'+k.slug;
+    var span=document.createElement('span');span.className='kspan';
+    span.textContent=(k.start+1===k.slut+1)?('slide '+(k.start+1)):('slide '+(k.start+1)+'-'+(k.slut+1));
+    r.appendChild(num);r.appendChild(navn);r.appendChild(hash);r.appendChild(span);
+    r.addEventListener('click',function(){gaaTilKapitel(n);});
+    panel.appendChild(r);
+    return r;
+  });
+
+  var fod=document.createElement('div');fod.className='kfod';
+  fod.textContent='1-9 spring · pil op og ned vælger · Enter åbner · Esc lukker · K åbner listen igen';
+  panel.appendChild(fod);
+  menu.appendChild(panel);
+  menu.addEventListener('click',function(e){if(e.target===menu)luk();});
+  document.body.appendChild(menu);
+
+  var aaben=false,valgt=0;
+
+  function kapitelFor(n){
+    for(var x=0;x<kap.length;x++){if(n>=kap[x].start&&n<=kap[x].slut)return x;}
+    return 0;
+  }
+  function markerValgt(){
+    raekker.forEach(function(r,n){r.classList.toggle('valgt',n===valgt);});
+  }
+  function opdater(){
+    var n=kapitelFor(i),k=kap[n],ial=k.slut-k.start+1,nu=i-k.start+1;
+    if(meterFyld)meterFyld.style.width=(nu/ial*100)+'%';
+    if(posEl)posEl.textContent=nu+' / '+ial;
+    if(meter)meter.title=k.navn+' · '+nu+' af '+ial;
+    raekker.forEach(function(r,x){r.classList.toggle('nu',x===n);});
+  }
+  function aab(){
+    valgt=kapitelFor(i);markerValgt();aaben=true;menu.classList.add('aaben');
+  }
+  function luk(){aaben=false;menu.classList.remove('aaben');}
+  function gaaTilKapitel(n){
+    luk();
+    vis(kap[Math.max(0,Math.min(kap.length-1,n))].start);
+  }
+
+  /* ---- hash: baade #12 (slidenummer, uaendret) og #toemreren (kapitel) ----
+     VIGTIGT: motoren har allerede kaldt vis() og skrevet #N i adressefeltet, før
+     denne blok koerer. Det ORIGINALE fragment fra selve navigationen hentes
+     derfor fra PerformanceNavigationTiming, som beholder det. Uden det ville et
+     kapitel-link altid lande paa slide 1. */
+  function fragmentVedIndlaesning(){
+    var e=performance.getEntriesByType?performance.getEntriesByType('navigation')[0]:null;
+    var raa=(e&&e.name)?e.name:location.href;
+    var n=raa.indexOf('#');
+    return n<0?'':raa.slice(n+1);
+  }
+  function losHash(raa){
+    var h='';
+    try{h=decodeURIComponent(String(raa||'')).trim();}catch(x){h=String(raa||'').trim();}
+    if(!h)return false;
+    if(/^\d+$/.test(h)){vis(parseInt(h,10)-1);return true;}
+    var s=slug(h);
+    for(var x2=0;x2<kap.length;x2++){
+      if(kap[x2].slug===s){vis(kap[x2].start);return true;}
+    }
+    return false;
+  }
+
+  /* motoren skal blive ved med at skrive #N, saa deep-link pr. slide er urørt.
+     Her lægges kun opdateringen af fremdriftsindikatoren oven på. */
+  var motorVis=window.vis;
+  window.vis=function(n){motorVis(n);opdater();};
+
+  addEventListener('hashchange',function(){losHash(String(location.hash||'').slice(1));});
+
+  addEventListener('keydown',function(e){
+    if(e.metaKey||e.ctrlKey||e.altKey)return;
+    var t=e.key;
+    if(!aaben){
+      if(t==='k'||t==='K'||t==='m'||t==='M'){e.preventDefault();e.stopPropagation();aab();}
+      return;
+    }
+    e.preventDefault();e.stopPropagation();
+    if(t==='Escape'||t==='k'||t==='K'||t==='m'||t==='M'){luk();return;}
+    if(t==='ArrowDown'||t==='ArrowRight'){valgt=Math.min(kap.length-1,valgt+1);markerValgt();return;}
+    if(t==='ArrowUp'||t==='ArrowLeft'){valgt=Math.max(0,valgt-1);markerValgt();return;}
+    if(t==='Enter'||t===' '){gaaTilKapitel(valgt);return;}
+    if(/^[1-9]$/.test(t)){var n=parseInt(t,10)-1;if(n<kap.length)gaaTilKapitel(n);return;}
+  },true);
+
+  var start=fragmentVedIndlaesning();
+  if(!(start&&!/^\d+$/.test(start)&&losHash(start)))opdater();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1901 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PowerMatch · Modul 4 · Video 2 · Mesteren og håndværkeren</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   POWERMATCH PRÆSENTATIONS-STANDARD v1.3
+   Modul 4 · Video 2 · Mesteren og håndværkeren
+   Bygget videre på modul-4-video1-praesentation.html (søsterdecket):
+   samme slide-motor, samme farver, samme typografi, samme chrome.
+   Tilføjelserne nedenfor er nye FIGURER, ikke et nyt designsprog.
+   ============================================================ */
+:root{
+  --gul:#F8E965; --gul-soft:#FDF8D4; --gul-kant:#F0E4A0;
+  --sort:#111213; --tekst:#26282B; --muted:#71757C;
+  --border:#ECECE8; --flade:#F6F6F3; --bg:#FFFFFF;
+  --linje:#C9C9C2;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --mx:7vw;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+body{font-family:'Inter',-apple-system,Arial,sans-serif;color:var(--tekst);background:var(--bg);-webkit-font-smoothing:antialiased}
+b{color:var(--sort)}
+mark{
+  background:linear-gradient(transparent 70%, var(--gul) 70%, var(--gul) 96%, transparent 96%);
+  background-size:0% 100%;background-repeat:no-repeat;color:inherit;padding:0 .05em;
+  transition:background-size .5s var(--ease) .95s;
+}
+.aktiv mark{background-size:100% 100%}
+
+/* ---------- slide-skelet ---------- */
+.slide{
+  position:absolute;inset:0;visibility:hidden;opacity:0;transform:scale(.986);
+  transition:opacity .45s var(--ease),transform .65s var(--ease),visibility 0s .45s;
+  padding:13vh var(--mx) 11vh;overflow:hidden;
+}
+.slide.aktiv{visibility:visible;opacity:1;transform:none;transition:opacity .5s var(--ease),transform .7s var(--ease)}
+.r{opacity:0;transform:translateY(14px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
+.aktiv .r{opacity:1;transform:none}
+.aktiv .d1{transition-delay:.08s}.aktiv .d2{transition-delay:.16s}.aktiv .d3{transition-delay:.24s}
+.aktiv .d4{transition-delay:.32s}.aktiv .d5{transition-delay:.4s}.aktiv .d6{transition-delay:.48s}
+.lm{display:block;overflow:hidden}
+.lm span{display:block;transform:translateY(112%);transition:transform .7s var(--ease)}
+.aktiv .lm span{transform:none}
+.aktiv .lm:nth-child(2) span{transition-delay:.08s}
+.aktiv .lm:nth-child(3) span{transition-delay:.16s}
+.z{position:relative;z-index:1}
+
+/* ---------- typografi ---------- */
+.kicker{display:flex;align-items:center;gap:14px;margin-bottom:26px}
+.kicker .knr{font-size:15px;font-weight:900;color:var(--sort);font-variant-numeric:tabular-nums}
+.kicker .krule{width:46px;height:2px;background:var(--gul)}
+.kicker .ktxt{font-size:12px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+h1{font-size:clamp(46px,5.9vw,88px);font-weight:900;color:var(--sort);letter-spacing:-.033em;line-height:1.03}
+h2{font-size:clamp(30px,3.2vw,48px);font-weight:900;color:var(--sort);letter-spacing:-.027em;line-height:1.07;max-width:26ch}
+p.under{font-size:clamp(15px,1.35vw,19px);line-height:1.6;color:var(--muted);max-width:56ch}
+
+/* spøgelsestal */
+.ghost{
+  position:absolute;right:-.05em;bottom:-.12em;z-index:0;pointer-events:none;user-select:none;
+  font-size:64vh;font-weight:900;line-height:.8;letter-spacing:-.05em;
+  color:transparent;-webkit-text-stroke:1.5px rgba(17,18,19,.09);
+}
+.fyld{display:flex;flex-direction:column;height:100%}
+.vgruppe{margin:auto 0;display:flex;flex-direction:column}
+.skub{margin-top:auto !important;padding-bottom:2vh}
+
+/* ---------- tjekliste ---------- */
+.tjekliste{margin-top:4vh;max-width:900px}
+.tjekliste .trow{display:flex;align-items:baseline;gap:20px;border-top:1px solid var(--border);padding:22px 4px}
+.tjekliste .trow:last-child{border-bottom:1px solid var(--border)}
+.tjekliste .tdot{width:12px;height:12px;border-radius:50%;background:var(--gul);flex-shrink:0;position:relative;top:-2px}
+.tjekliste .ttxt{font-size:clamp(15px,1.55vw,20px);font-weight:800;color:var(--sort)}
+.tjekliste .ttxt span{color:var(--muted);font-weight:500}
+
+/* ---------- proces-timeline (workflow) ---------- */
+.tflow{position:relative;margin:auto 0}
+.tflow .linje{position:absolute;left:31px;right:calc((100% - 104px)/5 - 31px);top:31px;height:2px;background:var(--sort)}
+.tflow .stationer{display:grid;grid-template-columns:repeat(5,1fr);column-gap:26px}
+.station{position:relative}
+.station .boks{
+  width:62px;height:62px;background:var(--gul);border-radius:12px;
+  display:flex;align-items:center;justify-content:center;gap:3px;
+  font-size:26px;font-weight:900;color:var(--sort);margin-bottom:24px;position:relative;z-index:1;
+  box-shadow:0 0 0 8px var(--bg);
+}
+.station.slut .boks{background:var(--sort);color:var(--gul)}
+.station h5{font-size:16px;font-weight:800;color:var(--sort);margin-bottom:7px;letter-spacing:-.01em}
+.station p{font-size:13px;line-height:1.5;color:var(--muted);max-width:22ch}
+
+/* ---------- gul effekt-slide ---------- */
+.slide.gulflade{background:var(--gul)}
+.gulflade .kicker .krule{background:var(--sort)}
+.gulflade .kicker .ktxt,.gulflade .kicker .knr{color:var(--sort)}
+.gulflade h2{max-width:none}
+.gulflade p.under{color:rgba(17,18,19,.68)}
+
+/* ---------- split ---------- */
+.split{position:absolute;inset:0;display:grid;grid-template-columns:46% 54%}
+.split .venstre{padding:13vh 3vw 11vh var(--mx);display:flex;flex-direction:column}
+.split .hoejre{position:relative;overflow:hidden;border-left:1px solid var(--border);display:flex;align-items:center;justify-content:center}
+.kaempe{
+  position:relative;font-size:clamp(180px,17vw,300px);font-weight:900;letter-spacing:-.05em;
+  line-height:1;color:var(--sort);font-variant-numeric:tabular-nums;
+}
+.kaempe i{position:absolute;left:-.05em;right:-.05em;bottom:.03em;height:.24em;background:var(--gul);z-index:-1}
+.fakta-stak{display:flex;flex-direction:column}
+.fakta-r{border-top:1px solid var(--border);padding:15px 0;font-size:15px;font-weight:700;color:var(--sort)}
+.fakta-r:last-child{border-bottom:1px solid var(--border)}
+.fakta-r span{color:var(--muted);font-weight:500}
+
+/* ---------- hero + gab-graf + statlinje ---------- */
+.hoejre.pro{flex-direction:column;align-items:stretch;justify-content:space-between;padding:13vh 7vw 11vh 4vw}
+.pro-hero{text-align:center;padding-top:1vh}
+.pro-hero .kaempe{display:inline-block}
+.pro-hero .ptag{margin-top:20px;font-size:12px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.gab .gtitel{font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;max-width:70ch}
+.gab svg{display:block;width:100%;height:auto}
+.gab .glab{font-family:'Inter',Arial,sans-serif;font-size:10.5px;font-weight:800;letter-spacing:.14em;fill:var(--muted)}
+.gab .gval{font-family:'Inter',Arial,sans-serif;font-size:14.5px;font-weight:900;letter-spacing:-.02em;fill:var(--sort);font-variant-numeric:tabular-nums}
+.gab .gval.hvid{fill:#fff}
+.pro-stats{display:grid;grid-template-columns:1fr 1.2fr;column-gap:30px}
+.pro-stats.en{grid-template-columns:1fr}
+.pro-stats.tre{grid-template-columns:repeat(3,1fr)}
+.pro-stats .pcell{border-left:1px solid var(--border);padding-left:26px}
+.pro-stats .pcell:first-child{border-left:none;padding-left:0}
+.pro-stats .pval{font-size:clamp(24px,2.1vw,34px);font-weight:900;color:var(--sort);letter-spacing:-.03em;font-variant-numeric:tabular-nums;line-height:1}
+.pro-stats .plab{margin-top:8px;font-size:10.5px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);line-height:1.55}
+.pro-stats .pnote{margin-top:8px;font-size:10.5px;font-weight:600;color:var(--muted);opacity:.85}
+.pro-kilde{margin-top:18px;font-size:10px;font-weight:600;letter-spacing:.05em;color:var(--muted);opacity:.75;line-height:1.5}
+
+p.under.bundfast{margin-top:auto !important;border-top:1px solid var(--border);padding-top:18px;padding-bottom:1vh;max-width:none}
+
+/* ---------- mørk flade ---------- */
+.slide.moerk{background:var(--sort)}
+.moerk .kicker .ktxt{color:rgba(255,255,255,.5)}
+.moerk .kicker .knr{color:#fff}
+.moerk h2{color:#fff}
+.moerk p.under{color:rgba(255,255,255,.6)}
+.moerk .ghost{-webkit-text-stroke:1.5px rgba(255,255,255,.1)}
+.moerk .tjekliste .trow{border-color:rgba(255,255,255,.16)}
+.moerk .tjekliste .ttxt{color:#fff}
+.moerk .tjekliste .ttxt span{color:rgba(255,255,255,.6)}
+.moerk .dtitel{color:rgba(255,255,255,.5)}
+
+/* duo */
+.duo{display:grid;grid-template-columns:1fr 1fr;column-gap:56px}
+.duo .dtitel{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);padding-bottom:12px}
+
+/* KABOOM-titel (gul fuldflade) */
+.titelgul h1{line-height:.98;letter-spacing:-.04em;text-transform:uppercase}
+.titelgul .boxline{display:inline-block;background:var(--sort);color:var(--gul);padding:.02em .14em;border-radius:10px}
+.titelgul .ghost{-webkit-text-stroke:2px rgba(17,18,19,.14);font-size:88vh;bottom:-14vh;right:-2vw}
+
+/* chips */
+.kstrip{display:flex;gap:9px;flex-wrap:wrap}
+.kchip{display:flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:100px;padding:7px 13px;
+  font-size:10px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.kchip i{font-style:normal;font-size:13px;font-weight:900;line-height:1}
+.kchip.ja{color:var(--sort);border-color:#DCDCD5}
+.kchip.gul{background:var(--gul);border-color:var(--gul-kant);color:var(--sort)}
+.kchip.fuld{background:var(--sort);border-color:var(--sort);color:#fff}
+.kchip.kant{color:var(--sort);border-color:var(--linje)}
+.kchip.stiplet{border-style:dashed;border-color:var(--linje)}
+.kstrip.stor .kchip{font-size:11.5px;padding:11px 17px;letter-spacing:.1em}
+.gulflade .kchip{border-color:rgba(17,18,19,.32);color:var(--sort)}
+.moerk .kchip{border-color:rgba(255,255,255,.24);color:rgba(255,255,255,.72)}
+
+/* ============================================================
+   MODUL 4 · NYE FIGUR-KOMPONENTER (samme tokens, ingen nye farver)
+   ============================================================ */
+
+/* ikoner: ét stregsprog hele vejen igennem modulet */
+.ik{width:22px;height:22px;flex-shrink:0;stroke:currentColor;stroke-width:1.7;fill:none;
+  stroke-linecap:round;stroke-linejoin:round}
+.ik.stor{width:30px;height:30px;stroke-width:1.6}
+.ik.mini{width:15px;height:15px;stroke-width:1.9}
+.ik.xl{width:44px;height:44px;stroke-width:1.4}
+.station .boks .ik{width:29px;height:29px}
+.station .boks.duoik .ik{width:21px;height:21px}
+.kchip .ik{width:14px;height:14px;stroke-width:2}
+
+/* fakta-rækker med nummer og ikon (fra Modul 3 · Video 3) */
+.frows{width:100%;max-width:900px}
+.frow{display:flex;align-items:center;gap:16px;border-top:1px solid var(--border);padding:15px 4px}
+.frow:last-child{border-bottom:1px solid var(--border)}
+.frow .fnr{font-size:13px;font-weight:900;color:var(--sort);width:26px;height:26px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-variant-numeric:tabular-nums}
+.frow .ft{font-size:clamp(14.5px,1.45vw,19px);font-weight:800;color:var(--sort);letter-spacing:-.01em}
+.frow .ft span{color:var(--muted);font-weight:500}
+.frow .fnote{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:10px;font-weight:800;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.frow.hero .fnr{background:var(--gul);border-radius:8px}
+.frow.svag .ft,.frow.svag .fnr,.frow.svag .ik{color:var(--muted)}
+.moerk .frow{border-color:rgba(255,255,255,.16)}
+.moerk .frow .ft{color:#fff}
+
+/* formel-linje (fra Video 2 · 10 spørgsmål) */
+.frik{display:flex;align-items:flex-end;gap:clamp(10px,1.2vw,20px);flex-wrap:nowrap;white-space:nowrap}
+.frik .led{position:relative}
+.frik .val{font-size:clamp(19px,1.9vw,30px);font-weight:900;color:var(--sort);letter-spacing:-.03em}
+.frik .op{font-size:clamp(18px,1.9vw,28px);font-weight:800;color:var(--linje)}
+.frik .val.ringet{background:var(--gul);border-radius:10px;padding:.06em .2em}
+.frik .lab{position:absolute;left:2px;top:100%;margin-top:11px;font-size:9.5px;font-weight:800;
+  letter-spacing:.14em;color:var(--muted);text-transform:uppercase;white-space:nowrap}
+
+/* kæmpe tal / kæmpe ord */
+.heroTal{display:flex;align-items:baseline;gap:22px}
+.heroTal .t{position:relative;font-size:clamp(64px,7.6vw,132px);font-weight:900;color:var(--sort);
+  letter-spacing:-.05em;line-height:1;font-variant-numeric:tabular-nums}
+.heroTal .t i{position:absolute;left:-.04em;right:-.04em;bottom:.05em;height:.22em;background:var(--gul);z-index:-1}
+.heroTal .tl{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
+  max-width:20ch;line-height:1.55}
+.heroTal.ord{flex-direction:column;align-items:flex-start;gap:10px}
+.heroTal.ord .t{font-size:clamp(24px,2.5vw,38px);letter-spacing:-.03em;line-height:1.08;max-width:11ch}
+
+/* svar-kort: replikken man husker */
+.svarkort{background:var(--gul);border-radius:16px;padding:18px 22px}
+.svarkort .sv{font-size:clamp(19px,2vw,30px);font-weight:900;color:var(--sort);letter-spacing:-.03em;line-height:1.1}
+.svarkort .svu{margin-top:8px;font-size:11px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:rgba(17,18,19,.6)}
+
+/* gul ankerflade i bunden af et slide */
+.gulbaand{margin-top:auto;background:var(--gul);padding:18px var(--mx);
+  margin-left:calc(-1 * var(--mx));margin-right:calc(-1 * var(--mx))}
+.gulbaand .gb{font-size:clamp(19px,2.05vw,30px);font-weight:900;color:var(--sort);letter-spacing:-.022em;line-height:1.14}
+/* slutlinje: samme rolle som en gul ankerflade, men uden gul, når gul er brugt i figuren */
+.slutlinje{margin-top:auto;border-top:1px solid var(--border);padding-top:15px;
+  font-size:clamp(17px,1.75vw,25px);font-weight:900;color:var(--sort);letter-spacing:-.022em;line-height:1.15}
+.notelinje{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.03em;line-height:1.5}
+.advarsel{display:flex;gap:11px;align-items:flex-start;border-left:3px solid var(--linje);padding-left:12px;
+  font-size:11.5px;font-weight:700;color:var(--muted);line-height:1.5;max-width:100ch}
+.advarsel .ik{width:15px;height:15px;margin-top:1px}
+
+/* synligt tom, stiplet plads: tal der mangler, og som IKKE må gættes */
+.tomplads{display:inline-flex;align-items:center;gap:10px;border:1.5px dashed var(--linje);border-radius:100px;
+  padding:7px 15px;font-size:10px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.tomplads b{color:var(--sort);letter-spacing:.24em}
+.tomboks{border:1.5px dashed var(--linje);border-radius:14px;padding:12px 15px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.tomboks .tblab{font-size:9.5px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);max-width:38ch;line-height:1.5}
+
+/* kort */
+.dkort{border:1px solid var(--border);border-radius:16px;padding:16px 18px;display:flex;flex-direction:column;gap:10px}
+.dkort.svag{background:var(--flade)}
+.dkort.tung{border-color:var(--linje);background:var(--flade)}
+.dkort .dk-titel{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:900;letter-spacing:.02em;color:var(--sort)}
+.dkort .dk-txt{font-size:13px;font-weight:600;color:var(--muted);line-height:1.5}
+.dkort.svag .dk-titel{color:var(--muted)}
+.gulflade .dkort{border-color:rgba(17,18,19,.3)}
+.gulflade .dkort .dk-txt{color:rgba(17,18,19,.66)}
+.matchboks{background:var(--sort);color:var(--gul);border-radius:16px;padding:16px 24px;
+  font-size:clamp(19px,2.2vw,32px);font-weight:900;letter-spacing:-.02em;align-self:center}
+
+/* replik-rækker */
+.rep{display:flex;align-items:center;gap:12px;border-top:1px solid var(--border);padding:12px 2px}
+.rep:last-of-type{border-bottom:1px solid var(--border)}
+.rep .rt{font-size:14px;font-weight:700;color:var(--sort);line-height:1.4}
+.rep .ik{color:var(--muted)}
+.rep.svag .rt{color:var(--muted)}
+.rep .pp{margin-left:auto}
+
+/* mørkt bånd med brud */
+.moerkbaand{display:flex;align-items:center;gap:16px;background:var(--sort);border-radius:14px;padding:15px 20px;color:#fff}
+.moerkbaand .mb{font-size:14.5px;font-weight:800;letter-spacing:-.01em}
+.moerkbaand .ik{color:var(--gul)}
+
+/* figurer */
+.figur{display:block;width:100%;height:auto}
+.figurmax{margin:0 auto}
+svg text{font-family:'Inter',Arial,sans-serif}
+.svgtxt{font-size:12px;font-weight:800;fill:var(--sort)}
+.svgstor{font-size:19px;font-weight:900;fill:var(--sort);letter-spacing:-.02em}
+.svgmut{font-size:11px;font-weight:700;fill:var(--muted)}
+.svgcap{font-size:10px;font-weight:800;letter-spacing:.13em;fill:var(--muted)}
+.svgval{font-size:12px;font-weight:900;fill:var(--sort);font-variant-numeric:tabular-nums}
+.svgvalhvid{font-size:12px;font-weight:900;fill:#fff;font-variant-numeric:tabular-nums}
+.gtitel{font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);max-width:80ch}
+
+/* fagkæden: MASTERFIGUR. Genbruges i Video 4 ved at sætte ÉN klasse på .kaede:
+   .fremhaev-jordbeton | .fremhaev-murer | .fremhaev-toemrer | .fremhaev-elvvs | .fremhaev-maler
+   Uden fremhæv-klasse står alle fem stationer lige stærkt (dette slide). */
+.kaede .boks{background:var(--sort);border:none;color:var(--gul)}
+.kaede .station{transition:opacity .45s var(--ease)}
+.kaede .boks{transition:transform .45s var(--ease)}
+.kaede[class*="fremhaev-"] .station{opacity:.34}
+.kaede.fremhaev-jordbeton .st-jordbeton,
+.kaede.fremhaev-murer .st-murer,
+.kaede.fremhaev-toemrer .st-toemrer,
+.kaede.fremhaev-elvvs .st-elvvs,
+.kaede.fremhaev-maler .st-maler{opacity:1}
+.kaede.fremhaev-jordbeton .st-jordbeton .boks,
+.kaede.fremhaev-murer .st-murer .boks,
+.kaede.fremhaev-toemrer .st-toemrer .boks,
+.kaede.fremhaev-elvvs .st-elvvs .boks,
+.kaede.fremhaev-maler .st-maler .boks{background:var(--gul);color:var(--sort);transform:scale(1.1)}
+
+/* tflow-varianter: gul er anker, så kun ÉT led må være gult */
+.tflow.neutral .boks{background:var(--flade);border:1px solid var(--linje);color:var(--sort)}
+.tflow.neutral .station.staerk .boks{background:var(--gul);border-color:var(--gul);
+  transform:scale(1.1);box-shadow:0 0 0 8px var(--bg),0 0 0 11px var(--gul-soft)}
+.tflow .stationer.fem-tal{grid-template-columns:repeat(5,1fr)}
+.pilned{width:2px;height:22px;background:var(--linje);margin-left:31px;position:relative}
+.pilned::after{content:"";position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  border:5px solid transparent;border-top-color:var(--linje)}
+
+/* 12-måneders bånd: SAMME skala og samme nedtoning som årshjulet på slide 26 */
+.aarbaand{display:flex;align-items:center;gap:14px}
+.aarbaand .abnavn{width:112px;flex-shrink:0;text-align:right;font-size:10px;font-weight:800;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+.aarbaand .abnavn.gulchip{background:var(--gul);color:var(--sort);border-radius:100px;padding:5px 0;
+  text-align:center;width:112px}
+.aarbaand .abfelter{flex:1;display:grid;grid-template-columns:repeat(12,1fr);gap:3px}
+.aarbaand .m{height:24px;border-radius:4px;background:var(--sort);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:900;letter-spacing:.02em}
+.aarbaand .m.ned{background:#DDDDD6;color:var(--muted)}
+
+/* årshjul */
+.hjulwrap{display:flex;justify-content:center;align-items:center}
+.hjul{display:block;width:100%;max-width:500px;height:auto}
+.hjul .mnd{font-size:14px;font-weight:800;letter-spacing:.05em;fill:var(--muted)}
+.hjul .banenavn{font-size:13px;font-weight:900;letter-spacing:.16em;paint-order:stroke;stroke-width:4px;stroke-linejoin:round}
+.hjul .midt{font-size:14.5px;font-weight:800;fill:var(--sort)}
+
+/* ---------- chrome ---------- */
+.meta-tl,.meta-tr{position:fixed;top:30px;z-index:97;font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.meta-tl{left:var(--mx)} .meta-tl b{color:var(--sort)}
+.meta-tr{right:var(--mx)}
+.moerk-chrome .meta-tl,.moerk-chrome .meta-tr{color:rgba(255,255,255,.55)}
+.moerk-chrome .meta-tl b{color:#fff}
+.gul-chrome .meta-tl,.gul-chrome .meta-tr{color:rgba(17,18,19,.6)}
+.gul-chrome .meta-tl b{color:var(--sort)}
+.folio{
+  position:fixed;left:0;right:0;bottom:0;z-index:97;height:58px;
+  display:flex;align-items:center;gap:16px;padding:0 var(--mx);
+  border-top:1px solid var(--border);font-size:11px;font-weight:800;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--muted);background:var(--bg);
+}
+.folio .brand{color:var(--sort);display:flex;align-items:center;gap:10px}
+.folio .brand img{width:22px;height:22px}
+.folio .nr{margin-left:auto;font-size:15px;font-weight:900;color:var(--sort);letter-spacing:.06em;font-variant-numeric:tabular-nums}
+.folio .nr span{color:var(--linje)}
+.moerk-chrome .folio{background:var(--sort);border-color:rgba(255,255,255,.14);color:rgba(255,255,255,.5)}
+.moerk-chrome .folio .brand,.moerk-chrome .folio .nr{color:#fff}
+.moerk-chrome .folio .nr span{color:rgba(255,255,255,.35)}
+.gul-chrome .folio{background:var(--gul);border-color:rgba(17,18,19,.18);color:rgba(17,18,19,.6)}
+.gul-chrome .folio .brand,.gul-chrome .folio .nr{color:var(--sort)}
+.progress{position:fixed;bottom:56px;left:0;height:3px;background:var(--gul);width:0;z-index:98;transition:width .4s var(--ease)}
+.moerk-chrome .progress,.gul-chrome .progress{background:var(--sort)}
+.pilzone{position:fixed;top:0;bottom:58px;width:12%;z-index:90;cursor:pointer}
+.pilzone.v{left:0}.pilzone.h{right:0}
+
+/* ---------- lav skærm (fx 1366x768): samme udtryk, strammere lodret rytme ---------- */
+@media (max-height:820px){
+  .slide{padding:9vh var(--mx) 8vh}
+  .split .venstre{padding:9vh 3vw 8vh var(--mx)}
+  .hoejre.pro{padding:9vh 7vw 8vh 4vw}
+  .kicker{margin-bottom:20px}
+  .tjekliste{margin-top:2.6vh}
+  .tjekliste .trow{padding:15px 4px}
+  .frow{padding:11px 4px}
+  .rep{padding:9px 2px}
+  p.under{line-height:1.5}
+  .skub{padding-bottom:1vh}
+  .station .boks{margin-bottom:18px}
+  .hjul{max-width:462px}
+  .gulbaand{padding:14px var(--mx)}
+  .heroTal .t{font-size:clamp(56px,6.6vw,110px)}
+}
+@media (max-width:1500px){
+  .frik{gap:clamp(8px,1vw,16px)}
+  .frik .val{font-size:clamp(17px,1.7vw,28px)}
+  .frik .op{font-size:clamp(16px,1.7vw,26px)}
+  .frik .lab{font-size:9px;letter-spacing:.1em}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media print{
+  html,body{overflow:visible}
+  .slide{position:relative;visibility:visible;opacity:1;transform:none;page-break-after:always;height:100vh}
+  .progress,.pilzone,.folio,.meta-tl,.meta-tr{display:none}
+  .r,.lm span{opacity:1;transform:none}
+  mark{background-size:100% 100%}
+}
+
+/* v2 typografi-vagt: forhindrer horeunger (kort sidste linje) og skæve overskrifts-brud */
+h1,h2{text-wrap:balance}
+p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.ft,.dk-txt,.rt,.under,.notelinje,.gtitel{text-wrap:pretty}
+
+/* ============================================================
+   MODUL 4 · VIDEO 2 · NYE FIGUR-KOMPONENTER
+   Alt herunder er tilføjelser til v1.3. Ingen nye farver, ingen
+   ny slide-motor. De fire nye greb er:
+   1) .rkort  · replik-kortene (fire slides, samme greb hver gang)
+   2) .duo.spejl · modsætningen replik for replik (S8 og S20)
+   3) .brud / .brudtxt · den brudte linje (S9, S14, S22)
+   4) .panel · kontrolcirklens to felter (S22)
+   ============================================================ */
+
+/* ---- REPLIK-KORT: deckets signaturgreb ------------------------
+   Skal se ens ud på S6, S9, S13, S16, S17 og S11/S22, så en sælger
+   kan tage et telefon-screenshot af hvilket som helst af dem. ---- */
+.telefonkicker{display:flex;align-items:center;gap:13px;font-size:11.5px;font-weight:800;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.telefonkicker .ik{width:18px;height:18px;color:var(--sort);stroke-width:1.7}
+.telefonkicker::after{content:"";flex:1;height:1px;background:var(--border)}
+
+.kortnet{display:grid;gap:20px}
+.kortnet.tre{grid-template-columns:repeat(3,1fr)}
+.kortnet.to{grid-template-columns:1fr 1fr}
+.kortnet>.kw{display:flex}
+.kortnet .kw>.rkort{flex:1}
+.kortnet .bred{grid-column:1 / -1}
+/* kortene fylder den plads der er: nettet strækker sig, og rækkerne er lige høje */
+.kortnet.fyldud{flex:1;grid-auto-rows:1fr}
+/* når kortet strækkes, står replikken midt i kortet, og den sættes større:
+   det er de to slides en sælger tager et telefon-screenshot af. */
+.kortnet.fyldud .rkort{justify-content:center}
+.kortnet.fyldud .rkort .rk{font-size:clamp(19px,2.08vw,31px);line-height:1.16}
+.kortnet.fyldud .rkort .rq{font-size:42px;height:24px}
+
+.rkort{position:relative;background:#fff;border:1px solid var(--border);border-radius:18px;
+  padding:19px 22px 21px;display:flex;flex-direction:column;gap:9px;
+  box-shadow:0 14px 28px -24px rgba(17,18,19,.34)}
+.rkort .rq{display:block;height:20px;font-size:36px;font-weight:900;line-height:.86;
+  color:var(--gul);letter-spacing:-.04em}
+.rkort .rk{font-size:clamp(16.5px,1.68vw,24px);font-weight:800;color:var(--sort);
+  letter-spacing:-.024em;line-height:1.19}
+.rkort .rmark{position:absolute;right:17px;top:15px;display:flex;align-items:center;gap:9px;color:var(--muted)}
+.rkort.graa .rq{color:var(--linje)}
+.rkort.gul{background:var(--gul);border-color:var(--gul-kant);box-shadow:none}
+.rkort.gul .rq{color:rgba(17,18,19,.42)}
+.rkort.stor{padding:26px 28px 28px;gap:12px}
+.rkort.stor .rq{font-size:44px;height:26px}
+.rkort.stor .rk{font-size:clamp(18px,1.98vw,30px);line-height:1.15}
+.moerk .rkort{background:var(--gul);border-color:var(--gul);box-shadow:none}
+.moerk .rkort .rq{color:rgba(17,18,19,.42)}
+.moerk .rkort .rk{color:var(--sort)}
+/* kortene ligger let forskudt, som kort man har lagt ud på bordet.
+   Rotationen sidder på .rkort, ikke på .r, fordi .aktiv .r nulstiller transform. */
+.skaev1{transform:rotate(-.55deg)}.skaev2{transform:rotate(.45deg)}
+.skaev3{transform:rotate(.32deg)}.skaev4{transform:rotate(-.38deg)}
+.indad-v{transform:rotate(-1.25deg)}.indad-h{transform:rotate(1.25deg)}
+
+/* ---- svarhero: den fremhævede konklusion nederst i en .duo ---- */
+.svarhero{background:var(--gul);border-radius:16px;padding:15px 19px;display:flex;align-items:center;gap:15px}
+.svarhero .shv{font-size:clamp(17px,1.9vw,28px);font-weight:900;color:var(--sort);letter-spacing:-.03em;line-height:1.1}
+.svarhero .ik{color:var(--sort);flex-shrink:0}
+
+/* ---- recap-linje. .n = sort/hvid prik, når gul er brugt i figuren ---- */
+.recap{display:flex;align-items:flex-start;gap:14px;border-top:1px solid var(--border);padding-top:14px}
+.recap .rdot{width:11px;height:11px;border-radius:50%;background:var(--gul);flex-shrink:0;margin-top:5px}
+.recap.n .rdot{background:var(--sort)}
+.recap .rtx{font-size:clamp(14px,1.42vw,19px);font-weight:800;color:var(--sort);letter-spacing:-.012em;line-height:1.45}
+.moerk .recap{border-color:rgba(255,255,255,.16)}
+.moerk .recap .rtx{color:#fff}
+.moerk .recap.n .rdot{background:#fff}
+
+/* ---- brudt linje: en streg der knækker midt over ---- */
+.brud{display:flex;align-items:center;gap:14px}
+.brud .bs{flex:1;height:1px;background:var(--linje)}
+.brud .bz{color:var(--gul);flex-shrink:0}
+.brud .bi{color:var(--muted);flex-shrink:0}
+.brudtxt{margin-top:15px;font-size:clamp(17px,1.8vw,26px);font-weight:900;color:var(--sort);
+  letter-spacing:-.026em;line-height:1.15}
+.moerk .brud .bs{background:rgba(255,255,255,.3)}
+.moerk .brudtxt{color:#fff}
+.moerk .brud .bi{color:rgba(255,255,255,.55)}
+
+/* ---- spejl-duo: SAMME opbygning i begge halvdele af decket.
+   S8 (sælger mod rådgiver) og S20 (2 min mod 5-10 min) deler den her
+   klasse, så de to modsætninger kan lægges op mod hinanden. ---- */
+.duo.spejl{column-gap:54px;align-items:stretch}
+.duo.spejl .dside{display:flex;flex-direction:column}
+.duo.spejl .dtop{display:flex;align-items:center;gap:18px;margin:4px 0 10px}
+.duo.spejl .dbund{margin-top:auto;padding-top:16px}
+.duo.spejl .dside.svag .rt{color:var(--muted)}
+.duo.spejl.strk{flex:1}
+.laegpaa{display:flex;align-items:center;gap:11px;font-size:10.5px;font-weight:800;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+/* ---- panel: kontrolcirklens to felter ---- */
+.panel{border-radius:20px;padding:21px 24px 6px;display:flex;flex-direction:column;gap:12px}
+.panel.gul{background:var(--gul)}
+.panel.gul .ptitel{color:rgba(17,18,19,.6)}
+.panel.gul .tjekliste{margin-top:0}
+.panel.gul .tjekliste .trow{border-color:rgba(17,18,19,.22);padding:12px 0}
+.panel.gul .tjekliste .tdot{background:var(--sort)}
+.panel.gul .tjekliste .ttxt{color:var(--sort)}
+.panel.stille{border:1px solid rgba(255,255,255,.16);padding-bottom:18px}
+.ptitel{display:flex;align-items:center;gap:11px;font-size:11.5px;font-weight:800;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.ptitel .ik{flex-shrink:0}
+.moerk .panel.stille .ptitel{color:rgba(255,255,255,.55)}
+.moerk .panel.stille .frow{border-color:rgba(255,255,255,.16)}
+
+/* ---- tre-fase bånd: ét opkald fra venstre mod højre ---- */
+.faserow{display:flex;align-items:center;gap:16px}
+.faseband{display:flex;align-items:stretch;gap:4px;flex:1}
+.fseg{border-radius:7px;padding:12px 15px;display:flex;align-items:center;line-height:1.3;
+  font-size:11px;font-weight:800;letter-spacing:.11em;text-transform:uppercase}
+.fseg.et{flex:2;background:var(--sort);color:#fff}
+.fseg.to{flex:1;background:var(--flade);border:1px solid var(--linje);color:var(--sort)}
+.fseg.tre{flex:1;background:transparent;border:1px dashed var(--linje);color:var(--muted)}
+
+/* ---- små rettelser i arvet CSS, som Video 2 har brug for ---- */
+/* slut-leddet i en neutral tflow skal kunne være sort (gul er brugt i figuren) */
+.tflow.neutral .station.slut .boks{background:var(--sort);border-color:var(--sort);color:var(--gul);
+  transform:scale(1.1);box-shadow:0 0 0 8px var(--bg)}
+.moerk .heroTal .t{color:#fff}
+.moerk .heroTal .tl{color:rgba(255,255,255,.58)}
+.moerk .notelinje{color:rgba(255,255,255,.55)}
+.moerk .dkort{border-color:rgba(255,255,255,.18)}
+.moerk .dkort .dk-titel{color:#fff}
+.moerk .dkort .dk-txt{color:rgba(255,255,255,.6)}
+.midtret{display:flex;justify-content:center}
+.svgtxthvid{font-size:12px;font-weight:800;fill:rgba(255,255,255,.82)}
+.svgcaphvid{font-size:10px;font-weight:800;letter-spacing:.13em;fill:rgba(255,255,255,.5)}
+.ringnavn{font-size:15px;font-weight:900;letter-spacing:.16em;paint-order:stroke;
+  stroke-width:5px;stroke-linejoin:round}
+
+/* ============================================================
+   DE SEKS KASKADE-FÆLDER I GRUNDLAGET v1.3, lukket samlet her, så alle
+   fire decks i Modul 4 står på samme grundlag og ingen af dem kan arve
+   en usynlighedsfejl videre. Reglerne står ordret som i Video 1/Video 4:
+   A) en fill-erklæring i en KLASSE på et SVG-tekstelement vinder over
+      fill="#fff" som ATTRIBUT → hvid eller lys tekst bliver usynlig på
+      mørk flade. Hvid tekst i SVG sættes derfor altid med
+      style="fill:#fff" inline i dette deck.
+   B) .gulflade .kchip står efter .kchip.fuld → sort tekst på sort pille.
+   C) .moerk .kchip står efter .kchip.gul → lys grå tekst på gul pille.
+   D) .gulbaand .kchip står efter .kchip.fuld → samme som B. Fundet i V4.
+   E) .tik er scopet som ".tjekliste .tik", så et flueben brugt UDEN FOR
+      en .tjekliste faldt tilbage til 300x150 og fill:black og kunne fylde
+      det halve slide. Her får .tik samme regel uden scope. Fundet i V4.
+   F) et ikon skaleret over 24 px får sin stregbredde ganget op og bliver
+      en klat. .ik.stor (30 px), .ik.xl (44 px) og ikoner i en station-boks
+      (29 px) får stregbredden divideret med skalaen. :not(.duoik) er
+      nødvendig, fordi dobbeltikoner ellers bliver for tynde.
+   ============================================================ */
+.gulflade .kchip.fuld{background:var(--sort);border-color:var(--sort);color:#fff}
+.moerk .kchip.gul{background:var(--gul);border-color:var(--gul);color:var(--sort)}
+.moerk .kchip.gul .ik{color:var(--sort)}
+.gulbaand .kchip{border-color:rgba(17,18,19,.32);color:var(--sort)}
+.gulbaand .kchip .ik{color:var(--sort)}
+.gulbaand .kchip.fuld{background:var(--sort);border-color:var(--sort);color:var(--gul)}
+.gulbaand .kchip.fuld .ik{color:var(--gul)}
+.tik{width:17px;height:17px;flex-shrink:0;color:var(--sort);
+  stroke:currentColor;stroke-width:2.3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.ik.stor{stroke-width:1.35}
+.ik.xl{stroke-width:1.1}
+.station .boks:not(.duoik) .ik{stroke-width:1.4}
+
+@media (max-height:820px){
+  .rkort{padding:15px 18px 17px;gap:7px}
+  .rkort .rq{font-size:30px;height:17px}
+  .rkort.stor{padding:20px 22px 22px}
+  .rkort.stor .rq{font-size:36px;height:21px}
+  .kortnet{gap:15px}
+  .svarhero{padding:12px 16px}
+  .panel{padding:16px 19px 4px}
+  .fseg{padding:9px 13px}
+  .duo.spejl .dtop{margin:2px 0 6px}
+  .brudtxt{margin-top:12px}
+  .recap{padding-top:11px}
+  .telefonkicker{letter-spacing:.18em}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="i-hammer" viewBox="0 0 24 24"><path d="M8 3.5h10.5v5.5H8z" fill="currentColor" stroke="none"/><path d="M8 3.5L3.5 6.2 8 9"/><path d="M12.8 9v11"/><path d="M10.8 20h4"/></symbol>
+  <symbol id="i-murerske" viewBox="0 0 24 24"><path d="M3 4.5h12L9 15.5z" fill="currentColor" stroke="none"/><path d="M11.5 12l4 5.5"/><path d="M14.5 15.5l4 3.5"/></symbol>
+  <symbol id="i-rulle" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="14" height="5.5" rx="1.2" fill="currentColor" stroke="none"/><path d="M10.5 9v3.5H6V21"/></symbol>
+  <symbol id="i-tang" viewBox="0 0 24 24"><path d="M9 3v7l-3 3v8"/><path d="M15 3v7l3 3v8"/><path d="M9 10h6"/></symbol>
+  <symbol id="i-stik" viewBox="0 0 24 24"><path d="M9 3v5"/><path d="M15 3v5"/><path d="M6 8h12v3a6 6 0 01-12 0z"/><path d="M12 17v4"/></symbol>
+  <symbol id="i-roertang" viewBox="0 0 24 24"><circle cx="16" cy="8" r="4"/><path d="M13.2 10.8L4 20"/><path d="M4 16l4 4"/></symbol>
+  <symbol id="i-skovl" viewBox="0 0 24 24"><path d="M12 3v10"/><path d="M9.5 3h5"/><path d="M8 13h8v3.5a4 4 0 01-8 0z"/></symbol>
+  <symbol id="i-mursten" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="8" rx="1"/><path d="M9 8v8"/><path d="M15 8v8"/></symbol>
+  <symbol id="i-tommestok" viewBox="0 0 24 24"><path d="M3 17l5-9 5 9 5-9"/><path d="M5.5 12.5l1.5.8"/><path d="M15.5 12.5l1.5.8"/></symbol>
+  <symbol id="i-graver" viewBox="0 0 24 24"><path d="M3 20h18"/><rect x="4" y="12.5" width="7" height="5" rx="1"/><path d="M11 13.5l5-4 3.5 3.5"/><path d="M19.5 13l-2 4.5"/></symbol>
+  <symbol id="i-svejs" viewBox="0 0 24 24"><path d="M6 4h12v8.5a6 6 0 01-12 0z"/><path d="M8.5 9h7"/></symbol>
+  <symbol id="i-palle" viewBox="0 0 24 24"><path d="M3 12h18"/><path d="M3 16.5h18"/><path d="M5 12v4.5"/><path d="M12 12v4.5"/><path d="M19 12v4.5"/><path d="M6 8h12v4H6z"/></symbol>
+  <symbol id="i-plante" viewBox="0 0 24 24"><path d="M12 21v-7.5"/><path d="M12 13.5c-4 0-5.5-2.5-5.5-5.5 3.5 0 5.5 2.5 5.5 5.5z"/><path d="M12 13.5c4 0 5.5-2.5 5.5-5.5-3.5 0-5.5 2.5-5.5 5.5z"/></symbol>
+  <symbol id="i-telefon" viewBox="0 0 24 24"><path d="M6 3h3.5l1.8 4.4-2.3 1.4a10.5 10.5 0 005.2 5.2l1.4-2.3L20 14.5V18a2.5 2.5 0 01-2.5 2.5C10.6 20.5 3.5 13.4 3.5 5.5A2.5 2.5 0 016 3z"/></symbol>
+  <symbol id="i-boble" viewBox="0 0 24 24"><path d="M4 5h16v9.5h-8.5L6.5 19v-4.5H4z"/></symbol>
+  <symbol id="i-boblesp" viewBox="0 0 24 24"><path d="M4 5h16v9.5h-8.5L6.5 19v-4.5H4z"/><text x="12" y="13" text-anchor="middle" font-size="9" font-weight="900" stroke="none" fill="currentColor">?</text></symbol>
+  <symbol id="i-boblex2" viewBox="0 0 24 24"><path d="M2 4h11v6.5H6.5L4 13v-2.5H2z"/><path d="M22 11H11v6.5h6.5L20 20v-2.5H22z"/></symbol>
+  <symbol id="i-oere" viewBox="0 0 24 24"><path d="M8.5 21v-3.5c0-2.2-2.5-3.2-2.5-7A6 6 0 0118 10.5c0 2.2-1.2 3.5-3.2 3.5-1.6 0-2.3-1-2.3-2.2"/><path d="M10.2 10.4a2.1 2.1 0 013.9.6"/></symbol>
+  <symbol id="i-oerenej" viewBox="0 0 24 24"><path d="M8.5 21v-3.5c0-2.2-2.5-3.2-2.5-7A6 6 0 0118 10.5c0 2.2-1.2 3.5-3.2 3.5-1.6 0-2.3-1-2.3-2.2"/><path d="M3.5 20.5L20.5 3.5"/></symbol>
+  <symbol id="i-tillid" viewBox="0 0 24 24"><path d="M12 3l7.5 3v6c0 4.6-3.1 7.8-7.5 9.4C7.6 19.8 4.5 16.6 4.5 12V6z"/><path d="M8.6 12l2.5 2.5L15.8 9.6"/></symbol>
+  <symbol id="i-aftale" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M8.8 13.5l2.2 2.2 4.4-4.4"/></symbol>
+  <symbol id="i-hjelm" viewBox="0 0 24 24"><path d="M4 16.5h16"/><path d="M6.5 16.5v-3.5a5.5 5.5 0 0111 0v3.5"/><path d="M10 8V4.5h4V8"/></symbol>
+  <symbol id="i-knage" viewBox="0 0 24 24"><path d="M4 3h16"/><path d="M12 3v3"/><path d="M6.5 20v-4a5.5 5.5 0 0111 0v4"/><path d="M4 20h16"/></symbol>
+  <symbol id="i-prisop" viewBox="0 0 24 24"><path d="M3 11.5L11 3.5h7v7l-8 8z"/><circle cx="14.5" cy="7" r="1.3"/><path d="M18 21v-6"/><path d="M15.5 17.5L18 15l2.5 2.5"/></symbol>
+  <symbol id="i-gange" viewBox="0 0 24 24"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></symbol>
+  <symbol id="i-vaekst" viewBox="0 0 24 24"><path d="M4 20V14.5"/><path d="M12 20V9"/><path d="M20 20V4"/></symbol>
+  <symbol id="i-tegninger" viewBox="0 0 24 24"><path d="M3.5 8L12 4l8.5 4L12 12z"/><path d="M3.5 12L12 16l8.5-4"/><path d="M3.5 16L12 20l8.5-4"/></symbol>
+  <symbol id="i-dok" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M9 12.5h6"/><path d="M9 16.5h6"/></symbol>
+  <symbol id="i-doknej" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M3.5 20.5L20.5 3.5"/></symbol>
+  <symbol id="i-hus" viewBox="0 0 24 24"><path d="M3.5 20V10L12 4l8.5 6v10"/><path d="M3.5 20h17"/><path d="M9.5 20v-5.5h5V20"/></symbol>
+  <symbol id="i-kran" viewBox="0 0 24 24"><path d="M2.5 21h19"/><path d="M4.5 21v-9.5h8V21"/><path d="M6.5 15h4"/><path d="M17 21V3.5"/><path d="M17 3.5h-7"/><path d="M10.5 3.5v3.5"/><path d="M8.8 7h3.4v2.5H8.8z"/></symbol>
+  <symbol id="i-etage" viewBox="0 0 24 24"><rect x="4.5" y="3.5" width="15" height="17" rx="1"/><path d="M8 7.5h3M13 7.5h3M8 12h3M13 12h3M8 16.5h3M13 16.5h3"/></symbol>
+  <symbol id="i-renover" viewBox="0 0 24 24"><path d="M3.5 20.5V11L12 5l8.5 6v9.5"/><path d="M6.5 20.5v-5h4v5"/><path d="M17 12.5a3.6 3.6 0 10-3.4 4.8"/><path d="M14 10.5l3 2-2.4 2.2"/></symbol>
+  <symbol id="i-robot" viewBox="0 0 24 24"><rect x="4.5" y="8" width="15" height="10.5" rx="2.5"/><circle cx="9.5" cy="13" r="1.1"/><circle cx="14.5" cy="13" r="1.1"/><path d="M12 8V5"/><circle cx="12" cy="4" r="1.2"/></symbol>
+  <symbol id="i-platform" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M3 9h18"/><path d="M7 13h6"/><path d="M7 16h9"/></symbol>
+  <symbol id="i-sol" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 3v2"/><path d="M12 19v2"/><path d="M3 12h2"/><path d="M19 12h2"/><path d="M5.6 5.6L7 7"/><path d="M17 17l1.4 1.4"/><path d="M18.4 5.6L17 7"/><path d="M7 17l-1.4 1.4"/></symbol>
+  <symbol id="i-sne" viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M4 7.5l16 9"/><path d="M20 7.5l-16 9"/></symbol>
+  <symbol id="i-stopur" viewBox="0 0 24 24"><circle cx="12" cy="13.5" r="7"/><path d="M12 13.5V9.5"/><path d="M10 3h4"/><path d="M12 3v3.5"/></symbol>
+  <symbol id="i-trappe" viewBox="0 0 24 24"><path d="M3 20h6v-5h6v-5h6"/><path d="M21 10v10H3"/></symbol>
+  <symbol id="i-op" viewBox="0 0 24 24"><path d="M12 20V5"/><path d="M6 11l6-6 6 6"/></symbol>
+  <symbol id="i-ned" viewBox="0 0 24 24"><path d="M12 4v15"/><path d="M18 13l-6 6-6-6"/></symbol>
+  <symbol id="i-nej" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.5 8.5l7 7"/><path d="M15.5 8.5l-7 7"/></symbol>
+  <symbol id="i-ok" viewBox="0 0 24 24"><path d="M4 13l5 5L20 6"/></symbol>
+  <symbol id="i-saks" viewBox="0 0 24 24"><circle cx="6" cy="18" r="2.6"/><circle cx="18" cy="18" r="2.6"/><path d="M7.6 15.9L18 4"/><path d="M16.4 15.9L6 4"/></symbol>
+  <symbol id="i-brud" viewBox="0 0 24 24"><path d="M3 12h5l-2 4 5-8-2 4h5"/><path d="M16 12h5"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 6v12"/><path d="M6 12h12"/></symbol>
+  <symbol id="i-pil" viewBox="0 0 24 24"><path d="M4 12h14"/><path d="M13 7l5 5-5 5"/></symbol>
+  <!-- VIDEO 2 · nye ikoner, samme stregsprog -->
+  <symbol id="i-laegpaa" viewBox="0 0 24 24"><path d="M2.5 16.5l3.6-2.8 1.2-3.2h9.4l1.2 3.2 3.6 2.8"/><path d="M2.5 16.5h19"/><path d="M12 2.5v5.5"/><path d="M9.4 5.6L12 8.2l2.6-2.6"/></symbol>
+  <symbol id="i-tragt" viewBox="0 0 24 24"><path d="M3 4h18l-7 8.5V19l-4-2.2V12.5z"/></symbol>
+  <symbol id="i-penge" viewBox="0 0 24 24"><path d="M9.5 3h5l-1.4 3.4h-2.2z"/><path d="M13.6 6.4c3.9 1.5 5.9 4.4 5.9 7.8a7.5 7.5 0 01-15 0c0-3.4 2-6.3 5.9-7.8"/><path d="M12 9.6v8"/><path d="M10 12h4"/></symbol>
+  <symbol id="i-megafon" viewBox="0 0 24 24"><path d="M3.5 9.5v5l10.5 5.5V4z"/><path d="M14.5 8.5a4.5 4.5 0 010 7"/><path d="M6 14.7v4.8h3v-3.2"/></symbol>
+  <symbol id="i-noter" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8.5 8h7"/><path d="M8.5 12h7"/><path d="M8.5 16h4"/></symbol>
+  <symbol id="i-mappe" viewBox="0 0 24 24"><path d="M3 19.5V6h6.5l2 2.5H21v11z"/><path d="M3 10.5h18"/></symbol>
+  <symbol id="i-bord" viewBox="0 0 24 24"><path d="M2.5 14.5h19"/><path d="M5.5 14.5v6"/><path d="M18.5 14.5v6"/><circle cx="8" cy="6.6" r="2.4"/><circle cx="16" cy="6.6" r="2.4"/><path d="M4.6 14.5c0-1.9 1.5-3.4 3.4-3.4s3.4 1.5 3.4 3.4"/><path d="M12.6 14.5c0-1.9 1.5-3.4 3.4-3.4s3.4 1.5 3.4 3.4"/></symbol>
+  <symbol id="i-frem" viewBox="0 0 24 24"><circle cx="15" cy="5.6" r="2.6"/><path d="M14 9.2l-4.5 5.6"/><path d="M9.5 14.8L7 21"/><path d="M9.5 14.8L14 21"/><path d="M12.6 11.4L19 14"/></symbol>
+  <symbol id="i-smil" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.2 13.8a4.6 4.6 0 007.6 0"/><path d="M9.2 9.4v.6"/><path d="M14.8 9.4v.6"/></symbol>
+  <symbol id="i-kontrol" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6"/><path d="M8.2 12.2l2.7 2.7 5.1-5.4"/></symbol>
+  <symbol id="i-jobkort" viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="14" rx="2"/><path d="M9 3.2h6v2.3H9z"/><path d="M6.5 11h11"/><path d="M6.5 15h6.5"/></symbol>
+  <symbol id="i-vogn" viewBox="0 0 24 24"><path d="M2 15.2V6.5h11.5l4 4.2H22v4.5"/><path d="M13.5 6.5v4.2H22"/><path d="M2 15.2h2.4M9.6 15.2h5.4M20 15.2h2"/><circle cx="7" cy="15.2" r="2.4"/><circle cx="17.5" cy="15.2" r="2.4"/></symbol>
+  <symbol id="i-kaffe" viewBox="0 0 24 24"><path d="M4 8h13v6.5a4 4 0 01-4 4H8a4 4 0 01-4-4z"/><path d="M17 9.6h2.4a2.4 2.4 0 010 4.8H17"/><path d="M4.5 21.5h12"/></symbol>
+  <symbol id="i-firma" viewBox="0 0 24 24"><path d="M4 20.5V4.5h9.5v16"/><path d="M13.5 10h6.5v10.5"/><path d="M2 20.5h20"/><path d="M6.8 8h1.6M10.4 8H12M6.8 11.5h1.6M10.4 11.5H12M6.8 15h1.6M10.4 15H12M16.2 13.5h1.6M16.2 17h1.6"/></symbol>
+  <symbol id="i-doer" viewBox="0 0 24 24"><path d="M5.5 21V3h11v18"/><path d="M3 21h18"/><circle cx="13.5" cy="12" r="1"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="13" rx="1.6"/><path d="M2.5 6.5L12 13.5l9.5-7"/></symbol>
+  <symbol id="i-ur" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6"/><path d="M12 6.8V12l3.6 2.2"/></symbol>
+  <symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="7.4" r="3.6"/><path d="M4.8 21v-1.8a7.2 7.2 0 0114.4 0V21"/></symbol>
+  <symbol id="i-personer" viewBox="0 0 24 24"><circle cx="9" cy="7.4" r="3.3"/><path d="M2.4 21v-1.7a6.6 6.6 0 0113.2 0V21"/><path d="M16.2 4.6a3.3 3.3 0 010 5.6"/><path d="M18 21v-1.7c0-1.6-.5-3.1-1.5-4.3"/></symbol>
+  <!-- MENNESKEFIGURER. Bruges 1:1 eller nedskaleret; stroke-width sættes
+       på <use>, ikke i symbolet, så figuren kan få en gul halo-kopi bagved. -->
+  <symbol id="f-person" viewBox="0 0 80 124"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="40" cy="20" r="14"/><path d="M40 34v44"/><path d="M40 78l-13 44"/><path d="M40 78l13 44"/><path d="M40 46L21 62"/><path d="M40 46l19 16"/></g></symbol>
+  <symbol id="f-mester" viewBox="0 0 80 124"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M24 12h32"/><circle cx="40" cy="22" r="13"/><path d="M40 35v43"/><path d="M40 78l-13 44"/><path d="M40 78l13 44"/><path d="M40 46L22 58l6 15"/><path d="M40 46l18 12-6 15"/></g></symbol>
+  <symbol id="f-hjelm" viewBox="0 0 80 124"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M22 18h36"/><path d="M28 18v-3.5a12 12 0 0124 0V18"/><circle cx="40" cy="27" r="10"/><path d="M40 38v40"/><path d="M40 78l-13 44"/><path d="M40 78l13 44"/><path d="M40 48L21 62"/><path d="M40 48l19 14"/><path d="M31 62h18"/><rect x="45" y="61" width="13" height="10" rx="2.5"/></g></symbol>
+  <symbol id="f-headset" viewBox="0 0 80 124"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="40" cy="22" r="13"/><path d="M21 26a19 19 0 0138 0"/><rect x="17" y="22" width="8" height="13" rx="3"/><rect x="55" y="22" width="8" height="13" rx="3"/><path d="M59 34c0 6-6 9-12 9"/><path d="M40 35v43"/><path d="M40 78l-13 44"/><path d="M40 78l13 44"/><path d="M40 46L21 62"/><path d="M40 46l19 16"/></g></symbol>
+  <symbol id="f-telefon" viewBox="0 0 80 124"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="40" cy="20" r="14"/><path d="M40 34v44"/><path d="M40 78l-13 44"/><path d="M40 78l13 44"/><path d="M40 47L22 61"/><path d="M40 47l13 7 3-13"/><rect x="50" y="22" width="12" height="19" rx="2.5"/></g></symbol>
+  <symbol id="f-kaffe" viewBox="0 0 80 124"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M24 12h32"/><circle cx="40" cy="22" r="13"/><path d="M40 35v43"/><path d="M40 78l-13 44"/><path d="M40 78l13 44"/><path d="M40 48L23 60"/><path d="M40 48l14 9"/><path d="M50 52h14v9a5 5 0 01-5 5h-4a5 5 0 01-5-5z"/><path d="M64 54h4a3 3 0 010 6h-4"/></g></symbol>
+  <symbol id="f-silhuet" viewBox="0 0 60 110"><g fill="currentColor" stroke-linejoin="round"><circle cx="30" cy="18" r="14"/><path d="M30 36c-12.5 0-21.5 10-21.5 23v51h43V59c0-13-9-23-21.5-23z"/></g></symbol>
+</defs></svg>
+
+<div class="meta-tl"><b>PowerMatch</b>&nbsp;·&nbsp;Modul 4&nbsp;·&nbsp;Video 2</div>
+<div class="meta-tr">Mesteren og håndværkeren</div>
+
+<!-- ############ BLOK 6 · VIRKSOMHEDSEJEREN (slide 1-11) ############
+     De to blokke er spejlbilleder, slide for slide:
+     1↔12 gul åbning · 2↔18 anchor med mark · 3↔21 tflow-kæde ·
+     4↔19 tjekliste mod frows · 5↔15 blokkens billede · 6↔16 replik-kortene ·
+     7↔14 advarslen · 8↔20 .duo.spejl replik for replik · 9↔17 to kort ·
+     10↔13 skala mod udfald · 11↔22 mørk afslutning.
+     ################################################################ -->
+
+<!-- 1 · GUL ÅBNING: VIRKSOMHEDSEJEREN -->
+<section class="slide gulflade titelgul" data-sektion="Virksomhedsejeren">
+  <div class="ghost">1</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">01</span><span class="krule"></span><span class="ktxt">Virksomhedsejeren · 1 af 11</span></div>
+    <div class="vgruppe" style="display:grid;grid-template-columns:1.2fr .8fr;column-gap:38px;align-items:center">
+      <div>
+        <h1 style="font-size:clamp(38px,4.6vw,68px)"><span class="lm"><span>Virksomhedsejeren</span></span></h1>
+        <p class="r d2" style="font-size:clamp(17px,1.85vw,26px);font-weight:800;color:var(--sort);letter-spacing:-.02em;margin-top:18px;max-width:30ch">Hvordan er de her, der ejer håndværkervirksomheder?</p>
+      </div>
+      <!-- mesteren står ikke bag et skrivebord, han står foran sin kassevogn -->
+      <div class="r d3">
+        <svg class="figur figurmax" style="max-width:480px" viewBox="0 0 400 236" role="img" aria-label="En mester i arbejdstøj med hænderne i siden, stående foran sin kassevogn">
+          <path d="M20 208h360" stroke="rgba(17,18,19,.35)" stroke-width="2"/>
+          <g fill="none" stroke="#111213" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+            <path d="M30 192V96h158v96z"/>
+            <path d="M188 192v-58h34l26 30v28z"/>
+            <path d="M192 138h26l18 22h-44z"/>
+            <rect x="44" y="108" width="42" height="28" rx="2"/>
+          </g>
+          <circle cx="76" cy="192" r="16" fill="#fff" stroke="#111213" stroke-width="3"/>
+          <circle cx="216" cy="192" r="16" fill="#fff" stroke="#111213" stroke-width="3"/>
+          <rect x="108" y="112" width="52" height="52" rx="9" fill="#111213"/>
+          <g fill="none" stroke="#F8E965" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="color:#F8E965">
+            <use href="#i-hammer" x="120" y="124" width="28" height="28"/>
+          </g>
+          <use href="#f-mester" x="266" y="84" width="80" height="124" stroke-width="9" style="color:#F8E965"/>
+          <use href="#f-mester" x="266" y="84" width="80" height="124" stroke-width="3" style="color:#111213"/>
+        </svg>
+      </div>
+    </div>
+    <div class="skub r d4" style="display:flex;align-items:flex-end;gap:24px;flex-wrap:wrap">
+      <div class="kstrip stor">
+        <span class="kchip fuld">Meget lige til</span>
+        <span class="kchip fuld">Meget på tillid</span>
+        <span class="kchip fuld">Meget stolt af sit fag</span>
+      </div>
+      <div style="margin-left:auto;font-size:11.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:rgba(17,18,19,.6)">Det skal de nok opdage</div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 · HAN HAR IKKE STYR PÅ SIN TID -->
+<section class="slide" data-sektion="Virksomhedsejeren" data-lint-ok="doedzone">
+  <div class="ghost">2</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">01</span><span class="krule"></span><span class="ktxt">Virksomhedsejeren · 2 af 11 · Travlheden</span></div>
+    <h2 class="r d1" style="max-width:30ch">Vi skal ikke være bange for at ringe til dem <mark style="white-space:nowrap">flere gange</mark>.</h2>
+    <div class="vgruppe" style="display:grid;grid-template-columns:.92fr 1.08fr;column-gap:46px;align-items:center">
+      <!-- alt råber på ham samtidig. AFVIGELSE: mail-badget er sort, ikke rødt,
+           fordi rød ikke findes i v1.3. -->
+      <div class="r d2">
+        <svg class="figur" style="max-height:34vh" viewBox="0 0 420 250" role="img" aria-label="Mesteren med telefonen ved øret, og fem ting der råber på ham samtidig: to telefoner, en mail med tolv ulæste, et ur og en seddel">
+          <path d="M20 226h380" stroke="var(--border)" stroke-width="1.6"/>
+          <use href="#f-telefon" x="168" y="102" width="80" height="124" stroke-width="2.8" style="color:#26282B"/>
+          <g fill="none" stroke="var(--linje)" stroke-width="2" stroke-linecap="round">
+            <path d="M150 136c-6 6-6 16 0 22"/><path d="M138 128c-11 11-11 32 0 43"/>
+          </g>
+          <g style="color:#26282B">
+            <circle cx="64" cy="62" r="21" fill="var(--flade)"/>
+            <g fill="none" stroke="#26282B" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-telefon" x="53" y="51" width="22" height="22"/></g>
+            <circle cx="146" cy="34" r="21" fill="var(--flade)"/>
+            <g fill="none" stroke="#26282B" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-mail" x="135" y="23" width="22" height="22"/></g>
+            <circle cx="164" cy="18" r="12" fill="#111213"/>
+            <text x="164" y="22" text-anchor="middle" font-size="11" font-weight="900" fill="#fff">12</text>
+            <circle cx="272" cy="34" r="21" fill="var(--flade)"/>
+            <g fill="none" stroke="#26282B" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-ur" x="261" y="23" width="22" height="22"/></g>
+            <circle cx="352" cy="66" r="21" fill="var(--flade)"/>
+            <g fill="none" stroke="#26282B" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-dok" x="341" y="55" width="22" height="22"/></g>
+            <circle cx="66" cy="150" r="21" fill="var(--flade)"/>
+            <g fill="none" stroke="#26282B" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#i-telefon" x="55" y="139" width="22" height="22"/></g>
+          </g>
+          <text x="210" y="244" text-anchor="middle" class="svgcap">DEN RINGER OG RINGER HELE DAGEN</text>
+        </svg>
+      </div>
+      <div class="r d3">
+        <div class="dtitel">Tre opkald, samme dag</div>
+        <div class="frows" style="max-width:none">
+          <div class="frow svag"><svg class="ik"><use href="#i-telefon"/></svg><span class="ft">Forsøg 1 <span>ingen svar</span></span><span class="fnote">09.10</span></div>
+          <div class="frow svag"><svg class="ik"><use href="#i-telefon"/></svg><span class="ft">Forsøg 2 <span>ingen svar</span></span><span class="fnote">11.45</span></div>
+          <div class="frow"><svg class="ik"><use href="#i-telefon"/></svg><span class="ft">Forsøg 3 <span>han tager den</span></span><span class="fnote"><svg class="ik mini"><use href="#i-ok"/></svg>14.20</span></div>
+        </div>
+        <div class="notelinje" style="margin-top:14px">Det lægger de ikke engang mærke til, og det har de ikke noget imod.</div>
+      </div>
+    </div>
+    <p class="under skub r d5">Meget travle mennesker, som ikke har så godt styr på deres tid. <b>Deres mail bliver spammet, så man tror det er løgn.</b></p>
+  </div>
+</section>
+
+<!-- 3 · TILLIDS-KÆDEN -->
+<section class="slide" data-sektion="Virksomhedsejeren">
+  <div class="ghost">3</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">01</span><span class="krule"></span><span class="ktxt">Virksomhedsejeren · 3 af 11 · Tillids-kæden</span></div>
+    <h2 class="r d1">Får du tilliden, bliver han ved og ved.</h2>
+    <!-- gul er anker: kun sidste led er gult. AFVIGELSE fra manus: booking-knappen
+         i platform-mockup'en er sort i stedet for gul, så slidet kun har én gul flade. -->
+    <div class="vgruppe" style="width:100%">
+    <div class="tflow neutral r d2" style="margin:0">
+      <div class="linje"></div>
+      <div class="stationer">
+        <div class="station">
+          <div class="boks"><svg class="ik"><use href="#i-tillid"/></svg></div>
+          <h5>Du får tilliden</h5><p>han kan se du forstår ham</p>
+        </div>
+        <div class="station">
+          <div class="boks"><svg class="ik"><use href="#i-telefon"/></svg></div>
+          <h5>Han ringer til dig</h5><p>af sig selv</p>
+        </div>
+        <div class="station">
+          <div class="boks"><svg class="ik"><use href="#i-mail"/></svg></div>
+          <h5>Han sender mails</h5><p>og skriver først</p>
+        </div>
+        <div class="station">
+          <div class="boks"><svg class="ik"><use href="#i-aftale"/></svg></div>
+          <h5>Han booker selv jobsamtaler</h5><p>på kandidater</p>
+        </div>
+        <div class="station staerk">
+          <div class="boks"><svg class="ik"><use href="#i-platform"/></svg></div>
+          <h5>Tillid til produkt og platform</h5><p>hele vejen igennem</p>
+        </div>
+      </div>
+    </div>
+    <div class="r d4" style="display:grid;grid-template-columns:400px 1fr;column-gap:40px;align-items:center;margin-top:3vh">
+      <svg class="figur" style="max-height:26vh" viewBox="0 0 340 168" role="img" aria-label="Et platform-vindue hvor mesteren selv booker en jobsamtale på en kandidat">
+        <rect x="1" y="1" width="338" height="150" rx="9" fill="#fff" stroke="#111213" stroke-width="1.8"/>
+        <path d="M1 30h338" stroke="#111213" stroke-width="1.6"/>
+        <g fill="var(--linje)"><circle cx="20" cy="16" r="4"/><circle cx="34" cy="16" r="4"/><circle cx="48" cy="16" r="4"/></g>
+        <text x="70" y="20" class="svgcap">POWERMATCH · KANDIDATER</text>
+        <g fill="none" stroke="var(--linje)" stroke-width="1.5"><rect x="18" y="48" width="304" height="38" rx="6"/></g>
+        <circle cx="42" cy="67" r="11" fill="var(--flade)"/>
+        <g fill="none" stroke="#26282B" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><use href="#i-person" x="33" y="58" width="18" height="18"/></g>
+        <text x="62" y="64" class="svgtxt">Tømrer · 8 års erfaring</text>
+        <text x="62" y="79" class="svgmut">Match 94 %</text>
+        <rect x="18" y="98" width="150" height="34" rx="8" fill="#111213"/>
+        <text x="93" y="119" text-anchor="middle" class="svgtxt" style="fill:#fff" letter-spacing="1.2">BOOK SAMTALE</text>
+        <path d="M150 126l16 12-6 2 4 8-4 2-4-8-6 2z" fill="#111213" stroke="#fff" stroke-width="1.4"/>
+        <text x="18" y="166" class="svgcap">HAN GÅR SELV IND OG BOOKER</text>
+      </svg>
+      <div class="notelinje" style="font-size:13px;max-width:44ch">Fordi han stoler på dig, og han stoler på vores produkt. Så skal I nok få et rigtig rigtig godt bånd.</div>
+    </div>
+    </div>
+    <div class="slutlinje r d5">Som er det, det hele handler om.</div>
+  </div>
+</section>
+
+<!-- 4 · SÅDAN SNAKKER DU TIL HAM -->
+<section class="slide" data-sektion="Virksomhedsejeren">
+  <div class="ghost">4</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">01</span><span class="krule"></span><span class="ktxt">Virksomhedsejeren · 4 af 11 · Øjenhøjde</span></div>
+    <h2 class="r d1" style="max-width:40ch">Læg hurtigt mærke til hvordan han snakker til dig, og hvilken måde han er på.</h2>
+    <div class="duo vgruppe" style="column-gap:56px;align-items:start;margin-top:3vh">
+      <div class="r d2">
+        <div class="dtitel" style="color:var(--sort)">Sådan gør du</div>
+        <svg class="figur" style="max-height:14vh;max-width:280px" viewBox="0 0 280 124" role="img" aria-label="Sælgeren og mesteren står i samme øjenhøjde, markeret med en stiplet linje gennem begge hoveder">
+          <path d="M6 22h268" stroke="var(--linje)" stroke-width="1.4" stroke-dasharray="5 5"/>
+          <path d="M10 122h260" stroke="var(--border)" stroke-width="1.5"/>
+          <use href="#f-headset" x="34" y="8" width="74" height="115" stroke-width="2.9" style="color:#26282B"/>
+          <g transform="translate(246,0) scale(-1,1)"><use href="#f-mester" x="0" y="8" width="74" height="115" stroke-width="2.9" style="color:#26282B"/></g>
+          <g fill="none" stroke="#26282B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-boblex2" x="122" y="46" width="34" height="34"/></g>
+        </svg>
+        <div class="tjekliste" style="margin-top:1.6vh;max-width:none">
+          <div class="trow"><span class="tdot"></span><span class="ttxt">Mød ham i øjenhøjde</span></div>
+          <div class="trow"><span class="tdot"></span><span class="ttxt">Vær konkret</span></div>
+          <div class="trow"><span class="tdot"></span><span class="ttxt">Vær kort</span></div>
+          <div class="trow"><span class="tdot"></span><span class="ttxt">Vær lige til</span></div>
+          <div class="trow"><span class="tdot"></span><span class="ttxt">Vis at du forstår ham <span>og hans behov</span></span></div>
+        </div>
+      </div>
+      <div class="r d3">
+        <div class="dtitel">Det gider de ikke</div>
+        <svg class="figur" style="max-height:14vh;max-width:280px" viewBox="0 0 280 124" role="img" aria-label="En sælger bag et skrivebord med en mappe, og mesteren der vender sig væk">
+          <path d="M10 122h260" stroke="var(--border)" stroke-width="1.5"/>
+          <use href="#f-person" x="26" y="8" width="74" height="115" stroke-width="2.9" style="color:var(--muted)"/>
+          <g fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-mappe" x="96" y="58" width="26" height="26"/></g>
+          <rect x="18" y="86" width="96" height="8" rx="2" fill="var(--flade)" stroke="var(--linje)" stroke-width="1.4"/>
+          <g transform="translate(258,0) scale(-1,1)"><use href="#f-mester" x="0" y="8" width="74" height="115" stroke-width="2.9" style="color:var(--muted)"/></g>
+          <g fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-oerenej" x="146" y="46" width="30" height="30"/></g>
+        </svg>
+        <div class="frows" style="max-width:none;margin-top:1.6vh">
+          <div class="frow svag"><svg class="ik mini"><use href="#i-nej"/></svg><span class="ft">Bullshit</span></div>
+          <div class="frow svag"><svg class="ik mini"><use href="#i-nej"/></svg><span class="ft">Snakke en masse lort</span></div>
+          <div class="frow svag"><svg class="ik mini"><use href="#i-nej"/></svg><span class="ft">For kontoragtigt</span></div>
+          <div class="frow svag"><svg class="ik mini"><use href="#i-nej"/></svg><span class="ft">For HR-fint</span></div>
+          <div class="frow svag"><svg class="ik mini"><use href="#i-nej"/></svg><span class="ft">For meget ned i detaljer</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 · TO TØMRERVIRKSOMHEDER I KØBENHAVN (blokkens skarpeste pointe) -->
+<section class="slide" data-sektion="Virksomhedsejeren" data-lint-ok="doedzone">
+  <div class="ghost">5</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">01</span><span class="krule"></span><span class="ktxt">Virksomhedsejeren · 5 af 11 · To tømrervirksomheder i København</span></div>
+    <!-- De to firmakort er ens ned til hver linje. AFVIGELSE fra manus: logoet
+         adskiller sig ved fyld (fyldt mod åbent), ikke ved farve, fordi v1.3 kun
+         har gul og sort. Gul bruges her på ulighedstegnet, og derfor står
+         "så kommer tilliden" som sort felt i stedet for gult. -->
+    <div class="vgruppe" style="display:grid;grid-template-columns:1fr 96px 1fr;column-gap:18px;align-items:center">
+      <div class="r d2 midtret">
+        <svg style="height:min(50vh,462px);width:auto" viewBox="0 0 340 352" role="img" aria-label="Firmakort: tømrervirksomhed i København med otte ansatte. Under kortet mesteren på vej ud af døren, der siger sig det kort, jeg står på et tag">
+          <rect x="4" y="4" width="332" height="128" rx="15" fill="#fff" stroke="#111213" stroke-width="2"/>
+          <g fill="none" stroke="#26282B" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+            <use href="#i-vogn" x="26" y="22" width="40" height="40"/>
+            <use href="#i-firma" x="78" y="22" width="40" height="40"/>
+          </g>
+          <rect x="266" y="22" width="48" height="48" rx="10" fill="#111213"/>
+          <g fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="color:#fff"><use href="#i-hammer" x="278" y="34" width="24" height="24"/></g>
+          <text x="26" y="96" class="svgstor">Tømrervirksomhed</text>
+          <text x="26" y="118" class="svgmut">København · 8 ansatte</text>
+          <path d="M10 318h320" stroke="var(--border)" stroke-width="1.6"/>
+          <use href="#f-mester" x="20" y="194" width="80" height="124" stroke-width="2.8" style="color:#26282B"/>
+          <g fill="none" stroke="var(--linje)" stroke-width="1.8" stroke-linecap="round"><path d="M104 252c8-6 14-6 22 0"/></g>
+          <path d="M132 198h198v62H180l-20 18v-18h-28z" fill="var(--flade)" stroke="var(--linje)" stroke-width="1.6"/>
+          <text x="152" y="224" class="svgtxt">Sig det kort,</text>
+          <text x="152" y="245" class="svgtxt">jeg står på et tag.</text>
+          <text x="20" y="344" class="svgcap">MESTER A · PÅ VEJ UD AF DØREN</text>
+        </svg>
+      </div>
+      <div class="r d3 midtret">
+        <svg style="width:96px;height:auto" viewBox="0 0 96 126" role="img" aria-label="Et lighedstegn der er streget over med gult, så det bliver et ulighedstegn">
+          <g stroke="#111213" stroke-width="6" stroke-linecap="round"><path d="M18 56h60"/><path d="M18 78h60"/></g>
+          <path d="M22 96L74 38" stroke="#F8E965" stroke-width="11" stroke-linecap="round"/>
+          <text x="48" y="122" text-anchor="middle" class="svgcap">IKKE ENS</text>
+        </svg>
+      </div>
+      <div class="r d4 midtret">
+        <svg style="height:min(50vh,462px);width:auto" viewBox="0 0 340 352" role="img" aria-label="Det samme firmakort: tømrervirksomhed i København med otte ansatte. Under kortet en mester med en kop kaffe, der siger fortæl mig lidt om jer, hvem er I egentlig">
+          <rect x="4" y="4" width="332" height="128" rx="15" fill="#fff" stroke="#111213" stroke-width="2"/>
+          <g fill="none" stroke="#26282B" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+            <use href="#i-vogn" x="26" y="22" width="40" height="40"/>
+            <use href="#i-firma" x="78" y="22" width="40" height="40"/>
+          </g>
+          <rect x="267" y="23" width="46" height="46" rx="10" fill="#fff" stroke="#111213" stroke-width="2.2"/>
+          <g fill="none" stroke="#111213" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="color:#111213"><use href="#i-hammer" x="278" y="34" width="24" height="24"/></g>
+          <text x="26" y="96" class="svgstor">Tømrervirksomhed</text>
+          <text x="26" y="118" class="svgmut">København · 8 ansatte</text>
+          <path d="M10 318h320" stroke="var(--border)" stroke-width="1.6"/>
+          <use href="#f-kaffe" x="20" y="194" width="80" height="124" stroke-width="2.8" style="color:#26282B"/>
+          <path d="M132 188h198v82H180l-20 18v-18h-28z" fill="var(--flade)" stroke="var(--linje)" stroke-width="1.6"/>
+          <text x="152" y="216" class="svgtxt">Fortæl mig lidt om jer,</text>
+          <text x="152" y="237" class="svgtxt">hvem er I egentlig?</text>
+          <text x="20" y="344" class="svgcap">MESTER B · MED EN KOP KAFFE</text>
+        </svg>
+      </div>
+    </div>
+    <div class="skub r d5" style="display:flex;align-items:center;gap:13px;flex-wrap:wrap">
+      <span class="kchip kant">Hans jargon</span>
+      <svg class="ik mini" style="color:var(--linje)"><use href="#i-plus"/></svg>
+      <span class="kchip kant">Hans humor</span>
+      <svg class="ik mini" style="color:var(--linje)"><use href="#i-plus"/></svg>
+      <span class="kchip kant">Hans måde at snakke på</span>
+      <svg class="ik" style="color:var(--linje)"><use href="#i-pil"/></svg>
+      <span class="matchboks" style="font-size:clamp(16px,1.7vw,24px);padding:12px 22px;align-self:auto">så kommer tilliden</span>
+    </div>
+  </div>
+</section>
+
+<!-- 6 · SPØRGSMÅLENE DU TAGER MED TIL TELEFONEN (replik-kortene) -->
+<section class="slide" data-sektion="Virksomhedsejeren">
+  <div class="ghost">6</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">01</span><span class="krule"></span><span class="ktxt">Virksomhedsejeren · 6 af 11 · Spørgsmålene</span></div>
+    <!-- REPLIK-KORTENE. Samme greb på S9, S13, S16, S17 og S11. Kortene er
+         bevidst store nok til at kunne læses på et telefon-screenshot. -->
+    <div class="telefonkicker r d1"><svg class="ik"><use href="#i-telefon"/></svg>Tag dem med til telefonen</div>
+    <div class="kortnet tre fyldud" style="margin-top:2.4vh">
+      <div class="kw r d1"><div class="rkort skaev1"><span class="rq">&ldquo;</span><div class="rk">Hvordan er det I gør derude?</div></div></div>
+      <div class="kw r d2"><div class="rkort skaev2"><span class="rq">&ldquo;</span><div class="rk">Hvad lægger I vægt på?</div></div></div>
+      <div class="kw r d3"><div class="rkort skaev3"><span class="rq">&ldquo;</span><div class="rk">Hvad lægger du vægt på når du søger en medarbejder?</div></div></div>
+      <div class="kw r d4"><div class="rkort skaev4"><span class="rq">&ldquo;</span><div class="rk">Hvorfor er det fedt at arbejde i din virksomhed?</div></div></div>
+      <div class="kw r d5"><div class="rkort skaev1"><span class="rq">&ldquo;</span><div class="rk">Hvad gør jer specielle?</div></div></div>
+      <div class="kw r d6"><div class="rkort skaev2"><span class="rq">&ldquo;</span><div class="rk">Hvor vil I gerne vækste hen om et par år?</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 · ROBOTTEN -->
+<section class="slide" data-sektion="Virksomhedsejeren" data-lint-ok="doedzone">
+  <div class="ghost">7</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">01</span><span class="krule"></span><span class="ktxt">Virksomhedsejeren · 7 af 11 · Robotten</span></div>
+    <h2 class="r d1">Vi kan ikke bare blive robotter.</h2>
+    <!-- AFVIGELSE fra manus: de to ting du SKAL gøre står som frows med flueben-ikon
+         i stedet for som .tjekliste, fordi tjeklistens gule prikker ville give
+         slidet to gule markeringer ved siden af det gule svarkort. -->
+    <div class="vgruppe" style="display:grid;grid-template-columns:1fr 210px 1.06fr;column-gap:28px;align-items:center">
+      <div class="r d2">
+        <svg class="figur" style="max-height:32vh" viewBox="0 0 340 250" role="img" aria-label="En robot med et ark i hånden, og en taleboble med tre spørgsmål læst op af et script">
+          <g fill="none" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round">
+            <use href="#i-robot" x="14" y="128" width="86" height="86" stroke-width="0.72"/>
+            <use href="#i-dok" x="92" y="160" width="34" height="34" stroke-width="1.75"/>
+          </g>
+          <path d="M8 4h328v104H120l-22 20v-20H8z" fill="var(--flade)" stroke="var(--linje)" stroke-width="1.6"/>
+          <text x="30" y="34" class="svgmut">Hvad søger I?</text>
+          <text x="30" y="62" class="svgmut">Hvor mange års erfaring skal de have?</text>
+          <text x="30" y="90" class="svgmut">Hvilke arbejdsopgaver skal de lave?</text>
+          <text x="14" y="238" class="svgcap">ET SCRIPT LÆST OP</text>
+        </svg>
+      </div>
+      <div class="r d3">
+        <svg class="figur" style="max-height:28vh" viewBox="0 0 210 216" role="img" aria-label="Et brud på midten med to tomme felter: ingen personlighed og ingen relation">
+          <g stroke="var(--linje)" stroke-width="1.6" fill="none"><path d="M4 108h66"/><path d="M140 108h66"/></g>
+          <g fill="none" stroke="#26282B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><use href="#i-brud" x="80" y="92" width="50" height="42" stroke-width="1.2"/></g>
+          <rect x="12" y="12" width="186" height="56" rx="12" fill="none" stroke="var(--linje)" stroke-width="1.6" stroke-dasharray="6 5"/>
+          <text x="105" y="38" text-anchor="middle" class="svgcap">INGEN</text>
+          <text x="105" y="55" text-anchor="middle" class="svgcap">PERSONLIGHED</text>
+          <rect x="12" y="148" width="186" height="56" rx="12" fill="none" stroke="var(--linje)" stroke-width="1.6" stroke-dasharray="6 5"/>
+          <text x="105" y="174" text-anchor="middle" class="svgcap">INGEN</text>
+          <text x="105" y="191" text-anchor="middle" class="svgcap">RELATION</text>
+        </svg>
+      </div>
+      <div class="r d4">
+        <svg class="figur" style="max-height:15vh;max-width:250px" viewBox="0 0 250 120" role="img" aria-label="To mennesker der spiller replikker frem og tilbage">
+          <path d="M6 118h238" stroke="var(--border)" stroke-width="1.5"/>
+          <use href="#f-person" x="10" y="8" width="70" height="109" stroke-width="3" style="color:#26282B"/>
+          <g transform="translate(240,0) scale(-1,1)"><use href="#f-headset" x="0" y="8" width="70" height="109" stroke-width="3" style="color:#26282B"/></g>
+          <g fill="none" stroke="#26282B" stroke-linecap="round" stroke-linejoin="round"><use href="#i-boblex2" x="94" y="30" width="60" height="60" stroke-width="0.9"/></g>
+        </svg>
+        <div class="frows" style="max-width:none;margin-top:1.4vh">
+          <div class="frow"><svg class="ik mini"><use href="#i-ok"/></svg><span class="ft">Fortæl lidt om dig selv <span>hvem du selv er</span></span></div>
+          <div class="frow"><svg class="ik mini"><use href="#i-ok"/></svg><span class="ft">Spørg ind til hvem han er <span>og hvad han laver</span></span></div>
+        </div>
+        <div class="svarkort" style="margin-top:1.8vh">
+          <div class="sv">Det skaber så meget tillid.</div>
+        </div>
+      </div>
+    </div>
+    <p class="under skub r d5">Find ud af hvad der rykker for den her enkelte mester, og hvad der gør ham glad. <b>Snak om det, og skab et bånd af det.</b></p>
+  </div>
+</section>
+
+<!-- 8 · SÆLGER ELLER RÅDGIVER (.duo.spejl · samme greb som slide 20) -->
+<section class="slide" data-sektion="Virksomhedsejeren" data-lint-ok="doedzone">
+  <div class="ghost">8</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">01</span><span class="krule"></span><span class="ktxt">Virksomhedsejeren · 8 af 11 · Sælger eller rådgiver</span></div>
+    <h2 class="r d1" style="max-width:36ch">Prøv at lyde mindre som en sælger og mere som en rådgiver.</h2>
+    <div class="duo spejl strk" style="margin-top:2.4vh">
+      <div class="dside svag r d2">
+        <div class="dtitel">Sælgeren han er træt af</div>
+        <div class="dtop">
+          <svg class="figur" style="max-height:13vh;max-width:250px" viewBox="0 0 250 112" role="img" aria-label="Mesterens telefon ringer, og opkaldet er fra et vikarbureau">
+            <g fill="none" stroke="var(--muted)" stroke-linecap="round" stroke-linejoin="round"><use href="#i-telefon" x="6" y="30" width="52" height="52" stroke-width="1.15"/></g>
+            <g fill="none" stroke="var(--linje)" stroke-width="2" stroke-linecap="round"><path d="M64 44c7 7 7 24 0 31"/><path d="M76 34c12 12 12 44 0 56"/></g>
+            <rect x="98" y="34" width="148" height="44" rx="10" fill="var(--flade)" stroke="var(--linje)" stroke-width="1.5"/>
+            <text x="112" y="54" class="svgmut">Vikarbureau</text>
+            <text x="112" y="70" class="svgcap">UKENDT NUMMER</text>
+          </svg>
+        </div>
+        <div class="rep svag"><svg class="ik"><use href="#i-telefon"/></svg><span class="rt">Opkald fra rekrutteringsbureauer og vikarbureauer</span></div>
+        <div class="rep svag"><svg class="ik"><use href="#i-tragt"/></svg><span class="rt">Presser den ene håndværker efter den anden ud til ham</span></div>
+        <div class="rep svag"><svg class="ik"><use href="#i-nej"/></svg><span class="rt">Folk som ikke matcher dem</span></div>
+        <div class="dbund"><div class="laegpaa"><svg class="ik stor"><use href="#i-laegpaa"/></svg>Han lægger på</div></div>
+      </div>
+      <div class="dside r d3">
+        <div class="dtitel" style="color:var(--sort)">Rådgiveren</div>
+        <div class="dtop">
+          <svg class="figur" style="max-height:13vh;max-width:250px" viewBox="0 0 250 112" role="img" aria-label="Samme opkald, men nu en rådgiver med headset der taler med mesteren">
+            <g fill="none" stroke="#26282B" stroke-linecap="round" stroke-linejoin="round"><use href="#i-telefon" x="6" y="30" width="52" height="52" stroke-width="1.15"/></g>
+            <path d="M66 56h26" stroke="#26282B" stroke-width="2"/>
+            <path d="M92 56l-10-5v10z" fill="#26282B"/>
+            <rect x="98" y="34" width="148" height="44" rx="10" fill="#fff" stroke="#111213" stroke-width="1.6"/>
+            <text x="112" y="54" class="svgtxt">Rådgiver</text>
+            <text x="112" y="70" class="svgcap">TAGER DEN IGEN</text>
+          </svg>
+        </div>
+        <div class="rep"><svg class="ik" style="color:var(--sort)"><use href="#i-ok"/></svg><span class="rt">Hjælper ham i mål med det han gerne vil</span></div>
+        <div class="rep"><svg class="ik" style="color:var(--sort)"><use href="#i-vaekst"/></svg><span class="rt">Hjælper ham med at vækste hans virksomhed</span></div>
+        <div class="rep"><svg class="ik" style="color:var(--sort)"><use href="#i-personer"/></svg><span class="rt">Hjælper ham med reelt at finde de folk han mangler</span></div>
+        <div class="dbund"><div class="svarhero"><svg class="ik stor"><use href="#i-tillid"/></svg><span class="shv">Så skaber du det bånd du skal skabe.</span></div></div>
+      </div>
+    </div>
+    <p class="under skub r d5">Samme mester. Samme opkald. <b>To roller.</b></p>
+  </div>
+</section>
+
+<!-- 9 · DE TO SPØRGSMÅL DU STILLER DIG SELV -->
+<section class="slide" data-sektion="Virksomhedsejeren" data-lint-ok="doedzone">
+  <div class="ghost">9</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">01</span><span class="krule"></span><span class="ktxt">Virksomhedsejeren · 9 af 11 · Det du spørger dig selv om</span></div>
+    <!-- Samme kort-greb som slide 6, men to og dobbelt så store, og de vender
+         indad mod sælgeren: det er spørgsmål han stiller sig selv. -->
+    <div class="vgruppe" style="display:grid;grid-template-columns:1fr 156px 1fr;column-gap:26px;align-items:center">
+      <div class="kw r d2"><div class="rkort stor indad-v"><span class="rq">&ldquo;</span><div class="rk">Hvordan kan jeg lyde som en der ikke er sælger?</div></div></div>
+      <div class="r d3 midtret">
+        <svg style="width:156px;height:auto" viewBox="0 0 156 200" role="img" aria-label="Sælgeren med headset, med pile ind mod sig fra begge sider">
+          <path d="M8 176h140" stroke="var(--border)" stroke-width="1.5"/>
+          <use href="#f-headset" x="38" y="52" width="80" height="124" stroke-width="2.8" style="color:#26282B"/>
+          <g stroke="var(--linje)" stroke-width="2" fill="none"><path d="M4 108h26"/><path d="M126 108h26"/></g>
+          <path d="M34 108l-11-5.5v11z" fill="var(--linje)"/>
+          <path d="M122 108l11-5.5v11z" fill="var(--linje)"/>
+          <text x="78" y="196" text-anchor="middle" class="svgcap">DIG SELV</text>
+        </svg>
+      </div>
+      <div class="kw r d4"><div class="rkort stor indad-h"><span class="rq">&ldquo;</span><div class="rk">Hvordan kan jeg sætte ham og hans virksomhed i fokus, i stedet for at det lyder som om mit fokus bare er at sælge håndværkere?</div></div></div>
+    </div>
+    <div class="skub r d5">
+      <div class="brud">
+        <svg class="ik stor bi"><use href="#i-laegpaa"/></svg>
+        <span class="bs"></span>
+        <svg class="ik stor bz" style="color:var(--linje)"><use href="#i-brud"/></svg>
+        <span class="bs"></span>
+      </div>
+      <div class="brudtxt">Får han den fornemmelse, lægger han på og ringer ikke igen.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 · DET ER IKKE KUN EJEREN DER REKRUTTERER (trappen) -->
+<section class="slide" data-sektion="Virksomhedsejeren">
+  <div class="ghost">10</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">01</span><span class="krule"></span><span class="ktxt">Virksomhedsejeren · 10 af 11 · Flere der rekrutterer</span></div>
+    <h2 class="r d1">Det er ikke kun ejeren der rekrutterer.</h2>
+    <!-- AFVIGELSE fra manus: figurerne på trappen er slidets ene gule markering,
+         så tommelfingerreglen står som sort slutlinje i stedet for gul highlight. -->
+    <div class="vgruppe" style="display:grid;grid-template-columns:1.38fr .62fr;column-gap:42px;align-items:center">
+      <div class="r d2">
+        <svg class="figur" style="max-height:36vh" viewBox="0 0 620 212" role="img" aria-label="En trappe med tre trin: 10 ansatte giver én der rekrutterer, 20 ansatte ofte to og måske tre, 30 ansatte ofte tre og måske fire">
+          <g fill="var(--flade)" stroke="none">
+            <rect x="20" y="154" width="180" height="30"/><rect x="200" y="114" width="200" height="70"/><rect x="400" y="74" width="200" height="110"/>
+          </g>
+          <path d="M20 184v-30h180v-40h200V74h200v110z" fill="none" stroke="#111213" stroke-width="2.4" stroke-linejoin="round"/>
+          <path d="M14 190h592" stroke="var(--border)" stroke-width="1.6"/>
+          <use href="#f-silhuet" x="93" y="101" width="34" height="53" stroke="#111213" stroke-width="3" style="color:#F8E965"/>
+          <use href="#f-silhuet" x="242" y="61" width="34" height="53" stroke="#111213" stroke-width="3" style="color:#F8E965"/>
+          <use href="#f-silhuet" x="286" y="61" width="34" height="53" stroke="#111213" stroke-width="3" style="color:#F8E965"/>
+          <use href="#f-silhuet" x="330" y="61" width="34" height="53" stroke="#C9C9C2" stroke-width="3" style="color:#FFFFFF"/>
+          <use href="#f-silhuet" x="414" y="21" width="34" height="53" stroke="#111213" stroke-width="3" style="color:#F8E965"/>
+          <use href="#f-silhuet" x="458" y="21" width="34" height="53" stroke="#111213" stroke-width="3" style="color:#F8E965"/>
+          <use href="#f-silhuet" x="502" y="21" width="34" height="53" stroke="#111213" stroke-width="3" style="color:#F8E965"/>
+          <use href="#f-silhuet" x="546" y="21" width="34" height="53" stroke="#C9C9C2" stroke-width="3" style="color:#FFFFFF"/>
+          <text x="110" y="92" text-anchor="middle" class="svgcap">ÉN DER REKRUTTERER</text>
+          <text x="300" y="52" text-anchor="middle" class="svgcap">OFTE TO, MÅSKE TRE</text>
+          <text x="500" y="12" text-anchor="middle" class="svgcap">OFTE TRE, MÅSKE FIRE</text>
+          <text x="110" y="175" text-anchor="middle" class="svgtxt">10 ansatte</text>
+          <text x="300" y="175" text-anchor="middle" class="svgtxt">20 ansatte</text>
+          <text x="500" y="175" text-anchor="middle" class="svgtxt">30 ansatte</text>
+          <text x="606" y="208" text-anchor="end" class="svgcap">ÉN VIRKSOMHED, FLERE INDGANGE</text>
+        </svg>
+      </div>
+      <div class="r d3">
+        <div class="dtitel">Dem der også rekrutterer</div>
+        <div class="frows" style="max-width:none">
+          <div class="frow"><svg class="ik"><use href="#i-person"/></svg><span class="ft">Ejerens højre hånd <span>den daglige drift</span></span></div>
+          <div class="frow"><svg class="ik"><use href="#i-tegninger"/></svg><span class="ft">Projektchef</span></div>
+          <div class="frow"><svg class="ik"><use href="#i-mappe"/></svg><span class="ft">Projektansvarlig</span></div>
+          <div class="frow"><svg class="ik"><use href="#i-kran"/></svg><span class="ft">Entrepriseleder</span></div>
+        </div>
+      </div>
+    </div>
+    <!-- RETTET 14/8 · runde 2: hullet er LUKKET. Sebastian, ordret: "Det er min
+         egen tommelfingerregel med det rigtigt. Ja, det er rigtigt." Reglen er
+         hans egen og den er rigtig. .tomplads er væk, og i stedet står den
+         obligatoriske nedtonede linje manus kræver, så tallet ikke kommer til
+         at se ud som en opgørelse. -->
+    <div class="skub r d5">
+      <div class="slutlinje" style="margin-top:0">Cirka én der hjælper med rekruttering pr. 10 ansatte.</div>
+      <div class="notelinje" style="margin-top:8px">Vores erfaring fra kundedialogerne, ikke en målt regel.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 · MØRK AFSLUTNING: ÉN VIRKSOMHED, TRE INDGANGE -->
+<section class="slide moerk" data-sektion="Virksomhedsejeren">
+  <div class="ghost">11</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">01</span><span class="krule"></span><span class="ktxt">Virksomhedsejeren · 11 af 11 · Tre indgange</span></div>
+    <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+      <h2 class="r d1" style="max-width:none">Én virksomhed. Tre indgange.</h2>
+      <span class="kchip r d1">Han flyver rundt</span>
+    </div>
+    <!-- AFVIGELSE fra manus: pilene og kæmpetallet står i hvidt, ikke gult, fordi
+         de to gule replik-kort er slidets ene gule flade. -->
+    <div class="vgruppe" style="display:grid;grid-template-columns:1.42fr .58fr;column-gap:36px;align-items:center">
+      <div class="r d2">
+        <svg class="figur" style="max-height:27vh" viewBox="0 0 620 232" role="img" aria-label="En bygning med skiltet 30 ansatte og tre døre: ejeren, driften og projektchefen. Fra hver dør går en pil ud til den samme sælger">
+          <rect x="20" y="34" width="280" height="176" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="2"/>
+          <rect x="92" y="10" width="136" height="26" rx="5" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.8"/>
+          <text x="160" y="28" text-anchor="middle" class="svgtxt" style="fill:#fff" letter-spacing="1.4">30 ANSATTE</text>
+          <g fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.8">
+            <rect x="45" y="140" width="64" height="70"/><rect x="128" y="140" width="64" height="70"/><rect x="211" y="140" width="64" height="70"/>
+          </g>
+          <g style="color:rgba(255,255,255,.85)">
+            <use href="#f-silhuet" x="60" y="158" width="34" height="52" style="color:rgba(255,255,255,.8)"/>
+            <use href="#f-silhuet" x="143" y="158" width="34" height="52" style="color:rgba(255,255,255,.8)"/>
+            <use href="#f-silhuet" x="226" y="158" width="34" height="52" style="color:rgba(255,255,255,.8)"/>
+          </g>
+          <text x="77" y="132" text-anchor="middle" class="svgcaphvid">EJER</text>
+          <text x="160" y="132" text-anchor="middle" class="svgcaphvid">DRIFT</text>
+          <text x="243" y="132" text-anchor="middle" class="svgcaphvid">PROJEKT</text>
+          <g fill="none" stroke="rgba(255,255,255,.55)" stroke-width="2">
+            <path d="M300 90h130"/><path d="M300 122h130"/><path d="M300 154h130"/>
+          </g>
+          <g fill="rgba(255,255,255,.55)">
+            <path d="M434 90l-12-6v12z"/><path d="M434 122l-12-6v12z"/><path d="M434 154l-12-6v12z"/>
+          </g>
+          <use href="#f-headset" x="470" y="86" width="80" height="124" stroke-width="2.8" style="color:rgba(255,255,255,.9)"/>
+          <path d="M440 212h150" stroke="rgba(255,255,255,.22)" stroke-width="1.5"/>
+          <text x="510" y="230" text-anchor="middle" class="svgcaphvid">DIG</text>
+        </svg>
+      </div>
+      <div class="heroTal r d3" style="flex-direction:column;align-items:flex-start;gap:12px">
+        <span class="t">3</span>
+        <span class="tl">Mulige at sælge til i én virksomhed</span>
+      </div>
+    </div>
+    <div class="kortnet to r d4" style="margin-bottom:2vh">
+      <div class="kw"><div class="rkort skaev1"><span class="rq">&ldquo;</span><div class="rk">Er det bare dig der står for rekrutteringen i dag, eller er der også andre?</div></div></div>
+      <div class="kw"><div class="rkort skaev2"><span class="rq">&ldquo;</span><div class="rk">Har I flere jobtitler, eller er der andre der står for dem?</div></div></div>
+    </div>
+    <div class="recap n r d5"><span class="rdot"></span><span class="rtx">Virksomheder i håndværkerbranchen har mange der står for rekruttering, og de har ofte flere jobtitler.</span></div>
+  </div>
+</section>
+
+<!-- ############ BLOK 7 · HÅNDVÆRKEREN, KANDIDATEN (slide 12-22) ############
+     Samme greb til samme funktion som i Blok 6, så de to halvdele kan lægges
+     op mod hinanden: .rkort til replikkerne, .duo.spejl til modsætningen,
+     .brud til advarslen, .tflow til kæden, .panel/mørk til afslutningen.
+     ######################################################################## -->
+
+<!-- 12 · GUL ÅBNING: HÅNDVÆRKEREN, KANDIDATEN (spejler slide 1) -->
+<section class="slide gulflade titelgul" data-sektion="Håndværkeren">
+  <div class="ghost">1</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">02</span><span class="krule"></span><span class="ktxt">Håndværkeren · 1 af 11</span></div>
+    <div class="vgruppe" style="display:grid;grid-template-columns:1.2fr .8fr;column-gap:38px;align-items:center">
+      <div>
+        <h1 style="font-size:clamp(38px,4.6vw,68px)"><span class="lm"><span>Håndværkeren,</span></span><span class="lm"><span>kandidaten</span></span></h1>
+        <p class="r d2" style="font-size:clamp(17px,1.85vw,26px);font-weight:800;color:var(--sort);letter-spacing:-.02em;margin-top:18px;max-width:32ch">Kandidatdialogen er lige så vigtig at mestre som virksomhedens dialog.</p>
+      </div>
+      <!-- han er ikke en jobsøgende med et CV, han er en mand der er i arbejde -->
+      <div class="r d3">
+        <svg class="figur figurmax" style="max-width:480px" viewBox="0 0 400 236" role="img" aria-label="En håndværker med hjelm og bæltetaske står med telefonen ved øret på en byggeplads med stillads">
+          <path d="M14 208h372" stroke="rgba(17,18,19,.35)" stroke-width="2"/>
+          <g fill="none" stroke="#111213" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round" opacity=".5">
+            <path d="M34 208V54"/><path d="M150 208V54"/><path d="M34 54h116"/>
+            <path d="M34 106h116"/><path d="M34 158h116"/>
+            <path d="M34 54l116 52"/><path d="M34 106l116 52"/>
+            <path d="M168 208v-34h44v34"/><path d="M168 190h44"/>
+          </g>
+          <use href="#f-hjelm" x="266" y="84" width="80" height="124" stroke-width="9" style="color:#F8E965"/>
+          <use href="#f-hjelm" x="266" y="84" width="80" height="124" stroke-width="3.1" style="color:#111213"/>
+          <rect x="334" y="102" width="14" height="22" rx="3" fill="#fff" stroke="#111213" stroke-width="2.6"/>
+        </svg>
+      </div>
+    </div>
+    <div class="skub r d4" style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+      <div class="dkort" style="border-color:rgba(17,18,19,.28);max-width:540px;padding:13px 17px;gap:5px">
+        <div class="dk-titel" style="color:rgba(17,18,19,.55);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase"><svg class="ik mini"><use href="#i-boblesp"/></svg>Det man kommer til at tænke</div>
+        <div class="dk-txt" style="color:rgba(17,18,19,.7)">Er virksomheden ikke den sværeste? Håndværkerne siger vel bare ja til et job?</div>
+      </div>
+      <svg class="ik stor" style="color:rgba(17,18,19,.5)"><use href="#i-pil"/></svg>
+      <span class="kchip fuld">Det er ikke helt rigtigt</span>
+    </div>
+  </div>
+</section>
+
+<!-- 13 · DE HAR MANGE MULIGHEDER -->
+<section class="slide" data-sektion="Håndværkeren">
+  <div class="ghost">2</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">02</span><span class="krule"></span><span class="ktxt">Håndværkeren · 2 af 11 · Mange muligheder</span></div>
+    <div class="gtitel r d1" style="max-width:none">De gode folk, der er i arbejde, og som også godt selv kan finde job</div>
+    <div class="vgruppe" style="display:grid;grid-template-columns:.86fr 1.14fr;column-gap:40px;align-items:center">
+      <div class="r d2">
+        <svg class="figur" style="max-height:38vh" viewBox="0 0 560 300" role="img" aria-label="Håndværkeren med fem pile ud til fem virksomheder, så det er ham der har valgene, ikke virksomheden">
+          <use href="#f-hjelm" x="4" y="62" width="112" height="174" stroke-width="2.0" style="color:#26282B"/>
+          <g fill="none" stroke="#F8E965" stroke-width="4" stroke-linecap="round">
+            <path d="M132 150L288 33"/><path d="M132 150L288 91"/><path d="M132 150h156"/><path d="M132 150L288 209"/><path d="M132 150L288 267"/>
+          </g>
+          <g fill="#F8E965"><path d="M296 28l-15 8 3 11z"/><path d="M296 86l-15 6 1 11z"/><path d="M296 150l-15-6v12z"/><path d="M296 214l-15-7-1 12z"/><path d="M296 272l-15-10-3 11z"/></g>
+          <g fill="#fff" stroke="#111213" stroke-width="1.8">
+            <rect x="304" y="8" width="250" height="46" rx="9"/><rect x="304" y="66" width="250" height="46" rx="9"/>
+            <rect x="304" y="124" width="250" height="46" rx="9"/><rect x="304" y="182" width="250" height="46" rx="9"/>
+            <rect x="304" y="240" width="250" height="46" rx="9"/>
+          </g>
+          <g fill="none" stroke="#26282B" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round">
+            <use href="#i-vogn" x="320" y="18" width="26" height="26"/><use href="#i-vogn" x="320" y="76" width="26" height="26"/>
+            <use href="#i-vogn" x="320" y="134" width="26" height="26"/><use href="#i-vogn" x="320" y="192" width="26" height="26"/>
+            <use href="#i-vogn" x="320" y="250" width="26" height="26"/>
+          </g>
+          <g class="svgstor" style="font-size:16.5px"><text x="358" y="37">Virksomhed</text><text x="358" y="95">Virksomhed</text><text x="358" y="153">Virksomhed</text><text x="358" y="211">Virksomhed</text><text x="358" y="269">Virksomhed</text></g>
+          <text x="6" y="262" class="svgcap">HAN HAR VALGENE</text>
+        </svg>
+      </div>
+      <div class="r d3">
+        <!-- samme kort-greb som spørgsmålskortene, men markeret som det der IKKE virker:
+             citationstegnet er gråt, ikke gult. -->
+        <div class="rkort graa">
+          <span class="rq">&ldquo;</span>
+          <div class="rk">Hej, jeg har en god jobmulighed til dig. De vil gerne se dig i morgen til en samtale kl. 10.30, kan du det?</div>
+          <div class="rmark"><svg class="ik mini"><use href="#i-nej"/></svg><svg class="ik"><use href="#i-laegpaa"/></svg></div>
+        </div>
+        <div class="brudtxt">Så går det ikke.</div>
+      </div>
+    </div>
+    <div class="recap n skub r d5"><span class="rdot"></span><span class="rtx">Vi skal også sælge til håndværkeren, som vi sælger til virksomheden.</span></div>
+  </div>
+</section>
+
+<!-- 14 · DEN RØDE LINJE (blokkens advarsel nummer ét) -->
+<section class="slide moerk" data-sektion="Håndværkeren">
+  <div class="ghost">3</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">02</span><span class="krule"></span><span class="ktxt">Håndværkeren · 3 af 11 · Den røde linje</span></div>
+    <h2 class="r d1">Relationen bliver vigtigere end nogensinde før.</h2>
+    <div class="vgruppe r d2 midtret">
+      <svg class="figur" style="max-height:40vh" viewBox="0 0 840 296" role="img" aria-label="Håndværkeren med telefonen, og over hovedet en tankeboble hvor han ser en sælger med pengesæk der bare vil sælge ham et job">
+        <path d="M20 278h300" stroke="rgba(255,255,255,.18)" stroke-width="1.5"/>
+        <use href="#f-telefon" x="46" y="154" width="80" height="124" stroke-width="2.8" style="color:rgba(255,255,255,.9)"/>
+        <g fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1.8">
+          <circle cx="140" cy="150" r="6"/><circle cx="162" cy="128" r="9"/>
+        </g>
+        <rect x="182" y="6" width="650" height="188" rx="22" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1.8"/>
+        <use href="#f-person" x="212" y="52" width="70" height="108" stroke-width="3.1" style="color:rgba(255,255,255,.55)"/>
+        <path d="M241 78l7 14 7-14" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="2.6"/>
+        <g fill="none" stroke="rgba(255,255,255,.55)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-penge" x="278" y="108" width="34" height="34"/></g>
+        <text x="248" y="176" text-anchor="middle" class="svgcaphvid">EN SÆLGER</text>
+        <g fill="none" stroke="rgba(255,255,255,.5)" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+          <use href="#i-megafon" x="356" y="38" width="26" height="26"/>
+          <use href="#i-penge" x="356" y="96" width="26" height="26"/>
+          <use href="#i-prisop" x="356" y="140" width="26" height="26"/>
+        </g>
+        <text x="398" y="58" class="svgtxthvid">Prøver bare at sælge mig et job</text>
+        <text x="398" y="116" class="svgtxthvid">Tænker på sine egne penge</text>
+        <text x="398" y="160" class="svgtxthvid">Tænker på sin provision</text>
+      </svg>
+    </div>
+    <div class="skub r d5">
+      <div class="brud">
+        <svg class="ik stor bi"><use href="#i-laegpaa"/></svg>
+        <span class="bs"></span>
+        <svg class="ik stor bz"><use href="#i-brud"/></svg>
+        <span class="bs"></span>
+      </div>
+      <div class="brudtxt">Får de den mindste lugt af det, så lukker de ned.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 15 · CIRKLEN (blokkens billede, modulets mest citérbare grafik) -->
+<section class="slide" data-sektion="Håndværkeren" data-lint-ok="doedzone">
+  <div class="ghost">4</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">02</span><span class="krule"></span><span class="ktxt">Håndværkeren · 4 af 11 · Cirklen</span></div>
+    <!-- CIRKEL-BILLEDET. Størrelsesforholdet bærer pointen: den inderste cirkel
+         fylder mest, den yderste ring er tynd og næsten væk. -->
+    <div class="vgruppe r d2 midtret">
+      <svg style="height:min(56vh,500px);width:auto" viewBox="0 0 700 520" role="img" aria-label="Tre koncentriske cirkler: håndværkeren inderst i en fuld gul cirkel, virksomheden på ringen rundt om ham, og os yderst på en tynd, næsten usynlig ring">
+        <circle cx="350" cy="255" r="245" fill="none" stroke="var(--linje)" stroke-width="1.2" stroke-dasharray="5 7"/>
+        <circle cx="350" cy="255" r="182" fill="none" stroke="#111213" stroke-width="1.6"/>
+        <circle cx="350" cy="255" r="132" fill="var(--gul)"/>
+        <use href="#f-hjelm" x="298" y="128" width="104" height="161" stroke-width="2.2" style="color:#111213"/>
+        <text x="350" y="338" text-anchor="middle" class="ringnavn" style="font-size:17px" fill="#111213" stroke="#F8E965">HÅNDVÆRKEREN</text>
+        <g fill="#fff" stroke="#111213" stroke-width="1.8">
+          <rect x="294" y="49" width="112" height="48" rx="10"/>
+          <rect x="136" y="322" width="112" height="48" rx="10"/>
+          <rect x="452" y="322" width="112" height="48" rx="10"/>
+        </g>
+        <g fill="none" stroke="#26282B" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+          <use href="#i-vogn" x="306" y="61" width="24" height="24"/>
+          <use href="#i-vogn" x="148" y="334" width="24" height="24"/>
+          <use href="#i-vogn" x="464" y="334" width="24" height="24"/>
+          <use href="#i-firma" x="340" y="61" width="24" height="24"/>
+          <use href="#i-firma" x="182" y="334" width="24" height="24"/>
+          <use href="#i-firma" x="498" y="334" width="24" height="24"/>
+        </g>
+        <text x="350" y="444" text-anchor="middle" class="ringnavn" style="font-size:18px" fill="#111213" stroke="#FFFFFF">VIRKSOMHEDEN</text>
+        <rect x="546" y="224" width="128" height="62" fill="#fff"/>
+        <use href="#f-headset" x="550" y="226" width="40" height="62" stroke-width="5" style="color:var(--muted)"/>
+        <rect x="598" y="241" width="28" height="28" rx="7" fill="var(--muted)"/>
+        <text x="612" y="260" text-anchor="middle" font-size="11" font-weight="900" fill="#fff">PM</text>
+        <text x="636" y="265" font-size="21" font-weight="900" letter-spacing="2" fill="var(--muted)">OS</text>
+      </svg>
+    </div>
+    <div class="skub r d5" style="text-align:center">
+      <div class="brudtxt" style="margin-top:0;font-size:clamp(20px,2.3vw,36px)">Dialogen må aldrig handle om os.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 16 · VI SKYNDER OS IKKE, OG DET DU ÅBNER MED (samme kort som slide 6) -->
+<section class="slide" data-sektion="Håndværkeren">
+  <div class="ghost">5</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">02</span><span class="krule"></span><span class="ktxt">Håndværkeren · 5 af 11 · Åbningen</span></div>
+    <h2 class="r d1" style="max-width:36ch">Vi er ikke for hurtige, vi skynder os ikke.</h2>
+    <!-- AFVIGELSE fra manus: første felt i tidslinjen er sort i stedet for gult, og
+         anchoren står uden gul highlight, fordi replik-kortenes gule citationstegn
+         er slidets ene gule markering. Kortene skal se ud som på slide 6. -->
+    <div class="faserow r d2" style="margin-top:2.4vh">
+      <svg class="ik stor" style="color:var(--sort);flex-shrink:0"><use href="#i-stopur"/></svg>
+      <div class="faseband">
+        <div class="fseg et">3-5 minutter på relationen</div>
+        <div class="fseg to">De bløde spørgsmål</div>
+        <div class="fseg tre">Pitchen</div>
+      </div>
+      <div class="tomboks" style="border-style:solid;border-color:var(--border);padding:9px 14px;flex-shrink:0;max-width:230px">
+        <svg class="ik mini" style="color:var(--muted)"><use href="#i-nej"/></svg>
+        <span class="tblab">Det er ikke screening. Det har screeningsafdelingen gjort.</span>
+      </div>
+    </div>
+    <div class="telefonkicker r d3" style="margin-top:2.6vh"><svg class="ik"><use href="#i-telefon"/></svg>Tag dem med til telefonen</div>
+    <div class="kortnet tre fyldud" style="margin-top:1.8vh">
+      <div class="kw r d3"><div class="rkort skaev1"><span class="rq">&ldquo;</span><div class="rk">Hvad går du så og laver i dag?</div></div></div>
+      <div class="kw r d4"><div class="rkort skaev2"><span class="rq">&ldquo;</span><div class="rk">Har du haft en god dag?</div></div></div>
+      <div class="kw r d5"><div class="rkort skaev3"><span class="rq">&ldquo;</span><div class="rk">Hvad har du ellers af planer?</div></div></div>
+      <div class="kw r d6 bred"><div class="rkort skaev4"><span class="rq">&ldquo;</span><div class="rk">Vi kan se at screening har skrevet at du går et sted hvor du ikke er helt glad. Hvordan kan det være?</div></div></div>
+    </div>
+    <div class="notelinje skub r d6" style="padding-bottom:1vh">Alle de her ting giver os en masse viden.</div>
+  </div>
+</section>
+
+<!-- 17 · ASSISTEN -->
+<section class="slide" data-sektion="Håndværkeren">
+  <div class="ghost">6</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">02</span><span class="krule"></span><span class="ktxt">Håndværkeren · 6 af 11 · Assisten</span></div>
+    <h2 class="r d1">Assisten kommer før pitchen.</h2>
+    <!-- AFVIGELSE fra manus: buen er sort, ikke gul, fordi de to gule kort er
+         slidets ene gule flade. Rækkefølgen læses fra venstre: assist, så pitch. -->
+    <div class="vgruppe" style="display:grid;grid-template-columns:1fr 300px 1fr;column-gap:24px;align-items:center">
+      <div class="r d2" style="display:flex;flex-direction:column;gap:16px">
+        <div class="rkort gul skaev1"><span class="rq">&ldquo;</span><div class="rk">Hvad er det der gør dig glad i dit arbejde?</div></div>
+        <div class="rkort gul skaev2"><span class="rq">&ldquo;</span><div class="rk">Hvad er vigtigt for dig?</div></div>
+      </div>
+      <div class="r d3 midtret">
+        <svg style="width:300px;height:auto" viewBox="0 0 300 172" role="img" aria-label="En bue fra spørgsmålene over til pitchen, altså afleveringen, med ordet assist over buen">
+          <text x="150" y="52" text-anchor="middle" font-size="40" font-weight="900" letter-spacing="-1.6" fill="#111213">assist</text>
+          <path d="M10 158C56 82 244 82 286 148" fill="none" stroke="#111213" stroke-width="3"/>
+          <path d="M272 132l18 22-24 3z" fill="#111213"/>
+        </svg>
+      </div>
+      <div class="r d4">
+        <div class="dkort tung" style="padding:24px 26px;gap:14px">
+          <svg class="ik xl" style="color:var(--sort)"><use href="#i-jobkort"/></svg>
+          <div class="dk-titel" style="font-size:clamp(19px,2.05vw,30px);letter-spacing:-.03em">Pitchen af jobbet</div>
+          <div class="dk-txt">Med hans egne ord i hånden.</div>
+        </div>
+      </div>
+    </div>
+    <div class="recap n skub r d5"><span class="rdot"></span><span class="rtx">Så ved vi hvad vi skal pitche ud fra.</span></div>
+  </div>
+</section>
+
+<!-- 18 · ADVARSLEN -->
+<section class="slide" data-sektion="Håndværkeren">
+  <div class="ghost">7</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">02</span><span class="krule"></span><span class="ktxt">Håndværkeren · 7 af 11 · Advarslen</span></div>
+    <div class="gtitel r d1">Allerede fra første dialog, det vi kalder kandidatdialog</div>
+    <div class="vgruppe r d2 midtret">
+      <svg class="figur" style="max-height:40vh" viewBox="0 0 820 258" role="img" aria-label="En vippe helt ude af balance: al din energi ligger tungt på virksomhederne, og siden med håndværkerne er tom og helt i vejret">
+        <path d="M30 250h760" stroke="var(--border)" stroke-width="1.6"/>
+        <path d="M410 196l-34 52h68z" fill="var(--flade)" stroke="#111213" stroke-width="2.2" stroke-linejoin="round"/>
+        <path d="M70 254L750 138" stroke="#111213" stroke-width="6" stroke-linecap="round"/>
+        <g fill="#fff" stroke="#111213" stroke-width="2">
+          <rect x="52" y="150" width="122" height="30" rx="6"/>
+          <rect x="58" y="184" width="122" height="30" rx="6"/>
+          <rect x="64" y="218" width="122" height="30" rx="6"/>
+        </g>
+        <g fill="none" stroke="#26282B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <use href="#i-firma" x="62" y="156" width="18" height="18"/><use href="#i-firma" x="68" y="190" width="18" height="18"/><use href="#i-firma" x="74" y="224" width="18" height="18"/>
+        </g>
+        <g class="svgmut"><text x="88" y="170">Virksomhed</text><text x="94" y="204">Virksomhed</text><text x="100" y="238">Virksomhed</text></g>
+        <text x="116" y="136" class="svgcap">AL DIN ENERGI PÅ VIRKSOMHEDERNE</text>
+        <use href="#f-hjelm" x="620" y="42" width="74" height="115" stroke-width="3.1" style="color:var(--linje)"/>
+        <text x="657" y="26" text-anchor="middle" class="svgcap">INGEN RELATION MED HÅNDVÆRKERNE</text>
+      </svg>
+    </div>
+    <div class="skub r d4">
+      <h2 style="max-width:none">Så får du <mark style="white-space:nowrap">aldrig succes i PowerMatch</mark>.</h2>
+    </div>
+  </div>
+</section>
+
+<!-- 19 · SPEJL TYPEN -->
+<section class="slide" data-sektion="Håndværkeren" data-lint-ok="doedzone">
+  <div class="ghost">8</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">02</span><span class="krule"></span><span class="ktxt">Håndværkeren · 8 af 11 · Spejl typen</span></div>
+    <h2 class="r d1">Er han sådan, er vi også sådan.</h2>
+    <div class="duo vgruppe" style="column-gap:56px;align-items:start">
+      <div class="r d2">
+        <div class="dtitel" style="color:var(--sort)">Håndværkertypen</div>
+        <svg class="figur" style="max-height:19vh;max-width:340px" viewBox="0 0 340 152" role="img" aria-label="En hurtig håndværkertype i bevægelse, og sælgeren spejlvendt i samme kropsholdning">
+          <path d="M8 150h324" stroke="var(--border)" stroke-width="1.5"/>
+          <use href="#f-hjelm" x="14" y="30" width="78" height="120" stroke-width="2.9" style="color:#26282B"/>
+          <g fill="none" stroke="var(--linje)" stroke-width="2" stroke-linecap="round"><path d="M100 66c8 8 8 24 0 32"/><path d="M112 56c12 12 12 44 0 56"/></g>
+          <path d="M170 22v112" stroke="var(--linje)" stroke-width="1.4" stroke-dasharray="5 5"/>
+          <text x="170" y="14" text-anchor="middle" class="svgcap">SPEJL</text>
+          <g transform="translate(326,0) scale(-1,1)"><use href="#f-headset" x="0" y="30" width="78" height="120" stroke-width="2.9" style="color:#26282B"/></g>
+          <g fill="none" stroke="var(--linje)" stroke-width="2" stroke-linecap="round"><path d="M240 66c-8 8-8 24 0 32"/><path d="M228 56c-12 12-12 44 0 56"/></g>
+        </svg>
+        <div class="kstrip" style="margin-top:14px">
+          <span class="kchip kant">Hurtig</span><span class="kchip kant">Lige på</span><span class="kchip kant">Hård</span>
+        </div>
+        <div class="notelinje" style="margin-top:12px">Så er vi også på samme måde.</div>
+      </div>
+      <div class="r d3">
+        <div class="dtitel" style="color:var(--sort)">Den rolige type</div>
+        <svg class="figur" style="max-height:19vh;max-width:340px" viewBox="0 0 340 152" role="img" aria-label="En roligere håndværkertype med kaffekoppen, og sælgeren spejlvendt i samme rolige holdning">
+          <path d="M8 150h324" stroke="var(--border)" stroke-width="1.5"/>
+          <use href="#f-kaffe" x="14" y="30" width="78" height="120" stroke-width="2.9" style="color:#26282B"/>
+          <path d="M170 22v112" stroke="var(--linje)" stroke-width="1.4" stroke-dasharray="5 5"/>
+          <text x="170" y="14" text-anchor="middle" class="svgcap">SPEJL</text>
+          <g transform="translate(326,0) scale(-1,1)"><use href="#f-headset" x="0" y="30" width="78" height="120" stroke-width="2.9" style="color:#26282B"/></g>
+        </svg>
+        <div class="kstrip" style="margin-top:14px">
+          <span class="kchip kant">Stille</span><span class="kchip kant">Rolig</span><span class="kchip kant">Tager sin tid</span>
+        </div>
+        <div class="notelinje" style="margin-top:12px">Så er vi også mere stille og rolige.</div>
+      </div>
+    </div>
+    <div class="tjekliste r d4" style="max-width:none">
+      <div class="trow"><span class="tdot"></span><span class="ttxt">Gør det ikke for kompliceret</span></div>
+      <!-- RETTET 14/8: der stod "Ikke for stift og formelt". Sebastian sagde
+           "for hårdt og sprogagtigt". "For hårdt" står, og det andet ord er et
+           åbent hul i talesporet, derfor er fluebenet halvt indtil han svarer. -->
+      <div class="trow"><span class="tdot" style="background:linear-gradient(90deg,var(--gul) 50%,#FFFFFF 50%);box-shadow:inset 0 0 0 1.5px var(--gul)"></span><span class="ttxt">Ikke for hårdt <span class="tomplads" style="margin-left:14px"><b>___</b>Afventer Sebastian: det andet ord</span></span></div>
+      <div class="trow"><span class="tdot"></span><span class="ttxt">Jordnært, og mød ham i øjenhøjde</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 20 · DE TO OPKALD (.duo.spejl · samme greb som slide 8) -->
+<section class="slide" data-sektion="Håndværkeren" data-lint-ok="doedzone">
+  <div class="ghost">9</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">02</span><span class="krule"></span><span class="ktxt">Håndværkeren · 9 af 11 · De to opkald</span></div>
+    <h2 class="r d1" style="max-width:38ch">Hvis du selv skulle ringes op og få tilbudt et job.</h2>
+    <div class="duo spejl strk" style="margin-top:2.4vh">
+      <div class="dside svag r d2">
+        <div class="dtitel">2 minutter</div>
+        <div class="dtop">
+          <svg class="figur" style="max-height:13vh;max-width:250px" viewBox="0 0 250 104" role="img" aria-label="Et stopur der viser to minutter, og en sælger med en megafon i stedet for en telefon">
+            <circle cx="44" cy="60" r="30" fill="var(--flade)" stroke="var(--muted)" stroke-width="2"/>
+            <path d="M44 60V30A30 30 0 0161.6 37.3z" fill="var(--muted)"/>
+            <path d="M38 24h12" stroke="var(--muted)" stroke-width="2.4" stroke-linecap="round"/>
+            <use href="#f-person" x="132" y="8" width="62" height="96" stroke-width="3.4" style="color:var(--muted)"/>
+            <g fill="none" stroke="var(--muted)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-megafon" x="192" y="30" width="30" height="30"/></g>
+          </svg>
+        </div>
+        <div class="rep svag"><svg class="ik"><use href="#i-megafon"/></svg><span class="rt">Prapper løs om hvor fedt jobbet er</span></div>
+        <div class="rep svag"><svg class="ik"><use href="#i-boble"/></svg><span class="rt">Hvor meget du bare skal tage det</span></div>
+        <div class="rep svag"><svg class="ik"><use href="#i-oerenej"/></svg><span class="rt">Ingen spørgsmål til dig</span></div>
+        <div class="dbund"><div class="laegpaa"><svg class="ik stor"><use href="#i-laegpaa"/></svg>Du lægger på</div></div>
+      </div>
+      <div class="dside r d3">
+        <div class="dtitel" style="color:var(--sort)">5-10 minutter</div>
+        <div class="dtop">
+          <svg class="figur" style="max-height:13vh;max-width:250px" viewBox="0 0 250 104" role="img" aria-label="Et stopur der viser ti minutter, og en sælger der sidder med headset og noter">
+            <circle cx="44" cy="60" r="30" fill="var(--flade)" stroke="#111213" stroke-width="2"/>
+            <path d="M44 60V30A30 30 0 1126.4 84.3z" fill="#111213"/>
+            <path d="M38 24h12" stroke="#111213" stroke-width="2.4" stroke-linecap="round"/>
+            <use href="#f-headset" x="132" y="8" width="62" height="96" stroke-width="3.4" style="color:#26282B"/>
+            <g fill="none" stroke="#26282B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-noter" x="196" y="34" width="28" height="28"/></g>
+          </svg>
+        </div>
+        <div class="rep"><svg class="ik" style="color:var(--sort)"><use href="#i-ok"/></svg><span class="rt">Forklarer dig jobbet oprigtigt</span></div>
+        <div class="rep"><svg class="ik" style="color:var(--sort)"><use href="#i-boblex2"/></svg><span class="rt">Spørger ind til dig</span></div>
+        <div class="rep"><svg class="ik" style="color:var(--sort)"><use href="#i-tillid"/></svg><span class="rt">Er sikker på at alt er godt</span></div>
+        <!-- AFVIGELSE fra manus: de tre detaljer står som chips i stedet for en
+             .tjekliste, så de to halvdele beholder præcis samme opbygning. -->
+        <div class="kstrip" style="margin-top:14px">
+          <span class="kchip kant">Hvad du skal lave derude</span>
+          <span class="kchip kant">Hvad du kan få i løn</span>
+          <span class="kchip kant">Fremtidsmuligheder</span>
+        </div>
+        <div class="dbund"><div class="svarhero"><svg class="ik stor"><use href="#i-oere"/></svg><span class="shv">Så lytter du.</span></div></div>
+      </div>
+    </div>
+    <p class="under skub r d5">Samme opkald. Samme job. <b>To sælgere.</b></p>
+  </div>
+</section>
+
+<!-- 21 · KÆDEN, OG HVAD DU MÅ SNAKKE OM -->
+<section class="slide" data-sektion="Håndværkeren">
+  <div class="ghost">10</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">02</span><span class="krule"></span><span class="ktxt">Håndværkeren · 10 af 11 · Kæden</span></div>
+    <h2 class="r d1">Jo bedre relation, jo større sandsynlighed for et salg.</h2>
+    <!-- AFVIGELSE fra manus: sidste led i kæden er sort med gult ikon, ikke fuld gul,
+         fordi den gule ankerflade nederst er slidets ene gule flade.
+         Recap-linjen ligger inde i fladen, ikke under den: ved 1366x768 ville en
+         linje under fladen ligge oven i folio-bjælken. -->
+    <div class="tflow neutral r d2">
+      <div class="linje"></div>
+      <div class="stationer">
+        <div class="station">
+          <div class="boks"><svg class="ik"><use href="#i-tillid"/></svg></div>
+          <h5>Bedre relation</h5><p>med håndværkeren</p>
+        </div>
+        <div class="station">
+          <div class="boks"><svg class="ik"><use href="#i-mappe"/></svg></div>
+          <h5>Han er godt forberedt</h5><p>til samtalen</p>
+        </div>
+        <div class="station">
+          <div class="boks"><svg class="ik"><use href="#i-bord"/></svg></div>
+          <h5>Bedre jobsamtale</h5><p>de to taler sammen</p>
+        </div>
+        <div class="station">
+          <div class="boks"><svg class="ik"><use href="#i-frem"/></svg></div>
+          <h5>Han gør mere for at få jobbet</h5><p>han vil have det</p>
+        </div>
+        <div class="station slut">
+          <div class="boks"><svg class="ik"><use href="#i-vaekst"/></svg></div>
+          <h5>Større sandsynlighed</h5><p>for et salg</p>
+        </div>
+      </div>
+    </div>
+    <div class="gulbaand r d4">
+      <div style="display:flex;align-items:center;gap:26px;flex-wrap:wrap">
+        <svg style="width:158px;height:auto;flex-shrink:0" viewBox="0 0 132 104" role="img" aria-label="Sælgeren og håndværkeren griner sammen">
+          <path d="M4 102h124" stroke="rgba(17,18,19,.3)" stroke-width="1.5"/>
+          <use href="#f-headset" x="6" y="6" width="62" height="96" stroke-width="3.4" style="color:#111213"/>
+          <g transform="translate(130,0) scale(-1,1)"><use href="#f-hjelm" x="0" y="6" width="62" height="96" stroke-width="3.4" style="color:#111213"/></g>
+          <path d="M31 24a5 5 0 007 0" fill="none" stroke="#111213" stroke-width="2"/>
+          <path d="M94 28a5 5 0 007 0" fill="none" stroke="#111213" stroke-width="2"/>
+        </svg>
+        <div style="flex:1;min-width:0">
+          <div class="kstrip">
+            <span class="kchip">Bliv venner med dem</span>
+            <span class="kchip">De skal kunne lide dig</span>
+            <span class="kchip">Man må gerne lave en joke</span>
+            <span class="kchip">Øst-syd-vest-højre-venstre</span>
+          </div>
+          <!-- RETTET 14/8: hans eget billede er sat tilbage ordret, jf. Blok 7 slide 10. -->
+          <div class="gb" style="margin-top:12px">Man må snakke om alt fra hoved til jord.</div>
+        </div>
+        <div style="max-width:186px;font-size:10.5px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:rgba(17,18,19,.62);line-height:1.6">Det er så relationsbaseret som noget kan være</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 22 · MØRK AFSLUTNING: KONTROLCIRKLEN (deckets slutbillede) -->
+<section class="slide moerk" data-sektion="Håndværkeren">
+  <div class="ghost">11</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">02</span><span class="krule"></span><span class="ktxt">Håndværkeren · 11 af 11 · Kontrolcirklen</span></div>
+    <h2 class="r d1">Hvad er i vores kontrolcirkel?</h2>
+    <!-- AFVIGELSE fra manus: den brudte linje nederst står i hvidt, ikke i gult,
+         fordi det gule felt til venstre er slidets ene gule flade. -->
+    <div class="vgruppe" style="display:grid;grid-template-columns:1.16fr 1px .84fr;column-gap:36px;align-items:stretch">
+      <div class="panel gul r d2">
+        <div class="ptitel"><svg class="ik"><use href="#i-kontrol"/></svg>I vores kontrolcirkel</div>
+        <div class="tjekliste" style="max-width:none">
+          <div class="trow"><span class="tdot"></span><span class="ttxt">Skabe en god relation med håndværkeren</span></div>
+          <div class="trow"><span class="tdot"></span><span class="ttxt">Skabe værdi for PowerMatch-produktet</span></div>
+          <div class="trow"><span class="tdot"></span><span class="ttxt">Forberede ham godt på jobsamtalen</span></div>
+          <div class="trow"><span class="tdot"></span><span class="ttxt">Gøre alt for at han for alt i verden vil have jobbet</span></div>
+        </div>
+      </div>
+      <div style="background:rgba(255,255,255,.18)"></div>
+      <div class="panel stille r d3">
+        <div class="ptitel"><svg class="ik"><use href="#i-nej"/></svg>Uden for den</div>
+        <div class="frows" style="max-width:none">
+          <div class="frow"><svg class="ik mini" style="color:rgba(255,255,255,.5)"><use href="#i-nej"/></svg><span class="ft">Præcis hvad virksomheden siger til jobsamtalen</span></div>
+          <div class="frow"><svg class="ik mini" style="color:rgba(255,255,255,.5)"><use href="#i-nej"/></svg><span class="ft">Hvilke arbejdsopgaver de har derude</span></div>
+        </div>
+        <div class="notelinje">Det er jo virksomheden der kontrollerer det.</div>
+      </div>
+    </div>
+    <div class="skub r d5">
+      <div style="font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.48);margin-bottom:13px;line-height:1.6">Kan vi ikke svare på hans spørgsmål, kan vi ikke forberede ham, kan vi ikke skabe en relation</div>
+      <div class="brud">
+        <span class="bs"></span>
+        <svg class="ik stor bz" style="color:rgba(255,255,255,.7)"><use href="#i-brud"/></svg>
+        <span class="bs"></span>
+      </div>
+      <div class="brudtxt">Så kan selv et rigtig rigtig godt job gå i vasken grundet vores arbejde.</div>
+    </div>
+  </div>
+</section>
+
+
+<div class="progress" id="progress"></div>
+<div class="pilzone v" onclick="gaa(-1)"></div>
+<div class="pilzone h" onclick="gaa(1)"></div>
+<div class="folio">
+  <span class="brand"><img src="data:image/png;base64,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0Bst/nk2il5+YfHPBRQILAAAliMzBAAAAgsAQGABAAgsAAAEFgCAwAIAEFgAAAgsAACBBQAgsAAAEFgAAAILAEBgAQAILAAABBYAgMACABBYAAAILAAAgQUAILAAABBYAAACCwBAYAEAILAAAAQWAIDAAgAQWAAACCwAAIEFACCwAAAQWAAAAgsAQGABACCwAAAEFgCAwAIAQGABAAgsAACBBQAgsAAAEFgAAAILAEBgAQAgsAAABBYAgMACAEBgAQAILAAAgQUAgMACABBYAAACCwBAYAEAILAAAAQWAIDAAgBAYAEACCwAAIEFAIDAAgAQWAAAAgsAQGABACCwAAAEFgCAwAIAQGABAAgsAACBBQCAwAIAEFgAAAILAACBBQAgsAAABBYAgMACAEBgAQAILAAAgQUAgMACABBYAAACCwAAgQUAILAAAAQWAAACCwBAYAEACCwAAIEFAIDAAgAQWAAAAgsAAIEFACCwAAAEFgAAAgsAQGABAAgsAAAEFgCAwAIAEFgAAAILAACBBQAgsAAABBYAAAILAEBgAQAILAAABBYAgMACABBYAAACCwAAgQUAILAAAAQWAAACCwCgEf4/Paatms/mpuAAAAAASUVORK5CYII=" alt="">PowerMatch</span>
+  <span id="folioSektion">Virksomhedsejeren</span>
+  <span class="nr" id="taeller">01 <span>/ 22</span></span>
+</div>
+
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+let i=Math.max(0,Math.min(slides.length-1,(parseInt(location.hash.slice(1))||1)-1));
+function pad(n){return String(n).padStart(2,'0')}
+function vis(n){
+  slides.forEach(s=>s.classList.remove('aktiv'));
+  i=Math.max(0,Math.min(slides.length-1,n));
+  slides[i].classList.add('aktiv');
+  document.getElementById('taeller').innerHTML=pad(i+1)+' <span>/ '+pad(slides.length)+'</span>';
+  document.getElementById('progress').style.width=((i+1)/slides.length*100)+'%';
+  document.getElementById('folioSektion').textContent=slides[i].dataset.sektion||'';
+  document.body.classList.toggle('moerk-chrome',slides[i].classList.contains('moerk'));
+  document.body.classList.toggle('gul-chrome',slides[i].classList.contains('gulflade'));
+  history.replaceState(null,'','#'+(i+1));
+}
+function gaa(d){vis(i+d)}
+addEventListener('keydown',e=>{
+  if(['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)){e.preventDefault();gaa(1)}
+  if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();gaa(-1)}
+  if(e.key==='Home')vis(0); if(e.key==='End')vis(slides.length-1);
+  if(e.key==='f'||e.key==='F'){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen()}
+});
+let tx=null;
+addEventListener('touchstart',e=>tx=e.touches[0].clientX);
+addEventListener('touchend',e=>{if(tx===null)return;const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)gaa(dx<0?1:-1);tx=null});
+vis(i);
+</script>
+
+<!-- ============================================================================
+     KAPITELNAVIGATION v1.0 · BYTE-IDENTISK BLOK
+     Denne blok står ORDRET ENS i alle fem decks i Modul 4 og Modul 5. Skal den
+     rettes, rettes den ét sted og kopieres byte for byte til de fire andre —
+     præcis som kaskade-rettelsesblokken i grundlaget v1.3. Blokken indsættes
+     nederst i body, efter deckets egen slide-motor, og den rører ikke ét
+     eksisterende element: den læser data-sektion fra slidene og bygger selv
+     både kapitellisten og fremdriftsindikatoren ind i DOM'en. Derfor kan den
+     lægges ind i et deck uden at der ændres en eneste anden linje.
+
+     HVAD DEN GØR
+     1) KAPITELLISTE. Tasten K (eller M) åbner en liste over deckets kapitler
+        med slidenumre. Klik eller taltast 1-9 hopper direkte. Pil op/ned
+        flytter markeringen, Enter åbner, Escape lukker. Listen er LUKKET som
+        udgangspunkt (display:none), så den kan ikke komme med på et
+        screenshot og kan ikke forstyrre en optagelse. Mens den er åben,
+        spiser den piletasterne, så man ikke kommer til at bladre bagved.
+     2) KAPITLERNE ER BLOKKENE. De udledes af data-sektion på hvert slide,
+        altså præcis det navn der står i kicker-linjen på slidet. Navigationen
+        og indholdet kan derfor ikke komme til at sige to forskellige ting.
+     3) FREMDRIFTSINDIKATOR i folio-linjen: kapitlets navn står der i forvejen
+        (#folioSektion), og blokken føjer en hårfin 1 px streg og et lille
+        "3 / 6" til i folioens egen sats. Det er bevidst næsten usynligt og
+        må ikke gøres til en fed statusbjælke.
+     4) STABILE HASH-LINKS PR. KAPITEL. #toemreren, #jord-og-beton,
+        #opsigelsesvarsler osv. åbner decket på kapitlets første slide.
+        Sluggen står ved hvert kapitel i listen, så den kan læses og sendes
+        videre. DE GAMLE HASH-LINKS PR. SLIDENUMMER VIRKER UÆNDRET: #4 er
+        stadig slide 4, og motoren skriver stadig selv #N i adressefeltet,
+        så deep-link-testen i deck-lint.js er urørt.
+
+     DESIGNSYSTEM v1.3. Ingen nye farver og ingen ny typografi: --gul #F8E965,
+     --sort #111213, --tekst #26282B, --muted #71757C, --border #ECECE8,
+     --flade #F6F6F3, --linje #C9C9C2, Inter 400-900. Reglen om maksimalt én
+     gul flade pr. slide er ikke rørt — den gule streg i listen sidder på det
+     AKTIVE kapitel i overlejringen, ikke på slidet, og overlejringen ligger
+     oven på indholdet og tæller derfor ikke med.
+     ============================================================================ -->
+<style>
+#kapitelmenu{position:fixed;inset:0;z-index:120;display:none;align-items:center;justify-content:center;
+  background:rgba(17,18,19,.5);padding:4vh 4vw;font-family:'Inter',-apple-system,Arial,sans-serif}
+#kapitelmenu.aaben{display:flex}
+#kapitelmenu .kpanel{width:100%;max-width:660px;max-height:92vh;overflow:auto;background:#FFFFFF;
+  border:1px solid var(--border);border-radius:16px;padding:26px 30px 22px;
+  box-shadow:0 24px 70px rgba(17,18,19,.28)}
+#kapitelmenu .khoved{display:flex;align-items:baseline;gap:14px;margin-bottom:16px}
+#kapitelmenu .ktitel{font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+#kapitelmenu .kdeck{margin-left:auto;font-size:11px;font-weight:800;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--linje);font-variant-numeric:tabular-nums}
+#kapitelmenu .krow{display:flex;align-items:center;gap:16px;width:100%;text-align:left;cursor:pointer;
+  background:none;border:0;border-top:1px solid var(--border);border-left:2px solid transparent;
+  padding:14px 10px 14px 12px;color:var(--tekst);font-family:inherit}
+#kapitelmenu .krow:last-of-type{border-bottom:1px solid var(--border)}
+#kapitelmenu .krow:hover,#kapitelmenu .krow.valgt{background:var(--flade)}
+#kapitelmenu .krow.nu{border-left-color:var(--gul)}
+#kapitelmenu .knum{font-size:12px;font-weight:900;color:var(--muted);font-variant-numeric:tabular-nums;
+  width:16px;flex-shrink:0}
+#kapitelmenu .knavn{font-size:16px;font-weight:800;color:var(--sort);letter-spacing:-.015em}
+#kapitelmenu .khash{font-size:10px;font-weight:700;letter-spacing:.06em;color:var(--linje);margin-left:10px}
+#kapitelmenu .kspan{margin-left:auto;font-size:12px;font-weight:800;color:var(--muted);
+  font-variant-numeric:tabular-nums;letter-spacing:.04em;flex-shrink:0}
+#kapitelmenu .kfod{margin-top:15px;font-size:10px;font-weight:700;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--linje)}
+.kmeter{width:54px;height:1px;background:var(--border);position:relative;flex-shrink:0}
+.kmeter i{position:absolute;left:0;top:0;height:1px;width:0;background:var(--linje);
+  transition:width .4s var(--ease)}
+.kpos{font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--linje);
+  font-variant-numeric:tabular-nums}
+.moerk-chrome .kmeter{background:rgba(255,255,255,.16)}
+.moerk-chrome .kmeter i{background:rgba(255,255,255,.5)}
+.moerk-chrome .kpos{color:rgba(255,255,255,.35)}
+.gul-chrome .kmeter{background:rgba(17,18,19,.14)}
+.gul-chrome .kmeter i{background:rgba(17,18,19,.42)}
+.gul-chrome .kpos{color:rgba(17,18,19,.42)}
+@media print{#kapitelmenu{display:none!important}.kmeter,.kpos{display:none}}
+@media (prefers-reduced-motion:reduce){.kmeter i{transition:none}}
+</style>
+<script>
+(function(){
+  var alleSlides=[].slice.call(document.querySelectorAll('.slide'));
+  if(!alleSlides.length)return;
+
+  /* slug: dansk -> ascii, saa #toemreren og #jord-og-beton er stabile og kan skrives i hånden */
+  function slug(s){
+    return String(s).toLowerCase()
+      .replace(/æ/g,'ae').replace(/ø/g,'oe').replace(/å/g,'aa')
+      .replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+  }
+
+  /* kapitlerne ER blokkene: sammenhaengende loeb af samme data-sektion */
+  var kap=[];
+  alleSlides.forEach(function(s,n){
+    var navn=(s.dataset.sektion||'').trim();
+    var sidste=kap[kap.length-1];
+    if(sidste&&sidste.navn===navn){sidste.slut=n;return;}
+    kap.push({navn:navn,slug:slug(navn),start:n,slut:n});
+  });
+
+  /* ---- fremdriftsindikator i folio-linjen: haarfin, ikke en statusbjaelke ---- */
+  var folio=document.querySelector('.folio');
+  var sekEl=document.getElementById('folioSektion');
+  var meter=null,meterFyld=null,posEl=null;
+  if(folio&&sekEl){
+    meter=document.createElement('span');meter.className='kmeter';meter.setAttribute('aria-hidden','true');
+    meterFyld=document.createElement('i');meter.appendChild(meterFyld);
+    posEl=document.createElement('span');posEl.className='kpos';
+    sekEl.parentNode.insertBefore(meter,sekEl.nextSibling);
+    meter.parentNode.insertBefore(posEl,meter.nextSibling);
+  }
+
+  /* ---- kapitellisten. Lukket som udgangspunkt, saa den ikke kan komme med paa
+         et screenshot og ikke kan forstyrre en optagelse. ---- */
+  var menu=document.createElement('div');
+  menu.id='kapitelmenu';menu.setAttribute('role','dialog');menu.setAttribute('aria-label','Kapitler');
+  var panel=document.createElement('div');panel.className='kpanel';
+  var hoved=document.createElement('div');hoved.className='khoved';
+  var titel=document.createElement('span');titel.className='ktitel';titel.textContent='Kapitler';
+  var deckNavn=document.createElement('span');deckNavn.className='kdeck';
+  deckNavn.textContent=kap.length+' kapitler · '+alleSlides.length+' slides';
+  hoved.appendChild(titel);hoved.appendChild(deckNavn);panel.appendChild(hoved);
+
+  var raekker=kap.map(function(k,n){
+    var r=document.createElement('button');r.type='button';r.className='krow';
+    var num=document.createElement('span');num.className='knum';num.textContent=(n+1);
+    var navn=document.createElement('span');navn.className='knavn';navn.textContent=k.navn;
+    var hash=document.createElement('span');hash.className='khash';hash.textContent='#'+k.slug;
+    var span=document.createElement('span');span.className='kspan';
+    span.textContent=(k.start+1===k.slut+1)?('slide '+(k.start+1)):('slide '+(k.start+1)+'-'+(k.slut+1));
+    r.appendChild(num);r.appendChild(navn);r.appendChild(hash);r.appendChild(span);
+    r.addEventListener('click',function(){gaaTilKapitel(n);});
+    panel.appendChild(r);
+    return r;
+  });
+
+  var fod=document.createElement('div');fod.className='kfod';
+  fod.textContent='1-9 spring · pil op og ned vælger · Enter åbner · Esc lukker · K åbner listen igen';
+  panel.appendChild(fod);
+  menu.appendChild(panel);
+  menu.addEventListener('click',function(e){if(e.target===menu)luk();});
+  document.body.appendChild(menu);
+
+  var aaben=false,valgt=0;
+
+  function kapitelFor(n){
+    for(var x=0;x<kap.length;x++){if(n>=kap[x].start&&n<=kap[x].slut)return x;}
+    return 0;
+  }
+  function markerValgt(){
+    raekker.forEach(function(r,n){r.classList.toggle('valgt',n===valgt);});
+  }
+  function opdater(){
+    var n=kapitelFor(i),k=kap[n],ial=k.slut-k.start+1,nu=i-k.start+1;
+    if(meterFyld)meterFyld.style.width=(nu/ial*100)+'%';
+    if(posEl)posEl.textContent=nu+' / '+ial;
+    if(meter)meter.title=k.navn+' · '+nu+' af '+ial;
+    raekker.forEach(function(r,x){r.classList.toggle('nu',x===n);});
+  }
+  function aab(){
+    valgt=kapitelFor(i);markerValgt();aaben=true;menu.classList.add('aaben');
+  }
+  function luk(){aaben=false;menu.classList.remove('aaben');}
+  function gaaTilKapitel(n){
+    luk();
+    vis(kap[Math.max(0,Math.min(kap.length-1,n))].start);
+  }
+
+  /* ---- hash: baade #12 (slidenummer, uaendret) og #toemreren (kapitel) ----
+     VIGTIGT: motoren har allerede kaldt vis() og skrevet #N i adressefeltet, før
+     denne blok koerer. Det ORIGINALE fragment fra selve navigationen hentes
+     derfor fra PerformanceNavigationTiming, som beholder det. Uden det ville et
+     kapitel-link altid lande paa slide 1. */
+  function fragmentVedIndlaesning(){
+    var e=performance.getEntriesByType?performance.getEntriesByType('navigation')[0]:null;
+    var raa=(e&&e.name)?e.name:location.href;
+    var n=raa.indexOf('#');
+    return n<0?'':raa.slice(n+1);
+  }
+  function losHash(raa){
+    var h='';
+    try{h=decodeURIComponent(String(raa||'')).trim();}catch(x){h=String(raa||'').trim();}
+    if(!h)return false;
+    if(/^\d+$/.test(h)){vis(parseInt(h,10)-1);return true;}
+    var s=slug(h);
+    for(var x2=0;x2<kap.length;x2++){
+      if(kap[x2].slug===s){vis(kap[x2].start);return true;}
+    }
+    return false;
+  }
+
+  /* motoren skal blive ved med at skrive #N, saa deep-link pr. slide er urørt.
+     Her lægges kun opdateringen af fremdriftsindikatoren oven på. */
+  var motorVis=window.vis;
+  window.vis=function(n){motorVis(n);opdater();};
+
+  addEventListener('hashchange',function(){losHash(String(location.hash||'').slice(1));});
+
+  addEventListener('keydown',function(e){
+    if(e.metaKey||e.ctrlKey||e.altKey)return;
+    var t=e.key;
+    if(!aaben){
+      if(t==='k'||t==='K'||t==='m'||t==='M'){e.preventDefault();e.stopPropagation();aab();}
+      return;
+    }
+    e.preventDefault();e.stopPropagation();
+    if(t==='Escape'||t==='k'||t==='K'||t==='m'||t==='M'){luk();return;}
+    if(t==='ArrowDown'||t==='ArrowRight'){valgt=Math.min(kap.length-1,valgt+1);markerValgt();return;}
+    if(t==='ArrowUp'||t==='ArrowLeft'){valgt=Math.max(0,valgt-1);markerValgt();return;}
+    if(t==='Enter'||t===' '){gaaTilKapitel(valgt);return;}
+    if(/^[1-9]$/.test(t)){var n=parseInt(t,10)-1;if(n<kap.length)gaaTilKapitel(n);return;}
+  },true);
+
+  var start=fragmentVedIndlaesning();
+  if(!(start&&!/^\d+$/.test(start)&&losHash(start)))opdater();
+})();
+</script>
+</body>
+</html>
