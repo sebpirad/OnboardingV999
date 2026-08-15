@@ -421,6 +421,8 @@ svg text{font-family:'Inter',Arial,sans-serif}
 /* v2 typografi-vagt: forhindrer horeunger (kort sidste linje) og skæve overskrifts-brud */
 h1,h2{text-wrap:balance}
 p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.ft,.dk-txt,.rt,.under,.notelinje,.gtitel{text-wrap:pretty}
+
+.fagtal{margin-left:auto;font-size:clamp(17px,1.5vw,23px);font-weight:900;color:var(--sort);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
 </style>
 </head>
 <body>
@@ -781,7 +783,6 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.ft,.dk-txt,.rt,.under,.notelinje,.gt
         <text x="560" y="125" class="svgmut">det her er rummet</text>
       </svg>
     </div>
-    <div class="pro-kilde r d4" style="margin-top:16px">Danmarks Statistik, BYG1A 2025 · 208.440 beskæftigede ved byggeri og anlæg</div>
     <div class="gulbaand r d5">
       <div class="gb">Der er så mange salg derude der venter på dig.</div>
     </div>
@@ -797,7 +798,7 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.ft,.dk-txt,.rt,.under,.notelinje,.gt
     <div class="pro-stats tre r d2" style="margin-top:4vh">
       <div class="pcell"><div class="pval">cirka 6 %</div><div class="plab">Af alle beskæftigede i Danmark arbejder i bygge og anlæg</div></div>
       <div class="pcell"><div class="pval">381,7 mia. kr.</div><div class="plab">Byggeriets omsætning i 2025</div></div>
-      <div class="pcell"><div class="pval">+10,9 %</div><div class="plab">Vækst i omsætningen på ét år</div><div class="pnote">omsætning, ikke antal ansatte</div></div>
+      <div class="pcell"><div class="pval">+10,9 %</div><div class="plab">Vækst i omsætningen på ét år</div></div>
     </div>
     <div class="vgruppe r d4" style="margin-top:2vh">
       <svg class="figur" style="max-height:30vh" viewBox="0 0 900 190" role="img" aria-label="Omsætningen vokser fra 2024 til 2025">
@@ -812,199 +813,98 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.ft,.dk-txt,.rt,.under,.notelinje,.gt
         <text x="0" y="24" class="svgcap">OMSÆTNING</text>
       </svg>
     </div>
-    <div class="pro-kilde skub r d5">Kilder: Danmarks Statistik, BYGOMS2A og BYG1A, 2025 · andelen af alle beskæftigede: Danmarks Statistik</div>
   </div>
 </section>
 
 <!-- 10 · OG DEN MANGLER FOLK (samme figur som Modul 2 · Video 1, slide 3) -->
-<section class="slide" data-sektion="Markedet" style="padding:0">
-  <div class="ghost" style="right:54%">3</div>
-  <div class="split">
-    <div class="venstre">
-      <div class="kicker r"><span class="knr">02</span><span class="krule"></span><span class="ktxt">Markedet · 3 af 4 · Manglen</span></div>
-      <div class="vgruppe">
-        <h2 class="r d1">Det er en branche der mangler medarbejdere.</h2>
-        <p class="under r d2" style="margin-top:3.2vh">Det er dét, efterspørgslen på vores produkt hviler på: <b>folk mangler håndværkere.</b></p>
-        <!-- RETTET 14/8: "dobbelt" → "næsten dobbelt" (19 mod 10,5 er 1,81 gange),
-             "jern og metal" → "jern, metal og auto · de to sværeste erhvervsgrupper",
-             begge dele ordret som i Blok 2 slide 3. Tredje linje, "ikke om kunden
-             mangler folk, kun hvornår", er fjernet: den findes ikke i talesporet
-             og ikke i manuset, og skærmen må ikke påstå mere end der bliver sagt. -->
-        <div class="fakta-stak r d3" style="margin-top:4vh">
-          <div class="fakta-r">Næsten dobbelt så svært som resten af arbejdsmarkedet</div>
-          <div class="fakta-r">Sammen med jern, metal og auto <span style="display:block">de to sværeste erhvervsgrupper i Danmark</span></div>
-        </div>
-      </div>
+<section class="slide" data-sektion="Markedet">
+  <div class="ghost">3</div>
+  <div class="z fyld">
+    <div class="kicker r"><span class="knr">02</span><span class="krule"></span><span class="ktxt">Markedet · 3 af 4 · Manglen</span></div>
+    <h2 class="r d1">Det er en branche der <span style="white-space:nowrap">mangler medarbejdere.</span></h2>
+    <div class="gab r d3" style="margin-top:7vh">
+      <div class="gtitel">Rekrutteringer der endte uden en ansættelse</div>
+      <svg viewBox="0 0 1180 128" role="img" aria-label="19 procent af rekrutteringsforsøgene i bygge og anlæg endte uden en ansættelse, mod 10,5 procent på hele arbejdsmarkedet">
+        <text x="0" y="11" class="glab">BYGGE OG ANLÆG</text>
+        <rect x="0" y="20" width="1180" height="30" fill="#111213"/>
+        <text x="1166" y="41" text-anchor="end" class="gval hvid">19 %</text>
+        <text x="0" y="89" class="glab">HELE ARBEJDSMARKEDET</text>
+        <rect x="1" y="97" width="652" height="29" fill="#F6F6F3" stroke="#111213" stroke-width="1.5"/>
+        <text x="672" y="119" class="gval">10,5 %</text>
+      </svg>
     </div>
-    <div class="hoejre pro">
-      <div class="pro-hero r d2">
-        <div class="kaempe" style="font-size:clamp(84px,8.4vw,150px)">19 %<i></i></div>
-        <div class="ptag">Af rekrutteringerne i bygge og anlæg endte uden en ansættelse</div>
-      </div>
-      <div class="gab r d4">
-        <div class="gtitel">Næsten dobbelt så svært som resten af arbejdsmarkedet</div>
-        <svg viewBox="0 0 688 118" role="img" aria-label="19 procent af rekrutteringsforsøgene i bygge og anlæg endte uden en ansættelse, mod 10,5 procent på hele arbejdsmarkedet">
-          <text x="0" y="10" class="glab">BYGGE OG ANLÆG</text>
-          <rect x="0" y="18" width="688" height="26" fill="#111213"/>
-          <text x="676" y="36" text-anchor="end" class="gval hvid">19 %</text>
-          <text x="0" y="84" class="glab">HELE ARBEJDSMARKEDET</text>
-          <rect x="1" y="91" width="379" height="25" fill="#F6F6F3" stroke="#111213" stroke-width="1.5"/>
-          <text x="394" y="109" class="gval">10,5 %</text>
-        </svg>
-      </div>
-      <div class="r d5">
-        <div class="pro-stats en">
-          <div class="pcell"><div class="pval">op mod 100.000</div><div class="plab">Faglærte i hele Danmark i 2030</div></div>
-        </div>
-        <div class="pro-kilde">Kilder: STAR, Rekrutteringssurvey forår 2026 · op mod 100.000 faglærte: Arbejderbevægelsens Erhvervsråd, 2021, om hele arbejdsmarkedet og alle faglærte uddannelser i 2030, ikke byggebranchen alene</div>
-      </div>
-    </div>
+    <p class="under skub r d5">Næsten dobbelt så svært som resten af arbejdsmarkedet. <b>Det er dét, efterspørgslen på vores produkt hviler på.</b></p>
   </div>
 </section>
 
 <!-- 11 · FRA TRE ANSATTE TIL TRE TUSIND -->
-<section class="slide" data-sektion="Markedet" data-lint-ok="doedzone">
-  <div class="ghost">4</div>
-  <div class="z fyld">
-    <div class="kicker r"><span class="knr">02</span><span class="krule"></span><span class="ktxt">Markedet · 4 af 4 · Kundefladen</span></div>
-    <h2 class="r d1">Vores kunder er hele branchen. Der er ikke huller i båndet.</h2>
-    <div class="vgruppe r d2">
-      <svg class="figur" style="max-height:44vh" viewBox="0 0 900 250" role="img" aria-label="Fra de lokale virksomheder med tre til fem ansatte til de største med op imod 3000 ansatte, og et ubrudt bånd hen over hele spændet">
-        <text x="10" y="52" class="svgcap">HER ER DER FLEST AF DEM</text>
-        <path d="M10 112V100 M23 112V100 M36 112V100 M49 112V100 M62 112V100 M75 112V100 M88 112V100 M101 112V100 M114 112V100 M127 112V100 M140 112V100 M153 112V100 M166 112V100 M179 112V100" stroke="#26282B" stroke-width="5" stroke-linecap="round" opacity=".5"/>
-        <path d="M10 130V118 M23 130V118 M36 130V118 M49 130V118 M62 130V118 M75 130V118 M88 130V118 M101 130V118 M114 130V118 M127 130V118 M140 130V118 M153 130V118 M166 130V118 M179 130V118" stroke="#26282B" stroke-width="5" stroke-linecap="round" opacity=".5"/>
-        <path d="M10 148V136 M23 148V136 M36 148V136 M49 148V136 M62 148V136 M75 148V136 M88 148V136 M101 148V136 M114 148V136 M127 148V136 M140 148V136 M153 148V136 M166 148V136 M179 148V136" stroke="#26282B" stroke-width="5" stroke-linecap="round" opacity=".5"/>
-        <text x="10" y="72" class="svgmut">De lokale tømrervirksomheder med 3, 4, 5 ansatte</text>
-        <g fill="none" stroke="#111213" stroke-width="2.2">
-          <rect x="596" y="34" width="290" height="34" rx="8"/>
-          <rect x="596" y="78" width="290" height="34" rx="8"/>
-          <rect x="596" y="122" width="290" height="34" rx="8"/>
-        </g>
-        <text x="616" y="56" class="svgtxt">Kemp &amp; Lauritzen</text>
-        <text x="616" y="100" class="svgtxt">Bravida</text>
-        <text x="616" y="144" class="svgtxt">Wicotec Kirkebjerg</text>
-        <rect x="0" y="182" width="900" height="30" fill="var(--gul)"/>
-        <text x="450" y="202" text-anchor="middle" class="svgtxt" letter-spacing="3">VI ARBEJDER I HELE BRANCHEN</text>
-        <text x="0" y="238" class="svgcap">3 ANSATTE</text>
-        <text x="900" y="238" text-anchor="end" class="svgcap">OP IMOD 3.000 ANSATTE</text>
-      </svg>
+<section class="slide" data-sektion="Markedet">
+    <div class="ghost">4</div>
+    <div class="z fyld">
+      <div class="kicker r"><span class="knr">02</span><span class="krule"></span><span class="ktxt">Markedet · 4 af 4 · Kundefladen</span></div>
+      <h2 class="r d1">Vores kunder er <span style="white-space:nowrap">hele branchen.</span></h2>
+      <div class="frows r d3" style="margin-top:7vh;max-width:1000px">
+        <div class="frow" style="padding:3.4vh 4px"><svg class="ik xl"><use href="#i-hus"/></svg><span class="ft" style="font-size:clamp(22px,2.2vw,34px)">Små virksomheder</span></div>
+        <div class="frow" style="padding:3.4vh 4px"><svg class="ik xl"><use href="#i-etage"/></svg><span class="ft" style="font-size:clamp(22px,2.2vw,34px)">Mellemstore virksomheder</span></div>
+        <div class="frow" style="padding:3.4vh 4px"><svg class="ik xl"><use href="#i-kran"/></svg><span class="ft" style="font-size:clamp(22px,2.2vw,34px)">Store virksomheder</span></div>
+      </div>
+      <p class="under skub r d5">Fra de helt små til de største i landet. <b>Alle kunder er kunder.</b></p>
     </div>
-    <div class="skub r d5" style="display:flex;align-items:center;gap:18px;flex-wrap:wrap">
-      <!-- RETTET 14/8 · runde 2: "C5 også rigtigt." De tre store kunder med op
-           imod 3.000 ansatte er bekræftet, og .tomplads er fjernet. -->
-      <p class="under" style="margin:0">Fra de helt små til de største i landet. <b>Alle kunder er kunder.</b></p>
-    </div>
-  </div>
-</section>
+  </section>
 
 <!-- ############ BLOK 3 · FAGENE (slide 12-17) ############ -->
 
 <!-- 12 · VORES SEKS HOVEDFAG -->
 <section class="slide" data-sektion="Fagene" data-lint-ok="doedzone">
-  <div class="ghost">1</div>
-  <div class="z fyld">
-    <div class="kicker r"><span class="knr">03</span><span class="krule"></span><span class="ktxt">Fagene · 1 af 6 · Rangorden</span></div>
-    <h2 class="r d1">Vores seks hovedfag.</h2>
-    <div class="vgruppe">
-      <div class="dtitel r d2" style="padding-bottom:10px">Rangordnet efter hvor mange vi har ansat i PowerMatch</div>
-      <div class="frows r d2" style="max-width:960px">
-        <div class="frow hero"><span class="fnr">1</span><svg class="ik"><use href="#i-hammer"/></svg><span class="ft">Tømrer</span><span class="fnote">Vores største jobtitel, og det har det altid været</span></div>
-        <div class="frow"><span class="fnr">2</span><svg class="ik"><use href="#i-stik"/></svg><span class="ft">Elektriker</span><span class="fnote"><svg class="ik mini"><use href="#i-op"/></svg>Fornyeligt overhalet murer</span></div>
-        <div class="frow"><span class="fnr">3</span><svg class="ik"><use href="#i-murerske"/></svg><span class="ft">Murer</span><span class="fnote"><svg class="ik mini"><use href="#i-ned"/></svg>Overhalet af el</span></div>
-        <div class="frow"><span class="fnr">4</span><svg class="ik"><use href="#i-rulle"/></svg><span class="ft">Bygningsmaler</span></div>
-        <div class="frow"><span class="fnr">5</span><svg class="ik"><use href="#i-roertang"/></svg><span class="ft">VVS-montør</span></div>
-        <div class="frow"><span class="fnr">6</span><svg class="ik"><use href="#i-skovl"/></svg><span class="ft">Jord og beton</span></div>
+    <div class="ghost">1</div>
+    <div class="z fyld">
+      <div class="kicker r"><span class="knr">03</span><span class="krule"></span><span class="ktxt">Fagene · 1 af 6 · Rangorden</span></div>
+      <h2 class="r d1">Vores seks hovedfag.</h2>
+      <div class="vgruppe">
+        <div class="dtitel r d2" style="padding-bottom:10px">Rangordnet efter hvor mange vi har ansat i PowerMatch</div>
+        <div class="frows r d2" style="max-width:960px">
+          <div class="frow hero"><span class="fnr">1</span><svg class="ik"><use href="#i-hammer"/></svg><span class="ft">Tømrer</span><span class="fagtal">43.400</span></div>
+          <div class="frow"><span class="fnr">2</span><svg class="ik"><use href="#i-stik"/></svg><span class="ft">Elektriker</span><span class="fagtal">31.300</span></div>
+          <div class="frow"><span class="fnr">3</span><svg class="ik"><use href="#i-murerske"/></svg><span class="ft">Murer</span><span class="fagtal">12.600</span></div>
+          <div class="frow"><span class="fnr">4</span><svg class="ik"><use href="#i-rulle"/></svg><span class="ft">Bygningsmaler</span><span class="fagtal">11.800</span></div>
+          <div class="frow"><span class="fnr">5</span><svg class="ik"><use href="#i-roertang"/></svg><span class="ft">VVS-montør</span><span class="fagtal">20.200</span></div>
+          <div class="frow"><span class="fnr">6</span><svg class="ik"><use href="#i-skovl"/></svg><span class="ft">Jord og beton</span><span class="fagtal">24.800</span></div>
+        </div>
+        <div class="dtitel r d4" style="padding-top:14px">Tallet er hvor mange der er af dem i byggebranchen</div>
       </div>
     </div>
-    <p class="under skub r d5">Rækkefølgen er vores egen. <b>Tallene kommer nu.</b></p>
-  </div>
-</section>
+  </section>
 
 <!-- 13 · HVOR STORE FAGENE ER I DANMARK -->
 <section class="slide" data-sektion="Fagene">
-  <div class="ghost">2</div>
-  <div class="z fyld">
-    <div class="kicker r"><span class="knr">03</span><span class="krule"></span><span class="ktxt">Fagene · 2 af 6 · Fagenes størrelse</span></div>
-    <h2 class="r d1" style="max-width:34ch">Hvor store fagene egentlig er.</h2>
-    <!-- RETTET 14/8 · runde 2: den TREDJE bjælke pr. fag med PowerMatchs egne tal
-         er fjernet HELT, ikke sat som stiplet plads. Sebastian, ordret:
-         "Hvor mange per fag er lige meget? Det behøver vi ikke skrive ind."
-         Figuren tegnes derfor færdig med to bjælker pr. fag, og legenden har
-         kun to poster. Grupperytmen er uændret (62 px pr. fag), men de to
-         bjælker er centreret i gruppen, så der ikke står et hul hvor den
-         tredje lå. Der må ikke lægges en tredje bjælke ind igen. -->
-    <div class="r d2" style="display:grid;grid-template-columns:1fr 250px;column-gap:26px;align-items:start;margin-top:1.6vh">
-      <svg class="figur" style="max-height:46vh" viewBox="0 0 980 384" role="img" aria-label="Grupperet soejlediagram med to bjaelker pr. fag: branchen og faget, for hvert af de seks fag">
-        <rect x="158" y="0" width="16" height="9" fill="#111213"/><text x="180" y="9" class="svgcap">BRANCHEN</text>
-        <rect x="262" y="0" width="16" height="9" fill="var(--flade)" stroke="#111213" stroke-width="1.2"/><text x="284" y="9" class="svgcap">FAGET</text>
-        <g>
-          <text x="150" y="51" text-anchor="end" class="svgtxt">Tømrer</text>
-          <rect x="158" y="32" width="700.0" height="13" fill="#111213"/><text x="866.0" y="42.5" class="svgval">43.449</text>
-          <rect x="158.7" y="49" width="256.2" height="13" fill="var(--flade)" stroke="#111213" stroke-width="1.4"/><text x="422.2" y="59.5" class="svgval">15.902</text>
-        </g>
-        <g>
-          <text x="150" y="113" text-anchor="end" class="svgtxt">Elektriker</text>
-          <rect x="158" y="94" width="504.3" height="13" fill="#111213"/><text x="670.3" y="104.5" class="svgval">31.303</text>
-          <rect x="158.7" y="111" width="284.1" height="13" fill="var(--flade)" stroke="#111213" stroke-width="1.4"/><text x="450.1" y="121.5" class="svgval">17.635</text>
-        </g>
-        <g>
-          <text x="150" y="175" text-anchor="end" class="svgtxt">Murer</text>
-          <rect x="158" y="156" width="203.8" height="13" fill="#111213"/><text x="369.8" y="166.5" class="svgval">12.648</text>
-          <rect x="158.7" y="173" width="60.7" height="13" fill="var(--flade)" stroke="#111213" stroke-width="1.4"/><text x="226.7" y="183.5" class="svgval">3.767</text>
-        </g>
-        <g>
-          <text x="150" y="237" text-anchor="end" class="svgtxt">Bygningsmaler</text>
-          <rect x="158" y="218" width="190.6" height="13" fill="#111213"/><text x="356.6" y="228.5" class="svgval">11.830</text>
-          <rect x="158.7" y="235" width="74.3" height="13" fill="var(--flade)" stroke="#111213" stroke-width="1.4"/><text x="240.3" y="245.5" class="svgval">4.610</text>
-        </g>
-        <g>
-          <text x="150" y="299" text-anchor="end" class="svgtxt">VVS</text>
-          <rect x="158" y="280" width="325.9" height="13" fill="#111213"/><text x="491.9" y="290.5" class="svgval">20.230</text>
-          <rect x="158.7" y="297" width="125.1" height="13" fill="var(--flade)" stroke="#111213" stroke-width="1.4"/><text x="291.1" y="307.5" class="svgval">7.766</text>
-        </g>
-        <g>
-          <text x="150" y="361" text-anchor="end" class="svgtxt">Jord og beton</text>
-          <rect x="158" y="342" width="400.2" height="13" fill="#111213"/><text x="566.2" y="352.5" class="svgval">24.841</text>
-          <text x="158.7" y="369.5" class="svgmut">Ikke opgjort som fag</text>
-        </g>
-      </svg>
-      <svg class="figur" style="max-height:46vh" viewBox="0 0 250 412" role="img" aria-label="Vores raekkefoelge holdt op mod branchens raekkefoelge. Jord og beton er branchens tredjestoerste og vores mindste">
-        <text x="0" y="9" class="svgcap">VORES</text><text x="250" y="9" text-anchor="end" class="svgcap">BRANCHENS</text>
-        <g stroke="var(--linje)" stroke-width="1.4" fill="none">
-          <path d="M84 47 H166" />
-          <path d="M84 109 H166" />
-          <path d="M84 171 L166 295"/>
-          <path d="M84 233 L166 357"/>
-          <path d="M84 295 L166 233"/>
-        </g>
-        <path d="M84 357 L166 171" stroke="#111213" stroke-width="2.6" fill="none"/>
-        <g>
-          <text x="0" y="51" class="svgtxt">1 Tømrer</text>
-          <text x="0" y="113" class="svgtxt">2 Elektriker</text>
-          <text x="0" y="175" class="svgtxt">3 Murer</text>
-          <text x="0" y="237" class="svgtxt">4 Maler</text>
-          <text x="0" y="299" class="svgtxt">5 VVS</text>
-          <text x="0" y="361" class="svgtxt">6 Jord og beton</text>
-        </g>
-        <g text-anchor="end">
-          <text x="250" y="51" class="svgtxt">Tømrer 1</text>
-          <text x="250" y="113" class="svgtxt">Elektriker 2</text>
-          <text x="250" y="175" class="svgtxt">Jord og beton 3</text>
-          <text x="250" y="237" class="svgtxt">VVS 4</text>
-          <text x="250" y="299" class="svgtxt">Murer 5</text>
-          <text x="250" y="361" class="svgtxt">Maler 6</text>
-        </g>
-        <rect x="25" y="384" width="200" height="26" rx="13" fill="var(--gul)"/>
-        <text x="125" y="401" text-anchor="middle" class="svgtxt" letter-spacing="1">HER ER DER MEST AT HENTE</text>
-      </svg>
+    <div class="ghost">2</div>
+    <div class="z fyld">
+      <div class="kicker r"><span class="knr">03</span><span class="krule"></span><span class="ktxt">Fagene · 2 af 6 · Fagenes størrelse</span></div>
+      <h2 class="r d1">Hvor store fagene er.</h2>
+      <div class="gab r d3" style="margin-top:6vh">
+        <svg viewBox="0 0 1180 388" role="img" aria-label="Antal beskaeftigede i de seks fag">
+          <text x="0" y="14" class="glab">TØMRER</text>
+          <rect x="0" y="22" width="1180" height="30" fill="#111213"/>
+          <text x="1166" y="43" text-anchor="end" class="gval hvid">43.400</text>
+          <text x="0" y="80" class="glab">ELEKTRIKER</text>
+          <rect x="0" y="88" width="851" height="30" fill="#111213"/>
+          <text x="837" y="109" text-anchor="end" class="gval hvid">31.300</text>
+          <text x="0" y="146" class="glab">JORD OG BETON</text>
+          <rect x="0" y="154" width="674" height="30" fill="#111213"/>
+          <text x="660" y="175" text-anchor="end" class="gval hvid">24.800</text>
+          <text x="0" y="212" class="glab">VVS-MONTØR</text>
+          <rect x="0" y="220" width="549" height="30" fill="#111213"/>
+          <text x="535" y="241" text-anchor="end" class="gval hvid">20.200</text>
+          <text x="0" y="278" class="glab">MURER</text>
+          <rect x="0" y="286" width="343" height="30" fill="#111213"/>
+          <text x="329" y="307" text-anchor="end" class="gval hvid">12.600</text>
+          <text x="0" y="344" class="glab">BYGNINGSMALER</text>
+          <rect x="0" y="352" width="321" height="30" fill="#111213"/>
+          <text x="307" y="373" text-anchor="end" class="gval hvid">11.800</text>
+        </svg>
+      </div>
     </div>
-    <div class="advarsel skub r d5">
-      <svg class="ik"><use href="#i-nej"/></svg>
-      <span>Fagsøjlen dækker kun virksomheder med mindst 10 ansatte, og 91,8 % af byggefirmaerne har under 10. Murerens 3.767 er ikke antallet af murere i Danmark. Alle fagtal er kraftigt undervurderede.</span>
-    </div>
-    <div class="pro-kilde r d5">Kilder: Danmarks Statistik, BYG1A 2025 (branchen) og LONS20 2024 (faget)</div>
-  </div>
-</section>
+  </section>
 
 <!-- 14 · ENTREPRENØRBRANCHEN -->
 <section class="slide" data-sektion="Fagene" data-lint-ok="doedzone">
@@ -1035,24 +935,9 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.ft,.dk-txt,.rt,.under,.notelinje,.gt
         </g>
         <text x="450" y="176" text-anchor="middle" class="svgtxt">Folk laver det hele på kryds og tværs</text>
       </svg>
-      <div class="duo r d4" style="margin-top:2.4vh;column-gap:40px">
-        <!-- RETTET 14/8 · runde 2: hullet om svendebrev er LUKKET. Sebastian,
-             ordret: "Svendborg er et krav. Altid et krav i tømrer, mure,
-             elektriker, VVS-monitor og maler." Formuleringen "nogle kunder vil
-             se svendebrevet" er ude af hele modulet, og .tomplads er fjernet.
-             Ordet "altid" er slidets ENE gule markering. -->
-        <div class="dkort">
-          <div class="dk-titel"><svg class="ik"><use href="#i-dok"/></svg>Tømrer, murer, elektriker, VVS-montør og bygningsmaler</div>
-          <div class="dk-txt">Svendebrev er <mark>altid</mark> et krav.</div>
-        </div>
-        <div class="dkort svag">
-          <div class="dk-titel"><svg class="ik"><use href="#i-doknej"/></svg>Entreprenørbranchen</div>
-          <div class="dk-txt">Ikke uddannelseskrav på samme måde som i de øvrige fag.</div>
-        </div>
-      </div>
+      
     </div>
-    <p class="under skub r d5">Jord og beton hører under entreprenørbranchen.</p>
-  </div>
+</div>
 </section>
 
 <!-- 15 · DE FAG VI ER GÅET IND I FOR NYLIGT -->
@@ -1071,7 +956,7 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.ft,.dk-txt,.rt,.under,.notelinje,.gt
         </div>
       </div>
       <div class="dkort tung r d3" style="padding:22px 24px">
-        <div style="display:flex;align-items:center;gap:12px"><span class="kchip gul">Hovedfagene</span><span class="notelinje">her betyder den faglige forståelse aller allermest</span></div>
+        <div style="display:flex;align-items:center;gap:12px"><span class="kchip gul">Hovedfagene</span></div>
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:6px">
           <div class="dkort" style="background:#fff;padding:13px;gap:7px"><svg class="ik"><use href="#i-hammer"/></svg><div class="dk-titel">Tømrer</div></div>
           <div class="dkort" style="background:#fff;padding:13px;gap:7px"><svg class="ik"><use href="#i-stik"/></svg><div class="dk-titel">Elektriker</div></div>
@@ -1081,10 +966,6 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.ft,.dk-txt,.rt,.under,.notelinje,.gt
           <div class="dkort" style="background:#fff;padding:13px;gap:7px"><svg class="ik"><use href="#i-skovl"/></svg><div class="dk-titel">Jord og beton</div></div>
         </div>
       </div>
-    </div>
-    <div class="skub r d5" style="display:flex;align-items:center;gap:18px;flex-wrap:wrap">
-      <p class="under" style="margin:0">De nye fag får ikke forfærdelig meget fokus nu.</p>
-      <span class="kchip">De resterende fag kommer senere i modulet</span>
     </div>
   </div>
 </section>
@@ -1350,7 +1231,6 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.ft,.dk-txt,.rt,.under,.notelinje,.gt
       </div>
       <span class="kchip gul">Lige nu: arbejdsomkostninger +3,1 % mod inflation +1,7 %</span>
     </div>
-    <div class="pro-kilde skub r d5">Danmarks Statistik, BYG43 arbejdsomkostninger, årsgennemsnit af kvartaler · PRIS8 og PRIS111 forbrugerpriser · 2015-2025 · seneste tal 2026K1 og juli 2026</div>
   </div>
 </section>
 
@@ -1447,193 +1327,7 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.ft,.dk-txt,.rt,.under,.notelinje,.gt
 <!-- ############ BLOK 5 · SÆSONEN (slide 24-27) ############ -->
 
 <!-- 24 · BRANCHEN KAN GODT VÆRE SÆSONBASERET -->
-<section class="slide" data-sektion="Sæsonen">
-  <div class="ghost">1</div>
-  <div class="z fyld">
-    <div class="kicker r"><span class="knr">05</span><span class="krule"></span><span class="ktxt">Sæsonen · 1 af 4 · Sommeren</span></div>
-    <h2 class="r d1">I nogle sæsoner er nogle fag mere efterspurgte end andre.</h2>
-    <p class="under r d1" style="margin-top:14px">Og det er noget vi tilrettelægger vores fokus efter.</p>
-    <div class="vgruppe" style="display:grid;grid-template-columns:1fr 250px;column-gap:40px;align-items:center">
-      <div class="r d2">
-        <div class="gtitel" style="margin-bottom:12px">Arbejder utrolig meget udenfor</div>
-        <div class="kstrip stor">
-          <span class="kchip kant"><svg class="ik"><use href="#i-tommestok"/></svg>Tømrer</span>
-          <span class="kchip kant"><svg class="ik"><use href="#i-mursten"/></svg>Murer</span>
-          <span class="kchip kant"><svg class="ik"><use href="#i-rulle"/></svg>Maler</span>
-          <span class="kchip kant"><svg class="ik"><use href="#i-graver"/></svg>Entreprenør</span>
-          <span class="kchip kant"><svg class="ik"><use href="#i-skovl"/></svg>Jord og beton</span>
-        </div>
-      </div>
-      <div class="heroTal ord r d3">
-        <span class="t">Kæmpe efterspørgsel</span>
-        <span class="tl">Om sommeren</span>
-      </div>
-    </div>
-    <!-- AFVIGELSE fra manus: maanedsbaandet ligger OVER den gule ankerflade, ikke under.
-         Ved 1366x768 ville et baand under fladen ligge oven i folio-bjaelken. -->
-    <div class="aarbaand r d4" style="margin-top:auto;margin-bottom:20px">
-      <span class="abnavn">Byggefagene</span>
-      <span class="abfelter">
-        <span class="m ned">J</span><span class="m ned">F</span><span class="m ned">M</span><span class="m">A</span><span class="m">M</span><span class="m">J</span><span class="m">J</span><span class="m">A</span><span class="m">S</span><span class="m">O</span><span class="m ned">N</span><span class="m ned">D</span>
-      </span>
-    </div>
-    <div class="gulbaand r d5" style="margin-top:0">
-      <div class="gb">Dem vil alle have fat i, og dem mangler alle.</div>
-    </div>
-  </div>
-</section>
 
-<!-- 25 · OM VINTEREN, OG HVEM DER IKKE BLIVER RAMT -->
-<section class="slide" data-sektion="Sæsonen">
-  <div class="ghost">2</div>
-  <div class="z fyld">
-    <div class="kicker r"><span class="knr">05</span><span class="krule"></span><span class="ktxt">Sæsonen · 2 af 4 · Vinteren</span></div>
-    <h2 class="r d1">Elektriker og VVS bliver ikke ramt af vinteren.</h2>
-    <div class="r d2" style="margin-top:2.6vh;display:flex;flex-direction:column;gap:10px">
-      <div class="aarbaand">
-        <span class="abnavn">Byggefagene</span>
-        <span class="abfelter">
-          <span class="m ned">J</span><span class="m ned">F</span><span class="m ned">M</span><span class="m">A</span><span class="m">M</span><span class="m">J</span><span class="m">J</span><span class="m">A</span><span class="m">S</span><span class="m">O</span><span class="m ned">N</span><span class="m ned">D</span>
-        </span>
-      </div>
-      <div class="aarbaand">
-        <span class="abnavn gulchip">El og VVS</span>
-        <span class="abfelter">
-          <span class="m">J</span><span class="m">F</span><span class="m">M</span><span class="m">A</span><span class="m">M</span><span class="m">J</span><span class="m">J</span><span class="m">A</span><span class="m">S</span><span class="m">O</span><span class="m">N</span><span class="m">D</span>
-        </span>
-      </div>
-    </div>
-    <div class="gab vgruppe r d3">
-      <div class="gtitel">Andel af virksomhederne der melder dårligt vejr som produktionsbegrænsning i januar</div>
-      <svg class="figur" style="max-height:30vh" viewBox="0 0 900 200" role="img" aria-label="El 3 procent, VVS 5 procent, tømrer 17 procent, anlæg 29 procent, murer 30 procent">
-        <g><text x="92" y="26" text-anchor="end" class="svgtxt">El</text><rect x="100" y="12" width="76" height="20" fill="#111213"/><text x="186" y="27" class="svgval">3 %</text></g>
-        <g><text x="92" y="66" text-anchor="end" class="svgtxt">VVS</text><rect x="100" y="52" width="127" height="20" fill="#111213"/><text x="237" y="67" class="svgval">5 %</text></g>
-        <g><text x="92" y="106" text-anchor="end" class="svgtxt">Tømrer</text><rect x="100.7" y="92.7" width="431" height="19" fill="var(--flade)" stroke="#111213" stroke-width="1.4"/><text x="542" y="107" class="svgval">17 %</text></g>
-        <g><text x="92" y="146" text-anchor="end" class="svgtxt">Anlæg</text><rect x="100.7" y="132.7" width="735" height="19" fill="var(--flade)" stroke="#111213" stroke-width="1.4"/><text x="846" y="147" class="svgval">29 %</text></g>
-        <g><text x="92" y="186" text-anchor="end" class="svgtxt">Murer</text><rect x="100.7" y="172.7" width="760" height="19" fill="var(--flade)" stroke="#111213" stroke-width="1.4"/><text x="871" y="187" class="svgval">30 %</text></g>
-      </svg>
-      <div class="kstrip" style="margin-top:16px">
-        <span class="kchip">Gennemsnit af seks vintre, 2021 til 2026</span>
-        <span class="kchip">El ligger lavest i hvert enkelt år</span>
-      </div>
-    </div>
-    <div class="advarsel skub r d5">
-      <svg class="ik"><use href="#i-nej"/></svg>
-      <span>Det her er vejr, ikke efterspørgsel. To forskellige ting.</span>
-    </div>
-    <div class="pro-kilde r d5" style="margin-top:10px">Danmarks Statistik, konjunkturbarometer for byggeri og anlæg, KBB03, januar 2021-2026</div>
-  </div>
-</section>
-
-<!-- 26 · ÅRSHJULET -->
-<section class="slide" data-sektion="Sæsonen">
-  <div class="ghost">3</div>
-  <div class="z fyld">
-    <div class="kicker r"><span class="knr">05</span><span class="krule"></span><span class="ktxt">Sæsonen · 3 af 4 · Årshjulet</span></div>
-    <div class="vgruppe" style="display:grid;grid-template-columns:1.3fr .7fr;column-gap:34px;align-items:center">
-      <!-- ÅRSHJULET · masterfigur, genbruges uændret i Blok 16.
-           Radier: byggefagene 210 (bredde 24) · el og VVS 178 (22) · metal 146 (26)
-           · lager 116 (20) · RESERVERET TOM BANE: radius 86, bredde 20, som Blok 16
-           lægger anlægsgartneren ind på uden at flytte noget.
-           Bevis: metal og el/VVS er fulde hele vejen rundt, så der findes ikke
-           én måned hvor alle baner er nedtonede. -->
-      <div class="hjulwrap r d2">
-        <svg class="hjul" viewBox="0 0 520 522" role="img" aria-label="Årshjul med fire baner: byggefagene nedtonet om vinteren, el og VVS lukket hele året, metal lukket hele året, lager nedtonet om sommeren">
-          <defs>
-            <path id="buebygge" d="M129.5 424.2A215 215 0 0 0 390.5 424.2"/>
-            <path id="bueelvvs" d="M161.3 119.1A172 172 0 0 1 358.7 119.1"/>
-            <path id="buemetal" d="M179.7 145.3A140 140 0 0 1 340.3 145.3"/>
-            <path id="buelager" d="M196.9 169.9A110 110 0 0 1 323.1 169.9"/>
-          </defs>
-          <circle cx="260" cy="260" r="210" fill="none" stroke="#DDDDD6" stroke-width="24"/>
-          <path d="M462.8 205.6A210 210 0 1 1 57.2 205.6" fill="none" stroke="#111213" stroke-width="24"/>
-          <circle cx="260" cy="260" r="178" fill="none" stroke="#111213" stroke-width="22"/>
-          <circle cx="260" cy="260" r="146" fill="none" stroke="var(--gul)" stroke-width="26"/>
-          <circle cx="260" cy="260" r="133" fill="none" stroke="#111213" stroke-width="1.2"/>
-          <circle cx="260" cy="260" r="159" fill="none" stroke="#111213" stroke-width="1.2"/>
-          <circle cx="260" cy="260" r="116" fill="none" stroke="#DDDDD6" stroke-width="20"/>
-          <path d="M148 230A116 116 0 0 1 372 230" fill="none" stroke="#111213" stroke-width="20"/>
-          <path d="M232.6 157.6L202.5 45.6 M287.4 157.6L317.5 45.6 M335.0 185.0L417.0 103.0 M362.4 232.6L474.4 202.5 M362.4 287.4L474.4 317.5 M335.0 335.0L417.0 417.0 M287.4 362.4L317.5 474.4 M232.6 362.4L202.5 474.4 M185.0 335.0L103.0 417.0 M157.6 287.4L45.6 317.5 M157.6 232.6L45.6 202.5 M185.0 185.0L103.0 103.0" stroke="#FFFFFF" stroke-width="3" fill="none"/>
-          <text class="banenavn" fill="#fff" stroke="#111213"><textPath href="#buebygge" startOffset="50%" text-anchor="middle">BYGGEFAGENE</textPath></text>
-          <text class="banenavn" fill="#fff" stroke="#111213"><textPath href="#bueelvvs" startOffset="50%" text-anchor="middle">EL OG VVS</textPath></text>
-          <text class="banenavn" fill="#111213" stroke="#F8E965"><textPath href="#buemetal" startOffset="50%" text-anchor="middle">METAL</textPath></text>
-          <text class="banenavn" fill="#fff" stroke="#111213"><textPath href="#buelager" startOffset="50%" text-anchor="middle">LAGER</textPath></text>
-          <g class="mnd" text-anchor="middle">
-            <text x="260" y="27">JAN</text><text x="379" y="58.9">FEB</text><text x="466.1" y="146">MAR</text><text x="498" y="265">APR</text>
-            <text x="466.1" y="384">MAJ</text><text x="379" y="471.1">JUN</text><text x="260" y="503">JUL</text><text x="141" y="471.1">AUG</text>
-            <text x="53.9" y="384">SEP</text><text x="22" y="265">OKT</text><text x="53.9" y="146">NOV</text><text x="141" y="58.9">DEC</text>
-          </g>
-          <g class="midt" text-anchor="middle">
-            <text x="260" y="248">Altid et fag</text><text x="260" y="268">med høj</text><text x="260" y="288">efterspørgsel</text>
-          </g>
-        </svg>
-      </div>
-      <div>
-        <div class="dkort r d3" style="margin-bottom:14px">
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
-            <div class="dk-titel"><svg class="ik stor"><use href="#i-svejs"/></svg>Metal</div><span class="kchip">Nyt fag</span>
-          </div>
-          <div class="dk-txt">Meget på værkstedet</div>
-          <div style="display:flex"><span class="kchip kant">Hele året</span></div>
-        </div>
-        <div class="dkort r d4">
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
-            <div class="dk-titel"><svg class="ik stor"><use href="#i-palle"/></svg>Lager</div><span class="kchip">Nyt fag</span>
-          </div>
-          <div class="dk-txt">Indendørs</div>
-          <div style="display:flex"><span class="kchip kant">Om vinteren</span></div>
-        </div>
-      </div>
-    </div>
-    <!-- AFVIGELSE fra manus: metal-banen er slidets ene gule flade, så konklusionen
-         står som sort slutlinje i stedet for gul ankerflade. -->
-    <div class="slutlinje r d5">Så vi hele tiden har fag med høj efterspørgsel vi kan gå efter.</div>
-  </div>
-</section>
-
-<!-- 27 · HVAD DU GØR MED DET -->
-<section class="slide" data-sektion="Sæsonen">
-  <div class="ghost">4</div>
-  <div class="z fyld">
-    <div class="kicker r"><span class="knr">05</span><span class="krule"></span><span class="ktxt">Sæsonen · 4 af 4 · Hvad du gør</span></div>
-    <h2 class="r d1">Ring ind på det fag der har sæson.</h2>
-    <div class="duo r d2" style="margin-top:2.6vh;column-gap:48px">
-      <div>
-        <div class="aarbaand" style="margin-bottom:16px">
-          <span class="abfelter">
-            <span class="m">J</span><span class="m">F</span><span class="m">M</span><span class="m ned">A</span><span class="m ned">M</span><span class="m ned">J</span><span class="m ned">J</span><span class="m ned">A</span><span class="m ned">S</span><span class="m ned">O</span><span class="m">N</span><span class="m">D</span>
-          </span>
-        </div>
-        <div class="dk-titel" style="font-size:clamp(17px,1.7vw,24px);letter-spacing:-.02em;margin-bottom:14px"><svg class="ik stor"><use href="#i-sne"/></svg>November til marts</div>
-        <div class="kstrip">
-          <span class="kchip fuld">El</span><span class="kchip fuld">VVS</span><span class="kchip fuld">Metal</span><span class="kchip fuld">Lager</span>
-        </div>
-        <div class="notelinje" style="margin-top:12px">Det er dem du ringer ind på.</div>
-      </div>
-      <div>
-        <div class="aarbaand" style="margin-bottom:16px">
-          <span class="abfelter">
-            <span class="m ned">J</span><span class="m ned">F</span><span class="m ned">M</span><span class="m">A</span><span class="m">M</span><span class="m">J</span><span class="m">J</span><span class="m">A</span><span class="m">S</span><span class="m">O</span><span class="m ned">N</span><span class="m ned">D</span>
-          </span>
-        </div>
-        <div class="dk-titel" style="font-size:clamp(17px,1.7vw,24px);letter-spacing:-.02em;margin-bottom:14px"><svg class="ik stor"><use href="#i-sol"/></svg>April til oktober</div>
-        <div class="kstrip">
-          <span class="kchip fuld">Tømrer</span><span class="kchip fuld">Murer</span><span class="kchip fuld">Maler</span><span class="kchip fuld">Entreprenør</span><span class="kchip fuld">Jord og beton</span>
-        </div>
-        <div class="notelinje" style="margin-top:12px">Det er dem du ringer ind på.</div>
-      </div>
-    </div>
-    <div class="tjekliste" style="max-width:none">
-      <div class="trow r d3"><span class="tdot"></span><span class="ttxt">Ring ind på det fag der har sæson <span>ikke på det fag du ringede til sidst</span></span></div>
-      <div class="trow r d4"><span class="tdot"></span><span class="ttxt">Har din kunde flere fag, så flyt dialogen <span>over på det fag der har sæson lige nu</span></span></div>
-      <div class="trow r d5"><span class="tdot"></span><span class="ttxt">Du har altid mindst fire fag med høj efterspørgsel <span>uanset hvilken måned det er</span></span></div>
-    </div>
-    <div class="advarsel skub r d6">
-      <svg class="ik"><use href="#i-nej"/></svg>
-      <span>Sig til murermesteren i januar at han ikke kan komme til at arbejde, ikke at han mangler kunder. Det er to forskellige ting, og han ved godt hvilken en det er.</span>
-    </div>
-  </div>
-</section>
 
 <div class="progress" id="progress"></div>
 <div class="pilzone v" onclick="gaa(-1)"></div>
