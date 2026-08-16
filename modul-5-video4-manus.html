@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manus · Modul 5 · Video 4: Sådan opretter du en ansøgerprofil · PowerMatch</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gul:#F8E965; --gul-soft:#FDF8D4; --gul-kant:#F0E4A0;
+  --sort:#111213; --tekst:#26282B; --muted:#71757C;
+  --border:#ECECE8; --flade:#F6F6F3; --bg:#FFFFFF; --linje:#C9C9C2;
+  --tale:25px;                      /* styres af A- / A+ */
+  --maal:44ch;                      /* satsbredde: ca. 44 tegn pr. linje.
+                                       ch følger talesporets egen grad, så
+                                       linjelængden er den samme uanset hvor
+                                       stort Lasse skruer op. */
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{font-family:'Inter',-apple-system,Arial,sans-serif;color:var(--tekst);
+  background:var(--bg);-webkit-font-smoothing:antialiased;line-height:1.6}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em;
+  background:#fff;border:1px solid var(--border);border-radius:5px;padding:1px 5px}
+b{color:var(--sort);font-weight:800}
+a{color:var(--sort)}
+
+/* ---------------------------------------------------------- topbjælke --- */
+/* Helt dækkende hvid. Ikke gennemsigtig: talesporet må ikke kunne ses
+   igennem bjælken, når han scroller midt i en sætning. */
+.topbar{position:sticky;top:0;z-index:60;background:#fff;
+  border-bottom:1px solid var(--border);box-shadow:0 1px 0 rgba(17,18,19,.02)}
+.tb{max-width:1180px;margin:0 auto;padding:11px 30px;display:flex;
+  align-items:center;gap:18px}
+.flamme{width:22px;height:22px;border-radius:6px;background:var(--gul);
+  flex-shrink:0;border:1px solid var(--gul-kant)}
+.tb .navn{font-size:12px;font-weight:900;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--sort);white-space:nowrap}
+.tb .nu{font-size:12px;font-weight:700;color:var(--muted);white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;flex:1;min-width:0}
+.tb .nu b{color:var(--sort);font-weight:800}
+.vaerktoej{display:flex;align-items:center;gap:7px;flex-shrink:0}
+.knap{font-family:inherit;font-size:11px;font-weight:800;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--sort);background:#fff;cursor:pointer;
+  border:1px solid var(--border);border-radius:100px;padding:6px 13px;
+  transition:background .15s,border-color .15s}
+.knap:hover{background:var(--flade);border-color:var(--linje)}
+.knap.paa{background:var(--sort);color:#fff;border-color:var(--sort)}
+.knap.rund{width:30px;height:30px;padding:0;font-size:13px;line-height:1}
+.tbmaal{font-size:11px;font-weight:800;color:var(--muted);
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+#fremdrift{position:absolute;left:0;bottom:-1px;height:2px;width:0;
+  background:var(--gul);transition:width .12s linear}
+
+/* -------------------------------------------------------------- side ---- */
+.wrap{max-width:1180px;margin:0 auto;padding:0 30px}
+header.hoved{padding:56px 0 30px}
+.kicker{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.kicker .knr{font-size:12px;font-weight:900;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--sort)}
+.kicker .krule{width:46px;height:2px;background:var(--gul)}
+.kicker .ktxt{font-size:11px;font-weight:800;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted)}
+h1{font-size:clamp(34px,4.4vw,60px);font-weight:900;color:var(--sort);
+  letter-spacing:-.033em;line-height:1.04;max-width:18ch}
+h1 mark{background:linear-gradient(transparent 68%,var(--gul) 68%,var(--gul) 96%,transparent 96%);
+  color:inherit;padding:0 .04em}
+.fakta{display:flex;flex-wrap:wrap;gap:0;margin-top:30px;
+  border-top:1px solid var(--sort);border-bottom:1px solid var(--border)}
+.fakta div{padding:16px 30px 16px 0;margin-right:30px;
+  border-right:1px solid var(--border)}
+.fakta div:last-child{border-right:0}
+.fakta .t{font-size:10px;font-weight:800;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--muted);display:block;margin-bottom:5px}
+.fakta .v{font-size:24px;font-weight:900;color:var(--sort);letter-spacing:-.02em;
+  font-variant-numeric:tabular-nums}
+.fakta .v small{font-size:13px;font-weight:700;color:var(--muted)}
+
+/* --------------------------------------------------------- nøgle + toc -- */
+.noegle{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 0}
+.noegle span{display:inline-flex;align-items:center;gap:9px;font-size:12px;
+  font-weight:700;color:var(--muted);border:1px solid var(--border);
+  border-radius:100px;padding:7px 15px 7px 11px;background:#fff}
+.noegle i{width:12px;height:12px;border-radius:3px;display:block;flex-shrink:0}
+.i-tale{background:var(--gul)}
+.i-sk{background:var(--flade);border:1px solid var(--linje)}
+.i-hul{background:var(--sort)}
+.toc{margin:34px 0 0;border-top:1px solid var(--border)}
+.toc a{display:flex;align-items:baseline;gap:16px;text-decoration:none;
+  border-bottom:1px solid var(--border);padding:13px 6px;color:var(--tekst)}
+.toc a:hover{background:var(--flade)}
+.toc .n{font-size:11px;font-weight:900;color:var(--muted);width:56px;
+  flex-shrink:0;letter-spacing:.1em;text-transform:uppercase}
+.toc .t{font-size:15px;font-weight:800;color:var(--sort);letter-spacing:-.015em}
+.toc .m{margin-left:auto;font-size:12px;font-weight:700;color:var(--muted);
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* ------------------------------------------------------------- blokke --- */
+.blok{padding-top:74px}
+.blokhoved{border-top:2px solid var(--sort);padding-top:20px;
+  display:flex;align-items:flex-start;gap:22px;flex-wrap:wrap}
+.blokhoved .bnr{font-size:11px;font-weight:900;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--sort);background:var(--gul);
+  border-radius:100px;padding:6px 14px;white-space:nowrap}
+h2{font-size:clamp(23px,2.5vw,33px);font-weight:900;color:var(--sort);
+  letter-spacing:-.028em;line-height:1.12;flex:1;min-width:260px}
+.blokhoved .bm{font-size:12px;font-weight:700;color:var(--muted);
+  font-variant-numeric:tabular-nums;white-space:nowrap;padding-top:7px}
+
+/* før-optagelse-noten: skal ligne alt andet der ikke siges højt */
+.foer{background:var(--flade);border:1px solid var(--border);border-radius:14px;
+  padding:18px 22px;margin-top:22px;max-width:70em}
+.foer .mrk{font-size:10px;font-weight:900;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted);display:block;margin-bottom:10px}
+.foer .mrk em{font-style:normal;font-weight:600;letter-spacing:.02em;
+  text-transform:none;font-size:11px;color:var(--linje);margin-left:10px}
+.foer p{font-size:13.5px;line-height:1.65;color:var(--muted);margin-bottom:9px}
+.foer p:last-child{margin-bottom:0}
+.foer b{color:var(--tekst)}
+
+/* -------------------------------------------------------------- slides -- */
+.slide{display:grid;grid-template-columns:104px minmax(0,1fr);gap:0;
+  padding:40px 0 14px;border-top:1px solid var(--border)}
+.slide:first-of-type{border-top:1px solid var(--linje)}
+.gutter{padding-top:2px}
+.gutter .sn{position:sticky;top:80px;display:block}
+.gutter .sk{font-size:9px;font-weight:900;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted);display:block}
+.gutter .sv{font-size:40px;font-weight:900;color:var(--sort);line-height:.95;
+  letter-spacing:-.05em;font-variant-numeric:tabular-nums;display:block;
+  margin-top:2px}
+.gutter .sv::after{content:"";display:block;width:26px;height:3px;
+  background:var(--gul);margin-top:9px}
+h3{font-size:19px;font-weight:900;color:var(--sort);letter-spacing:-.02em;
+  line-height:1.25;margin-bottom:20px;max-width:34em}
+h3 .stjerne{color:#D4A900}
+
+/* GØR: handlingen i systemet. Sort strip, kan skelnes med perifert syn. */
+.gor{background:var(--sort);border-radius:12px;padding:14px 20px;margin:0 0 22px;max-width:62em}
+.gor .mrk{font-size:10px;font-weight:900;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gul);display:block;margin-bottom:8px}
+.gor .mrk em{font-style:normal;font-weight:700;letter-spacing:.04em;text-transform:none;
+  color:rgba(255,255,255,.45);margin-left:9px}
+.gor p{font-size:14.5px;line-height:1.6;color:#fff;margin-bottom:8px;font-weight:600}
+.gor p:last-child{margin-bottom:0}
+.gor b{color:var(--gul)}
+
+/* Replik: det sælgeren siger til virksomheden. Hvidt kort inde i talesporet. */
+.tale p.replik{background:#fff;border:1px solid var(--border);border-left:4px solid var(--gul);
+  border-radius:0 14px 14px 0;padding:14px 20px;margin:14px 0;font-weight:700;color:var(--sort)}
+
+/* Et STOP der springes over: nedtonet og kompakt. */
+.slide.spring{opacity:.5}
+.slide.spring .tale p{font-size:calc(var(--tale) * .72)}
+
+/* SKÆRM: det der vises, og som ALDRIG må læses højt */
+.skaerm{background:var(--flade);border:1px solid var(--border);
+  border-left:3px solid var(--linje);border-radius:0 12px 12px 0;
+  padding:15px 20px;margin:0 0 22px;max-width:62em}
+.skaerm .mrk{font-size:10px;font-weight:900;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted);display:block;margin-bottom:8px}
+.skaerm .mrk em{font-style:normal;font-weight:700;letter-spacing:.04em;
+  text-transform:none;color:var(--linje);margin-left:9px}
+.skaerm p{font-size:13px;line-height:1.62;color:var(--muted);margin-bottom:8px}
+.skaerm p:last-child{margin-bottom:0}
+
+/* TALESPOR: sidens største tekst. Gul skinne = det du siger. */
+.tale{border-left:3px solid var(--gul);padding:2px 0 2px 24px;margin:0 0 24px}
+.tale p{font-size:var(--tale);line-height:1.62;color:var(--tekst);
+  font-weight:400;letter-spacing:-.011em;margin-bottom:.72em;max-width:var(--maal)}
+.tale p:last-child{margin-bottom:0}
+
+/* instruktion til Lasse: siges ikke, men gøres */
+.instr{border:1px dashed var(--linje);border-radius:12px;padding:13px 18px;
+  margin:0 0 22px;max-width:62em;background:#fff}
+.instr .mrk{font-size:10px;font-weight:900;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted);display:block;margin-bottom:7px}
+.instr p{font-size:14px;line-height:1.6;color:var(--tekst);margin-bottom:7px}
+.instr p:last-child{margin-bottom:0}
+
+/* HUL: her kan der ikke optages endnu. Skal ikke kunne overses. */
+.hul{background:var(--gul-soft);border:2px solid var(--sort);border-radius:14px;
+  padding:0;margin:0 0 24px;max-width:62em;overflow:hidden}
+.hul .mrk{background:var(--sort);color:var(--gul);font-size:11px;
+  font-weight:900;letter-spacing:.18em;text-transform:uppercase;
+  padding:8px 18px;display:block}
+.hul .krop{padding:16px 18px}
+.hul p{font-size:15px;line-height:1.62;color:var(--sort);font-weight:500;
+  margin-bottom:9px}
+.hul p:last-child{margin-bottom:0}
+
+/* ------------------------------------------------------------- footer --- */
+footer{margin-top:80px;border-top:2px solid var(--sort);padding:26px 0 70px}
+.andre{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.andre a,.andre span{font-size:12px;font-weight:800;text-decoration:none;
+  border:1px solid var(--border);border-radius:100px;padding:8px 15px;
+  color:var(--muted);background:#fff}
+.andre a:hover{border-color:var(--sort);color:var(--sort)}
+.andre span.her{background:var(--sort);color:#fff;border-color:var(--sort)}
+.folio{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--linje)}
+.tiltop{position:fixed;right:22px;bottom:22px;z-index:50}
+
+/* ---------------------------------------------------- skjul skærmnoter -- */
+body.skjul .skaerm{display:none}
+body.skjul .foer{display:none}
+
+/* ---------------------------------------------------------- responsivt -- */
+@media (max-width:900px){
+  :root{--tale:22px;--maal:40ch}
+  .wrap{padding:0 20px}
+  .tb{padding:9px 20px;gap:12px}
+  .tb .nu{display:none}
+  .slide{grid-template-columns:1fr;gap:0;padding:32px 0 10px}
+  .gutter{display:flex;align-items:baseline;gap:11px;padding-bottom:14px}
+  .gutter .sn{position:static;display:flex;align-items:baseline;gap:11px}
+  .gutter .sv{font-size:26px;margin-top:0}
+  .gutter .sv::after{display:none}
+  .fakta div{padding-right:20px;margin-right:20px}
+  .fakta .v{font-size:20px}
+  .tale{padding-left:16px}
+  h1{max-width:100%}
+}
+@media (max-width:560px){
+  .vaerktoej .skjulmob{display:none}
+}
+
+/* ------------------------------------------------------------- print ---- */
+@media print{
+  @page{margin:16mm 14mm}
+  html{scroll-padding-top:0}
+  body{background:#fff;color:#000;line-height:1.5}
+  .topbar,.tiltop,.andre,.noegle,.toc,.vaerktoej{display:none !important}
+  body.skjul .skaerm,body.skjul .foer{display:block}
+  .wrap{max-width:100%;padding:0}
+  header.hoved{padding:0 0 12px}
+  h1{font-size:26pt;max-width:100%}
+  .fakta{margin-top:14px}
+  .fakta .v{font-size:14pt}
+  .blok{padding-top:18px;break-before:page;page-break-before:always}
+  .blok:first-of-type{break-before:auto;page-break-before:auto}
+  h2{font-size:16pt}
+  /* Slidet må gerne løbe over et sideskift, ellers står der en halv tom side
+     efter hvert slide. Det der ALDRIG må knække, er en enkelt talesporslinje,
+     en skærmnote eller en hul-boks. */
+  .slide{grid-template-columns:74px 1fr;padding:16px 0 6px}
+  .skaerm,.hul,.instr,.tale p{break-inside:avoid;page-break-inside:avoid}
+  h3{break-after:avoid;page-break-after:avoid}
+  .gutter .sv{font-size:20pt}
+  .gutter .sn{position:static}
+  h3{font-size:12pt;margin-bottom:10px}
+  .tale{max-width:100%;border-left:2.5pt solid #000;padding-left:14px;
+    margin-bottom:14px}
+  .tale p{font-size:13pt;line-height:1.5;color:#000;max-width:56ch}
+  .skaerm{background:#fff;border:1pt solid #999;border-left:3pt solid #999;
+    max-width:100%;margin-bottom:12px;padding:9px 13px}
+  .skaerm p{font-size:8.5pt;line-height:1.4;color:#444}
+  .foer{background:#fff;border:1pt solid #bbb;max-width:100%}
+  .foer p{font-size:8.5pt;color:#444}
+  .instr{max-width:100%}
+  .instr p{font-size:10pt}
+  .hul{border:2.5pt solid #000;max-width:100%;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .hul .mrk{background:#000;color:#fff;-webkit-print-color-adjust:exact;
+    print-color-adjust:exact}
+  .hul p{font-size:11pt}
+  footer{margin-top:24px;padding-bottom:0}
+  code{border:0;background:#fff}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="tb">
+    <span class="flamme"></span>
+    <span class="navn">Manus</span>
+    <span class="nu" id="nu"></span>
+    <span class="vaerktoej">
+      <span class="tbmaal skjulmob">16 min</span>
+      <button class="knap rund" id="knMindre" title="Mindre skrift (tast -)">&minus;</button>
+      <span class="tbmaal" id="strvis">25 px</span>
+      <button class="knap rund" id="knStoerre" title="Større skrift (tast +)">+</button>
+      <button class="knap skjulmob" id="knSkjul">Skjul skærm-noter</button>
+      <button class="knap skjulmob" id="knPrint">Print</button>
+    </span>
+  </div>
+  <div id="fremdrift"></div>
+</div>
+
+<div class="wrap">
+
+<header class="hoved">
+  <div class="kicker"><span class="knr">ENKELT BLOK</span><span class="krule"></span>
+    <span class="ktxt">Optage-manus til Lasse</span></div>
+  <h1>Manus &middot; Modul 5<br><mark>Video 4: Sådan opretter du en ansøgerprofil</mark></h1>
+
+  <div class="fakta">
+    <div><span class="t">Taletid</span><span class="v">ca. 16 <small>min</small></span></div>
+    <div><span class="t">Slides</span><span class="v">31</span></div>
+    <div><span class="t">Blokke</span><span class="v">1</span></div>
+    <div><span class="t">Ord i talesporet</span><span class="v">2356</span></div>
+    <div><span class="t">Huller</span><span class="v">0 <small>klar til optagelse</small></span></div>
+  </div>
+
+  <div class="noegle">
+    <span><i class="i-tale"></i>Gul skinne = det du siger højt</span>
+    <span><i class="i-sk"></i>Sort boks = det du gør i systemet, siges ikke</span>
+    <span><i class="i-hul"></i>Hvidt kort = replik, det du siger til virksomheden</span>
+  </div>
+
+  <nav class="toc"><a href="#blok0"><span class="n">Blok 00</span><span class="t">Video 4: Sådan opretter du en ansøgerprofil</span><span class="m">16 min · 31 stop</span></a></nav>
+</header>
+
+<main><section class="blok" id="blok0" data-nu="Blok 00 &amp;middot; &lt;b&gt;Video 4: Sådan opretter du en ansøgerprofil&lt;/b&gt;"><div class="blokhoved"><span class="bnr">Blok 00</span><h2>Video 4: Sådan opretter du en ansøgerprofil</h2><span class="bm">ca. 16 min · 31 stop · 2356 ord</span></div><div class="foer"><span class="mrk">Før du optager · læses, siges ikke<em>henvisninger til afsnit "nederst" står i MANUS_Modul5_Video4_OpretAnsoeger.md</em></span><p>Skærmdeling, ikke slides. Las deler sin skærm, klikker sig gennem ansøgerprofilen i PowerMatch og læser op herfra samtidig.</p><p>Sådan læses siden. <b>Sort boks = GØR.</b> Det er handlingen i systemet, og den siges ikke højt. <b>Almindelig tekst = talespor.</b> Det læses op. <b>Hvidt kort med gul kant = replik.</b> Det er det screeneren siger til kandidaten i telefonen, og det skal siges langsommere end resten, så en ny sælger kan skrive det ned.</p><p>Hvert stop hedder det samme som feltet gør inde i systemet. Taber du tråden midt i en optagelse, så kig på feltnavnet på skærmen og find det her.</p><p>Kilde: <code>00_Grundkontekst/RAA_VANDFALD_ORDRET_SYSTEMER.md</code>, Del 2. Beslutninger: <code>00_Grundkontekst/TIL_SEBASTIAN_MODUL5_SYSTEMER.md</code>.</p></div><article class="slide" id="b0-s1"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">1</span></span></div><div class="indhold"><h3>Sådan bliver en ansøgerprofil oprettet <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>åbn ansøgerprofilen, tom og uudfyldt.</p></div><div class="tale"><p>Nu hopper vi videre over i ansøgerprofilen. Og det skal understreges fra start af: som sælger kommer du ikke til at gøre det her. Du kommer ikke til at sidde og oprette profiler. Det er vores screening- og kundeserviceafdeling der gør det.</p></div><div class="tale"><p>Grunden til at vi har det med, det er for at give dig en generelt bedre forståelse af vores system. For at kunne være den bedst mulige sælger skal du forstå hele vores rejse og hele vores værdikæde, både fra virksomhedens synspunkt og fra ansøgerens.</p></div><div class="tale"><p>Der er to måder en ansøgerprofil kan blive oprettet på. Ligesom vi snakkede om med virksomheden, kan ansøgeren selv gå ind og oprette profilen. Så følger han det samme flow som vi går igennem nu, og svarer selv på de her spørgsmål. Forskellen er, at hans profil er sat lidt anderledes op, så det er mere brugervenligt og bliver mere til en rejse.</p></div><div class="tale"><p>Nu starter vi ved den anden måde: hvordan vores screening- og kundeserviceafdeling udfylder de her profiler.</p></div></div></article><article class="slide" id="b0-s2"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">2</span></span></div><div class="indhold"><h3>Basale oplysninger: navn, e-mail, telefonnummer, alder og adresse <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>udfyld navn, e-mail, telefonnummer og alder 27. Skriv adressen og klik på et forslag i dropdownen.</p></div><div class="tale"><p>Til at starte med, meget simple og basale oplysninger. Kandidatens navn skrives ind, kandidatens e-mail skrives ind, telefonnummer, alder og adresse.</p></div><div class="tale"><p>Adressen vi skriver ind her, er den adresse vi matcher fra.</p></div><div class="tale"><p>Og en ting jeg gerne vil have dig til at lægge mærke til hele vejen igennem: hvor mange af de samme felter det er, som du udfyldte på virksomhedsprofilen i forrige video. Adresse, telefonnummer, alder, e-mail, navn.</p></div><div class="tale"><p>Grunden til at du skal lægge mærke til det, er at så forstår du også vores matchingproces bedre, og hvordan vi rent faktisk matcher.</p></div></div></article><article class="slide" id="b0-s3"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">3</span></span></div><div class="indhold"><h3>Uddannelse</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>vælg tømrersvendeuddannelsen, og skriv den virksomhed kandidaten var lærling i.</p></div><div class="tale"><p>Det første der bliver spurgt om — nu laver vi bare lige en tømrer — det er, hvilken uddannelse de har taget. Det vil selvfølgelig være tømrersvendeuddannelsen.</p></div><div class="tale"><p>Så skriver vi ind, hvilken virksomhed de har været lærling i, og hvor de er blevet udlært.</p></div><div class="tale"><p>Uddannelsen er i alle håndværkerfag typisk fire år.</p></div></div></article><article class="slide" id="b0-s4"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">4</span></span></div><div class="indhold"><h3>Profilbeskrivelse</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>peg på knappen Skriv med AI, uden at trykke endnu.</p></div><div class="tale"><p>Så har vi en profilbeskrivelse. Den bliver lavet til sidst, ved at trykke Skriv med AI. Så tager AI hele profilen og laver en profilbeskrivelse ud fra alt det, der er skrevet ind.</p></div></div></article><article class="slide" id="b0-s5"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">5</span></span></div><div class="indhold"><h3>Stillinger <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>rul ned til sektionen Stillinger.</p></div><div class="tale"><p>Så hopper vi ned til det vigtigste felt, der hedder stillinger.</p></div><div class="tale"><p>Her har vi typisk op til tre stillinger, og det vil være kandidatens sidste tre stillinger.</p></div><div class="tale"><p>Har kandidaten mange korte stillinger på tre eller fire måneder, så fokuserer vi i stedet på de længere. Har kandidaten kun arbejdet to steder, så tager vi kun to steder. For det her eksempels skyld tager vi tre.</p></div></div></article><article class="slide" id="b0-s6"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">6</span></span></div><div class="indhold"><h3>Stilling 1: arbejdsgiver, periode og antal medarbejdere <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>skriv arbejdsgiverens navn i stilling 1. Sæt startår 2024 og marker at kandidaten stadig er der. Vælg 9-15 medarbejdere.</p></div><div class="tale"><p>Det vores screeningsafdeling skriver ind, det er: hvem har dine arbejdsgivere været? Her er det Jens' tømrervirksomhed, og kandidaten er stadig i arbejde der.</p></div><div class="tale"><p>Så stiller vi spørgsmålet:</p></div><div class="tale"><p class="replik">"Hvor mange medarbejdere var der derude?"</p></div><div class="tale"><p>Og her har man nogle spektrums, man kan vælge imellem. Lad os sige, der var 9-15 medarbejdere.</p></div><div class="tale"><p>Årsagen til at vi gør det, det er, at vi prøver at putte så mange detaljer på som overhovedet muligt. For virksomhedens navn bliver ikke vist på CV'et. Og det gør det ikke, fordi vi gerne vil undgå, at nogen bliver lidt smarte i en fart og prøver at ringe ud til de forskellige tidligere virksomheder og tage kandidaten uden om os.</p></div></div></article><article class="slide" id="b0-s7"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">7</span></span></div><div class="indhold"><h3>Stilling 1: arbejdsform</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>vælg selvstændigt og makkerpar.</p></div><div class="tale"><p>Så spørger vi:</p></div><div class="tale"><p class="replik">"Arbejdede du selvstændigt, i makkerpar, i sjak eller med lærling derude?"</p></div><div class="tale"><p>Her kunne det være selvstændigt eller makkerpar.</p></div></div></article><article class="slide" id="b0-s8"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">8</span></span></div><div class="indhold"><h3>Opgaver i stillingen: primær og sekundær <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>åbn opgavelisten i stilling 1, så det kan ses at det er de samme opgaver som på virksomhedens profil. Peg på primær og sekundær.</p></div><div class="tale"><p>Og så spørger vi, hvad det var for nogle opgaver. Der ser du præcis de samme opgaver, som blev udfyldt på virksomhedens profil.</p></div><div class="tale"><p>Der er to muligheder, der er primær og sekundær. Primær betyder, at det er noget man har lavet meget og fået godt styr på. Sekundær er, hvis det er noget man har lavet lidt mindre.</p></div></div></article><article class="slide" id="b0-s9"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">9</span></span></div><div class="indhold"><h3>Reglen: tre underopgaver på hver hovedopgave <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>bliv i opgavelisten.</p></div><div class="tale"><p>Når vi screener en ansøger, så har vi en regel om, at vi altid skal have tre underopgaver på hver hovedopgave.</p></div><div class="tale"><p>Og grunden til at vi har dem med, det er, bare for at være ærlig, at ansøgerne og håndværkerne, vi opretter profiler med, er meget mere snaksaglige omkring det her. Der kan du have en dialog på 10-15 minutter, 20 minutter, uden problemer.</p></div><div class="tale"><p>Og det er også vigtigere her, fordi det giver et bedre CV og en mere dybdegående profil, som vi præsenterer over for virksomheden.</p></div></div></article><article class="slide" id="b0-s10"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">10</span></span></div><div class="indhold"><h3>Stilling 1: opgaverne valgt</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>vælg Renovering og Nybyg som primære. Under renovering: butikker, døre og vinduer. Under nybyg: butikker, parcelhuse og lejligheder.</p></div><div class="tale"><p>Lad os sige, for en god ordens skyld, at den her kandidat i den her virksomhed har lavet renovering og nybyg. Der er blevet renoveret butikker, døre og vinduer. Og udover det har kandidaten været med til at bygge butikker, været med til at bygge parcelhuse — altså normale private Hr. og Fru Jensen-huse fra bunden — og nogle lejligheder.</p></div><div class="tale"><p>Han fortæller, at begge ting har han lavet meget og fået godt styr på, så vi putter dem begge som primære.</p></div><div class="tale"><p>Det vil så være første boks udfyldt.</p></div></div></article><article class="slide" id="b0-s11"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">11</span></span></div><div class="indhold"><h3>Stilling 2</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>udfyld stilling 2. Periode 2023 til 2024, omkring 10 medarbejdere. Spjæld og Service som primær med erhverv, Hr. og Fru Jensen og forsikringssager. Renovering som sekundær med boligbyggeri, facadearbejde og gulve.</p></div><div class="tale"><p>Når vi så går videre til næste boks, så siger kandidaten: der var jeg fra 23 til 24, der var vi omkring ti medarbejdere, og der kørte jeg faktisk kun Spjæld og Service. Og det gjorde jeg både hos erhverv og hos Hr. og Fru Jensen. Og der lavede jeg også en lille smule forsikringssager.</p></div><div class="tale"><p>Det var det eneste kandidaten lavede de to år. Og så spørger vi ind:</p></div><div class="tale"><p class="replik">"Var der slet ikke andet?"</p></div><div class="tale"><p>Så får vi ud af det, at der faktisk også var en smule renovering. Så får vi også det med. Men den sætter vi som sekundær, for det var ikke lige så meget. Det var noget boligbyggeri, noget facadearbejde og noget gulve.</p></div><div class="tale"><p>Så er endnu en boks udfyldt.</p></div></div></article><article class="slide" id="b0-s12"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">12</span></span></div><div class="indhold"><h3>Stilling 3</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>udfyld stilling 3. Fra 2018 og fem år frem hos Jens Bjerg &amp; Kjær, 5-6 medarbejdere, selvstændigt og makkerpar. Renovering, Tagarbejde og Spjæld og Service som primære, med de underopgaver han nævner.</p></div><div class="tale"><p>Til sidst spørger vi:</p></div><div class="tale"><p class="replik">"Hvad med resten af tiden?"</p></div><div class="tale"><p>Jamen der var jeg fra 2018, både hele min læretid og et år efter. Der var jeg i samme virksomhed, hvor jeg var i fem år. Det hedder Jens Bjerg &amp; Kjær. Der arbejdede vi med omkring 5-6 medarbejdere, og vi arbejdede både selvstændigt og i makkerpar.</p></div><div class="tale"><p>Og der lavede jeg lidt af det hele: jeg lavede både renovering, tagarbejde og Spjæld og Service. Og faktisk ikke så meget nybyg. Så det er de tre primære ting. Så vælger vi det.</p></div><div class="tale"><p>Så forklarer kandidaten, hvilke underopgaver der var. Lad os bare sige, det var noget døre, noget fredede bygninger og noget gips. Og det var noget tag, der blev bygget på lejligheder, på sommerhuse og på parcelhuse. Og det var noget Spjæld og Service, igen med forsikringssager, Hr. og Fru Jensen og noget erhverv.</p></div><div class="tale"><p>Og han siger, at det alt sammen var noget, han fik lavet meget og lærte meget af. Så vi sætter det som primært.</p></div><div class="tale"><p>Resten er også blevet udfyldt, og nu har vi ligesom lavet kandidatens CV. Vi har noteret, hvad kandidaten har lavet før, hvad han er god til, og hvilke virksomheder han har arbejdet i.</p></div></div></article><article class="slide" id="b0-s13"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">13</span></span></div><div class="indhold"><h3>Kørekort</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>vælg person- og varebil B.</p></div><div class="tale"><p>Så går vi videre. Der bliver spurgt om, hvilket kørekort kandidaten har. Han siger, han har kun det normale, person- og varebil B.</p></div></div></article><article class="slide" id="b0-s14"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">14</span></span></div><div class="indhold"><h3>Egen bil og firmabil</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>sæt egen bil til ja, og vælg firmabil på sigt.</p></div><div class="tale"><p>Så bliver der spurgt, om kandidaten har egen bil. Det siger han ja til, men han nævner også, at han helst gerne vil have en firmabil. Han kan godt bruge egen bil til at starte med.</p></div><div class="tale"><p>Så spørger vi:</p></div><div class="tale"><p class="replik">"Hvornår vil du så have den her firmabil? Skal det være med det samme, eller må det også godt være inden for et par måneder?"</p></div><div class="tale"><p>Så siger han, at hvis det er et godt sted, så kan han godt bruge sin egen bil de første to-tre måneder. Så vælger vi firmabil på sigt.</p></div><div class="tale"><p>Og igen: bid mærke i, hvor meget af det samme der kommer her, som vi også havde på virksomhedsprofilen. Det er det, der gør, at vi kan lave det helt rigtige match.</p></div></div></article><article class="slide" id="b0-s15"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">15</span></span></div><div class="indhold"><h3>Ønsket løn <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>skriv 215 til 225.</p></div><div class="tale"><p>Så går vi ned, og vi spørger kandidaten:</p></div><div class="tale"><p class="replik">"Hvad vil du gerne have i løn?"</p></div><div class="tale"><p>Og husk: det her er, hvad du er åben på at starte med. Der skal selvfølgelig være mulighed for, at du stiger.</p></div><div class="tale"><p>Kandidaten forklarer: jeg vil gerne starte på 220, men jeg kunne godt tage en snak med nogen, hvis den hedder 215. Og jeg vil gerne ligge mellem 215 og 225 som start. Så det skriver vi ind her.</p></div><div class="tale"><p>Og igen bruger vi den samme metode, som vi gør hos virksomheden, men vi prøver ikke at presse kandidaten for meget ned. For så ender vi bare med at tilbyde ham job, han alligevel ikke vil have, og det giver ikke nogen mening, hverken for os, for ham eller for virksomheden.</p></div></div></article><article class="slide" id="b0-s16"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">16</span></span></div><div class="indhold"><h3>Afstand</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>sæt 40 minutter.</p></div><div class="tale"><p>Kandidaten bliver spurgt, hvor langt han er villig til at køre efter et arbejde. Her er det op til 40 minutter, så der bliver sat 40 minutter.</p></div></div></article><article class="slide" id="b0-s17"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">17</span></span></div><div class="indhold"><h3>Startdato</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>vælg hurtigst muligt.</p></div><div class="tale"><p class="replik">"Hvornår vil du kunne starte?"</p></div><div class="tale"><p>Jamen jeg vil kunne starte med det samme. Så det bliver hurtigst muligt.</p></div></div></article><article class="slide" id="b0-s18"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">18</span></span></div><div class="indhold"><h3>Virksomhedsstørrelse</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>lad alle størrelser stå valgt.</p></div><div class="tale"><p class="replik">"Er der nogen virksomhedsstørrelse, du ikke vil arbejde for?"</p></div><div class="tale"><p>Det vil han ikke, han er åben over for det hele.</p></div></div></article><article class="slide" id="b0-s19"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">19</span></span></div><div class="indhold"><h3>Stærkeste kompetencer <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>vælg Spjæld og Service og Renovering.</p></div><div class="tale"><p>Vi spørger kandidaten:</p></div><div class="tale"><p class="replik">"Hvad vil du helst lave? Og hvad er du bedst til?"</p></div><div class="tale"><p>Og kandidaten svarer: jamen Spjæld og Service og renovering, der er jeg rigtig stærk, og det er egentlig også det, jeg bedst kan lide at lave. Så det putter vi under kandidatens stærkeste kompetencer.</p></div><div class="tale"><p>Det her felt er rigtig vigtigt, for det viser både, hvad kandidaten er bedst til — og det de er bedst til, det er ofte også det, de helst vil lave.</p></div></div></article><article class="slide" id="b0-s20"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">20</span></span></div><div class="indhold"><h3>Det kandidaten ikke vil lave</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>vælg Tagarbejde.</p></div><div class="tale"><p>Så spørger vi kandidaten:</p></div><div class="tale"><p class="replik">"Er der noget, som du slet ikke vil lave?"</p></div><div class="tale"><p>Og der svarer kandidaten: det med tagarbejdet, det er han sgu slet ikke glad for, det vil han ikke ud at lave. Så vælger vi tagarbejde, og så bliver der sørget for, at kandidaten ikke bliver matchet med tagarbejde.</p></div></div></article><article class="slide" id="b0-s21"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">21</span></span></div><div class="indhold"><h3>Årsag til jobsøgning</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>vælg dårligt arbejdsmiljø og ønsker at prøve noget nyt.</p></div><div class="tale"><p>Så kommer vi ned til de lidt mere bløde felter. Først årsag til jobsøgning.</p></div><div class="tale"><p>Kandidaten svarer, at han har været i et dårligt arbejdsmiljø og gerne vil prøve nogle nye udfordringer. Så vælger vi, at arbejdsmiljøet har været dårligt, og at han ønsker at prøve noget nyt.</p></div></div></article><article class="slide" id="b0-s22"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">22</span></span></div><div class="indhold"><h3>Hvor længe ledig</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>vælg stadig i arbejde.</p></div><div class="tale"><p class="replik">"Hvor længe har du så været ledig?"</p></div><div class="tale"><p>Jamen han er faktisk stadig i arbejde, så vi vælger stadig i arbejde.</p></div></div></article><article class="slide" id="b0-s23"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">23</span></span></div><div class="indhold"><h3>Fritidsaktiviteter</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>skriv boksning og gaming ind.</p></div><div class="tale"><p>Så spørger vi under fritidsaktiviteter:</p></div><div class="tale"><p class="replik">"Hvad kan du godt lide at lave i fritiden?"</p></div><div class="tale"><p>Kandidaten fortæller, at han går til noget boksning, og at han ellers godt kan lide noget computer og spiller gaming.</p></div><div class="tale"><p>Igen får vi nu også nogle bløde værdier på profilen. Det er ikke noget vi matcher på, men det gør bare profilen flottere og giver den lige lidt ekstra.</p></div></div></article><article class="slide" id="b0-s24"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">24</span></span></div><div class="indhold"><h3>Reference</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>skriv referencen ind.</p></div><div class="tale"><p>Til sidst har vi en reference, hvor vi spørger kandidaten:</p></div><div class="tale"><p class="replik">"Ude hos Jens Bjerg &amp; Kjær — hvis de skulle sige noget om dig, hvad kunne det så være?"</p></div><div class="tale"><p>Og kandidaten svarer: mester derude, han hedder Jens, han ville sige, at jeg er meget, meget mødestabil, at jeg er dygtig til mit arbejde, og at jeg er god til at hjælpe mine kolleger. Så det får vi skrevet ind her.</p></div><div class="tale"><p>Og så er profilen faktisk færdig.</p></div></div></article><article class="slide" id="b0-s25"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">25</span></span></div><div class="indhold"><h3>Anmod om foto</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>tryk Anmod om foto og send sms'en til dig selv. Vis telefonen, åbn linket, læg et billede op, og tryk opdater.</p></div><div class="tale"><p>Nu har vi udfyldt hele profilen, og det sidste vi mangler, for at gøre den ekstra flot, det er et billede.</p></div><div class="tale"><p>Det siger vi til kandidaten, og så trykker vi på den der hedder Anmod om foto. Der tikker en sms ind, og når han går ind på linket, så kan han tilføje et billede til profilen. Når han trykker opdater, så er billedet også kommet.</p></div></div></article><article class="slide" id="b0-s26"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">26</span></span></div><div class="indhold"><h3>Video</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>send videoanmodningen, vis den på telefonen, og optag en kort video.</p></div><div class="tale"><p>Efter det, så siger vi til kandidaten:</p></div><div class="tale"><p class="replik">"Ved du hvad — for at gøre den endnu bedre, kan du også lige lave en video, hvor du fortæller om dig selv på 30-60 sekunder."</p></div><div class="tale"><p>Det kommer også frem på telefonen, og så optager vi lige en video.</p></div><div class="tale"><p>Videoen har vi ikke herinde i systemet internt, men den bliver vist på alle de profiler, hvor kandidaten er blevet matchet, ude hos virksomhederne.</p></div></div></article><article class="slide" id="b0-s27"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">27</span></span></div><div class="indhold"><h3>Godkendt til CV <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>peg på Godkendt til CV nede i højre hjørne, mens den lyser gul. Fjern derefter svaret under kørekort og egen bil, så knappen bliver grå, og sæt det ind igen.</p></div><div class="tale"><p>Det du kan se nede i højre side, det er den der hedder Godkendt til CV. Nu lyser den gul, og det betyder, at profilen er klar til at blive sendt af sted.</p></div><div class="tale"><p>Vores system er rimelig bulletproof. Går vi op og fjerner vores svar under kørekort og egen bil, så kan vi ikke trykke godkendt — så bliver den grå, fordi vi ikke har svaret på det. Går vi ind og tilføjer det igen og vælger enten intet kørekort eller kørekort, så bliver den gul, og den kan sendes af sted. Egen bil skal selvfølgelig ikke besvares, hvis kandidaten ikke har egen bil.</p></div><div class="tale"><p>Og det går igen både hos virksomhederne og hos kandidaten: vi kan ikke smide noget af sted, hvis det ikke er helt udfyldt.</p></div></div></article><article class="slide" id="b0-s28"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">28</span></span></div><div class="indhold"><h3>Matchingen starter <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>tryk Godkendt til CV.</p></div><div class="tale"><p>Når jeg trykker godkend til CV her, så starter den automatiske matching, og CV'et bliver sendt ud til flere. Alt fra et par virksomheder til flere hundrede virksomheder, alt efter hvor mange virksomheder der matcher kandidatens krav, og hvor mange virksomheder hvor kandidaten også matcher virksomhedens krav.</p></div><div class="tale"><p>Inden for 30 minutter er CV'et skudt ud i indbakken hos de virksomheder han matcher.</p></div></div></article><article class="slide" id="b0-s29"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">29</span></span></div><div class="indhold"><h3>Derfor går vi så meget op i det <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>bliv på den godkendte profil.</p></div><div class="tale"><p>Som du kan se, så er det her bygget til punkt og prikke for at skabe de absolut bedste matches, som jeg hele tiden har snakket om indtil nu. Vi går ned i mindste detalje og sender så mange datapunkter på kryds og tværs, så vi sikrer os, at det er de helt rigtige matches vi skaber.</p></div><div class="tale"><p>Og det er også derfor, at din måde at behovsafdække virksomheder på er så vigtig. Går vi ikke nok op i det, og stiller vi ikke gode spørgsmål for at få de rigtige svar, så misser vi også rigtig mange potentielle matches. Og så kan det betyde, at vi misser potentielt rigtig mange gode ansættelser.</p></div><div class="tale"><p>Så det du skal tage fra det her, udover at lære at forstå og benytte vores system, det er også hvor meget vi går op i at lave de rigtige matches ved at stille de rigtige spørgsmål og bruge den rigtige data.</p></div></div></article><article class="slide" id="b0-s30"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">30</span></span></div><div class="indhold"><h3>Noten fra screeningen</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>rul ned til notesfeltet og vis noten.</p></div><div class="tale"><p>En sidste ting, der selvfølgelig også kommer på automatisk: du vil se, at der kommer en note inde i notesfeltet ud fra den screening, screeningsafdelingen har lavet.</p></div></div></article><article class="slide" id="b0-s31"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">31</span></span></div><div class="indhold"><h3>Lektion 2</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>luk profilen.</p></div><div class="tale"><p>Det var det, i forhold til at bygge ansøgerprofilen.</p></div><div class="tale"><p>I næste lektion skal du prøve selv at bygge tre profiler. Du skal sørge for, at du bygger dem godt nok til, at de bliver matchet med de tre jobs, du lavede i lektionen før. Så tester du ligesom også vores matchingsystem.</p></div><div class="tale"><p>Så det er opgaven. Sæt i gang, når du kommer ind i det næste.</p></div></div></article></section></main>
+
+<footer>
+  <div class="andre"></div>
+  <p class="folio">PowerMatch &middot; Internt materiale &middot; Modul 5 · Video 4: Sådan opretter du en ansøgerprofil &middot;
+</p>
+</footer>
+
+</div>
+
+<button class="knap tiltop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&uarr; Top</button>
+<script>
+/* Ingen localStorage og ingen sessionStorage. Alt står i variabler herunder
+   og nulstilles ved reload, præcis som aftalt. */
+(function(){
+  var talestr = 25;                     // px, samme startværdi som CSS
+  var minStr = 17, maxStr = 42;
+  var skjult = false;
+
+  var rod   = document.documentElement;
+  var vis   = document.getElementById('strvis');
+  var bar   = document.getElementById('fremdrift');
+  var nu    = document.getElementById('nu');
+  var knSkj = document.getElementById('knSkjul');
+  var blokke = [].slice.call(document.querySelectorAll('.blok'));
+
+  function saetStr(n){
+    talestr = Math.max(minStr, Math.min(maxStr, n));
+    rod.style.setProperty('--tale', talestr + 'px');
+    if (vis) vis.textContent = talestr + ' px';
+  }
+  document.getElementById('knMindre').onclick = function(){ saetStr(talestr - 2); };
+  document.getElementById('knStoerre').onclick = function(){ saetStr(talestr + 2); };
+  document.getElementById('knPrint').onclick = function(){ window.print(); };
+  knSkj.onclick = function(){
+    skjult = !skjult;
+    document.body.classList.toggle('skjul', skjult);
+    knSkj.classList.toggle('paa', skjult);
+    knSkj.textContent = skjult ? 'Vis skærm-noter' : 'Skjul skærm-noter';
+  };
+
+  function opdater(){
+    var h = document.documentElement;
+    var kan = (h.scrollHeight - h.clientHeight) || 1;
+    bar.style.width = Math.min(100, (h.scrollTop / kan) * 100) + '%';
+    var akt = null;
+    for (var i = 0; i < blokke.length; i++){
+      if (blokke[i].getBoundingClientRect().top <= 130) akt = blokke[i];
+    }
+    if (nu) nu.innerHTML = akt ? akt.getAttribute('data-nu') : '';
+  }
+  window.addEventListener('scroll', opdater, {passive:true});
+  window.addEventListener('resize', opdater);
+  opdater();
+
+  document.addEventListener('keydown', function(e){
+    if (e.target && /INPUT|TEXTAREA/.test(e.target.tagName)) return;
+    if (e.key === '+') { saetStr(talestr + 2); e.preventDefault(); }
+    if (e.key === '-') { saetStr(talestr - 2); e.preventDefault(); }
+  });
+})();
+</script>
+</body>
+</html>

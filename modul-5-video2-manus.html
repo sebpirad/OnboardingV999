@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manus · Modul 5 · Video 2: Behovet, og det de tilbyder · PowerMatch</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gul:#F8E965; --gul-soft:#FDF8D4; --gul-kant:#F0E4A0;
+  --sort:#111213; --tekst:#26282B; --muted:#71757C;
+  --border:#ECECE8; --flade:#F6F6F3; --bg:#FFFFFF; --linje:#C9C9C2;
+  --tale:25px;                      /* styres af A- / A+ */
+  --maal:44ch;                      /* satsbredde: ca. 44 tegn pr. linje.
+                                       ch følger talesporets egen grad, så
+                                       linjelængden er den samme uanset hvor
+                                       stort Lasse skruer op. */
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{font-family:'Inter',-apple-system,Arial,sans-serif;color:var(--tekst);
+  background:var(--bg);-webkit-font-smoothing:antialiased;line-height:1.6}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em;
+  background:#fff;border:1px solid var(--border);border-radius:5px;padding:1px 5px}
+b{color:var(--sort);font-weight:800}
+a{color:var(--sort)}
+
+/* ---------------------------------------------------------- topbjælke --- */
+/* Helt dækkende hvid. Ikke gennemsigtig: talesporet må ikke kunne ses
+   igennem bjælken, når han scroller midt i en sætning. */
+.topbar{position:sticky;top:0;z-index:60;background:#fff;
+  border-bottom:1px solid var(--border);box-shadow:0 1px 0 rgba(17,18,19,.02)}
+.tb{max-width:1180px;margin:0 auto;padding:11px 30px;display:flex;
+  align-items:center;gap:18px}
+.flamme{width:22px;height:22px;border-radius:6px;background:var(--gul);
+  flex-shrink:0;border:1px solid var(--gul-kant)}
+.tb .navn{font-size:12px;font-weight:900;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--sort);white-space:nowrap}
+.tb .nu{font-size:12px;font-weight:700;color:var(--muted);white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;flex:1;min-width:0}
+.tb .nu b{color:var(--sort);font-weight:800}
+.vaerktoej{display:flex;align-items:center;gap:7px;flex-shrink:0}
+.knap{font-family:inherit;font-size:11px;font-weight:800;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--sort);background:#fff;cursor:pointer;
+  border:1px solid var(--border);border-radius:100px;padding:6px 13px;
+  transition:background .15s,border-color .15s}
+.knap:hover{background:var(--flade);border-color:var(--linje)}
+.knap.paa{background:var(--sort);color:#fff;border-color:var(--sort)}
+.knap.rund{width:30px;height:30px;padding:0;font-size:13px;line-height:1}
+.tbmaal{font-size:11px;font-weight:800;color:var(--muted);
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+#fremdrift{position:absolute;left:0;bottom:-1px;height:2px;width:0;
+  background:var(--gul);transition:width .12s linear}
+
+/* -------------------------------------------------------------- side ---- */
+.wrap{max-width:1180px;margin:0 auto;padding:0 30px}
+header.hoved{padding:56px 0 30px}
+.kicker{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.kicker .knr{font-size:12px;font-weight:900;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--sort)}
+.kicker .krule{width:46px;height:2px;background:var(--gul)}
+.kicker .ktxt{font-size:11px;font-weight:800;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted)}
+h1{font-size:clamp(34px,4.4vw,60px);font-weight:900;color:var(--sort);
+  letter-spacing:-.033em;line-height:1.04;max-width:18ch}
+h1 mark{background:linear-gradient(transparent 68%,var(--gul) 68%,var(--gul) 96%,transparent 96%);
+  color:inherit;padding:0 .04em}
+.fakta{display:flex;flex-wrap:wrap;gap:0;margin-top:30px;
+  border-top:1px solid var(--sort);border-bottom:1px solid var(--border)}
+.fakta div{padding:16px 30px 16px 0;margin-right:30px;
+  border-right:1px solid var(--border)}
+.fakta div:last-child{border-right:0}
+.fakta .t{font-size:10px;font-weight:800;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--muted);display:block;margin-bottom:5px}
+.fakta .v{font-size:24px;font-weight:900;color:var(--sort);letter-spacing:-.02em;
+  font-variant-numeric:tabular-nums}
+.fakta .v small{font-size:13px;font-weight:700;color:var(--muted)}
+
+/* --------------------------------------------------------- nøgle + toc -- */
+.noegle{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 0}
+.noegle span{display:inline-flex;align-items:center;gap:9px;font-size:12px;
+  font-weight:700;color:var(--muted);border:1px solid var(--border);
+  border-radius:100px;padding:7px 15px 7px 11px;background:#fff}
+.noegle i{width:12px;height:12px;border-radius:3px;display:block;flex-shrink:0}
+.i-tale{background:var(--gul)}
+.i-sk{background:var(--flade);border:1px solid var(--linje)}
+.i-hul{background:var(--sort)}
+.toc{margin:34px 0 0;border-top:1px solid var(--border)}
+.toc a{display:flex;align-items:baseline;gap:16px;text-decoration:none;
+  border-bottom:1px solid var(--border);padding:13px 6px;color:var(--tekst)}
+.toc a:hover{background:var(--flade)}
+.toc .n{font-size:11px;font-weight:900;color:var(--muted);width:56px;
+  flex-shrink:0;letter-spacing:.1em;text-transform:uppercase}
+.toc .t{font-size:15px;font-weight:800;color:var(--sort);letter-spacing:-.015em}
+.toc .m{margin-left:auto;font-size:12px;font-weight:700;color:var(--muted);
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* ------------------------------------------------------------- blokke --- */
+.blok{padding-top:74px}
+.blokhoved{border-top:2px solid var(--sort);padding-top:20px;
+  display:flex;align-items:flex-start;gap:22px;flex-wrap:wrap}
+.blokhoved .bnr{font-size:11px;font-weight:900;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--sort);background:var(--gul);
+  border-radius:100px;padding:6px 14px;white-space:nowrap}
+h2{font-size:clamp(23px,2.5vw,33px);font-weight:900;color:var(--sort);
+  letter-spacing:-.028em;line-height:1.12;flex:1;min-width:260px}
+.blokhoved .bm{font-size:12px;font-weight:700;color:var(--muted);
+  font-variant-numeric:tabular-nums;white-space:nowrap;padding-top:7px}
+
+/* før-optagelse-noten: skal ligne alt andet der ikke siges højt */
+.foer{background:var(--flade);border:1px solid var(--border);border-radius:14px;
+  padding:18px 22px;margin-top:22px;max-width:70em}
+.foer .mrk{font-size:10px;font-weight:900;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted);display:block;margin-bottom:10px}
+.foer .mrk em{font-style:normal;font-weight:600;letter-spacing:.02em;
+  text-transform:none;font-size:11px;color:var(--linje);margin-left:10px}
+.foer p{font-size:13.5px;line-height:1.65;color:var(--muted);margin-bottom:9px}
+.foer p:last-child{margin-bottom:0}
+.foer b{color:var(--tekst)}
+
+/* -------------------------------------------------------------- slides -- */
+.slide{display:grid;grid-template-columns:104px minmax(0,1fr);gap:0;
+  padding:40px 0 14px;border-top:1px solid var(--border)}
+.slide:first-of-type{border-top:1px solid var(--linje)}
+.gutter{padding-top:2px}
+.gutter .sn{position:sticky;top:80px;display:block}
+.gutter .sk{font-size:9px;font-weight:900;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted);display:block}
+.gutter .sv{font-size:40px;font-weight:900;color:var(--sort);line-height:.95;
+  letter-spacing:-.05em;font-variant-numeric:tabular-nums;display:block;
+  margin-top:2px}
+.gutter .sv::after{content:"";display:block;width:26px;height:3px;
+  background:var(--gul);margin-top:9px}
+h3{font-size:19px;font-weight:900;color:var(--sort);letter-spacing:-.02em;
+  line-height:1.25;margin-bottom:20px;max-width:34em}
+h3 .stjerne{color:#D4A900}
+
+/* GØR: handlingen i systemet. Sort strip, kan skelnes med perifert syn. */
+.gor{background:var(--sort);border-radius:12px;padding:14px 20px;margin:0 0 22px;max-width:62em}
+.gor .mrk{font-size:10px;font-weight:900;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gul);display:block;margin-bottom:8px}
+.gor .mrk em{font-style:normal;font-weight:700;letter-spacing:.04em;text-transform:none;
+  color:rgba(255,255,255,.45);margin-left:9px}
+.gor p{font-size:14.5px;line-height:1.6;color:#fff;margin-bottom:8px;font-weight:600}
+.gor p:last-child{margin-bottom:0}
+.gor b{color:var(--gul)}
+
+/* Replik: det sælgeren siger til virksomheden. Hvidt kort inde i talesporet. */
+.tale p.replik{background:#fff;border:1px solid var(--border);border-left:4px solid var(--gul);
+  border-radius:0 14px 14px 0;padding:14px 20px;margin:14px 0;font-weight:700;color:var(--sort)}
+
+/* Et STOP der springes over: nedtonet og kompakt. */
+.slide.spring{opacity:.5}
+.slide.spring .tale p{font-size:calc(var(--tale) * .72)}
+
+/* SKÆRM: det der vises, og som ALDRIG må læses højt */
+.skaerm{background:var(--flade);border:1px solid var(--border);
+  border-left:3px solid var(--linje);border-radius:0 12px 12px 0;
+  padding:15px 20px;margin:0 0 22px;max-width:62em}
+.skaerm .mrk{font-size:10px;font-weight:900;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted);display:block;margin-bottom:8px}
+.skaerm .mrk em{font-style:normal;font-weight:700;letter-spacing:.04em;
+  text-transform:none;color:var(--linje);margin-left:9px}
+.skaerm p{font-size:13px;line-height:1.62;color:var(--muted);margin-bottom:8px}
+.skaerm p:last-child{margin-bottom:0}
+
+/* TALESPOR: sidens største tekst. Gul skinne = det du siger. */
+.tale{border-left:3px solid var(--gul);padding:2px 0 2px 24px;margin:0 0 24px}
+.tale p{font-size:var(--tale);line-height:1.62;color:var(--tekst);
+  font-weight:400;letter-spacing:-.011em;margin-bottom:.72em;max-width:var(--maal)}
+.tale p:last-child{margin-bottom:0}
+
+/* instruktion til Lasse: siges ikke, men gøres */
+.instr{border:1px dashed var(--linje);border-radius:12px;padding:13px 18px;
+  margin:0 0 22px;max-width:62em;background:#fff}
+.instr .mrk{font-size:10px;font-weight:900;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted);display:block;margin-bottom:7px}
+.instr p{font-size:14px;line-height:1.6;color:var(--tekst);margin-bottom:7px}
+.instr p:last-child{margin-bottom:0}
+
+/* HUL: her kan der ikke optages endnu. Skal ikke kunne overses. */
+.hul{background:var(--gul-soft);border:2px solid var(--sort);border-radius:14px;
+  padding:0;margin:0 0 24px;max-width:62em;overflow:hidden}
+.hul .mrk{background:var(--sort);color:var(--gul);font-size:11px;
+  font-weight:900;letter-spacing:.18em;text-transform:uppercase;
+  padding:8px 18px;display:block}
+.hul .krop{padding:16px 18px}
+.hul p{font-size:15px;line-height:1.62;color:var(--sort);font-weight:500;
+  margin-bottom:9px}
+.hul p:last-child{margin-bottom:0}
+
+/* ------------------------------------------------------------- footer --- */
+footer{margin-top:80px;border-top:2px solid var(--sort);padding:26px 0 70px}
+.andre{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.andre a,.andre span{font-size:12px;font-weight:800;text-decoration:none;
+  border:1px solid var(--border);border-radius:100px;padding:8px 15px;
+  color:var(--muted);background:#fff}
+.andre a:hover{border-color:var(--sort);color:var(--sort)}
+.andre span.her{background:var(--sort);color:#fff;border-color:var(--sort)}
+.folio{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--linje)}
+.tiltop{position:fixed;right:22px;bottom:22px;z-index:50}
+
+/* ---------------------------------------------------- skjul skærmnoter -- */
+body.skjul .skaerm{display:none}
+body.skjul .foer{display:none}
+
+/* ---------------------------------------------------------- responsivt -- */
+@media (max-width:900px){
+  :root{--tale:22px;--maal:40ch}
+  .wrap{padding:0 20px}
+  .tb{padding:9px 20px;gap:12px}
+  .tb .nu{display:none}
+  .slide{grid-template-columns:1fr;gap:0;padding:32px 0 10px}
+  .gutter{display:flex;align-items:baseline;gap:11px;padding-bottom:14px}
+  .gutter .sn{position:static;display:flex;align-items:baseline;gap:11px}
+  .gutter .sv{font-size:26px;margin-top:0}
+  .gutter .sv::after{display:none}
+  .fakta div{padding-right:20px;margin-right:20px}
+  .fakta .v{font-size:20px}
+  .tale{padding-left:16px}
+  h1{max-width:100%}
+}
+@media (max-width:560px){
+  .vaerktoej .skjulmob{display:none}
+}
+
+/* ------------------------------------------------------------- print ---- */
+@media print{
+  @page{margin:16mm 14mm}
+  html{scroll-padding-top:0}
+  body{background:#fff;color:#000;line-height:1.5}
+  .topbar,.tiltop,.andre,.noegle,.toc,.vaerktoej{display:none !important}
+  body.skjul .skaerm,body.skjul .foer{display:block}
+  .wrap{max-width:100%;padding:0}
+  header.hoved{padding:0 0 12px}
+  h1{font-size:26pt;max-width:100%}
+  .fakta{margin-top:14px}
+  .fakta .v{font-size:14pt}
+  .blok{padding-top:18px;break-before:page;page-break-before:always}
+  .blok:first-of-type{break-before:auto;page-break-before:auto}
+  h2{font-size:16pt}
+  /* Slidet må gerne løbe over et sideskift, ellers står der en halv tom side
+     efter hvert slide. Det der ALDRIG må knække, er en enkelt talesporslinje,
+     en skærmnote eller en hul-boks. */
+  .slide{grid-template-columns:74px 1fr;padding:16px 0 6px}
+  .skaerm,.hul,.instr,.tale p{break-inside:avoid;page-break-inside:avoid}
+  h3{break-after:avoid;page-break-after:avoid}
+  .gutter .sv{font-size:20pt}
+  .gutter .sn{position:static}
+  h3{font-size:12pt;margin-bottom:10px}
+  .tale{max-width:100%;border-left:2.5pt solid #000;padding-left:14px;
+    margin-bottom:14px}
+  .tale p{font-size:13pt;line-height:1.5;color:#000;max-width:56ch}
+  .skaerm{background:#fff;border:1pt solid #999;border-left:3pt solid #999;
+    max-width:100%;margin-bottom:12px;padding:9px 13px}
+  .skaerm p{font-size:8.5pt;line-height:1.4;color:#444}
+  .foer{background:#fff;border:1pt solid #bbb;max-width:100%}
+  .foer p{font-size:8.5pt;color:#444}
+  .instr{max-width:100%}
+  .instr p{font-size:10pt}
+  .hul{border:2.5pt solid #000;max-width:100%;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .hul .mrk{background:#000;color:#fff;-webkit-print-color-adjust:exact;
+    print-color-adjust:exact}
+  .hul p{font-size:11pt}
+  footer{margin-top:24px;padding-bottom:0}
+  code{border:0;background:#fff}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="tb">
+    <span class="flamme"></span>
+    <span class="navn">Manus</span>
+    <span class="nu" id="nu"></span>
+    <span class="vaerktoej">
+      <span class="tbmaal skjulmob">15 min</span>
+      <button class="knap rund" id="knMindre" title="Mindre skrift (tast -)">&minus;</button>
+      <span class="tbmaal" id="strvis">25 px</span>
+      <button class="knap rund" id="knStoerre" title="Større skrift (tast +)">+</button>
+      <button class="knap skjulmob" id="knSkjul">Skjul skærm-noter</button>
+      <button class="knap skjulmob" id="knPrint">Print</button>
+    </span>
+  </div>
+  <div id="fremdrift"></div>
+</div>
+
+<div class="wrap">
+
+<header class="hoved">
+  <div class="kicker"><span class="knr">ENKELT BLOK</span><span class="krule"></span>
+    <span class="ktxt">Optage-manus til Lasse</span></div>
+  <h1>Manus &middot; Modul 5<br><mark>Video 2: Behovet, og det de tilbyder</mark></h1>
+
+  <div class="fakta">
+    <div><span class="t">Taletid</span><span class="v">ca. 15 <small>min</small></span></div>
+    <div><span class="t">Slides</span><span class="v">18</span></div>
+    <div><span class="t">Blokke</span><span class="v">1</span></div>
+    <div><span class="t">Ord i talesporet</span><span class="v">2138</span></div>
+    <div><span class="t">Huller</span><span class="v">0 <small>klar til optagelse</small></span></div>
+  </div>
+
+  <div class="noegle">
+    <span><i class="i-tale"></i>Gul skinne = det du siger højt</span>
+    <span><i class="i-sk"></i>Sort boks = det du gør i systemet, siges ikke</span>
+    <span><i class="i-hul"></i>Hvidt kort = replik, det du siger til virksomheden</span>
+  </div>
+
+  <nav class="toc"><a href="#blok0"><span class="n">Blok 00</span><span class="t">Video 2: Behovet, og det de tilbyder</span><span class="m">15 min · 18 stop</span></a></nav>
+</header>
+
+<main><section class="blok" id="blok0" data-nu="Blok 00 &amp;middot; &lt;b&gt;Video 2: Behovet, og det de tilbyder&lt;/b&gt;"><div class="blokhoved"><span class="bnr">Blok 00</span><h2>Video 2: Behovet, og det de tilbyder</h2><span class="bm">ca. 15 min · 18 stop · 2138 ord</span></div><div class="foer"><span class="mrk">Før du optager · læses, siges ikke<em>henvisninger til afsnit "nederst" står i MANUS_Modul5_Video2_BehovetOgTilbuddet.md</em></span><p>Skærmdeling, ikke slides. Las deler sin skærm, klikker sig gennem PowerMatch-platformen og læser op herfra samtidig.</p><p>Sådan læses siden. <b>Sort boks = GØR.</b> Det er handlingen i systemet, og den siges ikke højt. <b>Almindelig tekst = talespor.</b> Det læses op. <b>Hvidt kort med gul kant = replik.</b> Det er det sælgeren siger til virksomheden i telefonen, og det skal siges langsommere end resten, så en ny sælger kan skrive det ned.</p><p>Hvert stop hedder det samme som feltet gør inde i systemet. Taber du tråden midt i en optagelse, så kig på feltnavnet på skærmen og find det her.</p><p>Videoen fortsætter direkte, hvor Video 1 slap: vi står stadig i den samme formular, lige under arbejdsopgaver.</p><p>Kilde: <code>00_Grundkontekst/RAA_VANDFALD_ORDRET_SYSTEMER.md</code>, Del 1. Beslutninger: <code>00_Grundkontekst/TIL_SEBASTIAN_MODUL5_SYSTEMER.md</code>.</p></div><article class="slide" id="b0-s1"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">1</span></span></div><div class="indhold"><h3>Start dato</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>rul ned til Start dato og vælg en dato et par uger ude i fremtiden.</p></div><div class="tale"><p>Nu går vi videre til start dato. Og der spørger man bare:</p></div><div class="tale"><p class="replik">"Er det noget der haster her? Eller handler det mere om at finde den helt rigtige?"</p></div><div class="tale"><p>Og det er lige meget, om det er en uge, to uger eller tre uger ude i fremtiden, han ansætter. Det er bare for at få en idé om dialogen, og hvor aggressiv vi skal være, og hvor hurtigt vi skal følge op.</p></div><div class="tale"><p>Det er vigtigt, at man stiller det spørgsmål. Det her handler om, at man lærer dem at kende og forstår behovet. Det skal ikke lyde, som om man bare gerne vil sælge dem en tømrer lige efter kaldet.</p></div><div class="tale"><p>Det her er ikke noget vi bruger til matching. Jeg skal nok sige til i forhold til, hvilke sektioner vi bruger til matching. Den første var arbejdsopgaver, som vi gennemgik før.</p></div></div></article><article class="slide" id="b0-s2"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">2</span></span></div><div class="indhold"><h3>Antal medarbejdere <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>skriv 2 i feltet.</p></div><div class="tale"><p>Så er der antallet af medarbejdere. Og det er igen også bare for at forstå deres behov. Så spørger man bare helt åbent:</p></div><div class="tale"><p class="replik">"Hvor mange er det så I søger for tiden? Er det bare en enkelt, eller leder I efter flere?"</p></div><div class="tale"><p>Og husk, det er igen måden vi spørger på. Spørger man på sådan en aggressiv måde:</p></div><div class="tale"><p class="replik">"Nå, kunne I godt bruge tre-fire stykker eller?"</p></div><div class="tale"><p>Hvor man i stedet bare spørger:</p></div><div class="tale"><p class="replik">"Hvor mange er det så I søger for tiden?"</p></div><div class="tale"><p>Så lyder det bare som et åbent spørgsmål med interesse i deres behov.</p></div><div class="tale"><p>Nu skriver vi bare to. Men det er ikke noget vi bliver matchet på. Det er bare for at kende deres profil bedre fra dit perspektiv i dialogen.</p></div></div></article><article class="slide" id="b0-s3"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">3</span></span></div><div class="indhold"><h3>Års erfaring <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>sæt 2 år i feltet.</p></div><div class="tale"><p>Så spørger vi dem:</p></div><div class="tale"><p class="replik">"Hvor mange års erfaring har I som krav, han skal have?"</p></div><div class="tale"><p>Her er der mange, der vil sige: jamen det handler ikke så meget om erfaring, det handler mere om personen. Og så stiller vi et yderligere spørgsmål:</p></div><div class="tale"><p class="replik">"Selvfølgelig, det giver mening. Men når du søger efter folk, har du så et minimum af erfaringsår som krav, du kigger efter? Det er bare fordi så matcher jeg kun med folk, der har det antal års erfaring."</p></div><div class="tale"><p>Og så kan det være, de siger: jamen det skal være fire eller fem. Så vælger vi det.</p></div><div class="tale"><p>Det kan også være, at de så giver dig endnu en indvending og siger: nej, det har jeg ikke, det handler om personen. Og så kan man jo bare spørge dem:</p></div><div class="tale"><p class="replik">"Er det så fint, at det er minimum to års erfaring? Så kan vi tage det ud fra de personer der kommer."</p></div><div class="tale"><p>Det siger de så ja til, og så vælger vi to års erfaring. Det er meget sjældent, vi vælger mindre end det. To års erfaring er ofte det mindste, vi vælger.</p></div></div></article><article class="slide" id="b0-s4"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">4</span></span></div><div class="indhold"><h3>Aldersinterval</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>træk aldersintervallet til 25-45, og vis derefter 22-48.</p></div><div class="tale"><p>Så har vi den, der hedder aldersintervallet. Her begynder vi at snakke ind til den kultur, de har ude på arbejdspladsen, og vi spørger dem meget åbent i forhold til kultur og alder:</p></div><div class="tale"><p class="replik">"Er der noget der, eller er I lidt alle aldre derude?"</p></div><div class="tale"><p>Er de alle aldre derude, så siger vi 20 til 60.</p></div><div class="tale"><p>Siger de, jamen vi er 25 til 45, så plejer vi bare at sætte den på 25 til 45.</p></div><div class="tale"><p>Hvis de er lidt åbne omkring det, kan man også gøre den tre-fire år bredere i hver ende, så den hedder 22 til 48.</p></div></div></article><article class="slide" id="b0-s5"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">5</span></span></div><div class="indhold"><h3>Arbejdssted <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>skriv en adresse i Roskilde i arbejdssted, og husk at klikke på et forslag i dropdownen.</p></div><div class="tale"><p>Så har vi igen et af de vigtigste matchpunkter, der hedder afstand. Og afstand hænger sammen med den her. Vi har to sektioner nedenunder, og den første hedder arbejdssted.</p></div><div class="tale"><p>Arbejdssted er igen en Google Maps-adresse, vi putter ind. Den er ofte den samme som den adresse, vi havde heroppe. Det der er vigtigt at sige, det er, at det er den her adresse, vi matcher ud fra. Vi matcher ikke fra virksomhedsadressen, vi valgte heroppe. Den bruger vi kun til virksomhedsprofilen.</p></div><div class="tale"><p>Og det kunne jo være, at i stedet for at tømrermester Jens bare søgte folk ud fra sin egen adresse, så havde han simpelthen så travlt nede i Roskilde, at han hellere vil søge ud fra det. Så han siger: jamen alle vores arbejdsopgaver for tiden er omkring Roskilde. Så spørger vi:</p></div><div class="tale"><p class="replik">"Hvor henne i Roskilde?"</p></div><div class="tale"><p>Jamen det er Roskildevænget. Så skriver vi det ind, og så søger vi ud fra den adresse.</p></div><div class="tale"><p>For de fleste er det bare virksomhedsadressen, men det er vigtigt at spørge om. Lad os sige for det her eksempel, at det er Roskilde. Så sætter vi søgningen ud fra Roskilde.</p></div><div class="tale"><p>En anden ting, bare lige et tip: er man i tvivl, så kan man også altid bare spørge virksomheden.</p></div><div class="tale"><p class="replik">"Hvilken adresse skal jeg sætte søgningen ud fra?"</p></div><div class="tale"><p>Meget simpelt spørgsmål.</p></div></div></article><article class="slide" id="b0-s6"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">6</span></span></div><div class="indhold"><h3>Afstand i minutter <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>sæt afstanden til 40 minutter.</p></div><div class="tale"><p>Så spørger jeg virksomheden:</p></div><div class="tale"><p class="replik">"I forhold til afstand i minutter, hvor mange minutter tænker du, han højest må komme væk fra?"</p></div><div class="tale"><p>Meget klassiske svar ligger omkring 35 til 40 minutter.</p></div><div class="tale"><p>Og en ting, der er vigtig: vi prøver ikke at forhandle det ned. Siger han, jamen det skal ikke være mere end 35 minutter, så vælger du bare 35 minutter. Fordi det er jo det, de mener.</p></div><div class="tale"><p>Husk, vi prøver ikke at sælge dem et eller andet mobilabonnement eller en forsikring, hvor hvis vi lykkes med at få dem til at skifte, så har vi ligesom lavet salget. Nej. Salget er vi ikke tæt på overhovedet endnu. Vi er kun ved at oprette deres profil, og her lægger vi op til hele det senere salgsforløb, hvor vi skal sætte matches og samtaler op. Så gør vi noget forkert her, så bider vi bare os selv i foden.</p></div><div class="tale"><p>Nu siger vi bare 40 minutter. Lad os antage, at virksomheden siger det.</p></div></div></article><article class="slide" id="b0-s7"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">7</span></span></div><div class="indhold"><h3>Kørekort</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>sæt kørekort til ja.</p></div><div class="tale"><p>Så er den næste kørekort. Den bliver der også matchet meget skarpt på. Siger vi ja på kørekort, så får håndværkervirksomheden kun folk med et kørekort. Siger vi nej, så får de begge. Meget simpelt.</p></div><div class="tale"><p>Et lille tip her. Er der blevet snakket om tidligere i dialogen, at arbejdsopgaverne involverer, at kandidaten skal køre fra sted til sted og for eksempel skal have en firmabil, køre Spjæld og Service, eller hvad det nu kunne være — så lad være med at spørge. Så lyder man uprofessionel. Så sig bare meget kort:</p></div><div class="tale"><p class="replik">"Nu hvor de skal lave det her og det her, så går jeg selvfølgelig også ud fra, at de skal have kørekort."</p></div><div class="tale"><p>Så vil mester bare sige ja.</p></div></div></article><article class="slide" id="b0-s8"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">8</span></span></div><div class="indhold"><h3>Duo-ansøgning</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>sæt duo-ansøgning til ja.</p></div><div class="tale"><p>Så har vi den, der hedder duo-ansøgning. Det er ikke noget, vi bruger aktivt i systemet endnu, men vi overvejer i fremtiden at lave sådan nogle makkerparprofiler. Og der er det bare fedt for os at have dataen om, det er noget de bruger.</p></div><div class="tale"><p>Så du spørger bare helt åbent:</p></div><div class="tale"><p class="replik">"Benytter I også makkerpar? Er I åbne for makkerpar, eller skal det være folk, der kommer alene?"</p></div><div class="tale"><p>Og så er det ja eller nej.</p></div></div></article><article class="slide spring" id="b0-s9"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">9</span></span></div><div class="indhold"><h3>Foretrukken tid til samtale · SPRINGES OVER</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>rul forbi feltet uden at udfylde det.</p></div><div class="tale"><p>Foretrukken tid til samtale. Det er ikke en funktion, vi bruger aktivt.</p></div><div class="tale"><p>Så du hopper bare videre her og behøver ikke udfylde den.</p></div></div></article><article class="slide" id="b0-s10"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">10</span></span></div><div class="indhold"><h3>Byer</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>skriv Roskilde, Næstved, Holbæk og Hillerød ind, og slet så Hillerød igen.</p></div><div class="tale"><p>Så har vi den, der hedder byer. Byer bruges til at give dig en bedre forståelse af, hvor virksomheden arbejder. Og det gør også den jobbeskrivelse, vi laver, bedre.</p></div><div class="tale"><p>Er det en meget hektisk dialog, så behøver du ikke komme for meget i dybden med det. Men ellers spørger man bare:</p></div><div class="tale"><p class="replik">"Hvilke byer arbejder I typisk i?"</p></div><div class="tale"><p>Det kommer også til at give dig en meget bedre forståelse af kunden. Men det er ikke noget vi matcher på, bare så du forstår.</p></div><div class="tale"><p>Lad os sige, vi arbejder i Roskilde, vi arbejder i Næstved, vi arbejder i Holbæk, vi arbejder i Hillerød. Nu fjerner jeg lige Hillerød, så der bare står tre. For som god hovedregel: skriv ikke mere end tre ind. Så bliver det forvirrende. Én til tre, det er fint.</p></div></div></article><article class="slide" id="b0-s11"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">11</span></span></div><div class="indhold"><h3>Løn <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>rul ned til løn og skriv spændet 210-230 ind.</p></div><div class="tale"><p>Nu har vi ligesom fået bygget virksomhedens behov. Vi har fået skrevet ind, hvad det er for nogle arbejdsopgaver de laver, så vi kan matche op på det. Vi har skrevet ind, hvor mange års erfaring kandidaten skal have, cirka hvilken alder, afstand og kørekort, og hvilken adresse han skal komme fra.</p></div><div class="tale"><p>Nu ryger samtalen over til: hvad tilbyder virksomheden? Som er lige så vigtigt. For hvis virksomheden ikke tilbyder det, deres drømmekandidat har som krav, så bliver kandidaten selvfølgelig heller ikke matchet med dem. Meget simpelt: har kandidaten 240 kroner som krav, og virksomheden tilbyder 220, så bliver der ikke lavet et match.</p></div><div class="tale"><p>Så første spørgsmål her bliver:</p></div><div class="tale"><p class="replik">"Hvad tilbyder I af løn ude hos jer?"</p></div><div class="tale"><p>Og bare for at indvendingsbehandle det, som ni ud af ti virksomheder siger, hvis man spørger på den måde — nemlig: jamen det kommer an på, hvad han kan — så siger vi bare:</p></div><div class="tale"><p class="replik">"Jeg skal lige notere, hvad I tilbyder i forhold til løn. Jeg ved godt, det er forskelligt fra kandidat til kandidat, hvad han kommer med af erfaring og selvfølgelig også hvad han kan. Men i hvilket spænd ligger I? Fra hvad til hvad cirka?"</p></div><div class="tale"><p>Når man siger det på den måde, så fjerner man den indvending, han lige skulle til at komme med, og så plejer de altid at give et spænd.</p></div><div class="tale"><p>Siger de bare omkring 220, så spørger man bare helt åbent:</p></div><div class="tale"><p class="replik">"Hvis jeg skriver 210 til 230 ind, er det så realistisk?"</p></div><div class="tale"><p>Den her er vigtig. Man må gerne lige spørge ind en gang eller to ekstra, så vi får det helt rigtige.</p></div></div></article><article class="slide" id="b0-s12"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">12</span></span></div><div class="indhold"><h3>Gangfaktor <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>sæt gangfaktoren til 1,925, og rul derefter ned til priseksemplet, så det kan ses.</p></div><div class="tale"><p>Den næste er den gangfaktor, du vil give dem. Og den er jo baseret på jobtitlen, hvilken dialog du har, og hvor henne i landet vi er. Nu tager vi bare 1,925. Den er meget standard for tømrere i København.</p></div><div class="tale"><p>Den kan du også lige bruge i løbet af dialogen. Nu er vi jo ikke kommet til løsning normalt i dialogen endnu, men nogle af de virksomheder du snakker med, gider ikke blive behovsafdækket, inden de ved hvad det koster. Så bliver du tvunget til at fortælle prisen og hvordan det fungerer, og du ikke lige kan lommeregneren i hovedet, så kan du også bare lige løbe herned. Der vil du få et priseksempel ud fra en timeløn på 210, og så give virksomheden eksempler.</p></div><div class="tale"><p>Men man skal helst vente med at fortælle løsning og pris, indtil man er kommet ind på behovet, og indtil man er kommet ind på selve platformen og har vist virksomheden de matches, vi har. Fordi der har vi skabt mere værdi for vores produkt. Og det er meget nemmere at tage en højere gangfaktor, en højere pris, når man har vist hvad produktet kan, og hvor gode kandidater det er.</p></div><div class="tale"><p>Frem for lige nu, hvor vi stadig er i et stadie, hvor de ikke har set platformen. Så vi foretrækker at vente med det.</p></div></div></article><article class="slide" id="b0-s13"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">13</span></span></div><div class="indhold"><h3>Firmabil <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>åbn de fire valgmuligheder, så de kan ses, og vælg Firmabil fra dag 1.</p></div><div class="tale"><p>Hvis vi går videre, så har vi den, der hedder firmabil, som også er rigtig vigtig. Der er fire valgmuligheder.</p></div><div class="tale"><p>Firmabil fra dag 1. Den giver sig selv. Siger han, bilen er klar med det samme, så tager vi den.</p></div><div class="tale"><p>Om et par uger. Siger virksomheden, når vi spørger, at der lige går et par uger, måske en måned, før den er klar, så tager vi den.</p></div><div class="tale"><p>På sigt. Siger virksomheden, at det går i hvert fald lige et par måneder, to til fire måneder, og vi er oppe i sådan en tidsspand, så hedder den på sigt.</p></div><div class="tale"><p>Ingen firmabil. Siger han, der er ingen firmabil — det kan være, det er noget pladsarbejde eller lignende — så vælger vi selvfølgelig ingen firmabil.</p></div><div class="tale"><p>Igen, det er vigtigt, at vi får den rigtige data her, fordi vi matcher på den. Har en kandidat et krav om, at der skal være firmabil fra dag 1, og vi har valgt enten på sigt eller ingen firmabil, bare som eksempel, så vil det heller ikke være et match.</p></div></div></article><article class="slide" id="b0-s14"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">14</span></span></div><div class="indhold"><h3>Transportmuligheder</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>vælg firmabil i transportmuligheder.</p></div><div class="tale"><p>Så har vi den, der hedder transportmuligheder. Den hænger sammen med firmabil.</p></div><div class="tale"><p>Vælger du firmabil fra dag 1 eller om et par uger, så tager du også bare firmabil herovre.</p></div><div class="tale"><p>Vælger vi for eksempel firmabil på sigt, så kan vi jo spørge:</p></div><div class="tale"><p class="replik">"Tilbyder I sådan noget samkørsel, hvor man kører to og to eller i sjak?"</p></div><div class="tale"><p>Og siger han, jamen det gør vi, så tager vi samkørsel. Fordi så kan vi også matche den med kandidater, hvor virksomheden så kan sørge for, at de bliver hentet. Det er vigtigt, fordi vi har mange kandidater, der måske ikke har deres egen bil.</p></div><div class="tale"><p>Siger virksomheden, at der ingen transport er — det kan være, det er en byggeplads — så tager man egen transport.</p></div></div></article><article class="slide" id="b0-s15"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">15</span></span></div><div class="indhold"><h3>Projekter · BLIVER FJERNET</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>vælg erhvervsbyggeri og privatbyggeri.</p></div><div class="tale"><p>I forhold til projekter. Den her bruger vi ikke synderligt meget, bare for at være helt ærlig, og den kommer også til at blive fjernet. Er den der stadig på nuværende tidspunkt, så forklar bare, at man typisk ud fra dialogen har kunnet høre, hvad det er for nogle projekter. Men ellers tager vi bare bolig- og erhvervsbyggeri og privatbyggeri. Det er meget standard.</p></div><div class="tale"><p>Du må også godt lige spørge dem:</p></div><div class="tale"><p class="replik">"Hvad er det for en type byggeri, I arbejder med?"</p></div><div class="tale"><p>Det må man også bare spørge virksomheden om. Tag helst ikke mere end to her. Nu tager vi bare erhvervsbyggeri og privatbyggeri.</p></div></div></article><article class="slide" id="b0-s16"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">16</span></span></div><div class="indhold"><h3>Arbejdsform <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>åbn de fire valgmuligheder, så de kan ses, og vælg selvstændigt og makkerpar.</p></div><div class="tale"><p>Så har vi arbejdsform. Det er, hvordan de arbejder derude på pladsen. Der har vi fire valgmuligheder.</p></div><div class="tale"><p>Selvstændigt. Det betyder, at man arbejder alene.</p></div><div class="tale"><p>Makkerpar. Det betyder, at man arbejder to og to.</p></div><div class="tale"><p>Sjak. Det betyder, man arbejder tre plus sammen. Tre, fire, fem eller seks typisk.</p></div><div class="tale"><p>Med lærling. Det er jo en, der er under uddannelse, og så kører man rundt med ham og skal også lære ham noget.</p></div><div class="tale"><p>Typisk har virksomheden to måder. Det kunne for eksempel være, man arbejder i makkerpar og sjak. Det kan også være selvstændigt og makkerpar, eller sjak og med lærling. Der er mange muligheder her, men typisk tager man en til tre.</p></div><div class="tale"><p>Er det noget entreprise? Er det noget byggeplads? Så spørger du:</p></div><div class="tale"><p class="replik">"Går man selvstændigt på byggepladsen? Går man i makkerpar, eller går man i sjak? Hvordan fungerer det? Er det med lærling?"</p></div><div class="tale"><p>Så brug hele tiden den information, du har fået i løbet af dialogen, i baghovedet til at gøre det her nemmere for dig.</p></div><div class="tale"><p>Lad os sige, der bliver valgt selvstændigt og makkerpar. Det forklarer virksomheden ud fra dine spørgsmål.</p></div></div></article><article class="slide spring" id="b0-s17"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">17</span></span></div><div class="indhold"><h3>Krævede kurser · SPRINGES OVER</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>rul forbi feltet uden at udfylde det.</p></div><div class="tale"><p>Den der hedder krævede kurser, den bruger vi ikke.</p></div><div class="tale"><p>Forhåbentlig er den fjernet, når den her onboarding bliver optaget.</p></div></div></article><article class="slide spring" id="b0-s18"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">18</span></span></div><div class="indhold"><h3>Fordele ved jobbet · SPRINGES OVER</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>rul forbi feltet uden at udfylde det.</p></div><div class="tale"><p>Fordele ved jobbet bruger vi heller ikke. Forhåbentlig er også den fjernet, når den her onboarding bliver optaget.</p></div><div class="tale"><p>Så er vi egentlig færdige med behovet og med det, de tilbyder. I næste video sender vi jobbet ind, ser jobannoncen, og så tager vi redigeringen.</p></div></div></article></section></main>
+
+<footer>
+  <div class="andre"></div>
+  <p class="folio">PowerMatch &middot; Internt materiale &middot; Modul 5 · Video 2: Behovet, og det de tilbyder &middot;
+</p>
+</footer>
+
+</div>
+
+<button class="knap tiltop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&uarr; Top</button>
+<script>
+/* Ingen localStorage og ingen sessionStorage. Alt står i variabler herunder
+   og nulstilles ved reload, præcis som aftalt. */
+(function(){
+  var talestr = 25;                     // px, samme startværdi som CSS
+  var minStr = 17, maxStr = 42;
+  var skjult = false;
+
+  var rod   = document.documentElement;
+  var vis   = document.getElementById('strvis');
+  var bar   = document.getElementById('fremdrift');
+  var nu    = document.getElementById('nu');
+  var knSkj = document.getElementById('knSkjul');
+  var blokke = [].slice.call(document.querySelectorAll('.blok'));
+
+  function saetStr(n){
+    talestr = Math.max(minStr, Math.min(maxStr, n));
+    rod.style.setProperty('--tale', talestr + 'px');
+    if (vis) vis.textContent = talestr + ' px';
+  }
+  document.getElementById('knMindre').onclick = function(){ saetStr(talestr - 2); };
+  document.getElementById('knStoerre').onclick = function(){ saetStr(talestr + 2); };
+  document.getElementById('knPrint').onclick = function(){ window.print(); };
+  knSkj.onclick = function(){
+    skjult = !skjult;
+    document.body.classList.toggle('skjul', skjult);
+    knSkj.classList.toggle('paa', skjult);
+    knSkj.textContent = skjult ? 'Vis skærm-noter' : 'Skjul skærm-noter';
+  };
+
+  function opdater(){
+    var h = document.documentElement;
+    var kan = (h.scrollHeight - h.clientHeight) || 1;
+    bar.style.width = Math.min(100, (h.scrollTop / kan) * 100) + '%';
+    var akt = null;
+    for (var i = 0; i < blokke.length; i++){
+      if (blokke[i].getBoundingClientRect().top <= 130) akt = blokke[i];
+    }
+    if (nu) nu.innerHTML = akt ? akt.getAttribute('data-nu') : '';
+  }
+  window.addEventListener('scroll', opdater, {passive:true});
+  window.addEventListener('resize', opdater);
+  opdater();
+
+  document.addEventListener('keydown', function(e){
+    if (e.target && /INPUT|TEXTAREA/.test(e.target.tagName)) return;
+    if (e.key === '+') { saetStr(talestr + 2); e.preventDefault(); }
+    if (e.key === '-') { saetStr(talestr - 2); e.preventDefault(); }
+  });
+})();
+</script>
+</body>
+</html>
