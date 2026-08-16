@@ -69,7 +69,7 @@ p.under{font-size:clamp(15px,1.35vw,19px);line-height:1.6;color:var(--muted);max
 .skub{margin-top:auto !important;padding-bottom:2vh}
 
 /* ---------- læringsmål / faktarækker ---------- */
-.maal{margin-top:5vh;max-width:1040px;flex:1;display:flex;flex-direction:column;justify-content:space-evenly}
+.maal{margin-top:5vh;max-width:none;flex:1;display:flex;flex-direction:column;justify-content:space-evenly}
 .maal .mrow{display:flex;align-items:center;gap:26px;border-top:1px solid var(--border);padding:30px 4px;flex:1}
 .maal .mrow:last-child{border-bottom:1px solid var(--border)}
 .maal .tjek{
@@ -154,9 +154,10 @@ p.under{font-size:clamp(15px,1.35vw,19px);line-height:1.6;color:var(--muted);max
 .gulflade .kicker .krule{background:var(--sort)}
 .gulflade .kicker .ktxt,.gulflade .kicker .knr{color:var(--sort)}
 .gulflade h2{max-width:none}
-.regne{display:flex;align-items:baseline;gap:clamp(16px,2.2vw,40px);margin-top:10vh;flex-wrap:nowrap;white-space:nowrap}
-.regne .val{font-size:clamp(46px,6.2vw,104px);font-weight:900;color:var(--sort);letter-spacing:-.05em;line-height:1;font-variant-numeric:tabular-nums}
-.regne .op{font-size:clamp(32px,4vw,62px);font-weight:800;color:rgba(17,18,19,.72)}
+.regne{display:flex;align-items:baseline;gap:clamp(14px,1.8vw,32px);margin-top:10vh;flex-wrap:nowrap;white-space:nowrap}
+/* 5,1vw holder "450-565 kr x 1 maaned = 70-90.000 kr" paa EEN linje inden for --mx ved 1366 og 1600 */
+.regne .val{font-size:clamp(36px,4.70vw,80px);font-weight:900;color:var(--sort);letter-spacing:-.05em;line-height:1;font-variant-numeric:tabular-nums}
+.regne .op{font-size:clamp(24px,3vw,48px);font-weight:800;color:rgba(17,18,19,.72)}
 .regne .led{position:relative}
 .regne .led .lab{
   position:absolute;left:2px;top:100%;margin-top:20px;font-size:11.5px;font-weight:800;
@@ -225,12 +226,12 @@ p.under.bundfast{margin-top:auto !important;border-top:1px solid var(--border);p
 .moerk .kicker .ktxt{color:rgba(255,255,255,.5)}
 .moerk .kicker .knr{color:#fff}
 .moerk h2{color:#fff}
-.recap{display:flex;flex-direction:column;margin-top:4vh;max-width:860px;flex:1;justify-content:space-evenly}
+.recap{display:flex;flex-direction:column;margin-top:4vh;max-width:none;flex:1;justify-content:space-evenly}
 .recap .rrow{display:flex;align-items:center;gap:26px;border-top:1px solid rgba(255,255,255,.16);padding:28px 0;flex:1}
 .recap .rrow:last-child{border-bottom:1px solid rgba(255,255,255,.16)}
 .recap .rnr{width:46px;height:46px;border-radius:13px;background:var(--gul);color:var(--sort);font-weight:900;font-size:19px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .recap .rtxt{font-size:clamp(18px,1.9vw,25px);font-weight:800;color:#fff;letter-spacing:-.015em}
-.recap .rtxt em{font-style:normal;color:var(--gul)}
+.recap .rtxt em{font-style:normal;color:#fff}
 .moerk .naeste{margin-top:5vh;font-size:14.5px;font-weight:600;color:rgba(255,255,255,.55)}
 .moerk .naeste b{color:#fff}
 .moerk .ghost{-webkit-text-stroke:1.5px rgba(255,255,255,.1)}
@@ -301,6 +302,10 @@ p.under.bundfast{margin-top:auto !important;border-top:1px solid var(--border);p
   p.under{line-height:1.5}
   .skub{padding-bottom:1vh}
 }
+/* smal skaerm (fx 1366): bundlinjen skal blive paa EEN linje, ellers staar sidste ord som horeunge */
+@media (max-width:1500px){
+  p.under.bundfast{font-size:17px;letter-spacing:-.005em}
+}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 @media print{
   html,body{overflow:visible}
@@ -313,9 +318,120 @@ p.under.bundfast{margin-top:auto !important;border-top:1px solid var(--border);p
 /* v2 typografi-vagt: forhindrer horeunger (kort sidste linje) og skaeve overskrifts-brud */
 h1,h2{text-wrap:balance}
 p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-lab{text-wrap:pretty}
+/* ---------- IKONER · samme sprite og samme regler som Modul 4 ---------- */
+.ik{width:22px;height:22px;flex-shrink:0;stroke:currentColor;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.ik.stor{width:30px;height:30px;stroke-width:1.35}
+.ik.mini{width:15px;height:15px;stroke-width:1.9}
+.ik.xl{width:44px;height:44px;stroke-width:1.1}
+.figur{width:100%;height:auto;display:block}
+.svgcap{font:800 10.5px/1 Inter,sans-serif;letter-spacing:.15em;text-transform:uppercase;fill:#71757C}
+.svgtxt{font:800 13px/1 Inter,sans-serif;fill:#111213}
+.svgmut{font:700 11px/1 Inter,sans-serif;fill:#71757C}
+/* ikon foran en faktarække / tjeklistelinje uden at flytte teksten */
+.fakta-r{display:flex;align-items:flex-start;gap:14px}
+.fakta-r > .ik{margin-top:1px;color:var(--sort)}
+.fakta-r .ftxt{flex:1;min-width:0;color:var(--sort);font-weight:700}
+.fakta-r .ftxt > span{color:var(--muted);font-weight:500}
+.maal .tjek .ik{width:19px;height:19px;color:var(--sort)}
+.trow > .ik{color:var(--sort);flex-shrink:0}
+.rrow > .ik{color:var(--gul);flex-shrink:0}
+.mrow > .ik{color:var(--sort)}
+/* ---------- tekstkolonnen paa split-slides: strammere lodret rytme ---------- */
+.split .venstre .tjekliste{margin-top:3vh;max-width:none}
+.split .venstre .tjekliste .trow{padding:15px 2px;gap:14px}
+.split .venstre .tjekliste .ttxt{font-size:clamp(14.5px,1.28vw,18px);line-height:1.5}
+.split .venstre h2{font-size:clamp(25px,2.6vw,40px)}
+.split .venstre .under.skub{font-size:13.5px;padding-bottom:1.6vh}
+.split .venstre .ik{width:19px;height:19px}
+@media (max-height:820px){
+  .split .venstre .tjekliste{margin-top:2.2vh}
+  .split .venstre .tjekliste .trow{padding:11px 2px}
+}
+/* titel: linjeafstand saa kommaets hale ikke rammer den sorte boks under den */
+.titelgul h1{line-height:1.12}
+.titelgul h1 .lm:last-child{margin-top:.06em}
 </style>
 </head>
 <body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="i-hammer" viewBox="0 0 24 24"><path d="M8 3.5h10.5v5.5H8z" fill="currentColor" stroke="none"/><path d="M8 3.5L3.5 6.2 8 9"/><path d="M12.8 9v11"/><path d="M10.8 20h4"/></symbol>
+  <symbol id="i-murerske" viewBox="0 0 24 24"><path d="M3 4.5h12L9 15.5z" fill="currentColor" stroke="none"/><path d="M11.5 12l4 5.5"/><path d="M14.5 15.5l4 3.5"/></symbol>
+  <symbol id="i-rulle" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="14" height="5.5" rx="1.2" fill="currentColor" stroke="none"/><path d="M10.5 9v3.5H6V21"/></symbol>
+  <symbol id="i-tang" viewBox="0 0 24 24"><path d="M9 3v7l-3 3v8"/><path d="M15 3v7l3 3v8"/><path d="M9 10h6"/></symbol>
+  <symbol id="i-stik" viewBox="0 0 24 24"><path d="M9 3v5"/><path d="M15 3v5"/><path d="M6 8h12v3a6 6 0 01-12 0z"/><path d="M12 17v4"/></symbol>
+  <symbol id="i-roertang" viewBox="0 0 24 24"><circle cx="16" cy="8" r="4"/><path d="M13.2 10.8L4 20"/><path d="M4 16l4 4"/></symbol>
+  <symbol id="i-skovl" viewBox="0 0 24 24"><path d="M12 3v10"/><path d="M9.5 3h5"/><path d="M8 13h8v3.5a4 4 0 01-8 0z"/></symbol>
+  <symbol id="i-mursten" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="8" rx="1"/><path d="M9 8v8"/><path d="M15 8v8"/></symbol>
+  <symbol id="i-tommestok" viewBox="0 0 24 24"><path d="M3 17l5-9 5 9 5-9"/><path d="M5.5 12.5l1.5.8"/><path d="M15.5 12.5l1.5.8"/></symbol>
+  <symbol id="i-graver" viewBox="0 0 24 24"><path d="M3 20h18"/><rect x="4" y="12.5" width="7" height="5" rx="1"/><path d="M11 13.5l5-4 3.5 3.5"/><path d="M19.5 13l-2 4.5"/></symbol>
+  <symbol id="i-svejs" viewBox="0 0 24 24"><path d="M6 4h12v8.5a6 6 0 01-12 0z"/><path d="M8.5 9h7"/></symbol>
+  <symbol id="i-palle" viewBox="0 0 24 24"><path d="M3 12h18"/><path d="M3 16.5h18"/><path d="M5 12v4.5"/><path d="M12 12v4.5"/><path d="M19 12v4.5"/><path d="M6 8h12v4H6z"/></symbol>
+  <symbol id="i-plante" viewBox="0 0 24 24"><path d="M12 21v-7.5"/><path d="M12 13.5c-4 0-5.5-2.5-5.5-5.5 3.5 0 5.5 2.5 5.5 5.5z"/><path d="M12 13.5c4 0 5.5-2.5 5.5-5.5-3.5 0-5.5 2.5-5.5 5.5z"/></symbol>
+  <symbol id="i-telefon" viewBox="0 0 24 24"><path d="M6 3h3.5l1.8 4.4-2.3 1.4a10.5 10.5 0 005.2 5.2l1.4-2.3L20 14.5V18a2.5 2.5 0 01-2.5 2.5C10.6 20.5 3.5 13.4 3.5 5.5A2.5 2.5 0 016 3z"/></symbol>
+  <symbol id="i-boble" viewBox="0 0 24 24"><path d="M4 5h16v9.5h-8.5L6.5 19v-4.5H4z"/></symbol>
+  <symbol id="i-boblesp" viewBox="0 0 24 24"><path d="M4 5h16v9.5h-8.5L6.5 19v-4.5H4z"/><text x="12" y="13" text-anchor="middle" font-size="9" font-weight="900" stroke="none" fill="currentColor">?</text></symbol>
+  <symbol id="i-boblex2" viewBox="0 0 24 24"><path d="M2 4h11v6.5H6.5L4 13v-2.5H2z"/><path d="M22 11H11v6.5h6.5L20 20v-2.5H22z"/></symbol>
+  <symbol id="i-oere" viewBox="0 0 24 24"><path d="M8.5 21v-3.5c0-2.2-2.5-3.2-2.5-7A6 6 0 0118 10.5c0 2.2-1.2 3.5-3.2 3.5-1.6 0-2.3-1-2.3-2.2"/><path d="M10.2 10.4a2.1 2.1 0 013.9.6"/></symbol>
+  <symbol id="i-oerenej" viewBox="0 0 24 24"><path d="M8.5 21v-3.5c0-2.2-2.5-3.2-2.5-7A6 6 0 0118 10.5c0 2.2-1.2 3.5-3.2 3.5-1.6 0-2.3-1-2.3-2.2"/><path d="M3.5 20.5L20.5 3.5"/></symbol>
+  <symbol id="i-tillid" viewBox="0 0 24 24"><path d="M12 3l7.5 3v6c0 4.6-3.1 7.8-7.5 9.4C7.6 19.8 4.5 16.6 4.5 12V6z"/><path d="M8.6 12l2.5 2.5L15.8 9.6"/></symbol>
+  <symbol id="i-aftale" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M8.8 13.5l2.2 2.2 4.4-4.4"/></symbol>
+  <symbol id="i-hjelm" viewBox="0 0 24 24"><path d="M4 16.5h16"/><path d="M6.5 16.5v-3.5a5.5 5.5 0 0111 0v3.5"/><path d="M10 8V4.5h4V8"/></symbol>
+  <symbol id="i-knage" viewBox="0 0 24 24"><path d="M4 3h16"/><path d="M12 3v3"/><path d="M6.5 20v-4a5.5 5.5 0 0111 0v4"/><path d="M4 20h16"/></symbol>
+  <symbol id="i-prisop" viewBox="0 0 24 24"><path d="M3 11.5L11 3.5h7v7l-8 8z"/><circle cx="14.5" cy="7" r="1.3"/><path d="M18 21v-6"/><path d="M15.5 17.5L18 15l2.5 2.5"/></symbol>
+  <symbol id="i-gange" viewBox="0 0 24 24"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></symbol>
+  <symbol id="i-vaekst" viewBox="0 0 24 24"><path d="M4 20V14.5"/><path d="M12 20V9"/><path d="M20 20V4"/></symbol>
+  <symbol id="i-tegninger" viewBox="0 0 24 24"><path d="M3.5 8L12 4l8.5 4L12 12z"/><path d="M3.5 12L12 16l8.5-4"/><path d="M3.5 16L12 20l8.5-4"/></symbol>
+  <symbol id="i-dok" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M9 12.5h6"/><path d="M9 16.5h6"/></symbol>
+  <symbol id="i-doknej" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M3.5 20.5L20.5 3.5"/></symbol>
+  <symbol id="i-hus" viewBox="0 0 24 24"><path d="M3.5 20V10L12 4l8.5 6v10"/><path d="M3.5 20h17"/><path d="M9.5 20v-5.5h5V20"/></symbol>
+  <symbol id="i-kran" viewBox="0 0 24 24"><path d="M2.5 21h19"/><path d="M4.5 21v-9.5h8V21"/><path d="M6.5 15h4"/><path d="M17 21V3.5"/><path d="M17 3.5h-7"/><path d="M10.5 3.5v3.5"/><path d="M8.8 7h3.4v2.5H8.8z"/></symbol>
+  <symbol id="i-etage" viewBox="0 0 24 24"><rect x="4.5" y="3.5" width="15" height="17" rx="1"/><path d="M8 7.5h3M13 7.5h3M8 12h3M13 12h3M8 16.5h3M13 16.5h3"/></symbol>
+  <symbol id="i-renover" viewBox="0 0 24 24"><path d="M3.5 20.5V11L12 5l8.5 6v9.5"/><path d="M6.5 20.5v-5h4v5"/><path d="M17 12.5a3.6 3.6 0 10-3.4 4.8"/><path d="M14 10.5l3 2-2.4 2.2"/></symbol>
+  <symbol id="i-robot" viewBox="0 0 24 24"><rect x="4.5" y="8" width="15" height="10.5" rx="2.5"/><circle cx="9.5" cy="13" r="1.1"/><circle cx="14.5" cy="13" r="1.1"/><path d="M12 8V5"/><circle cx="12" cy="4" r="1.2"/></symbol>
+  <symbol id="i-platform" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M3 9h18"/><path d="M7 13h6"/><path d="M7 16h9"/></symbol>
+  <symbol id="i-sol" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 3v2"/><path d="M12 19v2"/><path d="M3 12h2"/><path d="M19 12h2"/><path d="M5.6 5.6L7 7"/><path d="M17 17l1.4 1.4"/><path d="M18.4 5.6L17 7"/><path d="M7 17l-1.4 1.4"/></symbol>
+  <symbol id="i-sne" viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M4 7.5l16 9"/><path d="M20 7.5l-16 9"/></symbol>
+  <symbol id="i-stopur" viewBox="0 0 24 24"><circle cx="12" cy="13.5" r="7"/><path d="M12 13.5V9.5"/><path d="M10 3h4"/><path d="M12 3v3.5"/></symbol>
+  <symbol id="i-trappe" viewBox="0 0 24 24"><path d="M3 20h6v-5h6v-5h6"/><path d="M21 10v10H3"/></symbol>
+  <symbol id="i-op" viewBox="0 0 24 24"><path d="M12 20V5"/><path d="M6 11l6-6 6 6"/></symbol>
+  <symbol id="i-ned" viewBox="0 0 24 24"><path d="M12 4v15"/><path d="M18 13l-6 6-6-6"/></symbol>
+  <symbol id="i-nej" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.5 8.5l7 7"/><path d="M15.5 8.5l-7 7"/></symbol>
+  <symbol id="i-ok" viewBox="0 0 24 24"><path d="M4 13l5 5L20 6"/></symbol>
+  <symbol id="i-saks" viewBox="0 0 24 24"><circle cx="6" cy="18" r="2.6"/><circle cx="18" cy="18" r="2.6"/><path d="M7.6 15.9L18 4"/><path d="M16.4 15.9L6 4"/></symbol>
+  <symbol id="i-brud" viewBox="0 0 24 24"><path d="M3 12h5l-2 4 5-8-2 4h5"/><path d="M16 12h5"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 6v12"/><path d="M6 12h12"/></symbol>
+  <symbol id="i-pil" viewBox="0 0 24 24"><path d="M4 12h14"/><path d="M13 7l5 5-5 5"/></symbol>
+  <!-- VIDEO 2 · nye ikoner, samme stregsprog -->
+  <symbol id="i-laegpaa" viewBox="0 0 24 24"><path d="M2.5 16.5l3.6-2.8 1.2-3.2h9.4l1.2 3.2 3.6 2.8"/><path d="M2.5 16.5h19"/><path d="M12 2.5v5.5"/><path d="M9.4 5.6L12 8.2l2.6-2.6"/></symbol>
+  <symbol id="i-tragt" viewBox="0 0 24 24"><path d="M3 4h18l-7 8.5V19l-4-2.2V12.5z"/></symbol>
+  <symbol id="i-penge" viewBox="0 0 24 24"><path d="M9.5 3h5l-1.4 3.4h-2.2z"/><path d="M13.6 6.4c3.9 1.5 5.9 4.4 5.9 7.8a7.5 7.5 0 01-15 0c0-3.4 2-6.3 5.9-7.8"/><path d="M12 9.6v8"/><path d="M10 12h4"/></symbol>
+  <symbol id="i-megafon" viewBox="0 0 24 24"><path d="M3.5 9.5v5l10.5 5.5V4z"/><path d="M14.5 8.5a4.5 4.5 0 010 7"/><path d="M6 14.7v4.8h3v-3.2"/></symbol>
+  <symbol id="i-noter" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8.5 8h7"/><path d="M8.5 12h7"/><path d="M8.5 16h4"/></symbol>
+  <symbol id="i-mappe" viewBox="0 0 24 24"><path d="M3 19.5V6h6.5l2 2.5H21v11z"/><path d="M3 10.5h18"/></symbol>
+  <symbol id="i-bord" viewBox="0 0 24 24"><path d="M2.5 14.5h19"/><path d="M5.5 14.5v6"/><path d="M18.5 14.5v6"/><circle cx="8" cy="6.6" r="2.4"/><circle cx="16" cy="6.6" r="2.4"/><path d="M4.6 14.5c0-1.9 1.5-3.4 3.4-3.4s3.4 1.5 3.4 3.4"/><path d="M12.6 14.5c0-1.9 1.5-3.4 3.4-3.4s3.4 1.5 3.4 3.4"/></symbol>
+  <symbol id="i-frem" viewBox="0 0 24 24"><circle cx="15" cy="5.6" r="2.6"/><path d="M14 9.2l-4.5 5.6"/><path d="M9.5 14.8L7 21"/><path d="M9.5 14.8L14 21"/><path d="M12.6 11.4L19 14"/></symbol>
+  <symbol id="i-smil" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.2 13.8a4.6 4.6 0 007.6 0"/><path d="M9.2 9.4v.6"/><path d="M14.8 9.4v.6"/></symbol>
+  <symbol id="i-kontrol" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6"/><path d="M8.2 12.2l2.7 2.7 5.1-5.4"/></symbol>
+  <symbol id="i-jobkort" viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="14" rx="2"/><path d="M9 3.2h6v2.3H9z"/><path d="M6.5 11h11"/><path d="M6.5 15h6.5"/></symbol>
+  <symbol id="i-vogn" viewBox="0 0 24 24"><path d="M2 15.2V6.5h11.5l4 4.2H22v4.5"/><path d="M13.5 6.5v4.2H22"/><path d="M2 15.2h2.4M9.6 15.2h5.4M20 15.2h2"/><circle cx="7" cy="15.2" r="2.4"/><circle cx="17.5" cy="15.2" r="2.4"/></symbol>
+  <symbol id="i-kaffe" viewBox="0 0 24 24"><path d="M4 8h13v6.5a4 4 0 01-4 4H8a4 4 0 01-4-4z"/><path d="M17 9.6h2.4a2.4 2.4 0 010 4.8H17"/><path d="M4.5 21.5h12"/></symbol>
+  <symbol id="i-firma" viewBox="0 0 24 24"><path d="M4 20.5V4.5h9.5v16"/><path d="M13.5 10h6.5v10.5"/><path d="M2 20.5h20"/><path d="M6.8 8h1.6M10.4 8H12M6.8 11.5h1.6M10.4 11.5H12M6.8 15h1.6M10.4 15H12M16.2 13.5h1.6M16.2 17h1.6"/></symbol>
+  <symbol id="i-doer" viewBox="0 0 24 24"><path d="M5.5 21V3h11v18"/><path d="M3 21h18"/><circle cx="13.5" cy="12" r="1"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="13" rx="1.6"/><path d="M2.5 6.5L12 13.5l9.5-7"/></symbol>
+  <symbol id="i-ur" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6"/><path d="M12 6.8V12l3.6 2.2"/></symbol>
+  <symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="7.4" r="3.6"/><path d="M4.8 21v-1.8a7.2 7.2 0 0114.4 0V21"/></symbol>
+  <symbol id="i-personer" viewBox="0 0 24 24"><circle cx="9" cy="7.4" r="3.3"/><path d="M2.4 21v-1.7a6.6 6.6 0 0113.2 0V21"/><path d="M16.2 4.6a3.3 3.3 0 010 5.6"/><path d="M18 21v-1.7c0-1.6-.5-3.1-1.5-4.3"/></symbol>
+  <!-- MENNESKEFIGURER. Bruges 1:1 eller nedskaleret; stroke-width sættes
+       på <use>, ikke i symbolet, så figuren kan få en gul halo-kopi bagved. -->
+  <symbol id="f-person" viewBox="0 0 80 124"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="40" cy="20" r="14"/><path d="M40 34v44"/><path d="M40 78l-13 44"/><path d="M40 78l13 44"/><path d="M40 46L21 62"/><path d="M40 46l19 16"/></g></symbol>
+  <symbol id="f-mester" viewBox="0 0 80 124"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M24 12h32"/><circle cx="40" cy="22" r="13"/><path d="M40 35v43"/><path d="M40 78l-13 44"/><path d="M40 78l13 44"/><path d="M40 46L22 58l6 15"/><path d="M40 46l18 12-6 15"/></g></symbol>
+  <symbol id="f-hjelm" viewBox="0 0 80 124"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M22 18h36"/><path d="M28 18v-3.5a12 12 0 0124 0V18"/><circle cx="40" cy="27" r="10"/><path d="M40 38v40"/><path d="M40 78l-13 44"/><path d="M40 78l13 44"/><path d="M40 48L21 62"/><path d="M40 48l19 14"/><path d="M31 62h18"/><rect x="45" y="61" width="13" height="10" rx="2.5"/></g></symbol>
+  <symbol id="f-headset" viewBox="0 0 80 124"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="40" cy="22" r="13"/><path d="M21 26a19 19 0 0138 0"/><rect x="17" y="22" width="8" height="13" rx="3"/><rect x="55" y="22" width="8" height="13" rx="3"/><path d="M59 34c0 6-6 9-12 9"/><path d="M40 35v43"/><path d="M40 78l-13 44"/><path d="M40 78l13 44"/><path d="M40 46L21 62"/><path d="M40 46l19 16"/></g></symbol>
+  <symbol id="f-telefon" viewBox="0 0 80 124"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="40" cy="20" r="14"/><path d="M40 34v44"/><path d="M40 78l-13 44"/><path d="M40 78l13 44"/><path d="M40 47L22 61"/><path d="M40 47l13 7 3-13"/><rect x="50" y="22" width="12" height="19" rx="2.5"/></g></symbol>
+  <symbol id="f-kaffe" viewBox="0 0 80 124"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M24 12h32"/><circle cx="40" cy="22" r="13"/><path d="M40 35v43"/><path d="M40 78l-13 44"/><path d="M40 78l13 44"/><path d="M40 48L23 60"/><path d="M40 48l14 9"/><path d="M50 52h14v9a5 5 0 01-5 5h-4a5 5 0 01-5-5z"/><path d="M64 54h4a3 3 0 010 6h-4"/></g></symbol>
+  <symbol id="f-silhuet" viewBox="0 0 60 110"><g fill="currentColor" stroke-linejoin="round"><circle cx="30" cy="18" r="14"/><path d="M30 36c-12.5 0-21.5 10-21.5 23v51h43V59c0-13-9-23-21.5-23z"/></g></symbol>
+</defs></svg>
 
 <div class="meta-tl"><b>Modul 3</b>&nbsp;·&nbsp;Rekrutteringsbranchen</div>
 <div class="meta-tr">PowerMatch Sælger-onboarding</div>
@@ -340,9 +456,9 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-
     <div class="kicker r"><span class="knr">00</span><span class="krule"></span><span class="ktxt">Efter denne video kan du</span></div>
     <h2 class="r d1">Tre ting, du skal kunne&nbsp;bagefter.</h2>
     <div class="maal">
-      <div class="mrow r d2"><span class="tjek">✓</span><span class="mtxt">Sætte kroner på problemet <span>tabt omsætning, fejlansættelser og dagbøder</span></span></div>
-      <div class="mrow r d3"><span class="tjek">✓</span><span class="mtxt">Forklare hvor de dygtige håndværkere er <span>og hvorfor virksomhederne ikke selv kan nå dem</span></span></div>
-      <div class="mrow r d4"><span class="tjek">✓</span><span class="mtxt">Forklare hvorfor PowerMatch kan nå dem <span>databasen, dialogen og matchet begge veje</span></span></div>
+      <div class="mrow r d2"><span class="tjek"><svg class="ik"><use href="#i-penge"/></svg></span><span class="mtxt">Sætte kroner på problemet <span>tabt omsætning, fejlansættelser og dagbøder</span></span></div>
+      <div class="mrow r d3"><span class="tjek"><svg class="ik"><use href="#i-personer"/></svg></span><span class="mtxt">Forklare hvor de dygtige håndværkere er <span>og hvorfor virksomhederne ikke selv kan nå dem</span></span></div>
+      <div class="mrow r d4"><span class="tjek"><svg class="ik"><use href="#i-platform"/></svg></span><span class="mtxt">Forklare hvorfor PowerMatch kan nå dem <span>databasen, dialogen og matchet begge veje</span></span></div>
     </div>
   </div>
 </section>
@@ -352,15 +468,29 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-
   <div class="z fyld">
     <div class="kicker r"><span class="knr">01</span><span class="krule"></span><span class="ktxt">Regnestykket: en tom plads</span></div>
     <div class="vgruppe">
-      <h2 class="r d1" style="margin-bottom:7vh">En tømrer, du mangler. Lad os regne.</h2>
+      <h2 class="r d1" style="margin-bottom:7vh">En håndværker, du mangler. Lad os regne.</h2>
       <div class="regne" style="margin:0">
-        <div class="led r d2"><span class="val">550 kr</span><span class="lab">Fakturering pr. time</span></div>
+        <div class="led r d2"><span class="val">450-565 kr</span><span class="lab">Fakturering pr. time · alt efter faget</span></div>
         <div class="op r d3">×</div>
-        <div class="led r d3"><span class="val">160 timer</span><span class="lab">Én måneds arbejde</span></div>
-        <div class="op r d4">=</div>
-        <div class="led svar r d4"><span class="val">88.000 kr</span><span class="lab">Tabt omsætning pr. måned</span></div>
+        <div class="led r d3"><span class="val">1 måned</span><span class="lab">Nok arbejde til en hel måned</span></div>
+        <div class="op r d4" aria-hidden="true"><svg class="ik" style="width:clamp(26px,2.7vw,44px);height:clamp(26px,2.7vw,44px);stroke-width:1.5;color:rgba(17,18,19,.72);vertical-align:-.05em"><use href="#i-pil"/></svg></div>
+        <div class="led svar r d4"><span class="val">70-90.000 kr</span><span class="lab">Tabt omsætning pr. måned</span></div>
       </div>
-      <p class="under r d5" style="margin-top:7vh;max-width:46ch;color:rgba(17,18,19,.68)">Har kunden opgaverne, men ikke manden, ryger der <b>op&nbsp;mod&nbsp;100.000&nbsp;kr i omsætning. Hver måned.</b> <span style="white-space:nowrap">Og det er bare én mand.</span></p>
+      <div class="r d5" style="margin-top:7vh;display:grid;grid-template-columns:1.02fr .98fr;column-gap:52px;align-items:center">
+        <p class="under" style="margin:0;max-width:46ch;color:rgba(17,18,19,.68)">Har kunden opgaverne, men ikke manden, ryger der <b><span style="white-space:nowrap">70-90.000&nbsp;kr</span> i omsætning. Hver måned.</b> <span style="white-space:nowrap">Og det er bare én mand.</span></p>
+        <svg class="figur" style="max-width:440px;max-height:24vh;margin-left:auto" viewBox="0 0 440 158" role="img" aria-label="Tabet fra den samme tomme plads lægger sig oveni for hver måned, der går: én klods efter én måned, to efter to måneder, tre efter tre måneder">
+          <text x="0" y="10" class="svgcap" style="fill:rgba(17,18,19,.6)">DET SAMME HUL LÆGGER SIG OVENI</text>
+          <g fill="#111213">
+            <rect x="6" y="100" width="112" height="24"/>
+            <rect x="158" y="100" width="112" height="24"/><rect x="158" y="71" width="112" height="24"/>
+            <rect x="310" y="100" width="112" height="24"/><rect x="310" y="71" width="112" height="24"/><rect x="310" y="42" width="112" height="24"/>
+          </g>
+          <path d="M0 130h428" stroke="#111213" stroke-width="1.6" stroke-linecap="round"/>
+          <g class="svgcap" style="fill:rgba(17,18,19,.6)" text-anchor="middle">
+            <text x="62" y="148">EFTER 1 MD.</text><text x="214" y="148">EFTER 2 MD.</text><text x="366" y="148">EFTER 3 MD.</text>
+          </g>
+        </svg>
+      </div>
     </div>
   </div>
 </section>
@@ -374,17 +504,33 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-
         <h2 class="r d1">At vælge forkert er endnu dyrere.</h2>
         <p class="under r d2" style="margin-top:3vh">Regningen kommer fra alle sider:</p>
         <div class="fakta-stak r d3" style="margin-top:4vh">
-          <div class="fakta-r">Firmabil og værktøj <span>klar fra dag 1</span></div>
-          <div class="fakta-r">Oplæring og spildtid</div>
-          <div class="fakta-r">Skal laves om <span>rives ned og bygges op igen</span></div>
-          <div class="fakta-r">Tabt omsætning og til sidst fyringen</div>
+          <div class="fakta-r"><svg class="ik"><use href="#i-vogn"/></svg><span class="ftxt">Firmabil og værktøj <span>klar fra dag 1</span></span></div>
+          <div class="fakta-r"><svg class="ik"><use href="#i-stopur"/></svg><span class="ftxt">Oplæring og spildtid</span></div>
+          <div class="fakta-r"><svg class="ik"><use href="#i-renover"/></svg><span class="ftxt">Arbejde, der skal laves om</span></div>
+          <div class="fakta-r"><svg class="ik"><use href="#i-doer"/></svg><span class="ftxt">Tabt omsætning og til sidst fyringen</span></div>
         </div>
       </div>
     </div>
     <div class="hoejre">
       <div class="r d2" style="text-align:center">
         <div class="kaempe" style="font-size:clamp(90px,9vw,160px)">250.000<i></i></div>
-        <div class="ktag" style="position:static;transform:none;display:block;margin-top:30px">Kr · op til · pr. fejlansættelse</div>
+        <div class="ktag" style="position:static;transform:none;display:block;margin-top:30px">Kr · pr. fejlansættelse · 200-250.000</div>
+        <div class="ktag" style="position:static;transform:none;display:block;margin-top:14px;opacity:.62">PowerMatchs egne kundeinterviews</div>
+        <svg class="figur r d4" style="margin:6vh auto 0;max-width:430px;max-height:26vh" viewBox="0 -12 440 176" role="img" aria-label="To af decksets egne beløb sat på samme skala fra nul til 250.000 kroner: en måned med tom plads fylder 70 til 90.000, mens én fejlansættelse fylder 200 til 250.000">
+          <text x="0" y="0" class="svgcap">DE TO BELØB PÅ SAMME SKALA</text>
+          <g stroke="#111213" stroke-width="1.5">
+            <rect x="0.75" y="22" width="111" height="26" fill="#F6F6F3"/>
+            <rect x="111.75" y="22" width="32" height="26" fill="#ECECE8"/>
+          </g>
+          <text x="156" y="40" class="svgtxt" style="font-size:12.5px">En måned med tom plads</text>
+          <rect x="0" y="72" width="320" height="32" fill="#111213"/>
+          <rect x="320" y="72" width="80" height="32" fill="#71757C"/>
+          <text x="14" y="93" class="svgtxt" style="font-size:12.5px;fill:#FFFFFF">Én fejlansættelse</text>
+          <path d="M0 118h400" stroke="#C9C9C2" stroke-width="1.4"/>
+          <path d="M0.75 114v8M400 114v8" stroke="#111213" stroke-width="1.4" stroke-linecap="round"/>
+          <text x="0" y="140" class="svgcap">0</text>
+          <text x="400" y="140" text-anchor="end" class="svgcap">250.000 KR</text>
+        </svg>
       </div>
     </div>
   </div>
@@ -400,14 +546,30 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-
       <div class="tflow" style="margin:0">
         <div class="linje r d2" style="right:calc((100% - 104px)/4 - 31px)"></div>
         <div class="stationer" style="grid-template-columns:repeat(4,1fr)">
-          <div class="station r d2"><div class="boks">1</div><h5>Muren forsinket</h5><p>Mureren mangler folk og bliver ikke færdig.</p><span class="fase">Dag 1</span></div>
-          <div class="station r d3"><div class="boks">2</div><h5>Tømrerne venter</h5><p>De kan ikke komme til.</p><span class="fase">Kæden venter</span></div>
-          <div class="station r d4"><div class="boks">3</div><h5>El, VVS og maler venter</h5><p>Hele kæden er gået i stå.</p><span class="fase">Kæden venter</span></div>
+          <div class="station r d2"><div class="boks">1</div><h5>Tømrerne bliver ikke færdige</h5><p>De mangler folk og kommer bagud.</p><span class="fase">Kæden skrider</span></div>
+          <div class="station r d3"><div class="boks">2</div><h5>El og VVS venter</h5><p>De kan ikke komme til.</p><span class="fase">Kæden venter</span></div>
+          <div class="station r d4"><div class="boks">3</div><h5>Så kan maleren ikke komme til</h5><p>Hele kæden er gået i stå.</p><span class="fase">Kæden venter</span></div>
           <div class="station slut betalt r d5"><div class="boks">kr</div><h5>Bøden tikker</h5><p>For hver arbejdsdag, tidsplanen&nbsp;skrider.</p><span class="fase">Her koster det</span></div>
         </div>
       </div>
     </div>
-    <p class="under bundfast r d6">Typisk <b>1-2 promille af entreprisesummen pr. arbejdsdag</b>. På en 10 mio.-sag: <b>10.000-20.000 kr pr. arbejdsdag.</b></p>
+    <svg class="figur r d6" style="margin:auto 0;max-height:21vh" viewBox="0 -12 1180 148" role="img" aria-label="Bøden er ikke et engangsbeløb: for hver arbejdsdag forsinkelsen varer, lægges der endnu en dagbod oveni, så beløbet vokser trinvis dag for dag">
+      <text x="0" y="9" class="svgcap">SÅ LÆNGE FORSINKELSEN VARER</text>
+      <g stroke="#111213" stroke-width="1.6">
+        <rect x="5" y="94" width="190" height="16" fill="#F6F6F3"/>
+        <rect x="205" y="78" width="190" height="32" fill="#F6F6F3"/>
+        <rect x="405" y="62" width="190" height="48" fill="#F6F6F3"/>
+        <rect x="605" y="46" width="190" height="64" fill="#F6F6F3"/>
+        <rect x="805" y="30" width="190" height="80" fill="#F8E965"/>
+      </g>
+      <path d="M0 111h1000" stroke="#111213" stroke-width="1.6" stroke-linecap="round"/>
+      <g class="svgmut" text-anchor="middle"><text x="100" y="128">1</text><text x="300" y="128">2</text><text x="500" y="128">3</text><text x="700" y="128">4</text><text x="900" y="128">5</text></g>
+      <path d="M1014 111h70" stroke="#111213" stroke-width="1.6" stroke-linecap="round"/>
+      <path d="M1096 111l-14-6v12z" fill="#111213"/>
+      <text x="1014" y="95" class="svgcap">OG DEN BLIVER VED</text>
+      <text x="1014" y="128" class="svgmut">ARBEJDSDAGE</text>
+    </svg>
+    <p class="under bundfast r d6">Aftales i kontrakten · ofte <b>1-2 promille af entreprisesummen ekskl. moms pr. arbejdsdag</b>. På en 10 mio.-sag: <b>10.000-20.000 kr pr. arbejdsdag.</b></p>
   </div>
 </section>
 
@@ -416,27 +578,63 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-
   <div class="ghost">04</div>
   <div class="z fyld">
     <div class="kicker r"><span class="knr">04</span><span class="krule"></span><span class="ktxt">Regningen · når de rigtige folk mangler</span></div>
-    <h2 class="r d1">Det her er dét, dit kald handler om.</h2>
+    <h2 class="r d1">Regningen, når de rigtige folk mangler.</h2>
     <div style="margin-top:5vh">
       <div class="cols" style="margin-top:0">
-        <div class="col first hero r d2" style="grid-column:span 4"><span class="bar"></span><span class="tal">100.000</span><span class="enhed">Kr pr. måned · op mod</span><h5>Den tomme plads</h5><p>Opgaverne er der. Manden er der ikke.</p></div>
-        <div class="col r d3" style="grid-column:span 4"><span class="bar"></span><span class="tal">250.000</span><span class="enhed">Kr pr. fejlansættelse · op til</span><h5>Det forkerte valg</h5><p>Bil, værktøj, oplæring, omarbejde&nbsp;og&nbsp;fyring.</p></div>
-        <div class="col r d4" style="grid-column:span 4"><span class="bar"></span><span class="tal">20.000</span><span class="enhed">Kr pr. arbejdsdag · op til · 10 mio.-sag</span><h5>Forsinkelsen</h5><p>Ét fag i stå, hele kæden venter.</p></div>
+        <div class="col first hero r d2" style="grid-column:span 4"><span class="bar"></span><span class="tal" style="font-size:clamp(36px,4.35vw,70px)">70-90.000</span><span class="enhed">Kr pr. måned</span><h5>Den tomme plads</h5><p>Opgaverne er der. Manden er der ikke.</p></div>
+        <div class="col r d3" style="grid-column:span 4"><span class="bar"></span><span class="tal" style="font-size:clamp(34px,4.1vw,64px)">250.000</span><span class="enhed">Kr pr. fejlansættelse</span><h5>Det forkerte valg</h5><p>Bil, værktøj, oplæring, omarbejde&nbsp;og&nbsp;fyring.</p></div>
+        <div class="col r d4" style="grid-column:span 4"><span class="bar"></span><span class="tal" style="font-size:clamp(34px,4.1vw,64px)">20.000</span><span class="enhed">Kr pr. arbejdsdag · 10 mio.-sag</span><h5>Forsinkelsen</h5><p>Ét fag i stå, hele kæden venter.</p></div>
       </div>
     </div>
-    <p class="under bundfast r d5">Derfor er rekruttering aldrig en lille beslutning for kunden. Men de investerer alt for lidt i den. <b>Og derfor er dit kald aldrig ubelejligt.</b></p>
+    <svg class="figur r d5" style="margin:auto 0;max-height:19vh" viewBox="86 -16 596 150" role="img" aria-label="En vippe: den side, der bærer hvad det koster at ramme forkert, ligger tungt i bund, mens den side, der bærer det virksomheden selv lægger i at ramme rigtigt, står i vejret">
+      <text x="90" y="-2" class="svgcap">SÅDAN VÆGTER DE DET I DAG</text>
+      <g transform="rotate(-8 300 66)">
+        <rect x="150" y="62" width="300" height="8" rx="4" fill="#111213"/>
+        <rect x="160" y="26" width="104" height="36" fill="#111213"/>
+        <rect x="182" y="4" width="60" height="22" fill="#111213"/>
+        <rect x="376" y="46" width="58" height="16" fill="#F6F6F3" stroke="#111213" stroke-width="1.6"/>
+      </g>
+      <path d="M300 58L279 100h42z" fill="#F8E965" stroke="#111213" stroke-width="1.6" stroke-linejoin="round"/>
+      <path d="M264 102h72" stroke="#111213" stroke-width="1.7" stroke-linecap="round"/>
+      <text x="90" y="126" class="svgcap">HVIS DE RAMMER FORKERT</text>
+      <text x="470" y="126" text-anchor="middle" class="svgcap">DET DE LÆGGER I DET</text>
+    </svg>
+    <p class="under bundfast r d5">Derfor er rekruttering aldrig en lille beslutning for kunden. <b>Men de investerer alt for lidt i den.</b></p>
   </div>
 </section>
 
 <!-- 7 · HVOR ER DE DYGTIGE SÅ? -->
-<section class="slide" data-sektion="Hvor er de?" data-lint-ok="doedzone">
-  <div class="ghost" style="font-size:52vh">?</div>
-  <div class="z fyld">
-    <div class="kicker r"><span class="knr">05</span><span class="krule"></span><span class="ktxt">Hvor er de dygtige så?</span></div>
-    <h2 class="r d1" style="font-size:clamp(56px,6.6vw,96px);max-width:13ch;letter-spacing:-.035em">De dygtigste?<br>De er i arbejde.</h2>
-    <div class="skub">
-      <p class="under r d2" style="max-width:50ch">Husk fra video 1: <b>de ser aldrig opslaget.</b> De sidder ikke på Jobindex og Jobnet, for de har et arbejde. Så virksomhederne kan ikke nå dem med et&nbsp;opslag.</p>
-      <p class="under r d3" style="margin-top:2.4vh;border-top:1px solid var(--border);padding-top:18px;max-width:none">Men det kan vi. <b>Og nu kommer tallet, der forklarer hele vores&nbsp;forspring.</b></p>
+<section class="slide" data-sektion="Hvor er de?" data-lint-ok="doedzone" style="padding:0">
+  <div class="split" style="grid-template-columns:56% 44%">
+    <div class="venstre">
+      <div class="kicker r"><span class="knr">05</span><span class="krule"></span><span class="ktxt">Hvor er de dygtige så?</span></div>
+      <div class="vgruppe">
+        <h2 class="r d1" style="font-size:clamp(32px,3.5vw,56px);max-width:13ch;letter-spacing:-.035em">De dygtigste?<br>De er i arbejde.</h2>
+        <div class="fakta-stak r d2" style="margin-top:3.6vh;margin-bottom:2.6vh"><div class="fakta-r"><svg class="ik"><use href="#i-tragt"/></svg><span class="ftxt">De kan ikke finde de kandidater, de mangler</span></div><div class="fakta-r"><svg class="ik"><use href="#i-ur"/></svg><span class="ftxt">De investerer alt for lidt tid i rekruttering</span></div><div class="fakta-r"><svg class="ik"><use href="#i-tegninger"/></svg><span class="ftxt">De har opgaverne, men ikke mandskabet</span></div></div><p class="under r d2" style="max-width:50ch;font-size:15.5px"><b>De dygtigste sidder ikke på Jobindex og Jobnet</b>, for de har et arbejde. Så et opslag når dem&nbsp;aldrig.</p>
+      </div>
+      <p class="under skub r d3" style="border-top:1px solid var(--border);padding-top:18px;max-width:none">Men det kan vi. <b>Og nu kommer tallet, der forklarer hele vores&nbsp;forspring.</b></p>
+    </div>
+    <div class="hoejre" style="padding:12vh 4vw 10vh 4vw">
+      <svg class="figur r d3" style="max-height:54vh;max-width:470px" viewBox="0 0 400 276" role="img" aria-label="Til venstre en opslagstavle med én kandidat foran. Til højre, på den anden side af en streg, står holdet af håndværkere på pladsen. Søgningen når kun til stregen">
+        <text x="0" y="9" class="svgcap">HVOR DER LEDES — OG HVOR DE ER</text>
+        <rect x="8" y="30" width="140" height="94" rx="8" fill="#F6F6F3" stroke="#111213" stroke-width="1.6"/>
+        <g stroke="#C9C9C2" stroke-width="1.4" stroke-linecap="round"><path d="M28 56h100"/><path d="M28 74h100"/><path d="M28 92h68"/></g>
+        <use href="#f-person" x="52" y="140" width="52" height="80" style="color:#111213" stroke-width="3.6"/>
+        <text x="78" y="248" text-anchor="middle" class="svgcap">EN, DER SØGER</text>
+        <path d="M196 24v218" stroke="#111213" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M136 174h24" stroke="#111213" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M170 174l-13-5.5v11z" fill="#111213"/>
+        <circle cx="196" cy="174" r="15" fill="#FFFFFF" stroke="#111213" stroke-width="1.7"/>
+        <path d="M189.5 167.5l13 13M202.5 167.5l-13 13" stroke="#111213" stroke-width="2" stroke-linecap="round"/>
+        <rect x="214" y="112" width="182" height="108" rx="10" fill="#F8E965"/>
+        <g style="color:#111213" stroke-width="4">
+          <use href="#f-hjelm" x="222" y="130" width="40" height="62"/>
+          <use href="#f-hjelm" x="266" y="130" width="40" height="62"/>
+          <use href="#f-hjelm" x="310" y="130" width="40" height="62"/>
+          <use href="#f-hjelm" x="354" y="130" width="40" height="62"/>
+        </g>
+        <text x="305" y="248" text-anchor="middle" class="svgcap">DE ØVRIGE, PÅ PLADSEN</text>
+      </svg>
     </div>
   </div>
 </section>
@@ -447,36 +645,82 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-
     <div class="venstre">
       <div class="kicker r"><span class="knr">06</span><span class="krule"></span><span class="ktxt">Databasen</span></div>
       <div class="vgruppe">
-        <h2 class="r d1">Adgangen, ingen andre&nbsp;har.</h2>
+        <h2 class="r d1">Adgangen, virksomhederne <span style="white-space:nowrap">ikke selv har.</span></h2>
         <div class="fakta-stak r d2" style="margin-top:4vh">
-          <div class="fakta-r">3-4 år i markedet <span>og altid behandlet folk godt</span></div>
-          <div class="fakta-r">Vi holder kontakten til folk i arbejde <span>en sms hver 1.-3. måned</span></div>
-          <div class="fakta-r">En dag er svaret nej <span>mester, løn, firmabil, kultur eller afstand</span></div>
-          <div class="fakta-r">Data, virksomhederne ikke har <span>og aldrig selv kan bygge</span></div>
+          <div class="fakta-r"><svg class="ik"><use href="#i-vaekst"/></svg><span class="ftxt">3-4 år i markedet <span>og altid behandlet folk godt</span></span></div>
+          <div class="fakta-r"><svg class="ik"><use href="#i-mail"/></svg><span class="ftxt">Vi holder kontakten til folk i arbejde <span>en mail eller sms hver 1.-3. måned</span></span></div>
+          <div class="fakta-r"><svg class="ik"><use href="#i-boblesp"/></svg><span class="ftxt">En dag er han ikke glad <span>mester, løn, firmabil, kultur, afstand</span></span></div>
+          <div class="fakta-r"><svg class="ik"><use href="#i-mappe"/></svg><span class="ftxt">Data, virksomhederne ikke har <span>det er data, vi har</span></span></div>
         </div>
       </div>
     </div>
     <div class="hoejre">
       <div class="r d2" style="text-align:center">
         <div class="kaempe" style="font-size:clamp(90px,9vw,160px)">50.000<i></i></div>
-        <div class="ktag" style="position:static;transform:none;display:block;margin-top:30px">Cirka · håndværkere, vi har adgang til</div>
+        <div class="ktag" style="position:static;transform:none;display:block;margin-top:30px">Cirka · profiler i databasen</div>
+        <svg class="figur r d4" style="margin:7vh auto 0;max-width:430px;max-height:24vh" viewBox="0 -12 412 132" role="img" aria-label="Et år i basen vist som tolv månedsfelter, hvor hvert andet til hvert tredje felt er sort: der tager vi fat i profilen igen">
+          <text x="0" y="0" class="svgcap">ÉN PROFIL · ÉT ÅR I BASEN</text>
+          <g stroke="#C9C9C2" stroke-width="1.4">
+            <rect x="0.7" y="18" width="30" height="30" fill="#111213" stroke="#111213"/>
+            <rect x="34.7" y="18" width="30" height="30" fill="#FFFFFF"/>
+            <rect x="68.7" y="18" width="30" height="30" fill="#111213" stroke="#111213"/>
+            <rect x="102.7" y="18" width="30" height="30" fill="#FFFFFF"/>
+            <rect x="136.7" y="18" width="30" height="30" fill="#111213" stroke="#111213"/>
+            <rect x="170.7" y="18" width="30" height="30" fill="#FFFFFF"/>
+            <rect x="204.7" y="18" width="30" height="30" fill="#FFFFFF"/>
+            <rect x="238.7" y="18" width="30" height="30" fill="#111213" stroke="#111213"/>
+            <rect x="272.7" y="18" width="30" height="30" fill="#FFFFFF"/>
+            <rect x="306.7" y="18" width="30" height="30" fill="#111213" stroke="#111213"/>
+            <rect x="340.7" y="18" width="30" height="30" fill="#FFFFFF"/>
+            <rect x="374.7" y="18" width="30" height="30" fill="#111213" stroke="#111213"/>
+          </g>
+          <text x="0" y="70" class="svgcap">JANUAR</text>
+          <text x="404" y="70" text-anchor="end" class="svgcap">DECEMBER</text>
+          <rect x="0.7" y="90" width="16" height="16" fill="#111213"/>
+          <text x="26" y="103" class="svgtxt" style="font-size:12px">Her tager vi fat i ham igen</text>
+        </svg>
       </div>
     </div>
   </div>
 </section>
 
 <!-- 9 · LOOPET -->
-<section class="slide" data-sektion="Loopet">
-  <div class="ghost">07</div>
-  <div class="z fyld">
-    <div class="kicker r"><span class="knr">07</span><span class="krule"></span><span class="ktxt">Loopet · databasen vokser selv</span></div>
-    <h2 class="r d1">Glade folk henter flere folk.</h2>
-    <div class="tjekliste">
-      <div class="trow r d2"><span class="tdot"></span><span class="ttxt">Trygt at skifte <span>han er dækket i hoved og røv hos os</span></span></div>
-      <div class="trow r d3"><span class="tdot"></span><span class="ttxt">Glade håndværkere anbefaler os <span>til kolleger og venner fra pladsen</span></span></div>
-      <div class="trow r d4"><span class="tdot"></span><span class="ttxt">Branchen er netværk <span>det lærte du i video 1. Vi lever selv efter dens logik</span></span></div>
+<section class="slide" data-sektion="Loopet" style="padding:0">
+  <div class="split" style="grid-template-columns:57% 43%">
+    <div class="venstre">
+      <div class="kicker r"><span class="knr">07</span><span class="krule"></span><span class="ktxt">Loopet · relationer og anbefalinger</span></div>
+      <div class="vgruppe">
+        <h2 class="r d1">Glade folk henter flere folk.</h2>
+        <div class="tjekliste">
+          <div class="trow r d2"><span class="tdot"></span><svg class="ik"><use href="#i-tillid"/></svg><span class="ttxt">Trygt at skifte <span>han er dækket i hoved og røv hos os</span></span></div>
+          <div class="trow r d3"><span class="tdot"></span><svg class="ik"><use href="#i-boble"/></svg><span class="ttxt">Glade håndværkere anbefaler os <span>til en kollega</span></span></div>
+          <div class="trow r d4"><span class="tdot"></span><svg class="ik"><use href="#i-personer"/></svg><span class="ttxt">Branchen er netværk og relationer <span>det lærte du i video 1</span></span></div><div class="trow r d5"><span class="tdot"></span><svg class="ik"><use href="#i-platform"/></svg><span class="ttxt">En kandidatbase, de ikke selv kunne skaffe <span>lige meget hvor meget de prøvede</span></span></div>
+        </div>
+      </div>
+      <p class="under skub r d6">Glade håndværkere anbefaler os videre. <b><span style="white-space:nowrap">Til en kollega på pladsen.</span></b></p>
     </div>
-    <p class="under skub r d5">Vi skal ikke selv jagte dem alle sammen. <b><span style="white-space:nowrap">Databasen vokser, fordi folk er glade.</span></b></p>
+    <div class="hoejre" style="padding:12vh 4vw 10vh 4vw">
+      <svg class="figur r d3" style="max-height:52vh;max-width:470px" viewBox="0 0 420 268" role="img" aria-label="Et kredsløb: en mand, der har det godt, siger det videre på pladsen, det giver en ny profil, og den nye bliver selv en mand, der har det godt">
+        <text x="0" y="9" class="svgcap">DET KØRER RUNDT AF SIG SELV</text>
+        <circle cx="210" cy="160" r="92" fill="none" stroke="#111213" stroke-width="1.7"/>
+        <g fill="#111213">
+          <path d="M0 0l-10-5.5v11z" transform="translate(289.7,114) rotate(60)"/>
+          <path d="M0 0l-10-5.5v11z" transform="translate(210,252) rotate(180)"/>
+          <path d="M0 0l-10-5.5v11z" transform="translate(130.3,114) rotate(-60)"/>
+        </g>
+        <circle cx="210" cy="68" r="27" fill="#F8E965" stroke="#111213" stroke-width="1.7"/>
+        <circle cx="289.7" cy="206" r="27" fill="#FFFFFF" stroke="#111213" stroke-width="1.7"/>
+        <circle cx="130.3" cy="206" r="27" fill="#FFFFFF" stroke="#111213" stroke-width="1.7"/>
+        <g fill="none" stroke="#111213" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <use href="#i-smil" x="196" y="54" width="28" height="28"/>
+          <use href="#i-boble" x="275.7" y="192" width="28" height="28"/>
+          <use href="#i-person" x="116.3" y="192" width="28" height="28"/>
+        </g>
+        <text x="210" y="30" text-anchor="middle" class="svgcap" style="fill:#111213">EN, DER HAR DET GODT</text>
+        <text x="420" y="254" text-anchor="end" class="svgcap">EN SNAK PÅ PLADSEN</text>
+        <text x="0" y="254" class="svgcap">EN NY I BASEN</text>
+      </svg>
+    </div>
   </div>
 </section>
 
@@ -484,15 +728,16 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-
 <section class="slide" data-sektion="En anden bane">
   <div class="ghost">08</div>
   <div class="z fyld">
-    <div class="kicker r"><span class="knr">08</span><span class="krule"></span><span class="ktxt">En anden bane · derfor vinder vi</span></div>
+    <div class="kicker r"><span class="knr">08</span><span class="krule"></span><span class="ktxt">En anden bane</span></div>
     <h2 class="r d1">Vi spiller på en helt <span style="white-space:nowrap">anden bane.</span></h2>
     <div class="tjekliste" style="margin-bottom:3vh">
-      <div class="trow r d2"><span class="tdot"></span><span class="ttxt">Virksomheden styrer selv <span>ser matches, opretter jobs og vælger, hvem de møder</span></span></div>
-      <div class="trow r d3"><span class="tdot"></span><span class="ttxt">De møder kandidaten, før de prøver ham af <span>telefon, fysisk eller Meet</span></span></div>
-      <div class="trow r d4"><span class="tdot"></span><span class="ttxt">Altid mod fastansættelse <span>aldrig vikar</span></span></div>
-      <div class="trow r d5"><span class="tdot"></span><span class="ttxt">Håndværkeren matches kun mod sine krav og ønsker <span>aldrig mod det nærmeste job</span></span></div>
+      <div class="trow r d2"><span class="tdot"></span><svg class="ik"><use href="#i-robot"/></svg><span class="ttxt">Matchet sker automatisk på data <span>ingen konsulent skubber kandidater rundt</span></span></div>
+      <div class="trow r d2"><span class="tdot"></span><svg class="ik"><use href="#i-jobkort"/></svg><span class="ttxt">Virksomheden styrer selv <span>ser matches, opretter jobs og vælger, hvem de møder</span></span></div>
+      <div class="trow r d3"><span class="tdot"></span><svg class="ik"><use href="#i-bord"/></svg><span class="ttxt">De møder kandidaten, før de prøver ham af <span>telefon, fysisk eller Meet</span></span></div>
+      <div class="trow r d4"><span class="tdot"></span><svg class="ik"><use href="#i-aftale"/></svg><span class="ttxt">Altid mod fastansættelse <span>aldrig vikar</span></span></div>
+      <div class="trow r d5"><span class="tdot"></span><svg class="ik"><use href="#i-kontrol"/></svg><span class="ttxt">Håndværkeren matches kun mod sine krav og ønsker <span>aldrig mod det nærmeste job</span></span></div>
     </div>
-    <p class="under skub r d6">Match begge veje. <b>Vi spiller på en helt anden bane, og vi tilbyder et <mark>markant bedre produkt</mark>.</b></p>
+    <p class="under skub r d6">Match begge veje. <b>Og vi tilbyder et <mark>markant bedre produkt</mark>.</b></p>
   </div>
 </section>
 
@@ -503,9 +748,9 @@ p,h5,.ttxt,.mtxt,.rtxt,.fakta-r,.station p,.col p,.svu,.under,.naeste,.enhed,.t-
     <div class="kicker r"><span class="knr">09</span><span class="krule"></span><span class="ktxt">Det vigtigste fra i dag</span></div>
     <h2 class="r d1">Tre ting skal sidde fast.</h2>
     <div class="recap">
-      <div class="rrow r d2"><span class="rnr">1</span><span class="rtxt">Tallene: <em>op&nbsp;mod&nbsp;100.000 pr.&nbsp;måned&nbsp;· op&nbsp;til&nbsp;250.000 pr.&nbsp;fejlansættelse&nbsp;· op&nbsp;til&nbsp;20.000 pr.&nbsp;arbejdsdag på en 10&nbsp;mio.-sag.</em></span></div>
-      <div class="rrow r d3"><span class="rnr">2</span><span class="rtxt">De dygtigste er i arbejde. <em>De ser aldrig opslaget.</em></span></div>
-      <div class="rrow r d4"><span class="rnr">3</span><span class="rtxt">Vi når dem alligevel: <em>50.000 håndværkere</em>, kontakt hele året, <span style="white-space:nowrap">og <em>matchet begge veje</em>.</span></span></div>
+      <div class="rrow r d2"><span class="rnr">1</span><svg class="ik stor"><use href="#i-penge"/></svg><span class="rtxt">Tallene: <em><span style="white-space:nowrap">70-90.000</span> pr.&nbsp;måned&nbsp;· <span style="white-space:nowrap">200-250.000</span> pr.&nbsp;fejlansættelse&nbsp;· <span style="white-space:nowrap">10-20.000</span> pr.&nbsp;arbejdsdag på en 10&nbsp;mio.-sag.</em></span></div>
+      <div class="rrow r d3"><span class="rnr">2</span><svg class="ik stor"><use href="#i-doknej"/></svg><span class="rtxt">De dygtigste er i arbejde. <em>De ser aldrig opslaget.</em></span></div>
+      <div class="rrow r d4"><span class="rnr">3</span><svg class="ik stor"><use href="#i-platform"/></svg><span class="rtxt">Vi når dem alligevel: <em>50.000 profiler</em> · 3-4 år i markedet · vi holder kontakten <span style="white-space:nowrap">og <em>matcher begge veje</em>.</span></span></div>
     </div>
     <p class="naeste skub r d5">Næste video: <b>10 spørgsmål til rekruttering.</b> Chatten spørger, Lasse svarer.</p>
   </div>
