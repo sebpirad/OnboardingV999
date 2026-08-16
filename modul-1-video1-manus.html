@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manus · Modul 1 · Præsentation, Passion &amp; Power · PowerMatch</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gul:#F8E965; --gul-soft:#FDF8D4; --gul-kant:#F0E4A0;
+  --sort:#111213; --tekst:#26282B; --muted:#71757C;
+  --border:#ECECE8; --flade:#F6F6F3; --bg:#FFFFFF; --linje:#C9C9C2;
+  --tale:25px;                      /* styres af A- / A+ */
+  --maal:44ch;                      /* satsbredde: ca. 44 tegn pr. linje.
+                                       ch følger talesporets egen grad, så
+                                       linjelængden er den samme uanset hvor
+                                       stort Lasse skruer op. */
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{font-family:'Inter',-apple-system,Arial,sans-serif;color:var(--tekst);
+  background:var(--bg);-webkit-font-smoothing:antialiased;line-height:1.6}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em;
+  background:#fff;border:1px solid var(--border);border-radius:5px;padding:1px 5px}
+b{color:var(--sort);font-weight:800}
+a{color:var(--sort)}
+
+/* ---------------------------------------------------------- topbjælke --- */
+/* Helt dækkende hvid. Ikke gennemsigtig: talesporet må ikke kunne ses
+   igennem bjælken, når han scroller midt i en sætning. */
+.topbar{position:sticky;top:0;z-index:60;background:#fff;
+  border-bottom:1px solid var(--border);box-shadow:0 1px 0 rgba(17,18,19,.02)}
+.tb{max-width:1180px;margin:0 auto;padding:11px 30px;display:flex;
+  align-items:center;gap:18px}
+.flamme{width:22px;height:22px;border-radius:6px;background:var(--gul);
+  flex-shrink:0;border:1px solid var(--gul-kant)}
+.tb .navn{font-size:12px;font-weight:900;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--sort);white-space:nowrap}
+.tb .nu{font-size:12px;font-weight:700;color:var(--muted);white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;flex:1;min-width:0}
+.tb .nu b{color:var(--sort);font-weight:800}
+.vaerktoej{display:flex;align-items:center;gap:7px;flex-shrink:0}
+.knap{font-family:inherit;font-size:11px;font-weight:800;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--sort);background:#fff;cursor:pointer;
+  border:1px solid var(--border);border-radius:100px;padding:6px 13px;
+  transition:background .15s,border-color .15s}
+.knap:hover{background:var(--flade);border-color:var(--linje)}
+.knap.paa{background:var(--sort);color:#fff;border-color:var(--sort)}
+.knap.rund{width:30px;height:30px;padding:0;font-size:13px;line-height:1}
+.tbmaal{font-size:11px;font-weight:800;color:var(--muted);
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+#fremdrift{position:absolute;left:0;bottom:-1px;height:2px;width:0;
+  background:var(--gul);transition:width .12s linear}
+
+/* -------------------------------------------------------------- side ---- */
+.wrap{max-width:1180px;margin:0 auto;padding:0 30px}
+header.hoved{padding:56px 0 30px}
+.kicker{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.kicker .knr{font-size:12px;font-weight:900;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--sort)}
+.kicker .krule{width:46px;height:2px;background:var(--gul)}
+.kicker .ktxt{font-size:11px;font-weight:800;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted)}
+h1{font-size:clamp(34px,4.4vw,60px);font-weight:900;color:var(--sort);
+  letter-spacing:-.033em;line-height:1.04;max-width:18ch}
+h1 mark{background:linear-gradient(transparent 68%,var(--gul) 68%,var(--gul) 96%,transparent 96%);
+  color:inherit;padding:0 .04em}
+.fakta{display:flex;flex-wrap:wrap;gap:0;margin-top:30px;
+  border-top:1px solid var(--sort);border-bottom:1px solid var(--border)}
+.fakta div{padding:16px 30px 16px 0;margin-right:30px;
+  border-right:1px solid var(--border)}
+.fakta div:last-child{border-right:0}
+.fakta .t{font-size:10px;font-weight:800;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--muted);display:block;margin-bottom:5px}
+.fakta .v{font-size:24px;font-weight:900;color:var(--sort);letter-spacing:-.02em;
+  font-variant-numeric:tabular-nums}
+.fakta .v small{font-size:13px;font-weight:700;color:var(--muted)}
+
+/* --------------------------------------------------------- nøgle + toc -- */
+.noegle{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 0}
+.noegle span{display:inline-flex;align-items:center;gap:9px;font-size:12px;
+  font-weight:700;color:var(--muted);border:1px solid var(--border);
+  border-radius:100px;padding:7px 15px 7px 11px;background:#fff}
+.noegle i{width:12px;height:12px;border-radius:3px;display:block;flex-shrink:0}
+.i-tale{background:var(--gul)}
+.i-sk{background:var(--flade);border:1px solid var(--linje)}
+.i-hul{background:var(--sort)}
+.toc{margin:34px 0 0;border-top:1px solid var(--border)}
+.toc a{display:flex;align-items:baseline;gap:16px;text-decoration:none;
+  border-bottom:1px solid var(--border);padding:13px 6px;color:var(--tekst)}
+.toc a:hover{background:var(--flade)}
+.toc .n{font-size:11px;font-weight:900;color:var(--muted);width:56px;
+  flex-shrink:0;letter-spacing:.1em;text-transform:uppercase}
+.toc .t{font-size:15px;font-weight:800;color:var(--sort);letter-spacing:-.015em}
+.toc .m{margin-left:auto;font-size:12px;font-weight:700;color:var(--muted);
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* ------------------------------------------------------------- blokke --- */
+.blok{padding-top:74px}
+.blokhoved{border-top:2px solid var(--sort);padding-top:20px;
+  display:flex;align-items:flex-start;gap:22px;flex-wrap:wrap}
+.blokhoved .bnr{font-size:11px;font-weight:900;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--sort);background:var(--gul);
+  border-radius:100px;padding:6px 14px;white-space:nowrap}
+h2{font-size:clamp(23px,2.5vw,33px);font-weight:900;color:var(--sort);
+  letter-spacing:-.028em;line-height:1.12;flex:1;min-width:260px}
+.blokhoved .bm{font-size:12px;font-weight:700;color:var(--muted);
+  font-variant-numeric:tabular-nums;white-space:nowrap;padding-top:7px}
+
+/* før-optagelse-noten: skal ligne alt andet der ikke siges højt */
+.foer{background:var(--flade);border:1px solid var(--border);border-radius:14px;
+  padding:18px 22px;margin-top:22px;max-width:70em}
+.foer .mrk{font-size:10px;font-weight:900;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted);display:block;margin-bottom:10px}
+.foer .mrk em{font-style:normal;font-weight:600;letter-spacing:.02em;
+  text-transform:none;font-size:11px;color:var(--linje);margin-left:10px}
+.foer p{font-size:13.5px;line-height:1.65;color:var(--muted);margin-bottom:9px}
+.foer p:last-child{margin-bottom:0}
+.foer b{color:var(--tekst)}
+
+/* -------------------------------------------------------------- slides -- */
+.slide{display:grid;grid-template-columns:104px minmax(0,1fr);gap:0;
+  padding:40px 0 14px;border-top:1px solid var(--border)}
+.slide:first-of-type{border-top:1px solid var(--linje)}
+.gutter{padding-top:2px}
+.gutter .sn{position:sticky;top:80px;display:block}
+.gutter .sk{font-size:9px;font-weight:900;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted);display:block}
+.gutter .sv{font-size:40px;font-weight:900;color:var(--sort);line-height:.95;
+  letter-spacing:-.05em;font-variant-numeric:tabular-nums;display:block;
+  margin-top:2px}
+.gutter .sv::after{content:"";display:block;width:26px;height:3px;
+  background:var(--gul);margin-top:9px}
+h3{font-size:19px;font-weight:900;color:var(--sort);letter-spacing:-.02em;
+  line-height:1.25;margin-bottom:20px;max-width:34em}
+h3 .stjerne{color:#D4A900}
+
+/* SKÆRM: det der vises, og som ALDRIG må læses højt */
+.skaerm{background:var(--flade);border:1px solid var(--border);
+  border-left:3px solid var(--linje);border-radius:0 12px 12px 0;
+  padding:15px 20px;margin:0 0 22px;max-width:62em}
+.skaerm .mrk{font-size:10px;font-weight:900;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted);display:block;margin-bottom:8px}
+.skaerm .mrk em{font-style:normal;font-weight:700;letter-spacing:.04em;
+  text-transform:none;color:var(--linje);margin-left:9px}
+.skaerm p{font-size:13px;line-height:1.62;color:var(--muted);margin-bottom:8px}
+.skaerm p:last-child{margin-bottom:0}
+
+/* TALESPOR: sidens største tekst. Gul skinne = det du siger. */
+.tale{border-left:3px solid var(--gul);padding:2px 0 2px 24px;margin:0 0 24px}
+.tale p{font-size:var(--tale);line-height:1.62;color:var(--tekst);
+  font-weight:400;letter-spacing:-.011em;margin-bottom:.72em;max-width:var(--maal)}
+.tale p:last-child{margin-bottom:0}
+
+/* instruktion til Lasse: siges ikke, men gøres */
+.instr{border:1px dashed var(--linje);border-radius:12px;padding:13px 18px;
+  margin:0 0 22px;max-width:62em;background:#fff}
+.instr .mrk{font-size:10px;font-weight:900;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted);display:block;margin-bottom:7px}
+.instr p{font-size:14px;line-height:1.6;color:var(--tekst);margin-bottom:7px}
+.instr p:last-child{margin-bottom:0}
+
+/* HUL: her kan der ikke optages endnu. Skal ikke kunne overses. */
+.hul{background:var(--gul-soft);border:2px solid var(--sort);border-radius:14px;
+  padding:0;margin:0 0 24px;max-width:62em;overflow:hidden}
+.hul .mrk{background:var(--sort);color:var(--gul);font-size:11px;
+  font-weight:900;letter-spacing:.18em;text-transform:uppercase;
+  padding:8px 18px;display:block}
+.hul .krop{padding:16px 18px}
+.hul p{font-size:15px;line-height:1.62;color:var(--sort);font-weight:500;
+  margin-bottom:9px}
+.hul p:last-child{margin-bottom:0}
+
+/* ------------------------------------------------------------- footer --- */
+footer{margin-top:80px;border-top:2px solid var(--sort);padding:26px 0 70px}
+.andre{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.andre a,.andre span{font-size:12px;font-weight:800;text-decoration:none;
+  border:1px solid var(--border);border-radius:100px;padding:8px 15px;
+  color:var(--muted);background:#fff}
+.andre a:hover{border-color:var(--sort);color:var(--sort)}
+.andre span.her{background:var(--sort);color:#fff;border-color:var(--sort)}
+.folio{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--linje)}
+.tiltop{position:fixed;right:22px;bottom:22px;z-index:50}
+
+/* ---------------------------------------------------- skjul skærmnoter -- */
+body.skjul .skaerm{display:none}
+body.skjul .foer{display:none}
+
+/* ---------------------------------------------------------- responsivt -- */
+@media (max-width:900px){
+  :root{--tale:22px;--maal:40ch}
+  .wrap{padding:0 20px}
+  .tb{padding:9px 20px;gap:12px}
+  .tb .nu{display:none}
+  .slide{grid-template-columns:1fr;gap:0;padding:32px 0 10px}
+  .gutter{display:flex;align-items:baseline;gap:11px;padding-bottom:14px}
+  .gutter .sn{position:static;display:flex;align-items:baseline;gap:11px}
+  .gutter .sv{font-size:26px;margin-top:0}
+  .gutter .sv::after{display:none}
+  .fakta div{padding-right:20px;margin-right:20px}
+  .fakta .v{font-size:20px}
+  .tale{padding-left:16px}
+  h1{max-width:100%}
+}
+@media (max-width:560px){
+  .vaerktoej .skjulmob{display:none}
+}
+
+/* ------------------------------------------------------------- print ---- */
+@media print{
+  @page{margin:16mm 14mm}
+  html{scroll-padding-top:0}
+  body{background:#fff;color:#000;line-height:1.5}
+  .topbar,.tiltop,.andre,.noegle,.toc,.vaerktoej{display:none !important}
+  body.skjul .skaerm,body.skjul .foer{display:block}
+  .wrap{max-width:100%;padding:0}
+  header.hoved{padding:0 0 12px}
+  h1{font-size:26pt;max-width:100%}
+  .fakta{margin-top:14px}
+  .fakta .v{font-size:14pt}
+  .blok{padding-top:18px;break-before:page;page-break-before:always}
+  .blok:first-of-type{break-before:auto;page-break-before:auto}
+  h2{font-size:16pt}
+  /* Slidet må gerne løbe over et sideskift, ellers står der en halv tom side
+     efter hvert slide. Det der ALDRIG må knække, er en enkelt talesporslinje,
+     en skærmnote eller en hul-boks. */
+  .slide{grid-template-columns:74px 1fr;padding:16px 0 6px}
+  .skaerm,.hul,.instr,.tale p{break-inside:avoid;page-break-inside:avoid}
+  h3{break-after:avoid;page-break-after:avoid}
+  .gutter .sv{font-size:20pt}
+  .gutter .sn{position:static}
+  h3{font-size:12pt;margin-bottom:10px}
+  .tale{max-width:100%;border-left:2.5pt solid #000;padding-left:14px;
+    margin-bottom:14px}
+  .tale p{font-size:13pt;line-height:1.5;color:#000;max-width:56ch}
+  .skaerm{background:#fff;border:1pt solid #999;border-left:3pt solid #999;
+    max-width:100%;margin-bottom:12px;padding:9px 13px}
+  .skaerm p{font-size:8.5pt;line-height:1.4;color:#444}
+  .foer{background:#fff;border:1pt solid #bbb;max-width:100%}
+  .foer p{font-size:8.5pt;color:#444}
+  .instr{max-width:100%}
+  .instr p{font-size:10pt}
+  .hul{border:2.5pt solid #000;max-width:100%;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .hul .mrk{background:#000;color:#fff;-webkit-print-color-adjust:exact;
+    print-color-adjust:exact}
+  .hul p{font-size:11pt}
+  footer{margin-top:24px;padding-bottom:0}
+  code{border:0;background:#fff}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="tb">
+    <span class="flamme"></span>
+    <span class="navn">Manus</span>
+    <span class="nu" id="nu"></span>
+    <span class="vaerktoej">
+      <span class="tbmaal skjulmob">15 min</span>
+      <button class="knap rund" id="knMindre" title="Mindre skrift (tast -)">&minus;</button>
+      <span class="tbmaal" id="strvis">25 px</span>
+      <button class="knap rund" id="knStoerre" title="Større skrift (tast +)">+</button>
+      <button class="knap skjulmob" id="knSkjul">Skjul skærm-noter</button>
+      <button class="knap skjulmob" id="knPrint">Print</button>
+    </span>
+  </div>
+  <div id="fremdrift"></div>
+</div>
+
+<div class="wrap">
+
+<header class="hoved">
+  <div class="kicker"><span class="knr">ENKELT BLOK</span><span class="krule"></span>
+    <span class="ktxt">Optage-manus til Lasse</span></div>
+  <h1>Manus &middot; Modul 1<br><mark>Modul 1 · Præsentation, Passion &amp; Power</mark></h1>
+
+  <div class="fakta">
+    <div><span class="t">Taletid</span><span class="v">ca. 15 <small>min</small></span></div>
+    <div><span class="t">Slides</span><span class="v">21</span></div>
+    <div><span class="t">Blokke</span><span class="v">1</span></div>
+    <div><span class="t">Ord i talesporet</span><span class="v">0</span></div>
+    <div><span class="t">Huller</span><span class="v">0 <small>klar til optagelse</small></span></div>
+  </div>
+
+  <div class="noegle">
+    <span><i class="i-tale"></i>Gul skinne = det du siger højt</span>
+    <span><i class="i-sk"></i>Grå boks = det der vises på skærmen, siges ikke</span>
+    <span><i class="i-hul"></i>Sort/gul boks = hul, kan ikke optages endnu</span>
+  </div>
+
+  <nav class="toc"><a href="#blok0"><span class="n">Blok 00</span><span class="t">Modul 1 · Præsentation, Passion &amp; Power</span><span class="m">15 min · 21 slides</span></a></nav>
+</header>
+
+<main><section class="blok" id="blok0" data-nu="Blok 00 &amp;middot; &lt;b&gt;Modul 1 · Præsentation, Passion &amp;amp; Power&lt;/b&gt;"><div class="blokhoved"><span class="bnr">Blok 00</span><h2>Modul 1 · Præsentation, Passion &amp; Power</h2><span class="bm">ca. 15 min · 21 slides</span></div><div class="foer"><span class="mrk">Før du optager · læses, siges ikke<em>henvisninger til afsnit "nederst" står i MANUS_Modul1_PowerMatchHistorien.md</em></span><p>Video 1 af 1 · Historien, menneskene, kulturen og fremtiden bag PowerMatch. Læses op af <b>Las</b>. Kilde: <code>00_Grundkontekst/RAA_VANDFALD_ORDRET_MODUL1.md</code>, runde 1 og 2.</p><p>Beslutninger der ligger fast (se <code>TIL_SEBASTIAN_MODUL1.md</code>): Las læser op og taler om begge foundere i tredje person · det personlige står på skærmen · markedsandelen står som "under 1 %" uden brøk og uden antal · videoen slutter på Sebastians egne ord · der laves ikke et værdi-slide.</p></div><article class="slide" id="b0-s1"><div class="gutter"><span class="sn"><span class="sk">Slide</span><span class="sv">1</span></span></div><div class="indhold"><h3>Historien om PowerMatch</h3><div class="tale"><p>Til at starte med skal vi selvfølgelig lige fortælle historien om PowerMatch. Hvorfor startede PowerMatch? Hvem er PowerMatch i dag? Og hvad er fremtiden for PowerMatch?</p></div><div class="tale"><p>Det er meget vigtigt, inden vi kommer ind i noget yderligere, at du lige har lidt historie om os.</p></div></div></article><article class="slide" id="b0-s2"><div class="gutter"><span class="sn"><span class="sk">Slide</span><span class="sv">2</span></span></div><div class="indhold"><h3>Efter denne video kan du</h3><div class="tale"><p>Fire ting skal sidde fast, når vi er færdige her.</p></div><div class="tale"><p>Du kan fortælle hvorfor PowerMatch findes, og hvilket problem vi så i markedet. Du ved hvem der driver forretningen, og hvad de står for. Du kender kulturen herinde, og hvad der forventes. Og du forstår hvor lidt af markedet vi har taget indtil nu — for det er derfor du sidder her.</p></div></div></article><article class="slide" id="b0-s3"><div class="gutter"><span class="sn"><span class="sk">Slide</span><span class="sv">3</span></span></div><div class="indhold"><h3>Problemet vi så i markedet <span class="stjerne">★</span></h3><div class="tale"><p>Og til at starte med: hvilket problem så vi i markedet? Meget simpelt.</p></div><div class="tale"><p>Byggebranchen skriger på dygtig arbejdskraft i Danmark. Det er den branche i Danmark, der mangler arbejdskraft allermest, hvis man samtidig tænker på hvor stor branchen er.</p></div><div class="tale"><p>Branchen omsætter for flere hundrede milliarder kroner om året, og næsten alle virksomheder mangler dygtig arbejdskraft.</p></div></div></article><article class="slide" id="b0-s4"><div class="gutter"><span class="sn"><span class="sk">Slide</span><span class="sv">4</span></span></div><div class="indhold"><h3>Og spillerne på markedet var dårlige</h3><div class="tale"><p>Samtidig gik vi ind og kiggede på: hvem er der af spillere på markedet i dag?</p></div><div class="tale"><p>Og det var alle sammen virksomheder — og det er stadig alle sammen virksomheder — med et produkt, vi mente var utrolig dårligt. Det var dårlig matching. Det var et dårligt tilbud til håndværkerne. Det var meget gammeldags i forhold til at screene kandidater, og det var gammeldags i forhold til at matche kandidater og virksomheder op.</p></div><div class="tale"><p>Og det gjorde, og det gør, at de virksomheder både dengang og også i dag har rigtig svært ved at skaffe de gode håndværkere, og derfor også de gode kunder.</p></div></div></article><article class="slide" id="b0-s5"><div class="gutter"><span class="sn"><span class="sk">Slide</span><span class="sv">5</span></span></div><div class="indhold"><h3>Idéen: gør branchen til en platform <span class="stjerne">★</span></h3><div class="tale"><p>Og det var det, vi gerne ville ændre fra start. Vi ville gøre den her branche til en platform.</p></div><div class="tale"><p>Et sted hvor håndværkerne kunne gå ind og oprette deres egen profil og selv vælge hvilken type job de ville have. Et sted hvor virksomhederne kunne gå ind og oprette deres egen profil og selv sætte meget skarpe kriterier op for hvilke håndværkere de søgte. Og så blive matchet op på kryds og tværs.</p></div><div class="tale"><p>Så målet var fra dag ét at ændre den her branche og skabe noget, branchen ikke har set før. Og derved også vinde en masse markedsandele og blive markedsleder på sigt.</p></div></div></article><article class="slide" id="b0-s6"><div class="gutter"><span class="sn"><span class="sk">Slide</span><span class="sv">6</span></span></div><div class="indhold"><h3>Det første år</h3><div class="tale"><p>Så det startede med idéen. Dag ét, der var PowerMatch.</p></div><div class="tale"><p>Det første år var det meget manuelt arbejde. Vi var to på selve driften — altså salg, kundeservice og screening. Vi havde en designer, der designede vores system. Og så havde vi Las, som var founder og også er direktør i dag, der stod for produktet.</p></div><div class="tale"><p>Der blev bare ringet og ringet og ringet. Koldt kanvas.</p></div><div class="tale"><p>Og der blev arbejdet så hårdt, man skulle tro det var løgn. Det var 12-14 timers dage, det var syv dage om ugen, og hele vores liv var dedikeret til at bygge den her virksomhed.</p></div><div class="tale"><p>For det har ikke altid været en platform. Det er noget vi har bygget os til. Vi startede helt fra bunden af og byggede sten for sten. Lange dage og hårdt arbejde. Det var sådan PowerMatch kom frem.</p></div></div></article><article class="slide" id="b0-s7"><div class="gutter"><span class="sn"><span class="sk">Slide</span><span class="sv">7</span></span></div><div class="indhold"><h3>Udviklingen: vi prøvede os frem</h3><div class="tale"><p>På udviklingen havde vi til at starte med forskellige eksterne bureauer ansat. Der prøvede vi os lidt frem, indtil vi fandt den rigtige løsning.</p></div><div class="tale"><p>Og den helt rigtige løsning, det var at bygge vores eget kontor i Pakistan.</p></div></div></article><article class="slide" id="b0-s8"><div class="gutter"><span class="sn"><span class="sk">Slide</span><span class="sv">8</span></span></div><div class="indhold"><h3>Pakistan er ikke et bureau. Det er vores eget. <span class="stjerne">★</span></h3><div class="tale"><p>Og det her er meget vigtigt at du forstår.</p></div><div class="tale"><p>Vi har ikke et eller andet bureau ansat i Pakistan. Vi har bygget vores eget lille kontor, vores egen kultur og vores helt egne medarbejdere fra bunden. Vi er omkring 25 medarbejdere dernede i dag. Det er os der har bygget det fra bunden, og det er os der har fået alle mennesker ind, én ad gangen.</p></div><div class="tale"><p>Vi har også bragt danske værdier ind i det kontor, og der har vi skabt utrolig gode resultater og utrolig dygtige medarbejdere.</p></div><div class="tale"><p>Og det er ikke kun for at spare penge, vi har det dernede. Mange af de udviklere vi har der, er bedre end mange af dem du kan finde i Danmark. Fordi vi har været med til at oplære dem fra bunden, og fordi vi har bygget processer, der gør det nemt at arbejde i PowerMatch og nemt at blive bedre til sit arbejde.</p></div><div class="tale"><p>Og så er vi så skarpe i forhold til hvem vi skal have ind, og hvem vi ikke skal have ind.</p></div></div></article><article class="slide" id="b0-s9"><div class="gutter"><span class="sn"><span class="sk">Slide</span><span class="sv">9</span></span></div><div class="indhold"><h3>Fra en lejlighed til femogfyrre</h3><div class="tale"><p>PowerMatch startede i oktober 2023. Efter et år var vi cirka ti medarbejdere. Og så voksede vi med cirka ti mennesker om året — og især det sidste års tid er det gået rigtig stærkt.</p></div><div class="tale"><p>Nu er vi jo i dag, hvor den her oplæring bliver lavet, små tre år senere. Så er vi omkring 45 mennesker på kryds og tværs internt i PowerMatch.</p></div></div></article><article class="slide" id="b0-s10"><div class="gutter"><span class="sn"><span class="sk">Slide</span><span class="sv">10</span></span></div><div class="indhold"><h3>Hvad vi bruger pengene på</h3><div class="tale"><p>Og det er fordi vi hele tiden har haft det her mindset fra dag ét: at vi ville blive de største, og vi ville ændre den her branche.</p></div><div class="tale"><p>Vi gik aldrig ind i det her bare for at tjene nogle hurtige penge og tænke kortsigtet. Hver en krone vi tjener, den investerer vi i vores produkt og vores platform.</p></div><div class="tale"><p>Og det var også derfor, det første team vi byggede, det var et udviklerteam. Det var et team til at bygge vores platform. Det er det, vi investerede de fleste af vores kroner i fra dag ét.</p></div></div></article><article class="slide" id="b0-s11"><div class="gutter"><span class="sn"><span class="sk">Slide</span><span class="sv">11</span></span></div><div class="indhold"><h3>Vi fejrer aldrig <span class="stjerne">★</span></h3><div class="tale"><p>Og vi har altid haft det her mindset om: okay, hvordan kan det blive større? Hvordan kan det blive bedre?</p></div><div class="tale"><p>Det har også betydet, at når vi har slået rekorder uge efter uge — både det første år, det andet år og også det tredje år — så har vi aldrig været typerne, der rigtig har fejret det. Og ja, det kan jo også være en dårlig ting. Men vi har altid været typerne, der gerne vil have mere. Okay, hvad er næste skridt? Hvordan kan vi nå højere op? Hvordan kan vi blive bedre?</p></div><div class="tale"><p>Altså, det er jo også founderne, det er vores personlighed. Du vil aldrig se os gå ud og købe dyre ure, store byture og dyrt mærketøj. Nej, det er altid blevet geninvesteret i virksomheden, i platformen, i produktet og i medarbejderne. Og det er også det, der har gjort at vi kunne vokse, som vi har kunnet indtil nu.</p></div></div></article><article class="slide" id="b0-s12"><div class="gutter"><span class="sn"><span class="sk">Slide</span><span class="sv">12</span></span></div><div class="indhold"><h3>Vi er lige startet <span class="stjerne">★</span></h3><div class="tale"><p>I vores øjne er vi, for at være helt ærlige, lige startet.</p></div><div class="tale"><p>Vi kommer ind på håndværkerbranchen senere. En branche med flere hundrede tusinde medarbejdere. Og der har vi, for at være helt ærlige, under 1 % af markedet.</p></div><div class="tale"><p>Så der er så meget mulighed for at vokse, at man skulle tro det var løgn.</p></div></div></article><article class="slide" id="b0-s13"><div class="gutter"><span class="sn"><span class="sk">Slide</span><span class="sv">13</span></span></div><div class="indhold"><h3>Vi automatiserer alt hvad vi kan</h3><div class="tale"><p>En af vores grundprincipper fra start, og måden vi altid har arbejdet på — og noget vi mener adskiller os fra mange andre — det er at vi altid har den her tankegang: hvordan kan vi hele tiden automatisere og forbedre vores processer?</p></div><div class="tale"><p>Et godt eksempel er, at på de tre år vi har bygget den her virksomhed, der har vi lavet godt nok omkring tusind Google Docs-dokumenter. Vi har skrevet idéer ned, vi har skrevet vores processer ned, og når vi har lavet noget én gang, som vi tænker "okay, det burde vi ikke lave igen", så er det blevet skrevet ned og automatiseret.</p></div><div class="tale"><p>Hele tiden med det mål: hvordan laver vi de bedst mulige processer og arbejdsgange? Både internt, i vores kundeflow og i vores kandidatflow, hele vejen rundt. Så vi kan få så meget ud af vores ressourcer som muligt.</p></div></div></article><article class="slide" id="b0-s14"><div class="gutter"><span class="sn"><span class="sk">Slide</span><span class="sv">14</span></span></div><div class="indhold"><h3>Derfor skal du kun ringe <span class="stjerne">★</span></h3><div class="tale"><p>Et godt eksempel på det, det er vores sælgere.</p></div><div class="tale"><p>En af de ting vi har investeret hjernedødt mange penge, tid og ressourcer i, det er at vores sælgere i PowerMatch skal ikke lave andet end at være i kald med kunder.</p></div><div class="tale"><p>De skal ikke sidde og lave alle de dumme manuelle processer, hvor man skal igennem fire forskellige systemer og trykke på tyve forskellige knapper for at køre et salg igennem. Og når man skal følge op på en kunde, skal man gøre det samme igen. Nej — alt sådan noget sker fuldstændig automatisk, når man arbejder herinde.</p></div><div class="tale"><p>Og nu oplærer vi sælgere, så det er det jeg har fokus på her. Men det er noget der går på kryds og tværs af hele organisationen.</p></div></div></article><article class="slide" id="b0-s15"><div class="gutter"><span class="sn"><span class="sk">Slide</span><span class="sv">15</span></span></div><div class="indhold"><h3>Las · founder og direktør</h3><div class="tale"><p>Så vil jeg også lige fortælle lidt mere om de to, der driver firmaet i dag. Det er Las og Sebastian.</p></div><div class="tale"><p>Hvis vi starter med Las, som er founder og direktør. Las var manden med idéen bag PowerMatch, og ham der satte gang i PowerMatch.</p></div><div class="tale"><p>Las' rolle i dag er direktørrollen. Det vil sige, det er ikke så meget hænderne i maskinen mere, men mere det strategiske og de store beslutninger, der bliver taget i virksomheden. En god måde at sige det på er, at vi løber rigtig hurtigt i PowerMatch. Vi løber i mange retninger, og der skal nogen holde styr på os oppefra. Det er Las' største rolle: at sørge for at vi løber i den rigtige retning, og at folk løber på den rigtige måde.</p></div><div class="tale"><p>Hvis man lige tager Las' baggrund, så er det ikke nogen hemmelighed, at han altid har bygget virksomheder. Det har han gjort siden han var helt ung — første virksomhed som 17-18-årig, og så er han bare blevet ved. Det har været alt fra hjemmesider og webshops til marketingbureauer. Og så har han været konsulent for et andet rekrutteringsbureau i byggebranchen, hvor han så hvor dårlige mange af de eksisterende spillere på markedet var. Især de helt store.</p></div><div class="tale"><p>Det går også meget igen i hans personlighed: meget disciplineret, meget målrettet, og en person med meget store ambitioner. Og udover at arbejde en masse, kan han godt lide sin træning og sin kampsport, som er både jiu-jitsu og muay thai.</p></div></div></article><article class="slide" id="b0-s16"><div class="gutter"><span class="sn"><span class="sk">Slide</span><span class="sv">16</span></span></div><div class="indhold"><h3>Sebastian · salg og vækst</h3><div class="tale"><p>Hvis vi går videre til den anden person, Sebastian. Så er Sebastian først og fremmest selvfølgelig en utrolig flot fyr. Det er jo en rigtig god ting.</p></div><div class="tale"><p>Han har en baggrund i salg og forretningsvækst, og han har været med til at bygge hele salget i den her forretning. Og det er også hans primære rolle — udover at han selvfølgelig har hænderne lidt alle steder i forretningen, fordi han er en meget kontrolfreak, der ikke kan lide at give slip på noget. Og det kan man jo godt sige er både godt og dårligt.</p></div><div class="tale"><p>Men den primære rolle er vækst. At sørge for at forretningen vokser konstant, at vi hele tiden vokser vores markedsandel og bliver større. Både med de interne processer, men også med vores processer ude mod kunderne: hvordan vi vokser databasen, hvordan vi får nogle af de større kunder ind, hvordan vi får nogle af de nye jobtitler ind, og hvordan vi hele tiden udvider os.</p></div><div class="tale"><p>Personligheden? Ja, det er sgu bare en arbejdshest. Han har svært ved at lave andet end at sidde foran computeren. Og det kan igen godt blive for meget. Udover det kan han også godt lide sin træning, dyrker også noget kampsport, noget muay thai, og ellers bare slappe af. Familiemenneske kan man også kalde ham.</p></div></div></article><article class="slide" id="b0-s17"><div class="gutter"><span class="sn"><span class="sk">Slide</span><span class="sv">17</span></span></div><div class="indhold"><h3>Kulturen: du får ansvar <span class="stjerne">★</span></h3><div class="tale"><p>Så er der kulturen herinde.</p></div><div class="tale"><p>Kulturen er meget det her med, at folk har meget ansvar. Vi tror på, at de folk vi får ind i forretningen er dygtige mennesker. Så de skal have plads til at performe og gøre hvad de kan.</p></div><div class="tale"><p>Udover det gør vi meget for at investere i vores medarbejdere, fordi vi tror meget på det her med, at vi alle sammen hele tiden skal blive bedre til det vi laver.</p></div><div class="tale"><p>Og så har vi en forretning, hvor det er åbent for alle at komme med forbedringer til vores system, vores processer og måden vi gør tingene på. Alle har en stemme her.</p></div></div></article><article class="slide" id="b0-s18"><div class="gutter"><span class="sn"><span class="sk">Slide</span><span class="sv">18</span></span></div><div class="indhold"><h3>Performancekulturen på salg <span class="stjerne">★</span></h3><div class="tale"><p>Og så har vi en meget høj performancekultur. Især på salg, som er det vi onboarder til her.</p></div><div class="tale"><p>Folk kommer tidligt. Folk går sent. Folk kommer ind for at blive den bedste.</p></div><div class="tale"><p>Alle skal kunne blive den bedste herinde, og alle skal hele tiden kunne blive bedre og lære af hinanden.</p></div></div></article><article class="slide" id="b0-s19"><div class="gutter"><span class="sn"><span class="sk">Slide</span><span class="sv">19</span></span></div><div class="indhold"><h3>PowerMatch i dag</h3><div class="tale"><p>PowerMatch i dag, det er hvad vi er blevet til efter tre års utrolig hårdt arbejde. Vi er vokset på kryds og tværs af forretningen.</p></div><div class="tale"><p>Forretningen spreder sig over forskellige teams. Der er salgsteamet, kundeserviceteamet, screeningholdet, udviklingsteamet, designerne og AI-folkene.</p></div><div class="tale"><p>Så vi har allerede en masse afdelinger i vores organisation. Og det er det, PowerMatch er i dag.</p></div></div></article><article class="slide" id="b0-s20"><div class="gutter"><span class="sn"><span class="sk">Slide</span><span class="sv">20</span></span></div><div class="indhold"><h3>Hvor vi skal hen</h3><div class="tale"><p>Hvis vi skal se ind i fremtiden — hvor vil vi gerne hen i PowerMatch? Og hvorfor sidder du her i dag?</p></div><div class="tale"><p>Som jeg sagde tidligere: de ambitioner vi har helt oppe fra ledelsen, dem har vi stadig, og de er vokset som virksomheden er vokset. Ambitionerne er større nu. Sulten er større nu. Og fremtiden har aldrig set lysere ud.</p></div><div class="tale"><p>Vi tror på, at det her marked er så stort, og der er så meget af markedet vi mangler at tage. Så vi skal blive ved med at vokse og vokse — og det er også derfor du sidder her i dag.</p></div><div class="tale"><p>Vi skal blive ved med at forbedre vores produkt, både til virksomhederne og til håndværkerne. Vi skal blive ved med at forbedre de processer vi har internt, og den kultur vi har.</p></div><div class="tale"><p>De store ambitioner vi har fra toppen af, dem vil vi gerne have drevet ned gennem hele forretningen. Hvis vores forretning var et menneske, så skulle det være i vores DNA. Alle der arbejder her skal have store ambitioner for dem selv.</p></div></div></article><article class="slide" id="b0-s21"><div class="gutter"><span class="sn"><span class="sk">Slide</span><span class="sv">21</span></span></div><div class="indhold"><h3>Vi vil ændre branchen for altid <span class="stjerne">★</span></h3><div class="tale"><p>Så alt i alt, og det lyder måske lidt stort, men vi vil oprigtigt gerne ændre den her rekrutteringsbranche for altid.</p></div><div class="tale"><p>Vi vil gerne have, at når man om et par, tre, fire, fem år kigger tilbage, så skete der kæmpe ændringer. Og at det var positive ændringer for både håndværkere og håndværkervirksomheder.</p></div><div class="tale"><p>Et marked, der før var meget rodet og præget af dårlige produkter, blev lavet om. Hvor man havde ét fast sted man kunne komme hen, der tilbød et godt produkt til virksomhederne — et sted hvor man kunne finde de rigtige medarbejdere, der passede til ens virksomhed. Og for håndværkerne et sted, der kunne finde det rigtige arbejde til dem.</p></div><div class="tale"><p>Så for at sige det helt som det er: det er vores mål. Vi vil ændre branchen for altid. Og det skal I være med til.</p></div></div></article></section></main>
+
+<footer>
+  <div class="andre"><a href="manus-modul4-video1-branchen.html">M4 Video 1 · Branchen og markedet</a><a href="manus-modul4-video2-menneskene.html">M4 Video 2 · Mesteren og håndværkeren</a><a href="manus-modul4-video3-opgaverne.html">M4 Video 3 · Opgaverne, tømreren og mureren</a><a href="manus-modul4-video4-fagene.html">M4 Video 4 · De fire andre fag</a><a href="manus-modul5-overenskomster.html">M5 · Overenskomster og opsigelser</a></div>
+  <p class="folio">PowerMatch &middot; Internt materiale &middot; Modul 1 · Modul 1 · Præsentation, Passion &amp; Power &middot;
+     genereret af _QA/byg-manus-html.py &middot; deck: —</p>
+</footer>
+
+</div>
+
+<button class="knap tiltop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&uarr; Top</button>
+<script>
+/* Ingen localStorage og ingen sessionStorage. Alt står i variabler herunder
+   og nulstilles ved reload, præcis som aftalt. */
+(function(){
+  var talestr = 25;                     // px, samme startværdi som CSS
+  var minStr = 17, maxStr = 42;
+  var skjult = false;
+
+  var rod   = document.documentElement;
+  var vis   = document.getElementById('strvis');
+  var bar   = document.getElementById('fremdrift');
+  var nu    = document.getElementById('nu');
+  var knSkj = document.getElementById('knSkjul');
+  var blokke = [].slice.call(document.querySelectorAll('.blok'));
+
+  function saetStr(n){
+    talestr = Math.max(minStr, Math.min(maxStr, n));
+    rod.style.setProperty('--tale', talestr + 'px');
+    if (vis) vis.textContent = talestr + ' px';
+  }
+  document.getElementById('knMindre').onclick = function(){ saetStr(talestr - 2); };
+  document.getElementById('knStoerre').onclick = function(){ saetStr(talestr + 2); };
+  document.getElementById('knPrint').onclick = function(){ window.print(); };
+  knSkj.onclick = function(){
+    skjult = !skjult;
+    document.body.classList.toggle('skjul', skjult);
+    knSkj.classList.toggle('paa', skjult);
+    knSkj.textContent = skjult ? 'Vis skærm-noter' : 'Skjul skærm-noter';
+  };
+
+  function opdater(){
+    var h = document.documentElement;
+    var kan = (h.scrollHeight - h.clientHeight) || 1;
+    bar.style.width = Math.min(100, (h.scrollTop / kan) * 100) + '%';
+    var akt = null;
+    for (var i = 0; i < blokke.length; i++){
+      if (blokke[i].getBoundingClientRect().top <= 130) akt = blokke[i];
+    }
+    if (nu) nu.innerHTML = akt ? akt.getAttribute('data-nu') : '';
+  }
+  window.addEventListener('scroll', opdater, {passive:true});
+  window.addEventListener('resize', opdater);
+  opdater();
+
+  document.addEventListener('keydown', function(e){
+    if (e.target && /INPUT|TEXTAREA/.test(e.target.tagName)) return;
+    if (e.key === '+') { saetStr(talestr + 2); e.preventDefault(); }
+    if (e.key === '-') { saetStr(talestr - 2); e.preventDefault(); }
+  });
+})();
+</script>
+</body>
+</html>
