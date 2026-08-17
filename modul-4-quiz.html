@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PowerMatch - Quiz · Modul 4 · Byggebranchen</title>
+<title>Modul 4 · Quiz · Byggebranchen · PowerMatch</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -26,7 +26,8 @@ b{color:var(--sort)}
 .top .navn{font-weight:800;font-size:14px;color:var(--sort)}
 .top .sep{color:#C9C9C2}
 .top .titel{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
-.top .taeller{margin-left:auto;font-size:14px;font-weight:900;color:var(--sort);font-variant-numeric:tabular-nums}
+.top .tilbage{margin-left:auto;font-size:13px;font-weight:700;color:var(--sort);text-decoration:none;border:1.5px solid var(--border);border-radius:100px;padding:7px 15px;white-space:nowrap}
+.top .taeller{font-size:14px;font-weight:900;color:var(--sort);font-variant-numeric:tabular-nums}
 .top .taeller span{color:#C9C9C2}
 .pbar{height:3px;background:var(--flade)}
 .pbar i{display:block;height:100%;width:0;background:var(--gul);transition:width .4s var(--ease)}
@@ -100,6 +101,7 @@ footer img{width:20px;height:20px}
     <span class="navn">PowerMatch</span>
     <span class="sep">·</span>
     <span class="titel">Quiz · Modul 4 · Byggebranchen</span>
+    <a class="tilbage" href="modul-4.html">← Modul 4</a>
     <span class="taeller" id="taeller">1 <span>/ 20</span></span>
   </div>
   <div class="pbar"><i id="pbar"></i></div>
@@ -128,24 +130,24 @@ const SPG = [
     opts:[
       "Bruger så mange fagtermer du overhovedet kan, så han ikke opdager det",
       "Skifter emne over til prisen, hvor du er på hjemmebane",
-      "Gengiver det han siger, spørger ind til det og lytter mere end du taler - fagtermerne bygger du på løbende",
+      "Gengiver det han siger, spørger ind til det og lytter mere end du taler. Fagtermerne bygger du på løbende",
       "Siger, at du er ny, og at en kollega ringer tilbage"
     ],
     rigtig:2,
-    fk:"Mestre er meget hurtige til at høre, om du forstår faget, og lige så hurtige til at cutte snakken. Men modgiften er ikke at lyde klog. Den er at gengive hans egne ord, vise forståelse og lave ping pong. Til at starte med: brug lidt færre fagtermer, vær mere lyttende og lær. Så bygger du på dialog for dialog - og den dag han stoler på dig, siger han bare 'det gør vi da bare', når du foreslår ham tre tømrere."
+    fk:"Mestre er meget hurtige til at høre, om du forstår faget, og lige så hurtige til at cutte snakken. Men modgiften er ikke at lyde klog. Den er at gengive hans egne ord, vise forståelse og lave ping pong. Til at starte med: brug lidt færre fagtermer, vær mere lyttende og lær. Så bygger du på dialog for dialog. Og den dag han stoler på dig, siger han bare 'det gør vi da bare', når du foreslår ham tre tømrere."
   },
   // SPG 02 · KILDE: Modul 4 · Video 1 · Blok 2 · slide 1 og 4 (markedet og kundetyperne)
   {
     t:"Spørgsmål",
     q:"Øverst på din emneliste står Bravida og Kemp & Lauritzen. En kollega siger: 'Dem er vi alt for små til.' Har han ret?",
     opts:[
-      "Ja - vi arbejder kun med de lokale virksomheder med 3-10 ansatte",
-      "Nej - vores kunder går fra den lokale tømrervirksomhed med tre ansatte til nogle af landets største byggevirksomheder med op imod 3.000 ansatte",
-      "Ja - de store har deres egen HR-afdeling",
+      "Ja: vi arbejder kun med de lokale virksomheder med 3-10 ansatte",
+      "Nej: vores kunder går fra den lokale tømrervirksomhed med tre ansatte til nogle af landets største byggevirksomheder med op imod 3.000 ansatte",
+      "Ja: de store har deres egen HR-afdeling",
       "Nej, men de store må kun bruge os til vikarer"
     ],
     rigtig:1,
-    fk:"Vi er i hele branchen, fra tre ansatte til tre tusind. Og hold dig for øje, hvor lidt af markedet vi har: der er omkring 210.000 mennesker beskæftiget i byggebranchen, og vi har omkring 250 aktive håndværkere ude. Markedsandelen er minimal, og det er ikke et problem - det er hele pointen. Der er masser af rum at vækste i, og salgene står og venter derude."
+    fk:"Vi er i hele branchen, fra tre ansatte til tre tusind. Og hold dig for øje, hvor lidt af markedet vi har: der er omkring 210.000 mennesker beskæftiget i byggebranchen, og vi har omkring 250 aktive håndværkere ude. Markedsandelen er minimal, og det er ikke et problem. Det er hele pointen. Der er masser af rum at vækste i, og salgene står og venter derude."
   },
   // SPG 03 · KILDE: Modul 4 · Video 1 · Blok 3 · slide 5-6 (fagene hænger sammen, flere jobtitler)
   {
@@ -158,7 +160,7 @@ const SPG = [
       "'Hvem er jeres største konkurrent?'"
     ],
     rigtig:2,
-    fk:"Rigtig mange byggevirksomheder har flere fag: både tømrer og murer, både murer og jord og beton, eller el og VVS. Fagene hænger sammen på pladsen - først entreprenørerne, så murerne, så tømrerne, så el og VVS, og til sidst malerne - og derfor hænger de også sammen inde i virksomheden. Spørger du ikke, sælger du én jobtitel til en kunde, der havde tre."
+    fk:"Rigtig mange byggevirksomheder har flere fag: både tømrer og murer, både murer og jord og beton, eller el og VVS. Fagene hænger sammen på pladsen: først entreprenørerne, så murerne, så tømrerne, så el og VVS, og til sidst malerne. Og derfor hænger de også sammen inde i virksomheden. Spørger du ikke, sælger du én jobtitel til en kunde, der havde tre."
   },
   // SPG 04 · KILDE: Modul 4 · Video 1 · Blok 4 · slide 1-4 (dækningsgraden og prisen)
   {
@@ -168,7 +170,7 @@ const SPG = [
       "At vi er billigere end vikarbureauerne",
       "At prisen er sat af ledelsen, og at du ikke kan gøre noget",
       "At priserne bare følger inflationen",
-      "At han selv fakturerer sine kunder høje priser og har en høj dækningsgrad på sine folk - vores pris ligger inde i hans pris og kan kun være der, fordi han selv tjener på manden"
+      "At han selv fakturerer sine kunder høje priser og har en høj dækningsgrad på sine folk. Vores pris ligger inde i hans pris og kan kun være der, fordi han selv tjener på manden"
     ],
     rigtig:3,
     fk:"Byggebranchen har en rigtig god økonomi, og der er høj dækningsgrad for virksomhederne på medarbejdere. Det er hele grunden til, at vores gangfaktor overhovedet kan bære: kunne mesteren ikke selv tjene penge på manden, kunne vi ikke tage den pris vi tager. Og efterspørgslen presser hans egne priser opad år for år. Du sælger ikke en udgift, du sælger en mand han tjener på."
@@ -184,7 +186,7 @@ const SPG = [
       "Fordi de er nemmere at sælge til"
     ],
     rigtig:1,
-    fk:"Branchen kan godt være sæsonbaseret. Når det bliver koldt, falder efterspørgslen en smule på de fag, der arbejder meget udenfor - tømrer, murer, maler, entreprenør og jord og beton. Elektriker og VVS bliver ikke ramt af vinteren. Metal og lager er kommet til af præcis samme grund, og anlægsgartneren ligger i den modsatte ende og trækker om sommeren. Så vi altid har fag med høj efterspørgsel at gå efter."
+    fk:"Branchen kan godt være sæsonbaseret. Når det bliver koldt, falder efterspørgslen en smule på de fag, der arbejder meget udenfor: tømrer, murer, maler, entreprenør og jord og beton. Elektriker og VVS bliver ikke ramt af vinteren. Metal og lager er kommet til af præcis samme grund, og anlægsgartneren ligger i den modsatte ende og trækker om sommeren. Så vi altid har fag med høj efterspørgsel at gå efter."
   },
   // SPG 06 · KILDE: Modul 4 · Video 2 · Blok 6 · slide 6-9 (sælger eller rådgiver)
   {
@@ -197,7 +199,7 @@ const SPG = [
       "En gennemgang af vores priser, så han kan se, at det kan betale sig"
     ],
     rigtig:2,
-    fk:"Virksomhedsejerne er trætte af at få den ene håndværker efter den anden presset ud til sig af folk, der ikke matcher dem. Kommer du med tre mand i hånden, er du nummer fire i rækken. Kommer du med spørgsmål, er du en rådgiver. De elsker at snakke om deres egen virksomhed, og det er dér tilliden starter. Og vær konkret, kort og lige til - bliv ikke for kontoragtig eller HR-fin, det gider de ikke."
+    fk:"Virksomhedsejerne er trætte af at få den ene håndværker efter den anden presset ud til sig af folk, der ikke matcher dem. Kommer du med tre mand i hånden, er du nummer fire i rækken. Kommer du med spørgsmål, er du en rådgiver. De elsker at snakke om deres egen virksomhed, og det er dér tilliden starter. Og vær konkret, kort og lige til. Bliv ikke for kontoragtig eller HR-fin, det gider de ikke."
   },
   // SPG 07 · KILDE: Modul 4 · Video 2 · Blok 6 · slide 10-11 (flere der rekrutterer)
   {
@@ -207,7 +209,7 @@ const SPG = [
       "Om han vil have tilsendt en brochure",
       "Om han kan love at svare på din mail",
       "Om han vil booke et fysisk møde næste uge",
-      "Om det kun er ham, der står for rekrutteringen, eller om der er andre - og om de har flere jobtitler"
+      "Om det kun er ham, der står for rekrutteringen, eller om der er andre. Og om de har flere jobtitler"
     ],
     rigtig:3,
     fk:"En god tommelfingerregel er én der hjælper med rekruttering pr. 10 ansatte. Ved 30 ansatte er der altså ofte tre, måske fire: højre hånden der står for den daglige drift, en projektchef, en entrepriseleder. Får du fat i dem, har du tre indgange i én virksomhed i stedet for én travl mand, der aldrig har tid. Og det samme spørgsmål åbner for de andre jobtitler."
@@ -217,13 +219,13 @@ const SPG = [
     t:"Scenarie",
     q:"SCENARIE: Du ringer til en håndværker med en konkret jobmulighed. Hvad gør du, før du pitcher jobbet?",
     opts:[
-      "Pitcher med det samme - han er eftertragtet, og du skal nå det, før andre gør",
+      "Pitcher med det samme: han er eftertragtet, og du skal nå det, før andre gør",
       "Screener ham igen, så du er sikker på, at han er god nok",
       "Bruger 3-5 minutter på ham: hvordan dagen går, hvad der betyder noget for ham i et arbejde, og hvorfor han ikke er helt glad der, hvor han går",
       "Sender jobbeskrivelsen på sms, så han kan læse den i fred"
     ],
     rigtig:2,
-    fk:"De 3-5 minutter er ikke smalltalk, det er en assist til dig selv. Screeningen har allerede gjort deres, så du spørger ikke for at vurdere ham - du spørger for at vide, hvad du skal pitche ud fra. Ved du, hvad der gør ham glad i et arbejde, ved du også, hvilken del af jobbet du skal starte med. Og han må aldrig få den mindste lugt af en sælger, der bare vil af med et job."
+    fk:"De 3-5 minutter er ikke smalltalk, det er en assist til dig selv. Screeningen har allerede gjort deres, så du spørger ikke for at vurdere ham. Du spørger for at vide, hvad du skal pitche ud fra. Ved du, hvad der gør ham glad i et arbejde, ved du også, hvilken del af jobbet du skal starte med. Og han må aldrig få den mindste lugt af en sælger, der bare vil af med et job."
   },
   // SPG 09 · KILDE: Modul 4 · Video 2 · Blok 7 · slide 11 (kontrolcirklen)
   {
@@ -236,7 +238,7 @@ const SPG = [
       "Om han var forberedt, om han kendte jobbet ned til detaljen, og om vi havde bygget en relation, der gjorde, at han ville have jobbet"
     ],
     rigtig:3,
-    fk:"Vi kan ikke styre, hvad virksomheden siger, og vi kan ikke styre, hvilke opgaver de har derude. Det vi kan styre, er relationen, forberedelsen og hvor meget han vil have jobbet. Og det trækker begge veje: er han godt forberedt og vil jobbet, går samtalen bedre - virker vi forhastede og useriøse, kan selv et rigtig godt job gå i vasken på vores arbejde."
+    fk:"Vi kan ikke styre, hvad virksomheden siger, og vi kan ikke styre, hvilke opgaver de har derude. Det vi kan styre, er relationen, forberedelsen og hvor meget han vil have jobbet. Og det trækker begge veje: er han godt forberedt og vil jobbet, går samtalen bedre. Virker vi forhastede og useriøse, kan selv et rigtig godt job gå i vasken på vores arbejde."
   },
   // SPG 10 · KILDE: Modul 4 · Video 3 · Blok 8 · slide 5 (spørgsmålene i telefonen)
   {
@@ -259,7 +261,7 @@ const SPG = [
       "Fordi virksomhederne kun skriver hovedopgaver ind",
       "Fordi underopgaverne er nye i platformen",
       "Fordi hovedopgaver er sværere at udføre",
-      "Fordi en, der har renoveret i fem år, også kan renovere et gulv han ikke har prøvet - hvor en, der kun har lavet nybyg, har længere vej til renovering"
+      "Fordi en, der har renoveret i fem år, også kan renovere et gulv han ikke har prøvet: hvor en, der kun har lavet nybyg, har længere vej til renovering"
     ],
     rigtig:3,
     fk:"Det er en meget logisk tankegang: erfaring inden for hovedopgaven smitter af på underopgaverne, men ikke omvendt. Derfor scorer manden med fem års renovering højt, selvom han aldrig har haft det gulv i hånden, og derfor scorer nybyg-manden lavere på renovering, selvom han sagtens kan lære det. Praktisk for dig: start i hovedopgaverne, og læg højst en eller to underopgaver på, indtil du kender fagene."
@@ -275,7 +277,7 @@ const SPG = [
       "En der helst arbejder på de store byggepladser"
     ],
     rigtig:1,
-    fk:"Spjæld og service er de mindre opgaver ude hos Hr. og Fru Jensen eller hos erhverv. Man kører alene i firmabilen, højst med en lærling, så kørekort er et krav, og manden er virksomhedens ansigt ude hos kunden. Havde han sagt renovering og tagarbejde, var det den anden profil: en der går i sjak, er stærk og har fysikken - for det er de længere entreprisesager, hvor man er to, tre eller seks om det."
+    fk:"Spjæld og service er de mindre opgaver ude hos Hr. og Fru Jensen eller hos erhverv. Man kører alene i firmabilen, højst med en lærling, så kørekort er et krav, og manden er virksomhedens ansigt ude hos kunden. Havde han sagt renovering og tagarbejde, var det den anden profil: en der går i sjak, er stærk og har fysikken. For det er de længere entreprisesager, hvor man er to, tre eller seks om det."
   },
   // SPG 13 · KILDE: Modul 4 · Video 3 · Blok 10 · slide 5-6 og 8 (fliser og klinker)
   {
@@ -284,11 +286,11 @@ const SPG = [
     opts:[
       "At det er akkord",
       "At han skal kunne skalmure",
-      "At det stort set altid er badeværelser, og at det ofte er noget man laver alene - lidt a la spjæld og service",
+      "At det stort set altid er badeværelser, og at det ofte er noget man laver alene: lidt a la spjæld og service",
       "At det er tagarbejde om sommeren"
     ],
     rigtig:2,
-    fk:"Fliser og klinker er lig med badeværelser, i nybyggeri og i renovering. Det kan blive til svømmehaller på de helt store sager, men det er undtagelsen. Flisemureren kører ofte rundt alene, og derfor hænger fliser og spjæld og service godt sammen - kan han det ene, kan han typisk også det andet. Nybyg og renovering klumper sig sammen i den anden ende af murerfaget, og nybyg hedder også skalmuring."
+    fk:"Fliser og klinker er lig med badeværelser, i nybyggeri og i renovering. Det kan blive til svømmehaller på de helt store sager, men det er undtagelsen. Flisemureren kører ofte rundt alene, og derfor hænger fliser og spjæld og service godt sammen. Kan han det ene, kan han typisk også det andet. Nybyg og renovering klumper sig sammen i den anden ende af murerfaget, og nybyg hedder også skalmuring."
   },
   // SPG 14 · KILDE: Modul 4 · Video 3 · Blok 11 · slide 1-4 (akkord)
   {
@@ -298,7 +300,7 @@ const SPG = [
       "At de laver om til ren timeløn, mens manden er hos os",
       "At vi lægger vores gangfaktor oven på hele akkorden",
       "At vi ikke kan hjælpe dem",
-      "At håndværkeren får sin grundløn i timen gennem os, som vi fakturerer virksomheden for - og at bonussen oven på grundlønnen udbetaler virksomheden selv, uden om os"
+      "At håndværkeren får sin grundløn i timen gennem os, som vi fakturerer virksomheden for. Og at bonussen oven på grundlønnen udbetaler virksomheden selv, uden om os"
     ],
     rigtig:3,
     fk:"Akkord betyder betaling på resultater: hvor mange mursten der bliver lagt, hvor mange bjælker der bliver sat op. Vores løsning er timelønsbaseret, og vi kan ikke stå på pladsen og måle output. Men i en akkordsag ligger der næsten altid en grundløn i timen under bonussen, og den kan køre gennem os. Så vinder alle tre parter. Husk også, at mange håndværkere slet ikke gider akkord, fordi det er hårdt, og fordi man går flere om samme akkord."
@@ -309,12 +311,12 @@ const SPG = [
     q:"Du har en elektriker i røret. Hvad skal du have afklaret først?",
     opts:[
       "Om han har firmabil i dag",
-      "Om han vil lave spjæld og service, eller om han slet ikke vil - for i el er det meget enten eller",
+      "Om han vil lave spjæld og service, eller om han slet ikke vil. For i el er det meget enten eller",
       "Om han kan starte i morgen",
       "Om han har kørt akkord før"
     ],
     rigtig:1,
-    fk:"Elektrikerfaget er mere delt op end tømrer og murer. Enten vil de spjæld og service, eller også vil de det slet ikke - og vil de ikke, er de til gengæld typisk åbne for både nybyg, renovering og industri og erhverv. Det er samtidig det største hul i markedet: næsten alle elektrikervirksomheder i hele landet mangler spjæld og service-elektrikere. Ved du, hvor han står, ved du med det samme, hvilke kunder han passer til."
+    fk:"Elektrikerfaget er mere delt op end tømrer og murer. Enten vil de spjæld og service, eller også vil de det slet ikke. Og vil de ikke, er de til gengæld typisk åbne for både nybyg, renovering og industri og erhverv. Det er samtidig det største hul i markedet: næsten alle elektrikervirksomheder i hele landet mangler spjæld og service-elektrikere. Ved du, hvor han står, ved du med det samme, hvilke kunder han passer til."
   },
   // SPG 16 · KILDE: Modul 4 · Video 4 · Blok 12 · slide 7-8 (industri og erhverv)
   {
@@ -327,20 +329,20 @@ const SPG = [
       "'Hvor stor er jeres største kunde?'"
     ],
     rigtig:1,
-    fk:"Industri og erhverv bliver en af de sværeste at lære, og den kommer kun gennem dialog. Den kan være helt bred, hvor de tager alle ind, og den kan være meget specialiseret, hvor de kun vil have folk, der har lavet noget helt bestemt. Der findes certificeringer i den ende af faget, og forskellen afgør, om din kandidat overhovedet må lave arbejdet. Ét spørgsmål afklarer det - stil det, i stedet for at gætte."
+    fk:"Industri og erhverv bliver en af de sværeste at lære, og den kommer kun gennem dialog. Den kan være helt bred, hvor de tager alle ind, og den kan være meget specialiseret, hvor de kun vil have folk, der har lavet noget helt bestemt. Der findes certificeringer i den ende af faget, og forskellen afgør, om din kandidat overhovedet må lave arbejdet. Ét spørgsmål afklarer det. Stil det, i stedet for at gætte."
   },
   // SPG 17 · KILDE: Modul 4 · Video 4 · Blok 12 · slide 9 (elektrikeren som type)
   {
     t:"Scenarie",
     q:"En elektriker passer på løn og afstand, men opgaverne matcher ikke helt det, han siger, han vil lave. Hvad gør du?",
     opts:[
-      "Sætter samtalen op - løn og afstand er det vigtigste",
+      "Sætter samtalen op: løn og afstand er det vigtigste",
       "Sætter samtalen op og lader mesteren afgøre det",
       "Lader være med at sætte samtalen op, og finder en anden kandidat til jobbet",
       "Sætter samtalen op uden at nævne opgaverne"
     ],
     rigtig:2,
-    fk:"Elektrikeren er den, der går mest op i præcis, hvad han skal lave. Hvor en tømrer, murer, maler eller jord- og betonmand oftere siger 'vi laver sgu bare det hele', er elektrikeren meget præcis på, hvad han vil og ikke vil. Sætter du samtalen op alligevel, brænder du både kandidaten, kunden og din egen troværdighed. Sikr dig at det matcher præcist - ellers find en anden."
+    fk:"Elektrikeren er den, der går mest op i præcis, hvad han skal lave. Hvor en tømrer, murer, maler eller jord- og betonmand oftere siger 'vi laver sgu bare det hele', er elektrikeren meget præcis på, hvad han vil og ikke vil. Sætter du samtalen op alligevel, brænder du både kandidaten, kunden og din egen troværdighed. Sikr dig at det matcher præcist. Ellers find en anden."
   },
   // SPG 18 · KILDE: Modul 4 · Video 4 · Blok 13 · slide 2 og 7 (bygningsmaleren)
   {
@@ -353,7 +355,7 @@ const SPG = [
       "Om han kan komme på kursus"
     ],
     rigtig:1,
-    fk:"Malerfaget er det mest lige til af de seks store fag, og malerne laver meget på kryds og tværs - slet ikke lige så specialiseret som el og VVS, hvor opgaven skal passe perfekt. Det er løn, afstand og kultur, der afgør. Én ting skal du dog sikre dig: søger virksomheden en spjæld og service-maler, så spørg om din maler også vil det. De fleste vil, men der er nogle få, der ikke gider køre alene rundt."
+    fk:"Malerfaget er det mest lige til af de seks store fag, og malerne laver meget på kryds og tværs. Slet ikke lige så specialiseret som el og VVS, hvor opgaven skal passe perfekt. Det er løn, afstand og kultur, der afgør. Én ting skal du dog sikre dig: søger virksomheden en spjæld og service-maler, så spørg om din maler også vil det. De fleste vil, men der er nogle få, der ikke gider køre alene rundt."
   },
   // SPG 19 · KILDE: Modul 4 · Video 4 · Blok 14 · slide 3, 5 og 6 (VVS'erens to klumper)
   {
@@ -366,20 +368,20 @@ const SPG = [
       "Ventilation og klima"
     ],
     rigtig:1,
-    fk:"I VVS klumper opgaverne sig i to. Skal man på de større pladser og entrepriser, er det nybyg og renovering: nye installationer i en ny bygning, eller rør og toiletter der skal rettes i et helt kompleks. Vil man i stedet køre rundt i bil fra sted til sted, er det spjæld og service - og varmeinstallation og ventilation og klima hænger godt sammen med den, for det er også ofte ude hos Hr. og Fru Jensen. Og som i el er spjæld og service meget enten eller."
+    fk:"I VVS klumper opgaverne sig i to. Skal man på de større pladser og entrepriser, er det nybyg og renovering: nye installationer i en ny bygning, eller rør og toiletter der skal rettes i et helt kompleks. Vil man i stedet køre rundt i bil fra sted til sted, er det spjæld og service. Og varmeinstallation og ventilation og klima hænger godt sammen med den, for det er også ofte ude hos Hr. og Fru Jensen. Og som i el er spjæld og service meget enten eller."
   },
   // SPG 20 · KILDE: Modul 4 · Video 4 · Blok 15 · slide 1 og 4 · Video 1 · Blok 3 · slide 3 (entreprenørbranchen)
   {
     t:"Spørgsmål",
     q:"En kandidat til en jord- og betonstilling har ikke svendebrev. Er det et problem?",
     opts:[
-      "Ja - svendebrev er et krav i alle vores fag",
-      "Nej - i entreprenørbranchen er der ikke uddannelseskrav på samme måde. I tømrer, murer, elektriker, VVS og bygningsmaler er svendebrev derimod altid et krav",
+      "Ja: svendebrev er et krav i alle vores fag",
+      "Nej: i entreprenørbranchen er der ikke uddannelseskrav på samme måde. I tømrer, murer, elektriker, VVS og bygningsmaler er svendebrev derimod altid et krav",
       "Ja, men kun hvis han skal lave betonarbejde",
-      "Nej - svendebrev er aldrig et krav i byggeriet"
+      "Nej: svendebrev er aldrig et krav i byggeriet"
     ],
     rigtig:1,
-    fk:"Jord og beton hører under entreprenørbranchen, som er et af vores nye fag. Det er et blandet fag, hvor folk laver det hele på kryds og tværs, og der er ikke uddannelseskrav som i de øvrige fag. To andre ting skal du kunne om dem: de kommer aller aller først på pladsen, fordi de gør klar til alle de andre - og de har seks hovedopgaver, men ingen spjæld og service. Den findes i næsten alle fag undtagen entreprenør, jord og beton."
+    fk:"Jord og beton hører under entreprenørbranchen, som er et af vores nye fag. Det er et blandet fag, hvor folk laver det hele på kryds og tværs, og der er ikke uddannelseskrav som i de øvrige fag. To andre ting skal du kunne om dem: de kommer aller aller først på pladsen, fordi de gør klar til alle de andre. Og de har seks hovedopgaver, men ingen spjæld og service. Den findes i næsten alle fag undtagen entreprenør, jord og beton."
   }
 ];
 
@@ -406,7 +408,7 @@ function vaelg(k){
   if(ok)score++;
   svar.push(ok);
   const dom=document.getElementById('dom');
-  dom.textContent=ok?'Rigtigt':'Forkert - det rigtige svar er markeret';
+  dom.textContent=ok?'Rigtigt':'Forkert. Det rigtige svar er markeret';
   dom.className='dom '+(ok?'ok':'fejl');
   document.getElementById('fk').classList.add('vis');
   document.getElementById('naeste').classList.add('vis');
@@ -423,10 +425,10 @@ function visResultat(){
   r.classList.add('vis');
   document.getElementById('scoreTal').textContent=score+'/'+SPG.length;
   const bestaaet=score>=16;
-  document.getElementById('scoreTitel').textContent=bestaaet?'Bestået. Du kan tale med en mester.':'Ikke bestået endnu - se videoerne igen.';
+  document.getElementById('scoreTitel').textContent=bestaaet?'Bestået. Du kan tale med en mester.':'Ikke bestået endnu. Se videoerne igen.';
   document.getElementById('scoreTekst').textContent=bestaaet
-    ?'Du kan fagene, hovedopgaverne og de spørgsmål der får mesteren i snak. Tag videoerne igen inden din første uge i telefonen - især fagblokkene, for de sidder først efter tredje gennemsyn.'
-    :'Du skal have mindst 16 rigtige ud af 20. Gense især hovedopgaverne fag for fag og de spørgsmål du stiller mesteren, når han nævner en opgave - det er dem, der bærer dine første hundrede dialoger.';
+    ?'Du kan fagene, hovedopgaverne og de spørgsmål der får mesteren i snak. Tag videoerne igen inden din første uge i telefonen. Især fagblokkene, for de sidder først efter tredje gennemsyn.'
+    :'Du skal have mindst 16 rigtige ud af 20. Gense især hovedopgaverne fag for fag og de spørgsmål du stiller mesteren, når han nævner en opgave. Det er dem, der bærer dine første hundrede dialoger.';
   document.getElementById('gennemgang').innerHTML=svar.map((ok,i)=>
     `<div class="g-row"><span class="ik ${ok?'ok':'fejl'}">${ok?'✓':'✗'}</span><span><b>${String(i+1).padStart(2,'0')}</b> · ${SPG[i].q}</span></div>`
   ).join('');

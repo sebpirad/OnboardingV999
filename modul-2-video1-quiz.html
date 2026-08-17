@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PowerMatch - Quiz · Forretningsmodellen</title>
+<title>Modul 2 · Quiz · Forretningsmodellen · PowerMatch</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -26,7 +26,8 @@ b{color:var(--sort)}
 .top .navn{font-weight:800;font-size:14px;color:var(--sort)}
 .top .sep{color:#C9C9C2}
 .top .titel{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
-.top .taeller{margin-left:auto;font-size:14px;font-weight:900;color:var(--sort);font-variant-numeric:tabular-nums}
+.top .tilbage{margin-left:auto;font-size:13px;font-weight:700;color:var(--sort);text-decoration:none;border:1.5px solid var(--border);border-radius:100px;padding:7px 15px;white-space:nowrap}
+.top .taeller{font-size:14px;font-weight:900;color:var(--sort);font-variant-numeric:tabular-nums}
 .top .taeller span{color:#C9C9C2}
 .pbar{height:3px;background:var(--flade)}
 .pbar i{display:block;height:100%;width:0;background:var(--gul);transition:width .4s var(--ease)}
@@ -100,6 +101,7 @@ footer img{width:20px;height:20px}
     <span class="navn">PowerMatch</span>
     <span class="sep">·</span>
     <span class="titel">Quiz · Modul 2 · Forretningsmodellen</span>
+    <a class="tilbage" href="modul-2.html">← Modul 2</a>
     <span class="taeller" id="taeller">1 <span>/ 10</span></span>
   </div>
   <div class="pbar"><i id="pbar"></i></div>
@@ -125,9 +127,9 @@ const SPG = [
     q:"Hvorfor fungerer PowerMatch-modellen kun, hvis alle tre parter vinder?",
     opts:[
       "Fordi lovgivningen kræver, at alle parter behandles ens",
-      "Fordi væksten kommer fra genkøb: glade virksomheder OG glade håndværkere kommer tilbage - mister vi én part, dør motoren",
+      "Fordi væksten kommer fra genkøb: glade virksomheder OG glade håndværkere kommer tilbage. Mister vi én part, dør motoren",
       "Fordi vi ellers skal betale kompensation til den part, der taber",
-      "Det er mest et slogan - i praksis er virksomheden vigtigst"
+      "Det er mest et slogan. I praksis er virksomheden vigtigst"
     ],
     rigtig:1,
     fk:"Modellen er en genkøbsmotor: virksomheden kommer igen, når de mangler folk, og håndværkeren kommer igen, når han vil videre. Kan bare én part ikke se idéen, stopper motoren."
@@ -157,7 +159,7 @@ const SPG = [
   },
   {
     q:"Hvad koster det virksomheden at fastansætte kandidaten efter de 518 timer?",
-    opts:["Et rekrutteringsfee på 10.000 kr.","15 % af årslønnen","0 kr. - vi opsiger, og de fastansætter","3 måneders ekstra faktor-betaling"],
+    opts:["Et rekrutteringsfee på 10.000 kr.","15 % af årslønnen","0 kr. Vi opsiger, og de fastansætter","3 måneders ekstra faktor-betaling"],
     rigtig:2,
     fk:"Efter 518 effektive timer opsiger vi kandidaten, og virksomheden fastansætter ham uden at betale én krone ekstra."
   },
@@ -165,7 +167,7 @@ const SPG = [
     q:"Hvorfor er platformen, CV'erne og jobsamtalerne gratis for virksomhederne?",
     opts:[
       "Fordi konkurrenterne også er gratis",
-      "Fordi forarbejdet skaber matches, der holder - og vores forretning lever af mange effektive timer pr. kandidat",
+      "Fordi forarbejdet skaber matches, der holder, og vores forretning lever af mange effektive timer pr. kandidat",
       "Fordi vi tjener penge på annoncer på platformen",
       "Det er et midlertidigt tilbud for at vinde markedsandele"
     ],
@@ -176,10 +178,10 @@ const SPG = [
     q:"Virksomheden opsiger kandidaten efter to måneder. Hvem dækker opsigelsesdagene efter overenskomsten?",
     opts:["Virksomheden","Kandidaten selv","PowerMatch","De deles 50/50"],
     rigtig:2,
-    fk:"PowerMatch dækker opsigelsesdagene. Virksomheden betaler kun pr. effektiv arbejdstime - punktum."
+    fk:"PowerMatch dækker opsigelsesdagene. Virksomheden betaler kun pr. effektiv arbejdstime. Punktum."
   },
   {
-    q:"Hvorfor står virksomheden selv for forsikringer - som det eneste?",
+    q:"Hvorfor står virksomheden selv for forsikringer, som det eneste?",
     opts:[
       "Fordi det er billigere for dem",
       "Fordi PowerMatch ikke kan tegne forsikringer",
@@ -187,29 +189,29 @@ const SPG = [
       "Fordi overenskomsten kræver det"
     ],
     rigtig:2,
-    fk:"Instruktionspligten: den, der fortæller kandidaten hvor og hvordan han skal arbejde, hæfter for fejlarbejde og arbejdsskader. Det er virksomheden - derfor deres forsikring."
+    fk:"Instruktionspligten: den, der fortæller kandidaten hvor og hvordan han skal arbejde, hæfter for fejlarbejde og arbejdsskader. Det er virksomheden, og derfor er det deres forsikring."
   },
   {
-    q:"SCENARIE: En håndværker ringer efter én uge i prøveperioden: 'Det her job er ikke mig - lønnen og opgaverne er ikke, som jeg troede.' Hvad er det rigtige svar?",
+    q:"SCENARIE: En håndværker ringer efter én uge i en ansættelse gennem os: 'Det her job er ikke mig. Lønnen og opgaverne er ikke, som jeg troede.' Hvad er det rigtige svar?",
     opts:[
-      "'Du er nødt til at blive de 518 timer ud - ellers bryder du kontrakten'",
-      "'Helt fint - vi genaktiverer din søgning og finder et nyt match til dig. Og virksomheden får en ny kandidat'",
+      "'Du er nødt til at blive de 518 timer ud. Ellers bryder du kontrakten'",
+      "'Helt fint. Vi genaktiverer din søgning og finder et nyt match til dig. Og virksomheden får en ny kandidat'",
       "'Så skal du selv sige op over for virksomheden først'",
       "'Vi trækker dig i løn for de resterende dage'"
     ],
     rigtig:1,
-    fk:"Begge parter kan stoppe fra dag til dag. Kandidatens tryghed er en bærende del af modellen - vi finder nyt til ham og en ny mand til virksomheden."
+    fk:"Begge parter kan stoppe fra dag til dag. Kandidatens tryghed er en bærende del af modellen: vi finder nyt til ham og en ny mand til virksomheden."
   },
   {
-    q:"Lønnen er 200 kr./t og faktoren 1,9. Cirka hvad tjener PowerMatch pr. effektiv time - og hvorfor?",
+    q:"Lønnen er 200 kr./t og faktoren 1,9. Cirka hvad tjener PowerMatch pr. effektiv time, og hvorfor?",
     opts:[
-      "180 kr. - forskellen på løn og timepris",
-      "~80 kr. - vores omkostning er ca. løn × 1,5 (~300 kr.), og vi fakturerer 380 kr.",
-      "38 kr. - 10 % af timeprisen",
-      "0 kr. - vi tjener først ved fastansættelsen"
+      "180 kr. Forskellen på løn og timepris",
+      "~80 kr. Vores omkostning er ca. løn × 1,5 (~300 kr.), og vi fakturerer 380 kr.",
+      "38 kr. 10 % af timeprisen",
+      "0 kr. Vi tjener først ved fastansættelsen"
     ],
     rigtig:1,
-    fk:"Omkostningen er ca. løn × 1,5 = ~300 kr./t (alt inklusive). Faktureret 380 kr. → ~80 kr. i dækningsbidrag. Og omkostningen stiger ikke med faktoren - derfor betyder hver tiendedel noget."
+    fk:"Omkostningen er ca. løn × 1,5 = ~300 kr./t (alt inklusive). Faktureret 380 kr. → ~80 kr. i dækningsbidrag. Og omkostningen stiger ikke med faktoren, og derfor betyder hver tiendedel noget."
   }
 ];
 
@@ -236,7 +238,7 @@ function vaelg(k){
   if(ok)score++;
   svar.push(ok);
   const dom=document.getElementById('dom');
-  dom.textContent=ok?'Rigtigt':'Forkert - det rigtige svar er markeret';
+  dom.textContent=ok?'Rigtigt':'Forkert. Det rigtige svar er markeret';
   dom.className='dom '+(ok?'ok':'fejl');
   document.getElementById('fk').classList.add('vis');
   document.getElementById('naeste').classList.add('vis');
@@ -253,10 +255,10 @@ function visResultat(){
   r.classList.add('vis');
   document.getElementById('scoreTal').textContent=score+'/'+SPG.length;
   const bestaaet=score>=8;
-  document.getElementById('scoreTitel').textContent=bestaaet?'Bestået. Du forstår forretningen.':'Ikke bestået endnu - se videoen igen.';
+  document.getElementById('scoreTitel').textContent=bestaaet?'Bestået. Du forstår forretningen.':'Ikke bestået endnu. Se videoen igen.';
   document.getElementById('scoreTekst').textContent=bestaaet
     ?'Du kan modellen for alle tre parter, regnestykket og de 518 timer. Videre til næste modul.'
-    :'Du skal have mindst 8 rigtige. Gense videoen - især gangfaktoren, de 518 effektive timer og hvorfor gratis-delen er vores hemmelighed - og prøv igen.';
+    :'Du skal have mindst 8 rigtige. Gense videoen, især gangfaktoren, de 518 effektive timer og hvorfor gratis-delen er vores hemmelighed. Så prøv igen.';
   document.getElementById('gennemgang').innerHTML=svar.map((ok,i)=>
     `<div class="g-row"><span class="ik ${ok?'ok':'fejl'}">${ok?'✓':'✗'}</span><span><b>${String(i+1).padStart(2,'0')}</b> · ${SPG[i].q}</span></div>`
   ).join('');
