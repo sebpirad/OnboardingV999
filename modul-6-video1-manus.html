@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manus · Modul 6 · Produktviden · Video 1: Virksomhedens platform · PowerMatch</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gul:#F8E965; --gul-soft:#FDF8D4; --gul-kant:#F0E4A0;
+  --sort:#111213; --tekst:#26282B; --muted:#71757C;
+  --border:#ECECE8; --flade:#F6F6F3; --bg:#FFFFFF; --linje:#C9C9C2;
+  --tale:25px;                      /* styres af A- / A+ */
+  --maal:44ch;                      /* satsbredde: ca. 44 tegn pr. linje.
+                                       ch følger talesporets egen grad, så
+                                       linjelængden er den samme uanset hvor
+                                       stort Lasse skruer op. */
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{font-family:'Inter',-apple-system,Arial,sans-serif;color:var(--tekst);
+  background:var(--bg);-webkit-font-smoothing:antialiased;line-height:1.6}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em;
+  background:#fff;border:1px solid var(--border);border-radius:5px;padding:1px 5px}
+b{color:var(--sort);font-weight:800}
+a{color:var(--sort)}
+
+/* ---------------------------------------------------------- topbjælke --- */
+/* Helt dækkende hvid. Ikke gennemsigtig: talesporet må ikke kunne ses
+   igennem bjælken, når han scroller midt i en sætning. */
+.topbar{position:sticky;top:0;z-index:60;background:#fff;
+  border-bottom:1px solid var(--border);box-shadow:0 1px 0 rgba(17,18,19,.02)}
+.tb{max-width:1180px;margin:0 auto;padding:11px 30px;display:flex;
+  align-items:center;gap:18px}
+.flamme{width:22px;height:22px;border-radius:6px;background:var(--gul);
+  flex-shrink:0;border:1px solid var(--gul-kant)}
+.tb .navn{font-size:12px;font-weight:900;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--sort);white-space:nowrap}
+.tb .nu{font-size:12px;font-weight:700;color:var(--muted);white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;flex:1;min-width:0}
+.tb .nu b{color:var(--sort);font-weight:800}
+.vaerktoej{display:flex;align-items:center;gap:7px;flex-shrink:0}
+.knap{font-family:inherit;font-size:11px;font-weight:800;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--sort);background:#fff;cursor:pointer;
+  border:1px solid var(--border);border-radius:100px;padding:6px 13px;
+  transition:background .15s,border-color .15s}
+.knap:hover{background:var(--flade);border-color:var(--linje)}
+.knap.paa{background:var(--sort);color:#fff;border-color:var(--sort)}
+.knap.rund{width:30px;height:30px;padding:0;font-size:13px;line-height:1}
+.tbmaal{font-size:11px;font-weight:800;color:var(--muted);
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+#fremdrift{position:absolute;left:0;bottom:-1px;height:2px;width:0;
+  background:var(--gul);transition:width .12s linear}
+
+/* -------------------------------------------------------------- side ---- */
+.wrap{max-width:1180px;margin:0 auto;padding:0 30px}
+header.hoved{padding:56px 0 30px}
+.kicker{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.kicker .knr{font-size:12px;font-weight:900;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--sort)}
+.kicker .krule{width:46px;height:2px;background:var(--gul)}
+.kicker .ktxt{font-size:11px;font-weight:800;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted)}
+h1{font-size:clamp(34px,4.4vw,60px);font-weight:900;color:var(--sort);
+  letter-spacing:-.033em;line-height:1.04;max-width:18ch}
+h1 mark{background:linear-gradient(transparent 68%,var(--gul) 68%,var(--gul) 96%,transparent 96%);
+  color:inherit;padding:0 .04em}
+.fakta{display:flex;flex-wrap:wrap;gap:0;margin-top:30px;
+  border-top:1px solid var(--sort);border-bottom:1px solid var(--border)}
+.fakta div{padding:16px 30px 16px 0;margin-right:30px;
+  border-right:1px solid var(--border)}
+.fakta div:last-child{border-right:0}
+.fakta .t{font-size:10px;font-weight:800;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--muted);display:block;margin-bottom:5px}
+.fakta .v{font-size:24px;font-weight:900;color:var(--sort);letter-spacing:-.02em;
+  font-variant-numeric:tabular-nums}
+.fakta .v small{font-size:13px;font-weight:700;color:var(--muted)}
+
+/* --------------------------------------------------------- nøgle + toc -- */
+.noegle{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 0}
+.noegle span{display:inline-flex;align-items:center;gap:9px;font-size:12px;
+  font-weight:700;color:var(--muted);border:1px solid var(--border);
+  border-radius:100px;padding:7px 15px 7px 11px;background:#fff}
+.noegle i{width:12px;height:12px;border-radius:3px;display:block;flex-shrink:0}
+.i-tale{background:var(--gul)}
+.i-sk{background:var(--flade);border:1px solid var(--linje)}
+.i-hul{background:var(--sort)}
+.toc{margin:34px 0 0;border-top:1px solid var(--border)}
+.toc a{display:flex;align-items:baseline;gap:16px;text-decoration:none;
+  border-bottom:1px solid var(--border);padding:13px 6px;color:var(--tekst)}
+.toc a:hover{background:var(--flade)}
+.toc .n{font-size:11px;font-weight:900;color:var(--muted);width:56px;
+  flex-shrink:0;letter-spacing:.1em;text-transform:uppercase}
+.toc .t{font-size:15px;font-weight:800;color:var(--sort);letter-spacing:-.015em}
+.toc .m{margin-left:auto;font-size:12px;font-weight:700;color:var(--muted);
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* ------------------------------------------------------------- blokke --- */
+.blok{padding-top:74px}
+.blokhoved{border-top:2px solid var(--sort);padding-top:20px;
+  display:flex;align-items:flex-start;gap:22px;flex-wrap:wrap}
+.blokhoved .bnr{font-size:11px;font-weight:900;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--sort);background:var(--gul);
+  border-radius:100px;padding:6px 14px;white-space:nowrap}
+h2{font-size:clamp(23px,2.5vw,33px);font-weight:900;color:var(--sort);
+  letter-spacing:-.028em;line-height:1.12;flex:1;min-width:260px}
+.blokhoved .bm{font-size:12px;font-weight:700;color:var(--muted);
+  font-variant-numeric:tabular-nums;white-space:nowrap;padding-top:7px}
+
+/* før-optagelse-noten: skal ligne alt andet der ikke siges højt */
+.foer{background:var(--flade);border:1px solid var(--border);border-radius:14px;
+  padding:18px 22px;margin-top:22px;max-width:70em}
+.foer .mrk{font-size:10px;font-weight:900;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted);display:block;margin-bottom:10px}
+.foer .mrk em{font-style:normal;font-weight:600;letter-spacing:.02em;
+  text-transform:none;font-size:11px;color:var(--linje);margin-left:10px}
+.foer p{font-size:13.5px;line-height:1.65;color:var(--muted);margin-bottom:9px}
+.foer p:last-child{margin-bottom:0}
+.foer b{color:var(--tekst)}
+
+/* -------------------------------------------------------------- slides -- */
+.slide{display:grid;grid-template-columns:104px minmax(0,1fr);gap:0;
+  padding:40px 0 14px;border-top:1px solid var(--border)}
+.slide:first-of-type{border-top:1px solid var(--linje)}
+.gutter{padding-top:2px}
+.gutter .sn{position:sticky;top:80px;display:block}
+.gutter .sk{font-size:9px;font-weight:900;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted);display:block}
+.gutter .sv{font-size:40px;font-weight:900;color:var(--sort);line-height:.95;
+  letter-spacing:-.05em;font-variant-numeric:tabular-nums;display:block;
+  margin-top:2px}
+.gutter .sv::after{content:"";display:block;width:26px;height:3px;
+  background:var(--gul);margin-top:9px}
+h3{font-size:19px;font-weight:900;color:var(--sort);letter-spacing:-.02em;
+  line-height:1.25;margin-bottom:20px;max-width:34em}
+h3 .stjerne{color:#D4A900}
+
+/* GØR: handlingen i systemet. Sort strip, kan skelnes med perifert syn. */
+.gor{background:var(--sort);border-radius:12px;padding:14px 20px;margin:0 0 22px;max-width:62em}
+.gor .mrk{font-size:10px;font-weight:900;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gul);display:block;margin-bottom:8px}
+.gor .mrk em{font-style:normal;font-weight:700;letter-spacing:.04em;text-transform:none;
+  color:rgba(255,255,255,.45);margin-left:9px}
+.gor p{font-size:14.5px;line-height:1.6;color:#fff;margin-bottom:8px;font-weight:600}
+.gor p:last-child{margin-bottom:0}
+.gor b{color:var(--gul)}
+
+/* Replik: det sælgeren siger til virksomheden. Hvidt kort inde i talesporet. */
+.tale p.replik{background:#fff;border:1px solid var(--border);border-left:4px solid var(--gul);
+  border-radius:0 14px 14px 0;padding:14px 20px;margin:14px 0;font-weight:700;color:var(--sort)}
+
+/* Et STOP der springes over: nedtonet og kompakt. */
+.slide.spring{opacity:.5}
+.slide.spring .tale p{font-size:calc(var(--tale) * .72)}
+
+/* SKÆRM: det der vises, og som ALDRIG må læses højt */
+.skaerm{background:var(--flade);border:1px solid var(--border);
+  border-left:3px solid var(--linje);border-radius:0 12px 12px 0;
+  padding:15px 20px;margin:0 0 22px;max-width:62em}
+.skaerm .mrk{font-size:10px;font-weight:900;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted);display:block;margin-bottom:8px}
+.skaerm .mrk em{font-style:normal;font-weight:700;letter-spacing:.04em;
+  text-transform:none;color:var(--linje);margin-left:9px}
+.skaerm p{font-size:13px;line-height:1.62;color:var(--muted);margin-bottom:8px}
+.skaerm p:last-child{margin-bottom:0}
+
+/* TALESPOR: sidens største tekst. Gul skinne = det du siger. */
+.tale{border-left:3px solid var(--gul);padding:2px 0 2px 24px;margin:0 0 24px}
+.tale p{font-size:var(--tale);line-height:1.62;color:var(--tekst);
+  font-weight:400;letter-spacing:-.011em;margin-bottom:.72em;max-width:var(--maal)}
+.tale p:last-child{margin-bottom:0}
+
+/* instruktion til Lasse: siges ikke, men gøres */
+.instr{border:1px dashed var(--linje);border-radius:12px;padding:13px 18px;
+  margin:0 0 22px;max-width:62em;background:#fff}
+.instr .mrk{font-size:10px;font-weight:900;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted);display:block;margin-bottom:7px}
+.instr p{font-size:14px;line-height:1.6;color:var(--tekst);margin-bottom:7px}
+.instr p:last-child{margin-bottom:0}
+
+/* HUL: her kan der ikke optages endnu. Skal ikke kunne overses. */
+.hul{background:var(--gul-soft);border:2px solid var(--sort);border-radius:14px;
+  padding:0;margin:0 0 24px;max-width:62em;overflow:hidden}
+.hul .mrk{background:var(--sort);color:var(--gul);font-size:11px;
+  font-weight:900;letter-spacing:.18em;text-transform:uppercase;
+  padding:8px 18px;display:block}
+.hul .krop{padding:16px 18px}
+.hul p{font-size:15px;line-height:1.62;color:var(--sort);font-weight:500;
+  margin-bottom:9px}
+.hul p:last-child{margin-bottom:0}
+
+/* ------------------------------------------------------------- footer --- */
+footer{margin-top:80px;border-top:2px solid var(--sort);padding:26px 0 70px}
+.andre{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.andre a,.andre span{font-size:12px;font-weight:800;text-decoration:none;
+  border:1px solid var(--border);border-radius:100px;padding:8px 15px;
+  color:var(--muted);background:#fff}
+.andre a:hover{border-color:var(--sort);color:var(--sort)}
+.andre span.her{background:var(--sort);color:#fff;border-color:var(--sort)}
+.folio{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--linje)}
+.tiltop{position:fixed;right:22px;bottom:22px;z-index:50}
+
+/* ---------------------------------------------------- skjul skærmnoter -- */
+body.skjul .skaerm{display:none}
+body.skjul .foer{display:none}
+
+/* ---------------------------------------------------------- responsivt -- */
+@media (max-width:900px){
+  :root{--tale:22px;--maal:40ch}
+  .wrap{padding:0 20px}
+  .tb{padding:9px 20px;gap:12px}
+  .tb .nu{display:none}
+  .slide{grid-template-columns:1fr;gap:0;padding:32px 0 10px}
+  .gutter{display:flex;align-items:baseline;gap:11px;padding-bottom:14px}
+  .gutter .sn{position:static;display:flex;align-items:baseline;gap:11px}
+  .gutter .sv{font-size:26px;margin-top:0}
+  .gutter .sv::after{display:none}
+  .fakta div{padding-right:20px;margin-right:20px}
+  .fakta .v{font-size:20px}
+  .tale{padding-left:16px}
+  h1{max-width:100%}
+}
+@media (max-width:560px){
+  .vaerktoej .skjulmob{display:none}
+}
+
+/* ------------------------------------------------------------- print ---- */
+@media print{
+  @page{margin:16mm 14mm}
+  html{scroll-padding-top:0}
+  body{background:#fff;color:#000;line-height:1.5}
+  .topbar,.tiltop,.andre,.noegle,.toc,.vaerktoej{display:none !important}
+  body.skjul .skaerm,body.skjul .foer{display:block}
+  .wrap{max-width:100%;padding:0}
+  header.hoved{padding:0 0 12px}
+  h1{font-size:26pt;max-width:100%}
+  .fakta{margin-top:14px}
+  .fakta .v{font-size:14pt}
+  .blok{padding-top:18px;break-before:page;page-break-before:always}
+  .blok:first-of-type{break-before:auto;page-break-before:auto}
+  h2{font-size:16pt}
+  /* Slidet må gerne løbe over et sideskift, ellers står der en halv tom side
+     efter hvert slide. Det der ALDRIG må knække, er en enkelt talesporslinje,
+     en skærmnote eller en hul-boks. */
+  .slide{grid-template-columns:74px 1fr;padding:16px 0 6px}
+  .skaerm,.hul,.instr,.tale p{break-inside:avoid;page-break-inside:avoid}
+  h3{break-after:avoid;page-break-after:avoid}
+  .gutter .sv{font-size:20pt}
+  .gutter .sn{position:static}
+  h3{font-size:12pt;margin-bottom:10px}
+  .tale{max-width:100%;border-left:2.5pt solid #000;padding-left:14px;
+    margin-bottom:14px}
+  .tale p{font-size:13pt;line-height:1.5;color:#000;max-width:56ch}
+  .skaerm{background:#fff;border:1pt solid #999;border-left:3pt solid #999;
+    max-width:100%;margin-bottom:12px;padding:9px 13px}
+  .skaerm p{font-size:8.5pt;line-height:1.4;color:#444}
+  .foer{background:#fff;border:1pt solid #bbb;max-width:100%}
+  .foer p{font-size:8.5pt;color:#444}
+  .instr{max-width:100%}
+  .instr p{font-size:10pt}
+  .hul{border:2.5pt solid #000;max-width:100%;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .hul .mrk{background:#000;color:#fff;-webkit-print-color-adjust:exact;
+    print-color-adjust:exact}
+  .hul p{font-size:11pt}
+  footer{margin-top:24px;padding-bottom:0}
+  code{border:0;background:#fff}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="tb">
+    <span class="flamme"></span>
+    <span class="navn">Manus</span>
+    <span class="nu" id="nu"></span>
+    <span class="vaerktoej">
+      <span class="tbmaal skjulmob">12 min</span>
+      <button class="knap rund" id="knMindre" title="Mindre skrift (tast -)">&minus;</button>
+      <span class="tbmaal" id="strvis">25 px</span>
+      <button class="knap rund" id="knStoerre" title="Større skrift (tast +)">+</button>
+      <button class="knap skjulmob" id="knSkjul">Skjul skærm-noter</button>
+      <button class="knap skjulmob" id="knPrint">Print</button>
+    </span>
+  </div>
+  <div id="fremdrift"></div>
+</div>
+
+<div class="wrap">
+
+<header class="hoved">
+  <div class="kicker"><span class="knr">ENKELT BLOK</span><span class="krule"></span>
+    <span class="ktxt">Optage-manus til Lasse</span></div>
+  <h1>Manus &middot; Modul 6<br><mark>Produktviden · Video 1: Virksomhedens platform</mark></h1>
+
+  <div class="fakta">
+    <div><span class="t">Taletid</span><span class="v">ca. 12 <small>min</small></span></div>
+    <div><span class="t">Slides</span><span class="v">17</span></div>
+    <div><span class="t">Blokke</span><span class="v">1</span></div>
+    <div><span class="t">Ord i talesporet</span><span class="v">1807</span></div>
+    <div><span class="t">Huller</span><span class="v">0 <small>klar til optagelse</small></span></div>
+  </div>
+
+  <div class="noegle">
+    <span><i class="i-tale"></i>Gul skinne = det du siger højt</span>
+    <span><i class="i-sk"></i>Grå boks = det der vises på skærmen, siges ikke</span>
+    <span><i class="i-hul"></i>Sort/gul boks = hul, kan ikke optages endnu</span>
+  </div>
+
+  <nav class="toc"><a href="#blok0"><span class="n">Blok 00</span><span class="t">Produktviden · Video 1: Virksomhedens platform</span><span class="m">12 min · 17 stop</span></a></nav>
+</header>
+
+<main><section class="blok" id="blok0" data-nu="Blok 00 &amp;middot; &lt;b&gt;Produktviden · Video 1: Virksomhedens platform&lt;/b&gt;"><div class="blokhoved"><span class="bnr">Blok 00</span><h2>Produktviden · Video 1: Virksomhedens platform</h2><span class="bm">ca. 12 min · 17 stop · 1807 ord</span></div><div class="foer"><span class="mrk">Før du optager · læses, siges ikke<em>henvisninger til afsnit "nederst" står i MANUS_Modul6_Video1_Virksomhedsplatformen.md</em></span><p>Skærmdeling, ikke slides. Las deler sin skærm, klikker sig gennem platformen og læser op herfra samtidig.</p><p>Vigtigt om perspektivet: hele den her video optages inde på <b>virksomhedens egen platform.</b> Det er det, virksomheden selv ser, når de logger ind, ikke vores interne system. Log ind på en testvirksomhed før optagelsen, og bliv derinde hele videoen igennem.</p><p>Sådan læses siden. <b>Sort boks = GØR.</b> Det er handlingen i systemet, og den siges ikke højt. <b>Almindelig tekst = talespor.</b> Det læses op. <b>Hvidt kort med gul kant = replik.</b> Det er de ord du siger til virksomheden, og de skal siges langsommere end resten, så en ny sælger kan skrive dem ned.</p><p>Hvert stop hedder det samme som knappen eller siden gør inde på platformen. Taber du tråden midt i en optagelse, så kig på navnet på skærmen og find det her.</p><p>Kilde: <code>00_Grundkontekst/RAA_VANDFALD_ORDRET_PRODUKTVIDEN.md</code>, Del A og Del B.</p></div><article class="slide" id="b0-s1"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">1</span></span></div><div class="indhold"><h3>Virksomhedens platform <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>log ind på virksomhedens egen platform på en testvirksomhed. Bliv stående på forsiden med jobopslag, og åbn ikke noget endnu.</p></div><div class="tale"><p>I den her video gennemgår vi noget af det vigtigste, som du skal have hundrede procent styr på fra start, og som du skal kunne alt om, hvis du bliver spurgt. Du skal kunne det i søvne.</p></div><div class="tale"><p>Og det er nemlig virksomhedens platform. Det er vores bread and butter, og det er det, vi lever så højt og så godt på i PowerMatch.</p></div><div class="tale"><p>Du skal vide alle funktioner herinde. Du skal kunne forklare alle funktioner, og du skal kunne lære dem fra dig.</p></div><div class="tale"><p>I systemgennemgangen stod vi inde i vores eget system. Nu står vi der, hvor virksomheden selv lander, når de logger ind. Så nu gennemgår vi hele platformen til punkt og prikke.</p></div></div></article><article class="slide" id="b0-s2"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">2</span></span></div><div class="indhold"><h3>Nyt jobopslag</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>peg på knappen Nyt jobopslag oppe på forsiden. Tryk ikke på den endnu.</p></div><div class="tale"><p>Den første forside virksomheden har, det er deres jobopslag. Og den første funktion de har, den hedder nyt jobopslag.</p></div><div class="tale"><p>Klikker vi på den, så kan vi herfra oprette et nyt job og se matches direkte på platformen.</p></div></div></article><article class="slide" id="b0-s3"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">3</span></span></div><div class="indhold"><h3>Hvorfor du selv skal kunne funktionen <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>bliv på forsiden. Ingen klik her.</p></div><div class="tale"><p>Og du sidder så og tænker: hvorfor er det vigtigt, at jeg kan den her funktion?</p></div><div class="tale"><p>Det er det, fordi hvis du lærer dine kunder selv at oprette job, så gør de det hele selv. Lad os sige, de får brug for flere tømrere i andre dele af landet, eller de får brug for murere også nu, eller malere, eller et helt fjerde fag. I stedet for at ringe til dig, hvor du skal bruge ti, femten minutter af din tid på det, og ti, femten minutter mere på at hjælpe dem med at booke samtaler, så gør de det hele selv.</p></div><div class="tale"><p>Din provision ændrer sig ikke, om du gør det, eller de gør det. Det er fuldstændig den samme provision.</p></div><div class="tale"><p>Så lav det matematikstykke i dit hoved. Hvis jeg lærer hundrede kunder, to hundrede kunder, at gøre det her selv, hvor meget tid sparer jeg så, sammenlignet med at jeg skulle ringe til dem og gøre det for dem? Hvor mange penge mere kan jeg tjene?</p></div><div class="tale"><p>Så også bare fra et helt egoistisk perspektiv for dig selv. Hvis du ikke tænker på, at vi gerne vil have, at du skal lære platformen, så er det også bare meget bedre for din egen performance og din egen løn, at du får dem til at gøre de her ting selv, frem for at du skal gøre det for dem.</p></div><div class="tale"><p>Så lær alle dine kunder det fra dag et.</p></div></div></article><article class="slide" id="b0-s4"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">4</span></span></div><div class="indhold"><h3>Felterne i det nye jobopslag <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>tryk Nyt jobopslag, så formularen åbner. Udfyld den som en murervirksomhed: løn 230 til 250, start hurtigst muligt, fire års erfaring, arbejdssted omkring Rådhuspladsen, maks 30 minutter til arbejde, kørekort påkrævet, firmabil fra dag et, og arbejdsopgaverne renovering og fliser. Tryk Gem, så formularen lukker.</p></div><div class="tale"><p>Man trykker på nyt jobopslag, og så kommer der en masse felter, du har set før.</p></div><div class="tale"><p>Lad os sige, vi opretter en murervirksomhed. Virksomheden skriver ind, hvad de tilbyder i løn. Lad os sige 230 til 250. De søger en murer hurtigst muligt. De vil gerne have fire års erfaring. De søger omkring Rådhuspladsen. Maks tredive minutter til arbejde. Kørekort er påkrævet. Der er firmabil fra dag et. Og det er noget renovering og noget fliser.</p></div><div class="tale"><p>Og så trykker man Gem.</p></div></div></article><article class="slide" id="b0-s5"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">5</span></span></div><div class="indhold"><h3>Matchene loader ind <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>bliv stående på jobbet, mens matchene loader ind. Rul ikke væk, og åbn ikke noget imens.</p></div><div class="tale"><p>Det du kan se nu, det er, at platformen loader, og alle de bedste matches bliver fundet til dig.</p></div><div class="tale"><p>Prøv at lægge mærke til, hvor hurtigt det går. Inden for tredive sekunder er det første match allerede kommet, og så loader den profil efter profil.</p></div><div class="tale"><p>Hvilket igen viser, hvor fed og hvor nice en platform det her er.</p></div><div class="tale"><p>Det er jo også en måde at imponere kunden på. Det er jo noget, de aldrig har set før. Så det at du kan vise dem ting, de ikke har set før, det kan give sådan en wow-effekt og en endnu større lyst til at bruge os, end de nogensinde har haft.</p></div><div class="tale"><p>Så tænk også over det, når du præsenterer vores produkt. Hvordan giver jeg ham den her wow-effekt? Og det her er en måde at gøre det på.</p></div></div></article><article class="slide" id="b0-s6"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">6</span></span></div><div class="indhold"><h3>Korteste afstand, bedste match og nyeste kandidater</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>klik gennem de tre knapper én ad gangen, og lad til sidst bedste match stå tændt. Peg derefter på filteret for maks afstand uden at ændre det.</p></div><div class="tale"><p>Når vi så er inde på jobbet, så læg mærke til, at de blandt andet har tre knapper, som du også har set, vi har inde på virksomhedsprofilen i systemgennemgangen. De hedder korteste afstand, bedste match og nyeste kandidater.</p></div><div class="tale"><p>Bare lige for at sige, hvad det betyder igen. Korteste afstand, så kommer den kandidat der er tættest på adressen først. Bedste match, så kommer den højeste score først. Og nyeste kandidater, så kommer dem der for nylig er blevet screenet og matchet op først.</p></div><div class="tale"><p>Virksomheden kan også filtrere her på, hvor lang afstand de højest vil kigge på.</p></div></div></article><article class="slide" id="b0-s7"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">7</span></span></div><div class="indhold"><h3>Chatten nede i højre hjørne <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>åbn en af kandidaterne i matchlisten, så profilen kommer frem. Peg på chatten nede i højre hjørne. Bliv på profilen.</p></div><div class="tale"><p>Hvis vi åbner en af profilerne, så kan vi se det første, du ikke har set før. Selve profilen har du set tidligere i oplæringen. Men det nye, det er chatten nede i højre hjørne.</p></div><div class="tale"><p>Virksomheden kan sende en besked direkte til profilen og stille spørgsmål, hvis de har nogen. Og det får vi selvfølgelig også besked om. Er spørgsmålet relevant, får du det sendt videre som lead.</p></div><div class="tale"><p>Så der kunne du sige til virksomheden:</p></div><div class="tale"><p class="replik">"Hey, har du nogen ekstra spørgsmål til kandidaten omkring arbejdsopgaver eller lignende, du ikke kan se på CV'et? Så benyt chatten, så skriver du direkte til ham."</p></div></div></article><article class="slide" id="b0-s8"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">8</span></span></div><div class="indhold"><h3>Resten af CV'et</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>rul roligt ned gennem profilen, mens sektionerne læses op. Rul derefter tilbage op til de to knapper interesseret og ikke interesseret.</p></div><div class="tale"><p>Resten af profilen kender du. Så kan du gennemgå hele CV'et for kunden, ligesom vi har gennemgået det tidligere i oplæringen.</p></div><div class="tale"><p>Virksomheden kan se matchet i forhold til de arbejdsopgaver, de har puttet ind, erfaring og afstand. De kan se kandidatens løn, startdato og transportmuligheder. Så er der nøglekompetencer, der er kørekort, og der er fritidsinteresser. Der er årsag til ledighed. Så har vi billedet, vi har profilbeskrivelsen, og vi har sammenligningen mellem vores screening af kandidaten og virksomhedens krav. Og så er der ansættelseshistorikken, som du kender, og til sidst kan vi se kandidatens uddannelse og reference.</p></div></div></article><article class="slide" id="b0-s9"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">9</span></span></div><div class="indhold"><h3>Ikke interesseret <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>tryk Ikke interesseret, så årsagslisten kommer frem. Peg på de fire årsager, mens de læses op. Luk årsagslisten igen uden at vælge en årsag, så du står på kandidatprofilen. Kandidaten skal ikke afvises her.</p></div><div class="tale"><p>Det vigtigste er at lære kunderne at bruge de to knapper, interesseret og ikke interesseret.</p></div><div class="tale"><p>Så prøv at vise dem knappen ikke interesseret, og sig, at når de trykker der, så kan de helt selv rette jobbet til.</p></div><div class="tale"><p>Trykker de for lidt erfaring, kan de vælge den nye erfaring på jobbet. Trykker de for lang afstand, kan de vælge den nye afstand på jobbet. Trykker de mangler relevant erfaring, kan de rette arbejdsopgaverne til. Og trykker de lønforventninger matcher ikke, så kan de opdatere lønnen.</p></div><div class="tale"><p>Det har du set fra din egen side i systemgennemgangen. Det nye her er, at kunden selv kan gøre det.</p></div></div></article><article class="slide" id="b0-s10"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">10</span></span></div><div class="indhold"><h3>Interesseret <span class="stjerne">★</span><span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>tryk Interesseret, så de to muligheder kommer frem. Peg på Send jobtilbud.</p></div><div class="tale"><p>Så det vigtigste af det hele, det er den store fede knap, der hedder interesseret.</p></div><div class="tale"><p>Når de trykker på den, så kan du onboarde dem i at sende jobtilbud. Når de bliver så glade for platformen, at de stoler hundrede procent på os, så kan de sende kandidaten et jobtilbud direkte.</p></div><div class="tale"><p>Og har de haft en samtale med en kandidat, så kan de sende jobtilbuddet den vej bagefter.</p></div></div></article><article class="slide" id="b0-s11"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">11</span></span></div><div class="indhold"><h3>Book samtale og handelsbetingelserne <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>tryk Book samtale, så handelsbetingelserne kommer op. Tryk Accepter og fortsæt.</p></div><div class="tale"><p>Så har de knappen nedenunder, der hedder book samtale. Når de skal booke en samtale, så siger du de her handelsbetingelser.</p></div><div class="tale"><p>Det handler i bund og grund om, at vi ikke ønsker, at virksomheder gør det uden om os. Det har vi desværre oplevet før, og så har vi lavet det på den her måde.</p></div><div class="tale"><p>Så trykker du accepter her, og så siger du egentlig bare:</p></div><div class="tale"><p class="replik">"Når du får lov at snakke med kandidaten, som selvfølgelig er helt gratis, så tager du ham ikke uden om os."</p></div><div class="tale"><p>Og så accepter og fortsæt.</p></div></div></article><article class="slide" id="b0-s12"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">12</span></span></div><div class="indhold"><h3>De tre måder de kan booke på</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>klik gennem telefonisk samtale, fysisk samtale og Google Meet. Luk derefter bookingflowet uden at gemme, så du står på kandidatprofilen igen.</p></div><div class="tale"><p>Så har de tre valgmuligheder, og dem onboarder du kunden i.</p></div><div class="tale"><p>Den telefoniske samtale. Der fortæller du dem, at de vælger en dato, hvilket tidsrum de har tid i, og hvilket telefonnummer de vil kontaktes på.</p></div><div class="tale"><p>Med den fysiske samtale gælder det samme, bare med den adresse de vil se kandidaten på, i stedet for et telefonnummer.</p></div><div class="tale"><p>Og med Google Meet gælder det samme, der vælger de dato og tidsrum.</p></div><div class="tale"><p>De behøver ikke være præcise med tidspunktet. Vælger de et større tidsinterval, så betyder det bare, at vi ved, at de har tid inden for det tidsrum.</p></div></div></article><article class="slide" id="b0-s13"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">13</span></span></div><div class="indhold"><h3>Ændre jobkriterier <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>luk kandidatprofilen og gå tilbage til jobbet. Tryk Ændre jobkriterier, og rul, så arbejdsopgaver nederst, firmabil, kørekort, adresse, erfaring og løn kan ses. Ret adressen til Aarhus Letbane, og tryk Gem, så redigeringen lukker.</p></div><div class="tale"><p>Når vi går tilbage her, så vis dem, at de også altid kan ændre deres job ved at trykke ændre jobkriterier.</p></div><div class="tale"><p>Så kan de ændre det hele på én gang. Arbejdsopgaver nederst, firmabil, kørekort, adresse, erfaring og løn.</p></div><div class="tale"><p>Prøv at se, hvis vi ændrer adressen her til Aarhus. Aarhus Letbane. Lad os prøve det, og så trykker vi gem.</p></div></div></article><article class="slide" id="b0-s14"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">14</span></span></div><div class="indhold"><h3>Nye matches i Aarhus</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>bliv på jobbet, mens de nye matches loader ind.</p></div><div class="tale"><p>Så loader platformen igen, og der går ikke mere end ti sekunder, så har vi nye matches på præcis de samme kriterier som før, bare i Aarhus.</p></div><div class="tale"><p>Jeg vil selvfølgelig anbefale dem, at hvis de også søger murere i Aarhus, så går de ind og opretter et nyt job i Aarhus, så de har både København og Aarhus.</p></div><div class="tale"><p>Men det her var bare lige for at vise, hvor smart systemet er.</p></div></div></article><article class="slide" id="b0-s15"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">15</span></span></div><div class="indhold"><h3>Ansatte</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>gå til siden Ansatte i menuen.</p></div><div class="tale"><p>Når virksomheden får ansatte, så kan de se dem ovre i den her side, der hedder ansatte.</p></div><div class="tale"><p>Der får de alle profilerne med fuld information, altså fuldt navn, e-mail og telefonnummer.</p></div></div></article><article class="slide" id="b0-s16"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">16</span></span></div><div class="indhold"><h3>Se den her video flere gange <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>bliv på siden Ansatte.</p></div><div class="tale"><p>Så det var gennemgangen af platformen.</p></div><div class="tale"><p>Se den her video flere gange, så du forstår det til punkt og prikke, og så du kan onboarde alle dine kunder i det her. Jeg kan ikke understrege nok, hvor vigtigt det er, at du får onboardet dine kunder i, hvordan det her fungerer.</p></div><div class="tale"><p>Hele matematikken bag det er, at jo mere dine kunder gør selv, jo flere kunder kan du have, og jo flere penge kan du tjene.</p></div><div class="tale"><p>Skal du booke alle samtalerne for dine kunder, oprette alle deres job og sidde og redigere i job, hver gang der er behov for dig, så er der en begrænsning for, hvor mange kunder du kan have.</p></div><div class="tale"><p>Går dine kunder altid selv ind og booker samtaler, selv sender jobtilbud, selv opretter deres job og selv redigerer i job, så er det næsten ubegrænset, hvor mange kunder du kan håndtere. Fordi så skal du bare have prikket den over stregen.</p></div><div class="tale"><p>Så det var det. I næste trin får du en lille opgave.</p></div></div></article><article class="slide" id="b0-s17"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">17</span></span></div><div class="indhold"><h3>Testen</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>skift til øvelsessiden i onboardingen, og bliv på den, mens de fem opgaver læses op. Knappen på siden har endnu ikke et link på sig, så tryk ikke på den.</p></div><div class="tale"><p>Du skal nu gennemgå hele virksomhedsprofilen på din egen. Øvelsen laver du inde på virksomhedens platform, den vi lige har været igennem.</p></div><div class="tale"><p>Du skal oprette et nyt job. Du skal redigere et job. Du skal booke en samtale. Du skal sende jobtilbud. Og du skal afvise en kandidat plus årsag.</p></div><div class="tale"><p>Og ja, det er måske lidt nemt og ligetil, men det er bare, så du får en bedre og bedre feeling af hele platformen.</p></div></div></article></section></main>
+
+<footer>
+  <div class="andre"></div>
+  <p class="folio">PowerMatch &middot; Internt materiale &middot; Modul 6 · Produktviden · Video 1: Virksomhedens platform &middot;
+</p>
+</footer>
+
+</div>
+
+<button class="knap tiltop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&uarr; Top</button>
+<script>
+/* Ingen localStorage og ingen sessionStorage. Alt står i variabler herunder
+   og nulstilles ved reload, præcis som aftalt. */
+(function(){
+  var talestr = 25;                     // px, samme startværdi som CSS
+  var minStr = 17, maxStr = 42;
+  var skjult = false;
+
+  var rod   = document.documentElement;
+  var vis   = document.getElementById('strvis');
+  var bar   = document.getElementById('fremdrift');
+  var nu    = document.getElementById('nu');
+  var knSkj = document.getElementById('knSkjul');
+  var blokke = [].slice.call(document.querySelectorAll('.blok'));
+
+  function saetStr(n){
+    talestr = Math.max(minStr, Math.min(maxStr, n));
+    rod.style.setProperty('--tale', talestr + 'px');
+    if (vis) vis.textContent = talestr + ' px';
+  }
+  document.getElementById('knMindre').onclick = function(){ saetStr(talestr - 2); };
+  document.getElementById('knStoerre').onclick = function(){ saetStr(talestr + 2); };
+  document.getElementById('knPrint').onclick = function(){ window.print(); };
+  knSkj.onclick = function(){
+    skjult = !skjult;
+    document.body.classList.toggle('skjul', skjult);
+    knSkj.classList.toggle('paa', skjult);
+    knSkj.textContent = skjult ? 'Vis skærm-noter' : 'Skjul skærm-noter';
+  };
+
+  function opdater(){
+    var h = document.documentElement;
+    var kan = (h.scrollHeight - h.clientHeight) || 1;
+    bar.style.width = Math.min(100, (h.scrollTop / kan) * 100) + '%';
+    var akt = null;
+    for (var i = 0; i < blokke.length; i++){
+      if (blokke[i].getBoundingClientRect().top <= 130) akt = blokke[i];
+    }
+    if (nu) nu.innerHTML = akt ? akt.getAttribute('data-nu') : '';
+  }
+  window.addEventListener('scroll', opdater, {passive:true});
+  window.addEventListener('resize', opdater);
+  opdater();
+
+  document.addEventListener('keydown', function(e){
+    if (e.target && /INPUT|TEXTAREA/.test(e.target.tagName)) return;
+    if (e.key === '+') { saetStr(talestr + 2); e.preventDefault(); }
+    if (e.key === '-') { saetStr(talestr - 2); e.preventDefault(); }
+  });
+})();
+</script>
+</body>
+</html>

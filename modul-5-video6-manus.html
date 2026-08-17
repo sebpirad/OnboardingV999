@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manus · Modul 5 · Video 6: Adversus · PowerMatch</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gul:#F8E965; --gul-soft:#FDF8D4; --gul-kant:#F0E4A0;
+  --sort:#111213; --tekst:#26282B; --muted:#71757C;
+  --border:#ECECE8; --flade:#F6F6F3; --bg:#FFFFFF; --linje:#C9C9C2;
+  --tale:25px;                      /* styres af A- / A+ */
+  --maal:44ch;                      /* satsbredde: ca. 44 tegn pr. linje.
+                                       ch følger talesporets egen grad, så
+                                       linjelængden er den samme uanset hvor
+                                       stort Lasse skruer op. */
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{font-family:'Inter',-apple-system,Arial,sans-serif;color:var(--tekst);
+  background:var(--bg);-webkit-font-smoothing:antialiased;line-height:1.6}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em;
+  background:#fff;border:1px solid var(--border);border-radius:5px;padding:1px 5px}
+b{color:var(--sort);font-weight:800}
+a{color:var(--sort)}
+
+/* ---------------------------------------------------------- topbjælke --- */
+/* Helt dækkende hvid. Ikke gennemsigtig: talesporet må ikke kunne ses
+   igennem bjælken, når han scroller midt i en sætning. */
+.topbar{position:sticky;top:0;z-index:60;background:#fff;
+  border-bottom:1px solid var(--border);box-shadow:0 1px 0 rgba(17,18,19,.02)}
+.tb{max-width:1180px;margin:0 auto;padding:11px 30px;display:flex;
+  align-items:center;gap:18px}
+.flamme{width:22px;height:22px;border-radius:6px;background:var(--gul);
+  flex-shrink:0;border:1px solid var(--gul-kant)}
+.tb .navn{font-size:12px;font-weight:900;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--sort);white-space:nowrap}
+.tb .nu{font-size:12px;font-weight:700;color:var(--muted);white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;flex:1;min-width:0}
+.tb .nu b{color:var(--sort);font-weight:800}
+.vaerktoej{display:flex;align-items:center;gap:7px;flex-shrink:0}
+.knap{font-family:inherit;font-size:11px;font-weight:800;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--sort);background:#fff;cursor:pointer;
+  border:1px solid var(--border);border-radius:100px;padding:6px 13px;
+  transition:background .15s,border-color .15s}
+.knap:hover{background:var(--flade);border-color:var(--linje)}
+.knap.paa{background:var(--sort);color:#fff;border-color:var(--sort)}
+.knap.rund{width:30px;height:30px;padding:0;font-size:13px;line-height:1}
+.tbmaal{font-size:11px;font-weight:800;color:var(--muted);
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+#fremdrift{position:absolute;left:0;bottom:-1px;height:2px;width:0;
+  background:var(--gul);transition:width .12s linear}
+
+/* -------------------------------------------------------------- side ---- */
+.wrap{max-width:1180px;margin:0 auto;padding:0 30px}
+header.hoved{padding:56px 0 30px}
+.kicker{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.kicker .knr{font-size:12px;font-weight:900;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--sort)}
+.kicker .krule{width:46px;height:2px;background:var(--gul)}
+.kicker .ktxt{font-size:11px;font-weight:800;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted)}
+h1{font-size:clamp(34px,4.4vw,60px);font-weight:900;color:var(--sort);
+  letter-spacing:-.033em;line-height:1.04;max-width:18ch}
+h1 mark{background:linear-gradient(transparent 68%,var(--gul) 68%,var(--gul) 96%,transparent 96%);
+  color:inherit;padding:0 .04em}
+.fakta{display:flex;flex-wrap:wrap;gap:0;margin-top:30px;
+  border-top:1px solid var(--sort);border-bottom:1px solid var(--border)}
+.fakta div{padding:16px 30px 16px 0;margin-right:30px;
+  border-right:1px solid var(--border)}
+.fakta div:last-child{border-right:0}
+.fakta .t{font-size:10px;font-weight:800;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--muted);display:block;margin-bottom:5px}
+.fakta .v{font-size:24px;font-weight:900;color:var(--sort);letter-spacing:-.02em;
+  font-variant-numeric:tabular-nums}
+.fakta .v small{font-size:13px;font-weight:700;color:var(--muted)}
+
+/* --------------------------------------------------------- nøgle + toc -- */
+.noegle{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 0}
+.noegle span{display:inline-flex;align-items:center;gap:9px;font-size:12px;
+  font-weight:700;color:var(--muted);border:1px solid var(--border);
+  border-radius:100px;padding:7px 15px 7px 11px;background:#fff}
+.noegle i{width:12px;height:12px;border-radius:3px;display:block;flex-shrink:0}
+.i-tale{background:var(--gul)}
+.i-sk{background:var(--flade);border:1px solid var(--linje)}
+.i-hul{background:var(--sort)}
+.toc{margin:34px 0 0;border-top:1px solid var(--border)}
+.toc a{display:flex;align-items:baseline;gap:16px;text-decoration:none;
+  border-bottom:1px solid var(--border);padding:13px 6px;color:var(--tekst)}
+.toc a:hover{background:var(--flade)}
+.toc .n{font-size:11px;font-weight:900;color:var(--muted);width:56px;
+  flex-shrink:0;letter-spacing:.1em;text-transform:uppercase}
+.toc .t{font-size:15px;font-weight:800;color:var(--sort);letter-spacing:-.015em}
+.toc .m{margin-left:auto;font-size:12px;font-weight:700;color:var(--muted);
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* ------------------------------------------------------------- blokke --- */
+.blok{padding-top:74px}
+.blokhoved{border-top:2px solid var(--sort);padding-top:20px;
+  display:flex;align-items:flex-start;gap:22px;flex-wrap:wrap}
+.blokhoved .bnr{font-size:11px;font-weight:900;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--sort);background:var(--gul);
+  border-radius:100px;padding:6px 14px;white-space:nowrap}
+h2{font-size:clamp(23px,2.5vw,33px);font-weight:900;color:var(--sort);
+  letter-spacing:-.028em;line-height:1.12;flex:1;min-width:260px}
+.blokhoved .bm{font-size:12px;font-weight:700;color:var(--muted);
+  font-variant-numeric:tabular-nums;white-space:nowrap;padding-top:7px}
+
+/* før-optagelse-noten: skal ligne alt andet der ikke siges højt */
+.foer{background:var(--flade);border:1px solid var(--border);border-radius:14px;
+  padding:18px 22px;margin-top:22px;max-width:70em}
+.foer .mrk{font-size:10px;font-weight:900;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted);display:block;margin-bottom:10px}
+.foer .mrk em{font-style:normal;font-weight:600;letter-spacing:.02em;
+  text-transform:none;font-size:11px;color:var(--linje);margin-left:10px}
+.foer p{font-size:13.5px;line-height:1.65;color:var(--muted);margin-bottom:9px}
+.foer p:last-child{margin-bottom:0}
+.foer b{color:var(--tekst)}
+
+/* -------------------------------------------------------------- slides -- */
+.slide{display:grid;grid-template-columns:104px minmax(0,1fr);gap:0;
+  padding:40px 0 14px;border-top:1px solid var(--border)}
+.slide:first-of-type{border-top:1px solid var(--linje)}
+.gutter{padding-top:2px}
+.gutter .sn{position:sticky;top:80px;display:block}
+.gutter .sk{font-size:9px;font-weight:900;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted);display:block}
+.gutter .sv{font-size:40px;font-weight:900;color:var(--sort);line-height:.95;
+  letter-spacing:-.05em;font-variant-numeric:tabular-nums;display:block;
+  margin-top:2px}
+.gutter .sv::after{content:"";display:block;width:26px;height:3px;
+  background:var(--gul);margin-top:9px}
+h3{font-size:19px;font-weight:900;color:var(--sort);letter-spacing:-.02em;
+  line-height:1.25;margin-bottom:20px;max-width:34em}
+h3 .stjerne{color:#D4A900}
+
+/* GØR: handlingen i systemet. Sort strip, kan skelnes med perifert syn. */
+.gor{background:var(--sort);border-radius:12px;padding:14px 20px;margin:0 0 22px;max-width:62em}
+.gor .mrk{font-size:10px;font-weight:900;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gul);display:block;margin-bottom:8px}
+.gor .mrk em{font-style:normal;font-weight:700;letter-spacing:.04em;text-transform:none;
+  color:rgba(255,255,255,.45);margin-left:9px}
+.gor p{font-size:14.5px;line-height:1.6;color:#fff;margin-bottom:8px;font-weight:600}
+.gor p:last-child{margin-bottom:0}
+.gor b{color:var(--gul)}
+
+/* Replik: det sælgeren siger til virksomheden. Hvidt kort inde i talesporet. */
+.tale p.replik{background:#fff;border:1px solid var(--border);border-left:4px solid var(--gul);
+  border-radius:0 14px 14px 0;padding:14px 20px;margin:14px 0;font-weight:700;color:var(--sort)}
+
+/* Et STOP der springes over: nedtonet og kompakt. */
+.slide.spring{opacity:.5}
+.slide.spring .tale p{font-size:calc(var(--tale) * .72)}
+
+/* SKÆRM: det der vises, og som ALDRIG må læses højt */
+.skaerm{background:var(--flade);border:1px solid var(--border);
+  border-left:3px solid var(--linje);border-radius:0 12px 12px 0;
+  padding:15px 20px;margin:0 0 22px;max-width:62em}
+.skaerm .mrk{font-size:10px;font-weight:900;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted);display:block;margin-bottom:8px}
+.skaerm .mrk em{font-style:normal;font-weight:700;letter-spacing:.04em;
+  text-transform:none;color:var(--linje);margin-left:9px}
+.skaerm p{font-size:13px;line-height:1.62;color:var(--muted);margin-bottom:8px}
+.skaerm p:last-child{margin-bottom:0}
+
+/* TALESPOR: sidens største tekst. Gul skinne = det du siger. */
+.tale{border-left:3px solid var(--gul);padding:2px 0 2px 24px;margin:0 0 24px}
+.tale p{font-size:var(--tale);line-height:1.62;color:var(--tekst);
+  font-weight:400;letter-spacing:-.011em;margin-bottom:.72em;max-width:var(--maal)}
+.tale p:last-child{margin-bottom:0}
+
+/* instruktion til Lasse: siges ikke, men gøres */
+.instr{border:1px dashed var(--linje);border-radius:12px;padding:13px 18px;
+  margin:0 0 22px;max-width:62em;background:#fff}
+.instr .mrk{font-size:10px;font-weight:900;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted);display:block;margin-bottom:7px}
+.instr p{font-size:14px;line-height:1.6;color:var(--tekst);margin-bottom:7px}
+.instr p:last-child{margin-bottom:0}
+
+/* HUL: her kan der ikke optages endnu. Skal ikke kunne overses. */
+.hul{background:var(--gul-soft);border:2px solid var(--sort);border-radius:14px;
+  padding:0;margin:0 0 24px;max-width:62em;overflow:hidden}
+.hul .mrk{background:var(--sort);color:var(--gul);font-size:11px;
+  font-weight:900;letter-spacing:.18em;text-transform:uppercase;
+  padding:8px 18px;display:block}
+.hul .krop{padding:16px 18px}
+.hul p{font-size:15px;line-height:1.62;color:var(--sort);font-weight:500;
+  margin-bottom:9px}
+.hul p:last-child{margin-bottom:0}
+
+/* ------------------------------------------------------------- footer --- */
+footer{margin-top:80px;border-top:2px solid var(--sort);padding:26px 0 70px}
+.andre{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.andre a,.andre span{font-size:12px;font-weight:800;text-decoration:none;
+  border:1px solid var(--border);border-radius:100px;padding:8px 15px;
+  color:var(--muted);background:#fff}
+.andre a:hover{border-color:var(--sort);color:var(--sort)}
+.andre span.her{background:var(--sort);color:#fff;border-color:var(--sort)}
+.folio{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--linje)}
+.tiltop{position:fixed;right:22px;bottom:22px;z-index:50}
+
+/* ---------------------------------------------------- skjul skærmnoter -- */
+body.skjul .skaerm{display:none}
+body.skjul .foer{display:none}
+
+/* ---------------------------------------------------------- responsivt -- */
+@media (max-width:900px){
+  :root{--tale:22px;--maal:40ch}
+  .wrap{padding:0 20px}
+  .tb{padding:9px 20px;gap:12px}
+  .tb .nu{display:none}
+  .slide{grid-template-columns:1fr;gap:0;padding:32px 0 10px}
+  .gutter{display:flex;align-items:baseline;gap:11px;padding-bottom:14px}
+  .gutter .sn{position:static;display:flex;align-items:baseline;gap:11px}
+  .gutter .sv{font-size:26px;margin-top:0}
+  .gutter .sv::after{display:none}
+  .fakta div{padding-right:20px;margin-right:20px}
+  .fakta .v{font-size:20px}
+  .tale{padding-left:16px}
+  h1{max-width:100%}
+}
+@media (max-width:560px){
+  .vaerktoej .skjulmob{display:none}
+}
+
+/* ------------------------------------------------------------- print ---- */
+@media print{
+  @page{margin:16mm 14mm}
+  html{scroll-padding-top:0}
+  body{background:#fff;color:#000;line-height:1.5}
+  .topbar,.tiltop,.andre,.noegle,.toc,.vaerktoej{display:none !important}
+  body.skjul .skaerm,body.skjul .foer{display:block}
+  .wrap{max-width:100%;padding:0}
+  header.hoved{padding:0 0 12px}
+  h1{font-size:26pt;max-width:100%}
+  .fakta{margin-top:14px}
+  .fakta .v{font-size:14pt}
+  .blok{padding-top:18px;break-before:page;page-break-before:always}
+  .blok:first-of-type{break-before:auto;page-break-before:auto}
+  h2{font-size:16pt}
+  /* Slidet må gerne løbe over et sideskift, ellers står der en halv tom side
+     efter hvert slide. Det der ALDRIG må knække, er en enkelt talesporslinje,
+     en skærmnote eller en hul-boks. */
+  .slide{grid-template-columns:74px 1fr;padding:16px 0 6px}
+  .skaerm,.hul,.instr,.tale p{break-inside:avoid;page-break-inside:avoid}
+  h3{break-after:avoid;page-break-after:avoid}
+  .gutter .sv{font-size:20pt}
+  .gutter .sn{position:static}
+  h3{font-size:12pt;margin-bottom:10px}
+  .tale{max-width:100%;border-left:2.5pt solid #000;padding-left:14px;
+    margin-bottom:14px}
+  .tale p{font-size:13pt;line-height:1.5;color:#000;max-width:56ch}
+  .skaerm{background:#fff;border:1pt solid #999;border-left:3pt solid #999;
+    max-width:100%;margin-bottom:12px;padding:9px 13px}
+  .skaerm p{font-size:8.5pt;line-height:1.4;color:#444}
+  .foer{background:#fff;border:1pt solid #bbb;max-width:100%}
+  .foer p{font-size:8.5pt;color:#444}
+  .instr{max-width:100%}
+  .instr p{font-size:10pt}
+  .hul{border:2.5pt solid #000;max-width:100%;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .hul .mrk{background:#000;color:#fff;-webkit-print-color-adjust:exact;
+    print-color-adjust:exact}
+  .hul p{font-size:11pt}
+  footer{margin-top:24px;padding-bottom:0}
+  code{border:0;background:#fff}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="tb">
+    <span class="flamme"></span>
+    <span class="navn">Manus</span>
+    <span class="nu" id="nu"></span>
+    <span class="vaerktoej">
+      <span class="tbmaal skjulmob">16 min</span>
+      <button class="knap rund" id="knMindre" title="Mindre skrift (tast -)">&minus;</button>
+      <span class="tbmaal" id="strvis">25 px</span>
+      <button class="knap rund" id="knStoerre" title="Større skrift (tast +)">+</button>
+      <button class="knap skjulmob" id="knSkjul">Skjul skærm-noter</button>
+      <button class="knap skjulmob" id="knPrint">Print</button>
+    </span>
+  </div>
+  <div id="fremdrift"></div>
+</div>
+
+<div class="wrap">
+
+<header class="hoved">
+  <div class="kicker"><span class="knr">ENKELT BLOK</span><span class="krule"></span>
+    <span class="ktxt">Optage-manus til Lasse</span></div>
+  <h1>Manus &middot; Modul 5<br><mark>Video 6: Adversus</mark></h1>
+
+  <div class="fakta">
+    <div><span class="t">Taletid</span><span class="v">ca. 16 <small>min</small></span></div>
+    <div><span class="t">Slides</span><span class="v">30</span></div>
+    <div><span class="t">Blokke</span><span class="v">1</span></div>
+    <div><span class="t">Ord i talesporet</span><span class="v">2386</span></div>
+    <div><span class="t">Huller</span><span class="v">0 <small>klar til optagelse</small></span></div>
+  </div>
+
+  <div class="noegle">
+    <span><i class="i-tale"></i>Gul skinne = det du siger højt</span>
+    <span><i class="i-sk"></i>Grå boks = det der vises på skærmen, siges ikke</span>
+    <span><i class="i-hul"></i>Sort/gul boks = hul, kan ikke optages endnu</span>
+  </div>
+
+  <nav class="toc"><a href="#blok0"><span class="n">Blok 00</span><span class="t">Video 6: Adversus</span><span class="m">16 min · 30 stop</span></a></nav>
+</header>
+
+<main><section class="blok" id="blok0" data-nu="Blok 00 &amp;middot; &lt;b&gt;Video 6: Adversus&lt;/b&gt;"><div class="blokhoved"><span class="bnr">Blok 00</span><h2>Video 6: Adversus</h2><span class="bm">ca. 16 min · 30 stop · 2386 ord</span></div><div class="foer"><span class="mrk">Før du optager · læses, siges ikke<em>henvisninger til afsnit "nederst" står i MANUS_Modul5_Video6_Adversus.md</em></span><p>Skærmdeling, ikke slides. Las deler sin skærm, klikker sig gennem Adversus og læser op herfra samtidig. Tre gange skiftes der over i PowerMatch, og tre gange tilbage. GØR-linjen siger det hver gang.</p><p>Sådan læses siden. <b>Sort boks = GØR.</b> Det er handlingen i systemet, og den siges ikke højt. <b>Almindelig tekst = talespor.</b> Det læses op. <b>Hvidt kort med gul kant = replik.</b> Det er det, der bliver sagt i telefonen, enten af dig eller af virksomheden, og det skal siges langsommere end resten, så en ny sælger kan skrive det ned.</p><p>Hvert stop hedder det samme som knappen eller kampagnen gør inde i systemet. Taber du tråden midt i en optagelse, så kig på navnet på skærmen og find det her.</p><p>Ét stop bruger en slide i stedet for skærmen: STOP 12, hvor CV sendt-flowet vises. Filen hedder <code>modul-5-video6-flow.html</code>.</p><p>Kilde: <code>00_Grundkontekst/RAA_VANDFALD_ORDRET_SYSTEMER_DEL3.md</code>, Del B og tilføjelsen om Vis Præsenteret. Beslutninger: <code>00_Grundkontekst/TIL_SEBASTIAN_MODUL5_SYSTEMER.md</code>.</p></div><article class="slide" id="b0-s1"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">1</span></span></div><div class="indhold"><h3>Adversus: de to måder du ringer på</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>åbn Adversus, og bliv på kampagneoversigten.</p></div><div class="tale"><p>I den her video skal vi gennemgå det sted, hvor du bruger næstmest tid, udover PowerMatch-systemet. Det er vores ringeprogram Adversus.</p></div><div class="tale"><p>Adversus er meget vigtigt, og det er vigtigt, at du fra start af bruger det så effektivt som muligt. Så lyt rigtig godt efter i den her video, og tag alle de små tricks til dig.</p></div><div class="tale"><p>I Adversus har du to måder, du primært ringer på. Du ringer enten i din egen salgsstrategi, eller også ringer du KT.</p></div></div></article><article class="slide" id="b0-s2"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">2</span></span></div><div class="indhold"><h3>KT: kundetilmelding <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>søg på tømrer i kampagnesøgningen, så KT Tømrer og winback tømrer kan ses.</p></div><div class="tale"><p>Forskellen på de to. KT er det, der hedder kundetilmelding, hvor du ringer kold kanvas for at tilmelde nye kunder.</p></div><div class="tale"><p>Gør du det, så er det meget simpelt. Så søger du på den jobtitel, du gerne vil ringe på, for eksempel tømrer.</p></div><div class="tale"><p>Så kommer der en frem, der hedder KT Tømrer, hvor man ringer for at tilmelde nye kunder. Og der kommer en, der hedder winback tømrer, hvor man ringer til gamle kunder, der ikke har nogen sales agent i systemet, og som der ikke er blevet snakket med i lang tid, og så genaktiverer man dem.</p></div></div></article><article class="slide" id="b0-s3"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">3</span></span></div><div class="indhold"><h3>KT Tømrer 100% til 91% <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>start kampagnen KT Tømrer, så scoreintervallet kan ses øverst.</p></div><div class="tale"><p>Starter du din kampagne, så starter den op på den her måde. Du kan se KT Tømrer 100% til 91%.</p></div><div class="tale"><p>Det vil sige, den ringer dine virksomheder med den højeste score til at starte med. Og så ringer man bare kold kanvas. Den ringer bare opkald efter opkald efter opkald.</p></div></div></article><article class="slide" id="b0-s4"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">4</span></span></div><div class="indhold"><h3>Oplysningerne på emnet</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>bliv på emnet, og peg på oplysningerne ude i højre side.</p></div><div class="tale"><p>Der er nogle standardoplysninger omkring virksomheden ovre til højre. Der har vi deres telefonnummer, virksomhedsnavn, hvem man ringer til, adresse, CVR-nummer og antal ansatte. Meget simpelt.</p></div></div></article><article class="slide" id="b0-s5"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">5</span></span></div><div class="indhold"><h3>Opret virksomheden fra KT-formularen <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>åbn KT-formularen fra emnet, så virksomhedsnavn og CVR-nummer kan ses forududfyldt. Luk formularen igen, så du står på emnet.</p></div><div class="tale"><p>Herindefra kan du oprette en virksomhed med vores KT-formular, som vi har vist tidligere.</p></div><div class="tale"><p>Du vil kunne se, at virksomhed og CVR-nummer allerede er udfyldt. Og har man en god dialog, så kan man oprette dem herfra.</p></div></div></article><article class="slide" id="b0-s6"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">6</span></span></div><div class="indhold"><h3>Succes</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>bliv på emnet, og peg på succes uden at trykke.</p></div><div class="tale"><p>Får du et godt kald, så trykker du succes.</p></div></div></article><article class="slide" id="b0-s7"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">7</span></span></div><div class="indhold"><h3>Ikke interesseret: altid A <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>åbn ikke interesseret, så årsagerne kan ses, og peg på A. Luk årsagerne igen uden at vælge, så du står på emnet.</p></div><div class="tale"><p>Siger de nej tak, så trykker man ikke interesseret og tager den, der hedder A. Ikke B. Altid A.</p></div></div></article><article class="slide" id="b0-s8"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">8</span></span></div><div class="indhold"><h3>Genopkald om en time eller på et tidspunkt <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>åbn genopkald på emnet, vælg om en time, sæt VIP-opkald, og skriv en note i notefeltet. Vis derefter datoknappen. Luk genopkaldet uden at trykke gennem, så du står på emnet.</p></div><div class="tale"><p>Siger kunden:</p></div><div class="tale"><p class="replik">"Vil du lige ringe om en time eller i morgen i stedet for?"</p></div><div class="tale"><p>Så kan man her vælge et tidspunkt, for eksempel om en time. Man tager altid VIP-opkald, trykker gennem og tilføjer eventuelt en note i notefeltet.</p></div><div class="tale"><p>Man kan også vælge et helt specifikt tidspunkt ved at vælge datoknappen og vælge et tidspunkt der.</p></div></div></article><article class="slide" id="b0-s9"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">9</span></span></div><div class="indhold"><h3>De andre KT-kampagner</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>afslut kampagnen KT Tømrer, gå tilbage til kampagneoversigten, og søg på murer og elektriker, så KT murer, winback murer, KT elektriker og winback elektriker kan ses.</p></div><div class="tale"><p>Så det er meget simpelt i forhold til KT. Det er bare ren kold kanvas, hvor du ringer til så mange som muligt og får oprettet så mange som muligt.</p></div><div class="tale"><p>Og som du kan se her, kan man også søge efter KT murer, winback murer, KT elektriker, winback elektriker og så videre.</p></div></div></article><article class="slide" id="b0-s10"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">10</span></span></div><div class="indhold"><h3>Salg Lasse: din egen salgsstrategi <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>søg på salg Lasse, og åbn den, så de tre kampagner kan ses.</p></div><div class="tale"><p>Der hvor du dog kommer til at bruge mest tid, det er din egen salgsstrategi. Den hedder dit eget navn. Nu tager vi for eksempel Lasse, og så hedder den salg Lasse.</p></div><div class="tale"><p>Åbner vi den her, så kan man se, at den indeholder tre kampagner.</p></div></div></article><article class="slide" id="b0-s11"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">11</span></span></div><div class="indhold"><h3>CV sendt Lasse <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>bliv på oversigten over de tre kampagner, og peg på CV sendt Lasse.</p></div><div class="tale"><p>Den første er CV sendt, og så vil den selvfølgelig hedde dit eget navn. Her kommer alle de emner ind, hvor du er salgsagent.</p></div><div class="tale"><p>Hvordan det flow fungerer, det viser jeg lige her.</p></div></div></article><article class="slide" id="b0-s12"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">12</span></span></div><div class="indhold"><h3>Sådan lander et emne i CV sendt <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>vis flow-sliden modul-5-video6-flow.html på skærmen.</p></div><div class="tale"><p>Måden det fungerer på, det er, at en af dine kunder modtager et CV. Altså det bliver sendt på e-mail, og som forklaret tidligere bliver det kun sendt, hvis det er en score på 90 og derover.</p></div><div class="tale"><p>Så bliver emnet uploadet til din kampagne CV sendt Lasse. Det er så selvfølgelig med dit eget navn.</p></div><div class="tale"><p>Ligger der et aktivt emne derinde i forvejen, som du for eksempel har sat som genopkald, eller som bare ligger ubehandlet, så bliver det ikke uploadet igen, så du ikke får dubletter. Det sker selvfølgelig ikke.</p></div><div class="tale"><p>Men er der ikke noget aktivt emne, ikke noget genopkald og ikke noget ubehandlet, så bliver det uploadet.</p></div><div class="tale"><p>Og så ringer du selvfølgelig til dem og prøver at få dem til at sige ja til en samtale med de matches, der er kommet. Meget simpelt. Det er din første prioritet.</p></div></div></article><article class="slide" id="b0-s13"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">13</span></span></div><div class="indhold"><h3>Vis Præsenteret <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>luk flow-sliden og gå tilbage til Adversus. Åbn kampagnen CV sendt Lasse, åbn det første emne, og tryk på den grønne knap Vis Præsenteret, så du ryger over i PowerMatch på virksomhedens matches. Tryk Søg ovre i højre hjørne.</p></div><div class="tale"><p>Når du sidder inde på et emne, enten her på CV sendt eller på Cold Email, som du ser om lidt, så er der den knap, der hedder Vis Præsenteret.</p></div><div class="tale"><p>Trykker du på den, så kommer du ind på de matches, der er til virksomheden. Og det eneste, du lige skal trykke på, det er Søg ovre i højre hjørne, og så kan du se dem direkte.</p></div><div class="tale"><p>Så du behøver aldrig at søge virksomheden frem. Du trykker bare på knappen og åbner dem direkte. Det gør det nemt og overskueligt for dig.</p></div></div></article><article class="slide" id="b0-s14"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">14</span></span></div><div class="indhold"><h3>Kandidatsamtaler Lasse <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>gå tilbage til Adversus, luk emnet, og gå til de tre kampagner under salg Lasse. Peg på Kandidatsamtaler Lasse.</p></div><div class="tale"><p>Anden prioritet, udover dine egne kunder, det er alle de kandidater, du har dialoger med omkring jobsamtaler.</p></div><div class="tale"><p>De kommer også automatisk frem, når du kører den her strategi, og når du sætter dem som VIP genopkald.</p></div><div class="tale"><p>Så du har din egen kampagne, der hedder kandidatsamtaler og dit eget navn. Der kommer alle de kandidater ind, du har dialoger i gang med. Meget simpelt.</p></div></div></article><article class="slide" id="b0-s15"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">15</span></span></div><div class="indhold"><h3>CV sendt Cold Email <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>peg på CV sendt Cold Email i den samme oversigt.</p></div><div class="tale"><p>Den sidste kampagne, det er CV sendt Cold Email.</p></div><div class="tale"><p>Det er alle de emner, vi har i systemet, hvor virksomhederne selv har oprettet en profil, eller hvor vi har oprettet dem for dem, og hvor der ikke er nogen ejer, så PowerMatch står som ejer på dem.</p></div><div class="tale"><p>Og den er rigtig god. For så kan man ringe til dem og have en dialog med dem, præsentere dem for platformen, rette i deres job og eventuelt sætte jobsamtaler op. Og når du slår dem ud som succes, så bliver du salgsejer på dem.</p></div></div></article><article class="slide" id="b0-s16"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">16</span></span></div><div class="indhold"><h3>Emnebehandling på din egen kampagne <span class="stjerne">★</span><span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>søg på CV sendt Lasse, åbn kampagnen, og bliv på det første emne.</p></div><div class="tale"><p>Nu kommer en vigtig ting i forhold til emnebehandling. Vi tager først din egen CV sendt-kampagne. Nu søger jeg bare lige på CV sendt Lasse her og åbner dem.</p></div><div class="tale"><p>En ting, der er rigtig vigtig fra start, det er din emnebehandling.</p></div><div class="tale"><p>Det vil sige: snakker du med en af dine kunder, og de for eksempel siger nej tak, det er ikke en interessant kandidat, og du slår emnet ud som ikke interesseret, så er det meget vigtigt, at du forstår, at så kommer det emne igen i morgen, hvis vi sender et nyt CV til dem.</p></div><div class="tale"><p>Så det er kun, hvis du har det okay med det, at du slår emnet ud som ikke interesseret.</p></div></div></article><article class="slide" id="b0-s17"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">17</span></span></div><div class="indhold"><h3>VIP genopkald <span class="stjerne">★</span><span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>bliv på emnet, og sæt VIP genopkald to måneder frem, uden at trykke gennem. Åbn virksomhedsprofilen fra emnet, så du står i PowerMatch. Skriv noten, tryk Opdater virksomhed, og gå tilbage til emnet i Adversus.</p></div><div class="tale"><p>Alternativt. Siger virksomheden til dig:</p></div><div class="tale"><p class="replik">"Ved du hvad, det ser spændende ud, men vi søger ikke lige nu."</p></div><div class="tale"><p>Det er en vigtig information. Og så spørger du dem:</p></div><div class="tale"><p class="replik">"Det er helt fint. Vil det være okay, hvis jeg ringer igen om en måneds tid? Kunne der så være en chance for, at I søger?"</p></div><div class="tale"><p>Siger de så: nej, der går lige nok et par måneder. Så har vi det helt okay med det, og så slår vi bare et VIP genopkald ud. Vi sætter den to måneder frem, og vi laver en note på virksomhedsprofilen.</p></div><div class="tale"><p>Det er meget vigtigt, at vi husker det fra start af. Så vi ikke sidder og får en fuldstændig sindssyg kalender, fordi vi ikke behandler vores emner korrekt. Så husk det fra start af.</p></div></div></article><article class="slide" id="b0-s18"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">18</span></span></div><div class="indhold"><h3>Succes, når dialogen er færdig <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>bliv på emnet, og peg på succes uden at trykke.</p></div><div class="tale"><p>Sætter vi for eksempel en samtale op til en virksomhed, eller skal vi snakke med dem igen af den ene eller anden årsag, så bruger vi jo også VIP genopkald. Så slår vi det ikke ud som succes endnu, før vores dialog med dem er færdig.</p></div><div class="tale"><p>Har vi lukket en kandidat på virksomheden ved at sætte samtale op og det hele, og de har sagt ja til ham, og vi har lavet kontrakt, og vi først skal snakke med dem igen, når der er nye kandidater, så kan vi slå det ud som succes.</p></div><div class="tale"><p>Og så husker vi bare, at virksomheden kommer igen inde på kampagnen, når de får et nyt CV.</p></div></div></article><article class="slide" id="b0-s19"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">19</span></span></div><div class="indhold"><h3>Logikken bag de tre udfald <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>bliv på emnet, og peg på de tre udfald: succes, ikke interesseret og genopkald.</p></div><div class="tale"><p>Det er hele den her logik, der er vigtig at forstå.</p></div><div class="tale"><p>Sætter du et VIP genopkald, så kommer emnet ikke igen, før det er tid til genopkaldet. Brug det, og lav en god note sammen med det.</p></div><div class="tale"><p>Succes slår du først ud, når dialogen er færdig.</p></div><div class="tale"><p>Og slår du emnet ud som ikke interesseret, så kommer de igen med et nyt CV.</p></div><div class="tale"><p>Det er den logik, du skal forstå.</p></div></div></article><article class="slide" id="b0-s20"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">20</span></span></div><div class="indhold"><h3>Rådet fra dag et <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>bliv på emnet. Ingen klik her.</p></div><div class="tale"><p>Og det bedste råd, jeg kan give dig fra dag et, det er, at du kommer til at have nok kunder. Du kommer til at have masser af emner.</p></div><div class="tale"><p>Så lad være med at gå op i de mindste detaljer om, at du skal sætte alle som VIP genopkald, og at du skal ringe til alle hele tiden. Nej.</p></div><div class="tale"><p>Det vigtige er at ringe der, hvor pengene er. Det er der, hvor efterspørgslen er.</p></div><div class="tale"><p>Siger en virksomhed til dig, at de ikke skal bruge nogen lige nu, og at der slet ikke er behov for det, så har du det fint med at sætte den to eller tre måneder frem, hvis det er det, de siger. Ikke bare sætte den en uge frem, fordi du tænker, at om en uge kan du overtale dem. Så får du bare en rodet kalender.</p></div></div></article><article class="slide" id="b0-s21"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">21</span></span></div><div class="indhold"><h3>Emnebehandling på Cold Email <span class="stjerne">★</span><span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>luk emnet uden at gemme, gå tilbage til kampagneoversigten, åbn CV sendt Cold Email, og åbn et emne der.</p></div><div class="tale"><p>Den samme emnebehandling gør sig gældende inde på fælleskampagnen, den der hedder Cold Email.</p></div><div class="tale"><p>Siger en virksomhed til dig:</p></div><div class="tale"><p class="replik">"Ved du hvad, vi skal ikke bruge noget lige nu, der går et par måneder."</p></div><div class="tale"><p>Så lad være med at slå den ud som ikke interesseret. For så er der en af dine kollegaer, der kommer til at ringe til dem i morgen, og det er utrolig dårlig stil.</p></div></div></article><article class="slide" id="b0-s22"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">22</span></span></div><div class="indhold"><h3>Fællesgenopkald <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>bliv på emnet. Sæt fællesgenopkald en måned frem, skriv en note, fjern personligt genopkald ved at trykke på boksen, og tryk gennem emnet.</p></div><div class="tale"><p>Det, vi gør her i stedet, det er, at vi bruger den, der hedder fællesgenopkald.</p></div><div class="tale"><p>Så kan man sætte den en måned frem, lave en note, fjerne personligt genopkald ved at trykke på den her boks, og trykke gennem emnet. Så er der ikke nogen, hverken dig eller kollegaerne, der får den den næste måned.</p></div><div class="tale"><p>Og igen: slår du den ud som ikke interesseret, så betyder det, at de kommer igen, når de får et nyt CV i fællespuljen.</p></div></div></article><article class="slide" id="b0-s23"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">23</span></span></div><div class="indhold"><h3>Succes på Cold Email <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>bliv på det næste emne i Cold Email, og peg på succes.</p></div><div class="tale"><p>Slår du et Cold Email-emne ud som succes, hvilket du må efter en god dialog med dem, så ryger det ind på din egen kampagne, næste gang virksomheden får et CV.</p></div><div class="tale"><p>Så det er rigtig vigtigt, at du slår den ud som succes, lige så snart der er en god dialog. Du vil hellere snakke med dem på din egen kampagne, fordi det er mere overskueligt, end du vil på fælleskampagnen.</p></div></div></article><article class="slide" id="b0-s24"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">24</span></span></div><div class="indhold"><h3>Powerlink <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>slå emnet ud som succes i Adversus, og skift over i PowerMatch. Åbn virksomhedsprofilen, og peg på sales agent, hvor du nu selv står.</p></div><div class="tale"><p>Slår du den ud som succes, og vil du med det samme have den ind på dit eget genopkald, så lad os prøve at tage den her virksomhed som eksempel.</p></div><div class="tale"><p>Du har slået den ud som succes. Så trykker du ind på virksomhedsprofilen, og der kan vi se, at vi også er blevet sales agent herinde.</p></div></div></article><article class="slide" id="b0-s25"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">25</span></span></div><div class="indhold"><h3>Send til min CV sendt <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>bliv på virksomhedsprofilen i PowerMatch. Tryk på Powerlink nede i højre hjørne, tryk Åbn i Adversus, og tryk Send til min CV sendt. Vælg et tidspunkt i morgen.</p></div><div class="tale"><p>Så trykker vi nede i højre hjørne på den, der hedder Powerlink. Så trykker vi Åbn i Adversus. Og så trykker vi Send til min CV sendt.</p></div><div class="tale"><p>Vi kan vælge bare at åbne den op nu ved at trykke Send til min CV sendt, så kommer den ind med det samme, og så kan vi ringe til dem på vores egen kampagne nu. Skal det først være i morgen, så vælger vi et tidspunkt i morgen.</p></div></div></article><article class="slide" id="b0-s26"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">26</span></span></div><div class="indhold"><h3>Gem emne</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>du står nu i Adversus på emnet. Tryk Gem emne, og gå tilbage til kampagneoversigten.</p></div><div class="tale"><p>Så kan vi se det inde i Adversus, og så trykker vi gem emne. Og så ligger den inde i din kalender til i morgen. Meget simpelt.</p></div></div></article><article class="slide" id="b0-s27"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">27</span></span></div><div class="indhold"><h3>Aftale, genopkald: din kalender <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>bliv i Adversus. Åbn aftale, genopkald, og åbn Lasses kalender.</p></div><div class="tale"><p>Går vi lige tilbage i Adversus, så er en anden vigtig ting din kalender.</p></div><div class="tale"><p>Den kan ses herinde under aftale, genopkald. Nu åbner jeg bare lige Lasses kalender. Så får man et overblik over de genopkald, man har.</p></div></div></article><article class="slide" id="b0-s28"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">28</span></span></div><div class="indhold"><h3>Afslut aldrig dagen med genopkald, du ikke har fulgt op på <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>bliv på kalenderen, og rul hen over dagens genopkald.</p></div><div class="tale"><p>En hovedregel i PowerMatch, og husk den fra start. Man må aldrig afslutte sin dag med genopkald, man ikke har fulgt op på.</p></div><div class="tale"><p>Så når man går hjem klokken 16.30 eller 17, eller 18 eller 19, hvis man går hjem der, så skal kalenderen altid være clean, så man er klar til en god dag i morgen. Det er utrolig vigtigt for din succes i PowerMatch, at du har styr på det.</p></div><div class="tale"><p>Time management er en af de vigtigste ting herinde at lære at kende og blive god til. Det her med, at man bruger sin tid effektivt. Man bruger sin tid på de rigtige kunder, og man bruger sin tid, hvor pengene er.</p></div><div class="tale"><p>Har du en kalender, der fuldstændig flyder over, så er det umuligt for dig at gøre det. Så hav altid styr på din egen kalender. Gå altid hjem med en kalender, der er fikset.</p></div></div></article><article class="slide" id="b0-s29"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">29</span></span></div><div class="indhold"><h3>Genopkald som liste</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>tryk på genopkald, så listen over dine genopkald kommer frem i stedet for kalenderen.</p></div><div class="tale"><p>Du kan også få et anderledes overblik ved bare at trykke på genopkald, og så får du en liste over dine genopkald her.</p></div><div class="tale"><p>Om du bedst kan lide at bruge genopkaldsfunktionen herinde eller kalenderfunktionen herhenne, det styrer du selv.</p></div></div></article><article class="slide" id="b0-s30"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">30</span></span></div><div class="indhold"><h3>Begge kalendere skal være clean <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>gå tilbage til kalenderen i Adversus, så den kan ses en sidste gang. Bliv i Adversus, selvom PowerMatch-kalenderen bliver nævnt.</p></div><div class="tale"><p>Men en ting, jeg lige vil understrege igen. Hav altid styr på din egen kalender, både i Adversus og i PowerMatch. De skal begge to være clean. Det er det, der hjælper dig til at få en kæmpe succes herinde. Det lover jeg.</p></div><div class="tale"><p>Det var en gennemgang af Adversus. I næste video tager vi en overordnet gennemgang af resten af PowerMatch-systemet.</p></div></div></article></section></main>
+
+<footer>
+  <div class="andre"></div>
+  <p class="folio">PowerMatch &middot; Internt materiale &middot; Modul 5 · Video 6: Adversus &middot;
+</p>
+</footer>
+
+</div>
+
+<button class="knap tiltop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&uarr; Top</button>
+<script>
+/* Ingen localStorage og ingen sessionStorage. Alt står i variabler herunder
+   og nulstilles ved reload, præcis som aftalt. */
+(function(){
+  var talestr = 25;                     // px, samme startværdi som CSS
+  var minStr = 17, maxStr = 42;
+  var skjult = false;
+
+  var rod   = document.documentElement;
+  var vis   = document.getElementById('strvis');
+  var bar   = document.getElementById('fremdrift');
+  var nu    = document.getElementById('nu');
+  var knSkj = document.getElementById('knSkjul');
+  var blokke = [].slice.call(document.querySelectorAll('.blok'));
+
+  function saetStr(n){
+    talestr = Math.max(minStr, Math.min(maxStr, n));
+    rod.style.setProperty('--tale', talestr + 'px');
+    if (vis) vis.textContent = talestr + ' px';
+  }
+  document.getElementById('knMindre').onclick = function(){ saetStr(talestr - 2); };
+  document.getElementById('knStoerre').onclick = function(){ saetStr(talestr + 2); };
+  document.getElementById('knPrint').onclick = function(){ window.print(); };
+  knSkj.onclick = function(){
+    skjult = !skjult;
+    document.body.classList.toggle('skjul', skjult);
+    knSkj.classList.toggle('paa', skjult);
+    knSkj.textContent = skjult ? 'Vis skærm-noter' : 'Skjul skærm-noter';
+  };
+
+  function opdater(){
+    var h = document.documentElement;
+    var kan = (h.scrollHeight - h.clientHeight) || 1;
+    bar.style.width = Math.min(100, (h.scrollTop / kan) * 100) + '%';
+    var akt = null;
+    for (var i = 0; i < blokke.length; i++){
+      if (blokke[i].getBoundingClientRect().top <= 130) akt = blokke[i];
+    }
+    if (nu) nu.innerHTML = akt ? akt.getAttribute('data-nu') : '';
+  }
+  window.addEventListener('scroll', opdater, {passive:true});
+  window.addEventListener('resize', opdater);
+  opdater();
+
+  document.addEventListener('keydown', function(e){
+    if (e.target && /INPUT|TEXTAREA/.test(e.target.tagName)) return;
+    if (e.key === '+') { saetStr(talestr + 2); e.preventDefault(); }
+    if (e.key === '-') { saetStr(talestr - 2); e.preventDefault(); }
+  });
+})();
+</script>
+</body>
+</html>

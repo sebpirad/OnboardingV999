@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manus · Modul 5 · Video 7: Systemet rundt · PowerMatch</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gul:#F8E965; --gul-soft:#FDF8D4; --gul-kant:#F0E4A0;
+  --sort:#111213; --tekst:#26282B; --muted:#71757C;
+  --border:#ECECE8; --flade:#F6F6F3; --bg:#FFFFFF; --linje:#C9C9C2;
+  --tale:25px;                      /* styres af A- / A+ */
+  --maal:44ch;                      /* satsbredde: ca. 44 tegn pr. linje.
+                                       ch følger talesporets egen grad, så
+                                       linjelængden er den samme uanset hvor
+                                       stort Lasse skruer op. */
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{font-family:'Inter',-apple-system,Arial,sans-serif;color:var(--tekst);
+  background:var(--bg);-webkit-font-smoothing:antialiased;line-height:1.6}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em;
+  background:#fff;border:1px solid var(--border);border-radius:5px;padding:1px 5px}
+b{color:var(--sort);font-weight:800}
+a{color:var(--sort)}
+
+/* ---------------------------------------------------------- topbjælke --- */
+/* Helt dækkende hvid. Ikke gennemsigtig: talesporet må ikke kunne ses
+   igennem bjælken, når han scroller midt i en sætning. */
+.topbar{position:sticky;top:0;z-index:60;background:#fff;
+  border-bottom:1px solid var(--border);box-shadow:0 1px 0 rgba(17,18,19,.02)}
+.tb{max-width:1180px;margin:0 auto;padding:11px 30px;display:flex;
+  align-items:center;gap:18px}
+.flamme{width:22px;height:22px;border-radius:6px;background:var(--gul);
+  flex-shrink:0;border:1px solid var(--gul-kant)}
+.tb .navn{font-size:12px;font-weight:900;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--sort);white-space:nowrap}
+.tb .nu{font-size:12px;font-weight:700;color:var(--muted);white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;flex:1;min-width:0}
+.tb .nu b{color:var(--sort);font-weight:800}
+.vaerktoej{display:flex;align-items:center;gap:7px;flex-shrink:0}
+.knap{font-family:inherit;font-size:11px;font-weight:800;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--sort);background:#fff;cursor:pointer;
+  border:1px solid var(--border);border-radius:100px;padding:6px 13px;
+  transition:background .15s,border-color .15s}
+.knap:hover{background:var(--flade);border-color:var(--linje)}
+.knap.paa{background:var(--sort);color:#fff;border-color:var(--sort)}
+.knap.rund{width:30px;height:30px;padding:0;font-size:13px;line-height:1}
+.tbmaal{font-size:11px;font-weight:800;color:var(--muted);
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+#fremdrift{position:absolute;left:0;bottom:-1px;height:2px;width:0;
+  background:var(--gul);transition:width .12s linear}
+
+/* -------------------------------------------------------------- side ---- */
+.wrap{max-width:1180px;margin:0 auto;padding:0 30px}
+header.hoved{padding:56px 0 30px}
+.kicker{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.kicker .knr{font-size:12px;font-weight:900;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--sort)}
+.kicker .krule{width:46px;height:2px;background:var(--gul)}
+.kicker .ktxt{font-size:11px;font-weight:800;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted)}
+h1{font-size:clamp(34px,4.4vw,60px);font-weight:900;color:var(--sort);
+  letter-spacing:-.033em;line-height:1.04;max-width:18ch}
+h1 mark{background:linear-gradient(transparent 68%,var(--gul) 68%,var(--gul) 96%,transparent 96%);
+  color:inherit;padding:0 .04em}
+.fakta{display:flex;flex-wrap:wrap;gap:0;margin-top:30px;
+  border-top:1px solid var(--sort);border-bottom:1px solid var(--border)}
+.fakta div{padding:16px 30px 16px 0;margin-right:30px;
+  border-right:1px solid var(--border)}
+.fakta div:last-child{border-right:0}
+.fakta .t{font-size:10px;font-weight:800;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--muted);display:block;margin-bottom:5px}
+.fakta .v{font-size:24px;font-weight:900;color:var(--sort);letter-spacing:-.02em;
+  font-variant-numeric:tabular-nums}
+.fakta .v small{font-size:13px;font-weight:700;color:var(--muted)}
+
+/* --------------------------------------------------------- nøgle + toc -- */
+.noegle{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 0}
+.noegle span{display:inline-flex;align-items:center;gap:9px;font-size:12px;
+  font-weight:700;color:var(--muted);border:1px solid var(--border);
+  border-radius:100px;padding:7px 15px 7px 11px;background:#fff}
+.noegle i{width:12px;height:12px;border-radius:3px;display:block;flex-shrink:0}
+.i-tale{background:var(--gul)}
+.i-sk{background:var(--flade);border:1px solid var(--linje)}
+.i-hul{background:var(--sort)}
+.toc{margin:34px 0 0;border-top:1px solid var(--border)}
+.toc a{display:flex;align-items:baseline;gap:16px;text-decoration:none;
+  border-bottom:1px solid var(--border);padding:13px 6px;color:var(--tekst)}
+.toc a:hover{background:var(--flade)}
+.toc .n{font-size:11px;font-weight:900;color:var(--muted);width:56px;
+  flex-shrink:0;letter-spacing:.1em;text-transform:uppercase}
+.toc .t{font-size:15px;font-weight:800;color:var(--sort);letter-spacing:-.015em}
+.toc .m{margin-left:auto;font-size:12px;font-weight:700;color:var(--muted);
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* ------------------------------------------------------------- blokke --- */
+.blok{padding-top:74px}
+.blokhoved{border-top:2px solid var(--sort);padding-top:20px;
+  display:flex;align-items:flex-start;gap:22px;flex-wrap:wrap}
+.blokhoved .bnr{font-size:11px;font-weight:900;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--sort);background:var(--gul);
+  border-radius:100px;padding:6px 14px;white-space:nowrap}
+h2{font-size:clamp(23px,2.5vw,33px);font-weight:900;color:var(--sort);
+  letter-spacing:-.028em;line-height:1.12;flex:1;min-width:260px}
+.blokhoved .bm{font-size:12px;font-weight:700;color:var(--muted);
+  font-variant-numeric:tabular-nums;white-space:nowrap;padding-top:7px}
+
+/* før-optagelse-noten: skal ligne alt andet der ikke siges højt */
+.foer{background:var(--flade);border:1px solid var(--border);border-radius:14px;
+  padding:18px 22px;margin-top:22px;max-width:70em}
+.foer .mrk{font-size:10px;font-weight:900;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted);display:block;margin-bottom:10px}
+.foer .mrk em{font-style:normal;font-weight:600;letter-spacing:.02em;
+  text-transform:none;font-size:11px;color:var(--linje);margin-left:10px}
+.foer p{font-size:13.5px;line-height:1.65;color:var(--muted);margin-bottom:9px}
+.foer p:last-child{margin-bottom:0}
+.foer b{color:var(--tekst)}
+
+/* -------------------------------------------------------------- slides -- */
+.slide{display:grid;grid-template-columns:104px minmax(0,1fr);gap:0;
+  padding:40px 0 14px;border-top:1px solid var(--border)}
+.slide:first-of-type{border-top:1px solid var(--linje)}
+.gutter{padding-top:2px}
+.gutter .sn{position:sticky;top:80px;display:block}
+.gutter .sk{font-size:9px;font-weight:900;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted);display:block}
+.gutter .sv{font-size:40px;font-weight:900;color:var(--sort);line-height:.95;
+  letter-spacing:-.05em;font-variant-numeric:tabular-nums;display:block;
+  margin-top:2px}
+.gutter .sv::after{content:"";display:block;width:26px;height:3px;
+  background:var(--gul);margin-top:9px}
+h3{font-size:19px;font-weight:900;color:var(--sort);letter-spacing:-.02em;
+  line-height:1.25;margin-bottom:20px;max-width:34em}
+h3 .stjerne{color:#D4A900}
+
+/* GØR: handlingen i systemet. Sort strip, kan skelnes med perifert syn. */
+.gor{background:var(--sort);border-radius:12px;padding:14px 20px;margin:0 0 22px;max-width:62em}
+.gor .mrk{font-size:10px;font-weight:900;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gul);display:block;margin-bottom:8px}
+.gor .mrk em{font-style:normal;font-weight:700;letter-spacing:.04em;text-transform:none;
+  color:rgba(255,255,255,.45);margin-left:9px}
+.gor p{font-size:14.5px;line-height:1.6;color:#fff;margin-bottom:8px;font-weight:600}
+.gor p:last-child{margin-bottom:0}
+.gor b{color:var(--gul)}
+
+/* Replik: det sælgeren siger til virksomheden. Hvidt kort inde i talesporet. */
+.tale p.replik{background:#fff;border:1px solid var(--border);border-left:4px solid var(--gul);
+  border-radius:0 14px 14px 0;padding:14px 20px;margin:14px 0;font-weight:700;color:var(--sort)}
+
+/* Et STOP der springes over: nedtonet og kompakt. */
+.slide.spring{opacity:.5}
+.slide.spring .tale p{font-size:calc(var(--tale) * .72)}
+
+/* SKÆRM: det der vises, og som ALDRIG må læses højt */
+.skaerm{background:var(--flade);border:1px solid var(--border);
+  border-left:3px solid var(--linje);border-radius:0 12px 12px 0;
+  padding:15px 20px;margin:0 0 22px;max-width:62em}
+.skaerm .mrk{font-size:10px;font-weight:900;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted);display:block;margin-bottom:8px}
+.skaerm .mrk em{font-style:normal;font-weight:700;letter-spacing:.04em;
+  text-transform:none;color:var(--linje);margin-left:9px}
+.skaerm p{font-size:13px;line-height:1.62;color:var(--muted);margin-bottom:8px}
+.skaerm p:last-child{margin-bottom:0}
+
+/* TALESPOR: sidens største tekst. Gul skinne = det du siger. */
+.tale{border-left:3px solid var(--gul);padding:2px 0 2px 24px;margin:0 0 24px}
+.tale p{font-size:var(--tale);line-height:1.62;color:var(--tekst);
+  font-weight:400;letter-spacing:-.011em;margin-bottom:.72em;max-width:var(--maal)}
+.tale p:last-child{margin-bottom:0}
+
+/* instruktion til Lasse: siges ikke, men gøres */
+.instr{border:1px dashed var(--linje);border-radius:12px;padding:13px 18px;
+  margin:0 0 22px;max-width:62em;background:#fff}
+.instr .mrk{font-size:10px;font-weight:900;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted);display:block;margin-bottom:7px}
+.instr p{font-size:14px;line-height:1.6;color:var(--tekst);margin-bottom:7px}
+.instr p:last-child{margin-bottom:0}
+
+/* HUL: her kan der ikke optages endnu. Skal ikke kunne overses. */
+.hul{background:var(--gul-soft);border:2px solid var(--sort);border-radius:14px;
+  padding:0;margin:0 0 24px;max-width:62em;overflow:hidden}
+.hul .mrk{background:var(--sort);color:var(--gul);font-size:11px;
+  font-weight:900;letter-spacing:.18em;text-transform:uppercase;
+  padding:8px 18px;display:block}
+.hul .krop{padding:16px 18px}
+.hul p{font-size:15px;line-height:1.62;color:var(--sort);font-weight:500;
+  margin-bottom:9px}
+.hul p:last-child{margin-bottom:0}
+
+/* ------------------------------------------------------------- footer --- */
+footer{margin-top:80px;border-top:2px solid var(--sort);padding:26px 0 70px}
+.andre{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.andre a,.andre span{font-size:12px;font-weight:800;text-decoration:none;
+  border:1px solid var(--border);border-radius:100px;padding:8px 15px;
+  color:var(--muted);background:#fff}
+.andre a:hover{border-color:var(--sort);color:var(--sort)}
+.andre span.her{background:var(--sort);color:#fff;border-color:var(--sort)}
+.folio{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--linje)}
+.tiltop{position:fixed;right:22px;bottom:22px;z-index:50}
+
+/* ---------------------------------------------------- skjul skærmnoter -- */
+body.skjul .skaerm{display:none}
+body.skjul .foer{display:none}
+
+/* ---------------------------------------------------------- responsivt -- */
+@media (max-width:900px){
+  :root{--tale:22px;--maal:40ch}
+  .wrap{padding:0 20px}
+  .tb{padding:9px 20px;gap:12px}
+  .tb .nu{display:none}
+  .slide{grid-template-columns:1fr;gap:0;padding:32px 0 10px}
+  .gutter{display:flex;align-items:baseline;gap:11px;padding-bottom:14px}
+  .gutter .sn{position:static;display:flex;align-items:baseline;gap:11px}
+  .gutter .sv{font-size:26px;margin-top:0}
+  .gutter .sv::after{display:none}
+  .fakta div{padding-right:20px;margin-right:20px}
+  .fakta .v{font-size:20px}
+  .tale{padding-left:16px}
+  h1{max-width:100%}
+}
+@media (max-width:560px){
+  .vaerktoej .skjulmob{display:none}
+}
+
+/* ------------------------------------------------------------- print ---- */
+@media print{
+  @page{margin:16mm 14mm}
+  html{scroll-padding-top:0}
+  body{background:#fff;color:#000;line-height:1.5}
+  .topbar,.tiltop,.andre,.noegle,.toc,.vaerktoej{display:none !important}
+  body.skjul .skaerm,body.skjul .foer{display:block}
+  .wrap{max-width:100%;padding:0}
+  header.hoved{padding:0 0 12px}
+  h1{font-size:26pt;max-width:100%}
+  .fakta{margin-top:14px}
+  .fakta .v{font-size:14pt}
+  .blok{padding-top:18px;break-before:page;page-break-before:always}
+  .blok:first-of-type{break-before:auto;page-break-before:auto}
+  h2{font-size:16pt}
+  /* Slidet må gerne løbe over et sideskift, ellers står der en halv tom side
+     efter hvert slide. Det der ALDRIG må knække, er en enkelt talesporslinje,
+     en skærmnote eller en hul-boks. */
+  .slide{grid-template-columns:74px 1fr;padding:16px 0 6px}
+  .skaerm,.hul,.instr,.tale p{break-inside:avoid;page-break-inside:avoid}
+  h3{break-after:avoid;page-break-after:avoid}
+  .gutter .sv{font-size:20pt}
+  .gutter .sn{position:static}
+  h3{font-size:12pt;margin-bottom:10px}
+  .tale{max-width:100%;border-left:2.5pt solid #000;padding-left:14px;
+    margin-bottom:14px}
+  .tale p{font-size:13pt;line-height:1.5;color:#000;max-width:56ch}
+  .skaerm{background:#fff;border:1pt solid #999;border-left:3pt solid #999;
+    max-width:100%;margin-bottom:12px;padding:9px 13px}
+  .skaerm p{font-size:8.5pt;line-height:1.4;color:#444}
+  .foer{background:#fff;border:1pt solid #bbb;max-width:100%}
+  .foer p{font-size:8.5pt;color:#444}
+  .instr{max-width:100%}
+  .instr p{font-size:10pt}
+  .hul{border:2.5pt solid #000;max-width:100%;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .hul .mrk{background:#000;color:#fff;-webkit-print-color-adjust:exact;
+    print-color-adjust:exact}
+  .hul p{font-size:11pt}
+  footer{margin-top:24px;padding-bottom:0}
+  code{border:0;background:#fff}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="tb">
+    <span class="flamme"></span>
+    <span class="navn">Manus</span>
+    <span class="nu" id="nu"></span>
+    <span class="vaerktoej">
+      <span class="tbmaal skjulmob">14 min</span>
+      <button class="knap rund" id="knMindre" title="Mindre skrift (tast -)">&minus;</button>
+      <span class="tbmaal" id="strvis">25 px</span>
+      <button class="knap rund" id="knStoerre" title="Større skrift (tast +)">+</button>
+      <button class="knap skjulmob" id="knSkjul">Skjul skærm-noter</button>
+      <button class="knap skjulmob" id="knPrint">Print</button>
+    </span>
+  </div>
+  <div id="fremdrift"></div>
+</div>
+
+<div class="wrap">
+
+<header class="hoved">
+  <div class="kicker"><span class="knr">ENKELT BLOK</span><span class="krule"></span>
+    <span class="ktxt">Optage-manus til Lasse</span></div>
+  <h1>Manus &middot; Modul 5<br><mark>Video 7: Systemet rundt</mark></h1>
+
+  <div class="fakta">
+    <div><span class="t">Taletid</span><span class="v">ca. 14 <small>min</small></span></div>
+    <div><span class="t">Slides</span><span class="v">31</span></div>
+    <div><span class="t">Blokke</span><span class="v">1</span></div>
+    <div><span class="t">Ord i talesporet</span><span class="v">2109</span></div>
+    <div><span class="t">Huller</span><span class="v">0 <small>klar til optagelse</small></span></div>
+  </div>
+
+  <div class="noegle">
+    <span><i class="i-tale"></i>Gul skinne = det du siger højt</span>
+    <span><i class="i-sk"></i>Grå boks = det der vises på skærmen, siges ikke</span>
+    <span><i class="i-hul"></i>Sort/gul boks = hul, kan ikke optages endnu</span>
+  </div>
+
+  <nav class="toc"><a href="#blok0"><span class="n">Blok 00</span><span class="t">Video 7: Systemet rundt</span><span class="m">14 min · 31 stop</span></a></nav>
+</header>
+
+<main><section class="blok" id="blok0" data-nu="Blok 00 &amp;middot; &lt;b&gt;Video 7: Systemet rundt&lt;/b&gt;"><div class="blokhoved"><span class="bnr">Blok 00</span><h2>Video 7: Systemet rundt</h2><span class="bm">ca. 14 min · 31 stop · 2109 ord</span></div><div class="foer"><span class="mrk">Før du optager · læses, siges ikke<em>henvisninger til afsnit "nederst" står i MANUS_Modul5_Video7_SystemetRundt.md</em></span><p>Skærmdeling, ikke slides. Las deler sin skærm, går ned gennem menuen i venstre side i PowerMatch og læser op herfra samtidig. Telefonen skal ligge klar, den bliver taget frem i kontraktflowet. Videoen forlader PowerMatch to gange: kontraktmailen i kontraktflowet, og Adversus under Virksomheder. GØR-linjen siger det begge gange.</p><p>Sådan læses siden. <b>Sort boks = GØR.</b> Det er handlingen i systemet, og den siges ikke højt. <b>Almindelig tekst = talespor.</b> Det læses op. <b>Hvidt kort med gul kant = replik.</b> Det er det virksomheden eller kandidaten siger, og det skal siges langsommere end resten.</p><p>Hvert stop hedder det samme som menupunktet gør inde i systemet. Taber du tråden midt i en optagelse, så kig på navnet i venstre side og find det her.</p><p>Det her er den overordnede tur rundt i resten af systemet. Vi går ét menupunkt ad gangen, oppefra og ned, og vi bliver ikke hængende nogen steder.</p><p>Kilde: <code>00_Grundkontekst/RAA_VANDFALD_ORDRET_SYSTEMER_DEL3.md</code>, Del D. Beslutninger: <code>00_Grundkontekst/TIL_SEBASTIAN_MODUL5_SYSTEMER.md</code>.</p></div><article class="slide" id="b0-s1"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">1</span></span></div><div class="indhold"><h3>Jobsamtaler</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>bliv i PowerMatch med hele menuen i venstre side fremme. Peg på Jobsamtaler øverst.</p></div><div class="tale"><p>Nu laver jeg lige en overordnet gennemgang af resten af systemet.</p></div><div class="tale"><p>Du har lært at forstå de to vigtigste aspekter, som er virksomhedsprofilen og ansøgerprofilen, så nu giver det mere mening, når jeg gennemgår hele systemet.</p></div><div class="tale"><p>Vi går ned gennem menuen i venstre side, ét punkt ad gangen.</p></div><div class="tale"><p>Så har vi jobsamtaler og kalenderen. Den har vi gennemgået, så den behøver jeg ikke sige mere til. Den giver mening for dig, håber jeg. Ellers kan du gå tilbage og se videoen om kalenderen.</p></div></div></article><article class="slide" id="b0-s2"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">2</span></span></div><div class="indhold"><h3>Tidsregistrering <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>klik på Tidsregistrering i venstre side, så ugens overblik kommer frem.</p></div><div class="tale"><p>Så har vi tidsregistrering. Tidsregistrering er ikke noget, du kommer til at benytte. Nu forklarer jeg den bare, fordi det er noget, du har adgang til, og så er det selvfølgelig vigtigt, at du forstår hvad det er.</p></div><div class="tale"><p>Meget simpelt forklaret er det vores overblik over alle de kandidater vi har, og hvor mange timer de arbejder i løbet af ugen. Det er det, vi bruger til at sende fakturaer til virksomhederne og give løn til kandidaterne.</p></div><div class="tale"><p>Kandidaterne kan tilføje timer herfra eller fra deres app, PowerMatch-appen. Der kan de skrive, hvad tid de møder ind, hvad tid de slutter, og hvor meget pause de har. Så kommer det ind her.</p></div></div></article><article class="slide" id="b0-s3"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">3</span></span></div><div class="indhold"><h3>Handling og Vis</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>åbn en virksomhed med aktive kandidater som eksempel. Tryk handling og vælg vis, så ugen for en kandidat kan ses.</p></div><div class="tale"><p>Hvis vi lige tager en virksomhed som eksempel. Det overblik, jeg ser her, det har virksomheden også adgang til fra deres perspektiv.</p></div><div class="tale"><p>De kan gå ind og trykke handling og trykke vis. Så kan de se starttidspunkt, sluttidspunkt, pause og hvor mange timer kandidaten har arbejdet.</p></div><div class="tale"><p>De kan godkende det. De kan godkende hele ugen. Og de kan afvise og foreslå et nyt tidspunkt.</p></div></div></article><article class="slide" id="b0-s4"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">4</span></span></div><div class="indhold"><h3>Godkendelsen om mandagen <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>bliv stående i visningen af ugen.</p></div><div class="tale"><p>De fleste virksomheder går ikke ind og godkender. De tjekker bare lige timerne kort.</p></div><div class="tale"><p>For gør de ikke noget, så bliver det hele godkendt automatisk om mandagen klokken tolv tredive, og så sender vi fakturaen inden for et par timer.</p></div><div class="tale"><p>Nogle virksomheder reagerer desværre først, når de får fakturaen, hvor vi selvfølgelig foretrækker, at de gør det inden, da det er nemmere at fikse for os.</p></div><div class="tale"><p>Det var vores tidsregistrering.</p></div></div></article><article class="slide spring" id="b0-s5"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">5</span></span></div><div class="indhold"><h3>Løn og fakturering · SPRINGES OVER</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>luk visningen af ugen og gå tilbage til menuen i venstre side. Peg på Løn og fakturering uden at åbne den.</p></div><div class="tale"><p>Så har vi løn og fakturering. Den springer vi over, da den ikke har noget med dig og dit arbejde at gøre.</p></div><div class="tale"><p>Der er ingen grund til det, for den kommer bare til at forvirre dig mere end at gavne dig.</p></div></div></article><article class="slide" id="b0-s6"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">6</span></span></div><div class="indhold"><h3>Kontrakter <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>klik på Kontrakter i venstre side.</p></div><div class="tale"><p>Under kontrakter kan du se de kontrakter, du sender ud. Nu har jeg et fuldt overblik over det hele, men du vil kunne se alle de kontrakter, du selv har sendt.</p></div><div class="tale"><p>Har du en kandidat i røret, så kan du følge med herinde og få kandidaten til at underskrive kontrakten.</p></div><div class="tale"><p>Det er jo meget vigtigt, at kandidaterne får underskrevet kontrakten, inden de starter.</p></div></div></article><article class="slide" id="b0-s7"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">7</span></span></div><div class="indhold"><h3>Underskrevet og ikke underskrevet</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>sortér listen på underskrevet, og derefter på ikke underskrevet.</p></div><div class="tale"><p>Du kan sortere kontrakterne på underskrevet og ikke underskrevet. Så kan du lige gå ind og se, hvor du mangler en underskrift.</p></div></div></article><article class="slide" id="b0-s8"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">8</span></span></div><div class="indhold"><h3>Overenskomsterne i venstre side <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>filtrér på hver af overenskomsterne, mens du nævner dem, og stil derefter filteret tilbage på alle.</p></div><div class="tale"><p>Her kan du også ude i venstre side filtrere på de forskellige overenskomster.</p></div><div class="tale"><p>Vi har den, der dækker ind over alle dem, der har med Dansk Industri at gøre, altså tømrer, murer, bygningsmalere, jord og beton og entreprenører.</p></div><div class="tale"><p>Så har vi elektrikerne, der ligger under Dansk El-Forbund. Vi har VVS'erne. Og vi har industriens overenskomst, som er metalfolkene.</p></div></div></article><article class="slide" id="b0-s9"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">9</span></span></div><div class="indhold"><h3>Opsigelser</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>peg på opsigelser, men gå ikke ind i dem.</p></div><div class="tale"><p>Så er der også opsigelser. Det er primært vores kundeservice, der sidder med dem, ni ud af ti opsigelser.</p></div><div class="tale"><p>Så det er heller ikke noget, vi behøver at gå i dybden med nu. Det kommer også bare til at forvirre dig.</p></div></div></article><article class="slide" id="b0-s10"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">10</span></span></div><div class="indhold"><h3>Dit ansvar for underskriften <span class="stjerne">★</span><span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>bliv på kontraktoversigten.</p></div><div class="tale"><p>Kontrakter bruger du typisk til lige at følge med i de kontrakter, du har lavet, og sikre dig, at de folk du har lavet kontrakt til, også får kontrakten godkendt.</p></div><div class="tale"><p>Vi har kundeservice som sidste backup til at følge op. Men det er primært din rolle at sørge for, når du har sendt en kandidat en kontrakt, at den også bliver godkendt enten i kaldet eller samme dag, og der plejer vi at sige inden klokken 16, når du går hjem, så du lige kan få styr på papirarbejdet. Det er nemmest.</p></div></div></article><article class="slide" id="b0-s11"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">11</span></span></div><div class="indhold"><h3>Se kontrakt <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>vis kontraktmailen, som kandidaten får den, og tryk Se kontrakt.</p></div><div class="tale"><p>Der er også lige et flow, der er vigtigt at sige nu, hvor vi er under kontrakter.</p></div><div class="tale"><p>Det der er med kontrakten, det er, at når du sender den, så får kandidaten en e-mail. Han trykker se kontrakt, og så kan han åbne den. Meget simpelt.</p></div><div class="tale"><p>Det viser jeg lige på skærmen her, hvordan det ser ud.</p></div></div></article><article class="slide" id="b0-s12"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">12</span></span></div><div class="indhold"><h3>Underskriv kontrakt</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>tryk Underskriv kontrakt, og derefter Godkend.</p></div><div class="tale"><p>Når kandidaten har læst kontrakten igennem, så trykker han her på underskriv kontrakt.</p></div><div class="tale"><p>Har kandidaten en bruger i forvejen, så beder vi ham ikke om at oprette en kode. Men nu lader vi som om, der ikke er en bruger i forvejen. Så trykker vi godkend.</p></div></div></article><article class="slide" id="b0-s13"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">13</span></span></div><div class="indhold"><h3>Opret kode</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>skriv en sekscifret kode ind i feltet.</p></div><div class="tale"><p>Så skal der oprettes en sekscifret kode.</p></div></div></article><article class="slide" id="b0-s14"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">14</span></span></div><div class="indhold"><h3>PowerMatch-appen <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>tag telefonen frem og vis PowerMatch-appen på den. Log ind med kandidatens e-mail og koden.</p></div><div class="tale"><p>Og herfra guider vi kandidaten og siger:</p></div><div class="tale"><p class="replik">"Nu skal du ind og downloade PowerMatch-appen."</p></div><div class="tale"><p>Den kan vi lige vise her på telefonen. Så logger vi ind med den e-mail og den kode, vi lige har lavet.</p></div><div class="tale"><p>Og så er kandidaten onboardet og klar til at starte med at arbejde for PowerMatch. Så simpelt er det, og så nemt er det.</p></div></div></article><article class="slide" id="b0-s15"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">15</span></span></div><div class="indhold"><h3>Tilføj timer i appen <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>bliv på telefonen. Åbn tilføj timer i appen og vis felterne starttid, sluttid og pause.</p></div><div class="tale"><p>Og bare for at vise hvor fedt det er, så prøv at se her på telefonen, når jeg skal tilføje timer. Prøv at se, hvor nemt det også er for kandidaten.</p></div><div class="tale"><p>Du får nogle kandidater, der siger:</p></div><div class="tale"><p class="replik">"Skal jeg både tilføje timer hos jer og hos virksomheden?"</p></div><div class="tale"><p>Ja, det skal kandidaterne. Men vores tidsregistrering er Danmarks nemmeste. Det kunne ikke være nemmere at skrive starttid, sluttid og pause ind her. Så det er det nemmeste i hele verden.</p></div><div class="tale"><p>Det var kontrakter. Nu går vi videre.</p></div></div></article><article class="slide" id="b0-s16"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">16</span></span></div><div class="indhold"><h3>Team og Kandidater <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>læg telefonen fra dig, luk kontraktvisningen på skærmen og gå tilbage til PowerMatch. Klik på Team i venstre side og vælg Kandidater.</p></div><div class="tale"><p>Så har vi den, der hedder team. Først og fremmest har vi kandidater.</p></div><div class="tale"><p>En forvirring, vi oplever hos nye folk, det er den mellem kandidater heroppe og den der hedder ansøgere hernede.</p></div><div class="tale"><p>Forskellen er, bare for at line det helt op, at kandidater, det er alle dem, der aktivt er ansat under os.</p></div></div></article><article class="slide" id="b0-s17"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">17</span></span></div><div class="indhold"><h3>Filtrene under Kandidater</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>klik gennem filtrene aktiv, kontrakt underskrevet, kontrakt sendt og alle, og stil derefter filteret tilbage på aktiv.</p></div><div class="tale"><p>Når vi har dem stående på aktiv, så kan vi se de aktive ansatte kandidater.</p></div><div class="tale"><p>Vil vi, så kan vi også rette det til kontrakt underskrevet. Så kan vi se alle dem, der har skrevet under på deres kontrakt, men afventer en opstartsdato.</p></div><div class="tale"><p>Så kan vi se alle dem, vi har sendt en kontrakt til, som ikke har skrevet under endnu.</p></div><div class="tale"><p>Og vi kan også trykke på alle, og så er det muligt at søge på alle, der nogensinde har været ansat gennem os før.</p></div></div></article><article class="slide" id="b0-s18"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">18</span></span></div><div class="indhold"><h3>Beskæftigelse <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>tryk på en kandidat og gå ind under beskæftigelse.</p></div><div class="tale"><p>Kandidater bruger du, hvis en af dine kunder ringer ind vedrørende en af de kandidater, der er ude i marken.</p></div><div class="tale"><p>Lad os sige for eksempel, at din kunde ringer ind omkring den her kandidat. Så vil du her under beskæftigelse kunne se, hvornår kandidaten er startet, timelønnen, gangfaktoren, kostprisen og hvor mange timer kandidaten har arbejdet.</p></div></div></article><article class="slide" id="b0-s19"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">19</span></span></div><div class="indhold"><h3>Det kunden ringer om <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>bliv stående under beskæftigelse.</p></div><div class="tale"><p>Det kan være, at din kunde spørger:</p></div><div class="tale"><p class="replik">"Ham vil jeg sgu rigtig gerne ansætte snart. Hvor mange timer er han på? Hvor meget mangler han for at ramme de fem hundrede og atten timer?"</p></div><div class="tale"><p>Det kan du nemt svare på herinde.</p></div><div class="tale"><p>Det kan også være, at kunden ringer og siger:</p></div><div class="tale"><p class="replik">"Ved du hvad? Han skal ikke starte på mandag. Han skal starte mandagen efter."</p></div><div class="tale"><p>Eller han ringer ind og siger:</p></div><div class="tale"><p class="replik">"Vi har lige givet ham ti kroner mere i timen, så I må gerne tilføje den tier til ham."</p></div></div></article><article class="slide" id="b0-s20"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">20</span></span></div><div class="indhold"><h3>Rediger beskæftigelsen <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>tryk på knappen der åbner ændringerne, og vis felterne startdato, løn, gangfaktor, kostpris og mødetid. Luk uden at gemme, så der ikke bliver ændret noget på en rigtig kandidat.</p></div><div class="tale"><p>Lige meget hvad det er, så kan det hele ændres på den her knap.</p></div><div class="tale"><p>Er kandidaten ikke startet endnu, så kan du ændre startdatoen ved at putte en ny dato ind her. Og så skal de samme oplysninger ind i forhold til løn, gangfaktor, kostpris og mødetid.</p></div><div class="tale"><p>Er kandidaten allerede i gang, så vælger du en dato for, hvornår den nye løn og den nye kostpris skal træde i kraft fra.</p></div><div class="tale"><p>Så alt det kan ændres herfra.</p></div></div></article><article class="slide" id="b0-s21"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">21</span></span></div><div class="indhold"><h3>De 40 timer <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>bliv på kandidaten og peg på antal timer under beskæftigelse.</p></div><div class="tale"><p>Kandidater kan du også bruge, hvis du er lidt nysgerrig på, hvor mange timer din egen kandidat har arbejdet, og om han har opnået de her 40 timer. Det kræves, for at et salg bliver godkendt til provision.</p></div><div class="tale"><p>Så kan du se det herinde under kandidater.</p></div></div></article><article class="slide" id="b0-s22"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">22</span></span></div><div class="indhold"><h3>Team og Virksomheder</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>gå tilbage til Team i venstre side og klik på Virksomheder.</p></div><div class="tale"><p>Udover det har vi under team også virksomheder. Her har vi et overblik over alle de virksomheder, vi har i systemet.</p></div><div class="tale"><p>Det er meget sjældent, vi bruger det overhovedet. Når vi vil åbne en virksomhed, så åbner vi den gennem Adversus, hvor der på alle emner er noget, der hedder åbn virksomhedsprofil.</p></div></div></article><article class="slide" id="b0-s23"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">23</span></span></div><div class="indhold"><h3>Vis Præsenteret <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>skift over i Adversus og åbn et emne på CV sendt. Tryk på den grønne knap Vis Præsenteret, så du lander på de præsenterede under virksomheden i PowerMatch.</p></div><div class="tale"><p>Det kan jeg lige kort vise. Hvis jeg åbner et emne på CV sendt, ligesom vi gjorde i sidste video, og du sidder på en kunde, så kan du trykke på den her grønne knap, der hedder vis præsenteret. Og så ryger du direkte ind på de præsenterede under virksomheden.</p></div><div class="tale"><p>Så der er ingen grund til at sidde inde under virksomheder og søge efter virksomheden. Sidder du på et emne, så åbner du virksomheden derindefra.</p></div></div></article><article class="slide" id="b0-s24"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">24</span></span></div><div class="indhold"><h3>Søg og sælger</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>gå tilbage til Virksomheder under Team. Søg på et virksomhedsnavn, vælg derefter dig selv i sælgerfeltet, og ryd feltet igen.</p></div><div class="tale"><p>Kommer du i en situation, hvor du alligevel bliver nødt til at gå herind, så kan du søge på virksomhedens navn, e-mail eller telefonnummer.</p></div><div class="tale"><p>Du kan også vælge dig selv her under sælger, og så kan du se alle de virksomheder, hvor du er salgsagent på.</p></div><div class="tale"><p>Det bliver hurtigt meget forvirrende herinde, hvis du gør det, fordi om et par uger har du allerede over 100 virksomheder herinde.</p></div></div></article><article class="slide" id="b0-s25"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">25</span></span></div><div class="indhold"><h3>Jobs</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>klik på Jobs i venstre side.</p></div><div class="tale"><p>Hvis vi går videre, så har vi jobs. Først og fremmest har vi et overblik over alle jobs herinde. Det er ikke noget, du kommer til at bruge aktivt.</p></div></div></article><article class="slide" id="b0-s26"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">26</span></span></div><div class="indhold"><h3>Tilføj nyt job</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>tryk Tilføj nyt job og vis søgefeltet til virksomheden. Luk formularen igen uden at sende noget.</p></div><div class="tale"><p>Men skal du nogensinde oprette et job direkte gennem PowerMatch hos en af dine kunder i stedet for gennem Adversus, og det kan ske, så kan du heroppe trykke på tilføj nyt job.</p></div><div class="tale"><p>Og så kommer den formular, du kender så godt. Det eneste du lige skal gøre, det er at vælge virksomheden ved at søge den frem, og så kan du tilføje resten, som du kender det.</p></div></div></article><article class="slide" id="b0-s27"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">27</span></span></div><div class="indhold"><h3>Ansøgere <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>klik på Ansøgere i venstre side.</p></div><div class="tale"><p>Så har vi også til sidst ansøgere. Det her er heller ikke et sted, du kommer til at bruge særlig meget tid, for det er her, alle vores ansøgere ligger, og det er screeningens område.</p></div><div class="tale"><p>Du sidder under virksomheden under matches og ser alle de profiler, der er.</p></div></div></article><article class="slide" id="b0-s28"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">28</span></span></div><div class="indhold"><h3>Adresse og kilometer <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>skriv Holstebro under adresse, slå målingen om til kilometer, sæt den til 35, og vælg tømrer som jobtitel.</p></div><div class="tale"><p>Skulle du komme i en situation, hvor du kunne bruge ansøgere, så kunne det være, at du har en virksomhed i Holstebro. Bare for at give et eksempel.</p></div><div class="tale"><p>Det kan jo være, at der er en profil, der ikke er blevet matchet til din virksomhed på grund af kravene, og virksomheden har ringet til dig og sagt:</p></div><div class="tale"><p class="replik">"Vi tager hvad som helst, vi tager det hele."</p></div><div class="tale"><p>Og derfor har du valgt at gå herind og se, hvad der ellers er.</p></div><div class="tale"><p>Så skriver du Holstebro herinde under adresse. Du tager altid kilometer herovre. Minutter virker ikke. Og du vil gerne se folk 35 kilometer maks fra Holstebro. Det er tømrer.</p></div></div></article><article class="slide" id="b0-s29"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">29</span></span></div><div class="indhold"><h3>Statusserne <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>sæt statusserne jobsamtale, rescreening og CV-ready, og tryk Søg.</p></div><div class="tale"><p>Så vil du gerne se jobsamtale, rescreening og CV-ready. Det er ofte dem, vi kan hjælpe med job.</p></div><div class="tale"><p>Så kan du trykke søg. Og så vil du se alle dem i området.</p></div></div></article><article class="slide" id="b0-s30"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">30</span></span></div><div class="indhold"><h3>Match job <span class="stjerne">★</span></h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>tryk på en kandidat i listen, tryk Match job, søg Tømrermester Jens Olsen frem, og tryk Beregn score. Peg på Send mail nu uden at trykke: det ville sende en rigtig mail. Luk uden at sende.</p></div><div class="tale"><p>Og finder du en, du gerne vil matche med virksomheden, så kan du bare trykke på kandidaten. Så kan du trykke match job og søge på din virksomheds navn. Lad os sige, det var den, der hed Tømrermester Jens Olsen.</p></div><div class="tale"><p>Så kan du trykke beregn score, og du kan herfra trykke send mail nu. Og så vil kandidaten ryge ind under matches på virksomheden. Meget simpelt.</p></div></div></article><article class="slide" id="b0-s31"><div class="gutter"><span class="sn"><span class="sk">Stop</span><span class="sv">31</span></span></div><div class="indhold"><h3>Det var hele systemet</h3><div class="gor"><span class="mrk">Gør<em>klik · siges ikke</em></span><p>gå tilbage til menuen i venstre side, så hele menuen kan ses igen.</p></div><div class="tale"><p>Det var hele systemet. Systemet gennemgået.</p></div><div class="tale"><p>I næste video samler vi op. Der visualiserer vi alle de flows, vi har været igennem, så vi er helt sikre på, at vi forstår dem.</p></div><div class="tale"><p>Ses i næste video.</p></div></div></article></section></main>
+
+<footer>
+  <div class="andre"></div>
+  <p class="folio">PowerMatch &middot; Internt materiale &middot; Modul 5 · Video 7: Systemet rundt &middot;
+</p>
+</footer>
+
+</div>
+
+<button class="knap tiltop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&uarr; Top</button>
+<script>
+/* Ingen localStorage og ingen sessionStorage. Alt står i variabler herunder
+   og nulstilles ved reload, præcis som aftalt. */
+(function(){
+  var talestr = 25;                     // px, samme startværdi som CSS
+  var minStr = 17, maxStr = 42;
+  var skjult = false;
+
+  var rod   = document.documentElement;
+  var vis   = document.getElementById('strvis');
+  var bar   = document.getElementById('fremdrift');
+  var nu    = document.getElementById('nu');
+  var knSkj = document.getElementById('knSkjul');
+  var blokke = [].slice.call(document.querySelectorAll('.blok'));
+
+  function saetStr(n){
+    talestr = Math.max(minStr, Math.min(maxStr, n));
+    rod.style.setProperty('--tale', talestr + 'px');
+    if (vis) vis.textContent = talestr + ' px';
+  }
+  document.getElementById('knMindre').onclick = function(){ saetStr(talestr - 2); };
+  document.getElementById('knStoerre').onclick = function(){ saetStr(talestr + 2); };
+  document.getElementById('knPrint').onclick = function(){ window.print(); };
+  knSkj.onclick = function(){
+    skjult = !skjult;
+    document.body.classList.toggle('skjul', skjult);
+    knSkj.classList.toggle('paa', skjult);
+    knSkj.textContent = skjult ? 'Vis skærm-noter' : 'Skjul skærm-noter';
+  };
+
+  function opdater(){
+    var h = document.documentElement;
+    var kan = (h.scrollHeight - h.clientHeight) || 1;
+    bar.style.width = Math.min(100, (h.scrollTop / kan) * 100) + '%';
+    var akt = null;
+    for (var i = 0; i < blokke.length; i++){
+      if (blokke[i].getBoundingClientRect().top <= 130) akt = blokke[i];
+    }
+    if (nu) nu.innerHTML = akt ? akt.getAttribute('data-nu') : '';
+  }
+  window.addEventListener('scroll', opdater, {passive:true});
+  window.addEventListener('resize', opdater);
+  opdater();
+
+  document.addEventListener('keydown', function(e){
+    if (e.target && /INPUT|TEXTAREA/.test(e.target.tagName)) return;
+    if (e.key === '+') { saetStr(talestr + 2); e.preventDefault(); }
+    if (e.key === '-') { saetStr(talestr - 2); e.preventDefault(); }
+  });
+})();
+</script>
+</body>
+</html>
